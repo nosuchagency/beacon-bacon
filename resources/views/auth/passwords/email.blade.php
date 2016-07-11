@@ -50,7 +50,7 @@
             </form>
 
             <a href="{{ url('/login') }}">Log in</a><br>
-            <a href="{{ url('/register') }}" class="text-center">Register a new membership</a>
+            <a href="{{ url('/register') }}" class="text-center">Register a new account</a>
 
         </div><!-- /.login-box-body -->
 

@@ -61,7 +61,7 @@
             </form>
 
             <a href="{{ url('/login') }}">Log in</a><br>
-            <a href="{{ url('/register') }}" class="text-center">I already have a membership</a>
+            <a href="{{ url('/register') }}" class="text-center">I already have an account</a>
 
         </div><!-- /.login-box-body -->
 
