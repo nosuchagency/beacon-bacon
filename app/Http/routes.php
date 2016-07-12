@@ -15,6 +15,10 @@ Route::auth();
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
+Route::resource('places', 'PlaceController');
+Route::resource('categories', 'CategoryController');
+Route::resource('maps', 'MapController');
+Route::resource('locations', 'LocationController');
 
 /**
  * Teamwork routes

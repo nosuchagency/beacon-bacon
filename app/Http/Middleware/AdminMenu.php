@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Auth;
 use Menu;
 use Closure;
+use App\Place;
+use App\Category;
 
 class AdminMenu
 {
@@ -32,15 +34,48 @@ class AdminMenu
                 //$menu->divide();
             }*/
 
-            $menu->raw('MENU', ['class' => 'header']);
-            $menu->add('<i class="fa fa-home"></i> Home', ['route' => 'home']);
+            $menu->add('<i class="fa fa-dashboard"></i><span>Dashboard</span>', ['route' => 'home']);
+
+            $menu->raw('PLACES', ['class' => 'header']);
+            $menu->add('<i class="fa fa-plus"></i><span>Create place</span>', ['route' => 'places.create']);
+
+            foreach (Place::all() as $index => $place) {
+                $menu->add('<i class="fa fa-globe"></i><span>' . $place->name . '</span>', ['route' => ['places.show', $place->id]]);
+
+                if ($index == 4) {
+                    $menu->add('<i class="fa fa-circle-o text-aqua"></i><span>View all</span>', ['route' => 'places.index']);
+                    break;
+                }
+            }
+
+            $menu->raw('CATEGORIES', ['class' => 'header']);
+            $menu->add('<i class="fa fa-plus"></i><span>Create category</span>', ['route' => 'categories.create']);
+
+            foreach (Category::all() as $index => $category) {
+                $menu->add('<i class="fa fa-archive"></i><span>' . $category->name . '</span>', ['route' => ['categories.show', $category->id]]);
+
+                if ($index == 4) {
+                    $menu->add('<i class="fa fa-circle-o text-yellow"></i><span>View all</span>', ['route' => 'categories.index']);
+                    break;
+                }
+            }
+
+            $menu->raw('FLOORS', ['class' => 'header']);
+            $menu->add('<i class="fa fa-plus"></i><span>Create floor</span>', ['route' => 'maps.create']);
+            $menu->add('<i class="fa fa-circle-o text-red"></i><span>View all</span>', ['route' => 'maps.index']);
+
+            $menu->raw('LOCATIONS', ['class' => 'header']);
+            $menu->add('<i class="fa fa-plus"></i><span>Create location</span>', ['route' => 'locations.create']);
+            $menu->add('<i class="fa fa-circle-o text-green"></i><span>View all</span>', ['route' => 'locations.index']);
+
+            $menu->raw('SYSTEM', ['class' => 'header']);
 
             if(Auth::user()->teams()->count() <> 1) {
-                $menu->add('<i class="fa fa-users"></i> Teams', ['route' => 'teams.index']);
+                $menu->add('<i class="fa fa-users"></i><span>Teams</span>', ['route' => 'teams.index']);
             }
 
             if(Auth::user()->isOwnerOfCurrentTeam()) {
-                $menu->add('<i class="fa fa-users"></i> Users', ['route' => 'teams.members.show']);
+                $menu->add('<i class="fa fa-users"></i><span>Users</span>', ['route' => 'teams.members.show']);
             }
 
         });

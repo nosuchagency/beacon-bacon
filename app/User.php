@@ -27,6 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * Shortcut to get if the user is the owner of the current team
+     * @return bool
+     */
     public function isOwnerOfCurrentTeam()
     {
         $team = $this->currentTeam;
