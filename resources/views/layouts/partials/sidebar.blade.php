@@ -22,7 +22,15 @@
         <ul class="sidebar-menu">
             <li class="header">MENU</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="{{ route('home') }}"><i class='fa fa-home'></i> <span>Home</span></a></li>
+            <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ route('home') }}"><i class='fa fa-home'></i> <span>Home</span></a></li>
+
+            @if(Auth::user()->teams()->count() <> 1)
+            <li class="{{ starts_with(Route::currentRouteName(), 'teams') ? 'active' : '' }}"><a href="{{ route('teams.index') }}"><i class="fa fa-users"></i> Teams</a></li>
+            @endif
+
+            @if(Auth::user()->isOwnerOfCurrentTeam())
+            <li class="{{ starts_with(Route::currentRouteName(), 'users') ? 'active' : '' }}"><a href="{{ route('teams.members.show') }}"><i class="fa fa-users"></i> Users</a></li>
+            @endif
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

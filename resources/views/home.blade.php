@@ -4,7 +4,7 @@
 
 @section('contentheader_title', 'Home')
 
-@section('main-content')
+@section('content')
 
 		<div class="row">
 			<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">

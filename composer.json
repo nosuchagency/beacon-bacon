@@ -7,7 +7,11 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "mpociot/teamwork": "~3.0"
+        "mpociot/teamwork": "~3.0",
+        "barryvdh/laravel-debugbar": "^2.2",
+        "laravelcollective/html": "5.2.*",
+        "guzzlehttp/guzzle": "~5.0",
+        "filp/whoops": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

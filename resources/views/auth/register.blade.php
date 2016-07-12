@@ -24,7 +24,11 @@
         @endif
 
         <div class="register-box-body">
+            @if(session()->has('invite_token'))
+            <p class="login-box-msg">Register to accept the invitation</p>
+            @else
             <p class="login-box-msg">Register a new account</p>
+            @endif
             <form action="{{ url('/register') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group has-feedback">

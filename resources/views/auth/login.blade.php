@@ -23,7 +23,11 @@
     @endif
 
     <div class="login-box-body">
+    @if(session()->has('invite_token'))
+    <p class="login-box-msg">Sign in to accept the invitation</p>
+    @else
     <p class="login-box-msg">Sign in to start your session</p>
+    @endif
     <form action="{{ url('/login') }}" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group has-feedback">

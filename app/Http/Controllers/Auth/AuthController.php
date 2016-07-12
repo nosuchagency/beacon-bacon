@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+use App\Team;
 use App\User;
 use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -69,5 +72,42 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $user = $this->create($request->all());
+
+        // If user was not invited, create and join a new team
+        if (!$request->session()->has('invite_token')) {
+            // Create event (team)
+            $team = new Team();
+            $team->owner_id = $user->id;
+            $team->name = $user->name;
+            $team->save();
+
+            // Add user to team
+            $user->teams()->attach($team->id);
+            $user->switchTeam($team->id);
+        }
+
+        // Log the user in
+        Auth::guard($this->getGuard())->login($user);
+
+        return redirect($this->redirectPath());
     }
 }
