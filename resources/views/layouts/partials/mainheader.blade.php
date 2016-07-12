@@ -22,6 +22,30 @@
                     <li><a href="{{ url('/register') }}">Register</a></li>
                     <li><a href="{{ url('/login') }}">Login</a></li>
                 @else
+                    {{--@if(Auth::user()->teams()->count() > 1)
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                          <i class="fa fa-users"></i>
+                          <span class="label label-danger">{{ Auth::user()->teams()->count() }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li class="header">You have {{ Auth::user()->teams()->count() }} teams</li>
+                          <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                              @foreach(Auth::user()->teams as $team)
+                              <li>
+                                <a href="{{ route('teams.switch', $team->id) }}">
+                                  <i class="fa fa-circle-o text-aqua"></i> {{ $team->name }}
+                                </a>
+                              @endforeach
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="footer"><a href="{{ route('teams.index') }}">View all</a></li>
+                        </ul>
+                      </li>
+                      @endif--}}
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu">
                         <!-- Menu Toggle Button -->
