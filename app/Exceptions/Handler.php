@@ -19,6 +19,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
+        AuthenticationException::class,
         AuthorizationException::class,
         HttpException::class,
         ModelNotFoundException::class,
@@ -58,6 +59,14 @@ class Handler extends ExceptionHandler
             return $this->renderExceptionWithWhoops($request, $e);
         }
 
+        if ($request->wantsJson()) {
+            return response()->json([
+                'code' => $e->getCode(),
+                'error' => 'Something weird happened',
+                'description' => $e->getMessage()
+            ], $e->getCode());
+        }
+
         return parent::render($request, $e);
     }
 
@@ -72,7 +81,7 @@ class Handler extends ExceptionHandler
     {
         $whoops = new \Whoops\Run;
 
-        if ($request->ajax()) {
+        if ($request->ajax() || $request->wantsJson()) {
             $whoops->pushHandler(new \Whoops\Handler\JsonResponseHandler());
         } else {
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
