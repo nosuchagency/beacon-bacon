@@ -19,6 +19,7 @@ Route::resource('places', 'PlaceController');
 Route::resource('categories', 'CategoryController');
 Route::resource('maps', 'MapController');
 Route::resource('locations', 'LocationController');
+Route::resource('beacons', 'BeaconController');
 
 /**
  * Teamwork routes

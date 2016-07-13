@@ -50,15 +50,7 @@ class AdminMenu
 
             $menu->raw('CATEGORIES', ['class' => 'header']);
             $menu->add('<i class="fa fa-plus"></i><span>Create category</span>', ['route' => 'categories.create']);
-
-            foreach (Category::all() as $index => $category) {
-                $menu->add('<i class="fa fa-archive"></i><span>' . $category->name . '</span>', ['route' => ['categories.show', $category->id]]);
-
-                if ($index == 4) {
-                    $menu->add('<i class="fa fa-circle-o text-yellow"></i><span>View all</span>', ['route' => 'categories.index']);
-                    break;
-                }
-            }
+            $menu->add('<i class="fa fa-circle-o text-yellow"></i><span>View all</span>', ['route' => 'categories.index']);
 
             $menu->raw('FLOORS', ['class' => 'header']);
             $menu->add('<i class="fa fa-plus"></i><span>Create floor</span>', ['route' => 'maps.create']);
@@ -67,6 +59,10 @@ class AdminMenu
             $menu->raw('LOCATIONS', ['class' => 'header']);
             $menu->add('<i class="fa fa-plus"></i><span>Create location</span>', ['route' => 'locations.create']);
             $menu->add('<i class="fa fa-circle-o text-green"></i><span>View all</span>', ['route' => 'locations.index']);
+
+            $menu->raw('BEACONS', ['class' => 'header']);
+            $menu->add('<i class="fa fa-plus"></i><span>Create beacon</span>', ['route' => 'beacons.create']);
+            $menu->add('<i class="fa fa-circle-o text-blue"></i><span>View all</span>', ['route' => 'beacons.index']);
 
             $menu->raw('SYSTEM', ['class' => 'header']);
 
