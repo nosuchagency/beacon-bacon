@@ -94,7 +94,7 @@ class PlaceController extends Controller
 
         $place = Place::findOrFail($id);
         $place->update($request->all());
-        return redirect()->route('places.index');
+        return redirect()->route('places.show', $id);
     }
 
     /**

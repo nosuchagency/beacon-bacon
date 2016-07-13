@@ -33,4 +33,13 @@ class Map extends Model
     {
         return $this->belongsTo('App\Place');
     }
+
+    /**
+     * Get locations on this map
+     * @return Illuminate\Database\Query\Builder
+     */
+    public function locations()
+    {
+        return $this->hasMany('App\Location');
+    }
 }

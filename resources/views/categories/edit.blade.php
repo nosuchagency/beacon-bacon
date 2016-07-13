@@ -2,6 +2,15 @@
 
 @section('contentheader_title', 'Edit ' . $category->name)
 
+@section('breadcrumbs')
+<ol class="breadcrumb">
+  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+  <li><a href="{{ route('categories.index') }}">Categories</a></li>
+  <li><a href="{{ route('categories.show', $category->name) }}">{{ $category->name }}</a></li>
+  <li class="active">Edit category</li>
+</ol>
+@endsection
+
 @section('content')
 <div class="row">
   <div class="col-sm-12">

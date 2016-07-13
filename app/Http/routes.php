@@ -17,9 +17,39 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::resource('places', 'PlaceController');
 Route::resource('categories', 'CategoryController');
-Route::resource('maps', 'MapController');
-Route::resource('locations', 'LocationController');
+//Route::resource('maps', 'MapController');
+//Route::resource('locations', 'LocationController');
 Route::resource('beacons', 'BeaconController');
+
+// Places
+/*Route::get('places', ['as' => 'places.index', 'uses' => 'PlaceController@index']);
+Route::get('places/create', ['as' => 'places.create', 'uses' => 'PlaceController@create']);
+Route::post('places', ['as' => 'places.store', 'uses' => 'PlaceController@store']);
+Route::get('places/{place}', ['as' => 'places.show', 'uses' => 'PlaceController@show']);
+Route::put('places/{place}', ['as' => 'places.update', 'uses' => 'PlaceController@update']);
+Route::delete('places/{place}', ['as' => 'places.destroy', 'uses' => 'PlaceController@destroy']);*/
+
+Route::group(['prefix' => 'places/{place}'], function(){
+    // Maps
+    Route::get('maps', ['as' => 'maps.index', 'uses' => 'MapController@index']);
+    Route::get('maps/create', ['as' => 'maps.create', 'uses' => 'MapController@create']);
+    Route::post('maps', ['as' => 'maps.store', 'uses' => 'MapController@store']);
+    Route::get('maps/{map}', ['as' => 'maps.show', 'uses' => 'MapController@show']);
+    Route::get('maps/{map}/edit', ['as' => 'maps.edit', 'uses' => 'MapController@edit']);
+    Route::put('maps/{map}', ['as' => 'maps.update', 'uses' => 'MapController@update']);
+    Route::delete('maps/{map}', ['as' => 'maps.destroy', 'uses' => 'MapController@destroy']);
+
+    Route::group(['prefix' => 'maps/{map}'], function(){
+        // Locations
+        Route::get('locations', ['as' => 'locations.index', 'uses' => 'LocationController@index']);
+        Route::get('locations/create', ['as' => 'locations.create', 'uses' => 'LocationController@create']);
+        Route::post('locations', ['as' => 'locations.store', 'uses' => 'LocationController@store']);
+        Route::get('locations/{location}', ['as' => 'locations.show', 'uses' => 'LocationController@show']);
+        Route::get('locations/{location}/edit', ['as' => 'locations.edit', 'uses' => 'LocationController@edit']);
+        Route::put('locations/{location}', ['as' => 'locations.update', 'uses' => 'LocationController@update']);
+        Route::delete('locations/{location}', ['as' => 'locations.destroy', 'uses' => 'LocationController@destroy']);
+    });
+});
 
 /**
  * Teamwork routes

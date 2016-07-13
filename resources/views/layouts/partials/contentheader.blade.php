@@ -4,4 +4,5 @@
         @yield('contentheader_title', 'Page Header here')
         <small>@yield('contentheader_description')</small>
     </h1>
+    @yield('breadcrumbs')
 </section>

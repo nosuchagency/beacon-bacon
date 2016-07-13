@@ -17,7 +17,6 @@
 					<div class="icon">
 						<i class="fa fa-globe"></i>
 					</div>
-					<a href="{{ route('places.index') }}" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -31,7 +30,6 @@
 					<div class="icon">
 						<i class="fa fa-clone"></i>
 					</div>
-					<a href="{{ route('maps.index') }}" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -45,7 +43,6 @@
 					<div class="icon">
 						<i class="fa fa-map-marker"></i>
 					</div>
-					<a href="{{ route('locations.index') }}" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -59,7 +56,6 @@
 					<div class="icon">
 						<i class="fa fa-exclamation-circle"></i>
 					</div>
-					<a href="{{ route('beacons.index') }}" class="small-box-footer">View all <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->

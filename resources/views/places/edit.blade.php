@@ -2,6 +2,15 @@
 
 @section('contentheader_title', 'Edit ' . $place->name)
 
+@section('breadcrumbs')
+<ol class="breadcrumb">
+  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+  <li><a href="{{ route('places.index') }}">Places</a></li>
+  <li><a href="{{ route('places.show', $place->id) }}">{{ $place->name }}</a></li>
+  <li class="active">Edit place</li>
+</ol>
+@endsection
+
 @section('content')
 <div class="row">
   <div class="col-sm-12">
@@ -20,7 +29,7 @@
           </div>
         </div>
         <div class="box-footer">
-          <a href="{{ route('places.index') }}" class="btn btn-default">Cancel</a>
+          <a href="{{ route('places.show', $place->id) }}" class="btn btn-default">Cancel</a>
           <button type="submit" class="btn btn-info pull-right">Save</button>
         </div>
         {!! Form::close() !!}

@@ -2,6 +2,14 @@
 
 @section('contentheader_title', 'Create new place')
 
+@section('breadcrumbs')
+<ol class="breadcrumb">
+  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+  <li><a href="{{ route('places.index') }}">Places</a></li>
+  <li class="active">Create place</li>
+</ol>
+@endsection
+
 @section('content')
 <div class="row">
   <div class="col-sm-12">

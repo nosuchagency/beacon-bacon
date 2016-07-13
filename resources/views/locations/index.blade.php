@@ -2,6 +2,16 @@
 
 @section('contentheader_title', 'Locations')
 
+@section('breadcrumbs')
+<ol class="breadcrumb">
+  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+  <li><a href="{{ route('places.index') }}">Places</a></li>
+  <li><a href="{{ route('places.show', $placeId) }}">{{ $place->name }}</a></li>
+  <li><a href="{{ route('maps.show', [$placeId, $mapId]) }}">{{ $map->name }}</a></li>
+  <li class="active">Locations</li>
+</ol>
+@endsection
+
 @section('content')
 <div class="row">
   <div class="col-sm-12">
@@ -23,14 +33,14 @@
               @foreach($locations as $index => $location)
                 <tr>
                   <td>{{ $index+1 }}</td>
-                  <td><a href="{{ route('locations.show', $location->id) }}">{{ $location->name }}</a></td>
+                  <td><a href="{{ route('locations.show', [$placeId, $mapId, $location->id]) }}">{{ $location->name }}</a></td>
                   <td>{{ $location->place->name }}</td>
                   <td>{{ $location->map->name }}</td>
                   <td>{{ $location->category->name }}</td>
                   <td class="text-right">
-                    {!! Form::open(['route' => ['locations.destroy', $location->id], 'method' => 'DELETE']) !!}
+                    {!! Form::open(['route' => ['locations.destroy', $placeId, $mapId, $location->id], 'method' => 'DELETE']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                    <a href="{{ route('locations.edit', $location->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{{ route('locations.edit', [$placeId, $mapId, $location->id]) }}" class="btn btn-primary btn-sm">Edit</a>
                     {!! Form::close() !!}
                   </td>
                 </tr>

@@ -24,4 +24,13 @@ class Place extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * Get maps belonging to this place
+     * @return Illuminate\Database\Query\Builder
+     */
+    public function maps()
+    {
+      return $this->hasMany('App\Map');
+    }
 }

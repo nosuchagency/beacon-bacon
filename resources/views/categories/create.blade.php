@@ -2,6 +2,14 @@
 
 @section('contentheader_title', 'Create new category')
 
+@section('breadcrumbs')
+<ol class="breadcrumb">
+  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+  <li><a href="{{ route('categories.index') }}">Categories</a></li>
+  <li class="active">Create category</li>
+</ol>
+@endsection
+
 @section('content')
 <div class="row">
   <div class="col-sm-12">

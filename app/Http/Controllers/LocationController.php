@@ -26,10 +26,12 @@ class LocationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($placeId, $mapId)
     {
         $locations = Location::all();
-        return view('locations.index', compact('locations'));
+        $place = Place::findOrFail($placeId);
+        $map = Map::findOrFail($mapId);
+        return view('locations.index', compact('locations', 'place', 'map', 'placeId', 'mapId'));
     }
 
     /**
@@ -37,12 +39,12 @@ class LocationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($placeId, $mapId)
     {
-        $places = Place::lists('name', 'id');
         $categories = Category::lists('name', 'id');
-        $maps = Map::lists('name', 'id');
-        return view('locations.create', compact('places', 'categories', 'maps'));
+        $place = Place::findOrFail($placeId);
+        $map = Map::findOrFail($mapId);
+        return view('locations.create', compact('categories', 'place', 'map', 'placeId', 'mapId'));
     }
 
     /**
@@ -51,14 +53,14 @@ class LocationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $placeId, $mapsId)
     {
         $this->validate($request, [
            'name' => 'required|max:255',
         ]);
 
         $location = Location::create($request->all());
-        return redirect()->route('locations.show', $location->id);
+        return redirect()->route('locations.show', [$placeId, $mapsId, $location->id]);
     }
 
     /**
@@ -67,10 +69,10 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($placeId, $mapId, $id)
     {
         $location = Location::findOrFail($id);
-        return view('locations.show', compact('location'));
+        return view('locations.show', compact('location', 'placeId', 'mapId'));
     }
 
     /**
@@ -79,13 +81,13 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($placeId, $mapId, $id)
     {
         $location = Location::findOrFail($id);
         $places = Place::lists('name', 'id');
         $categories = Category::lists('name', 'id');
         $maps = Map::lists('name', 'id');
-        return view('locations.edit', compact('location', 'places', 'categories', 'maps'));
+        return view('locations.edit', compact('location', 'places', 'categories', 'maps', 'placeId', 'mapId'));
     }
 
     /**
@@ -95,7 +97,7 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $placeId, $mapId, $id)
     {
         $this->validate($request, [
            'name' => 'required|max:255',
@@ -103,7 +105,7 @@ class LocationController extends Controller
 
         $location = Location::findOrFail($id);
         $location->update($request->all());
-        return redirect()->route('locations.index');
+        return redirect()->route('maps.show', [$placeId, $mapId]);
     }
 
     /**
@@ -112,10 +114,10 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($placeId, $mapId, $id)
     {
         $location = Location::findOrFail($id);
         $location->delete();
-        return redirect()->route('locations.index');
+        return redirect()->route('maps.show', [$placeId, $mapId]);
     }
 }

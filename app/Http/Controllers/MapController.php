@@ -24,10 +24,11 @@ class MapController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($placeId)
     {
         $maps = Map::all();
-        return view('maps.index', compact('maps'));
+        $place = Place::findOrFail($placeId);
+        return view('maps.index', compact('maps', 'place', 'placeId'));
     }
 
     /**
@@ -35,10 +36,10 @@ class MapController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($placeId)
     {
-        $places = Place::lists('name', 'id');
-        return view('maps.create', compact('places'));
+        $place = Place::findOrFail($placeId);
+        return view('maps.create', compact('place', 'placeId'));
     }
 
     /**
@@ -47,7 +48,7 @@ class MapController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $placeId)
     {
         $this->validate($request, [
            'name' => 'required|max:255',
@@ -59,7 +60,7 @@ class MapController extends Controller
 
         $this->uploadMap($map, $request);
 
-        return redirect()->route('maps.show', $map->id);
+        return redirect()->route('maps.show', [$placeId, $map->id]);
     }
 
     /**
@@ -68,10 +69,10 @@ class MapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($placeId, $id)
     {
         $map = Map::findOrFail($id);
-        return view('maps.show', compact('map'));
+        return view('maps.show', compact('map', 'placeId'));
     }
 
     /**
@@ -80,11 +81,10 @@ class MapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($placeId, $id)
     {
         $map = Map::findOrFail($id);
-        $places = Place::lists('name', 'id');
-        return view('maps.edit', compact('map', 'places'));
+        return view('maps.edit', compact('map', 'placeId'));
     }
 
     /**
@@ -94,7 +94,7 @@ class MapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $placeId, $id)
     {
         $this->validate($request, [
            'name' => 'required|max:255',
@@ -107,7 +107,7 @@ class MapController extends Controller
 
         $this->uploadMap($map, $request);
 
-        return redirect()->route('maps.index');
+        return redirect()->route('places.show', $placeId);
     }
 
     /**
@@ -116,11 +116,11 @@ class MapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($placeId, $id)
     {
         $map = Map::findOrFail($id);
         $map->delete();
-        return redirect()->route('maps.index');
+        return redirect()->route('places.show', $placeId);
     }
 
     /**

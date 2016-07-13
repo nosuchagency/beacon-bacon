@@ -2,6 +2,15 @@
 
 @section('contentheader_title', 'Edit ' . $beacon->name)
 
+@section('breadcrumbs')
+<ol class="breadcrumb">
+  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+  <li><a href="{{ route('beacons.index') }}">Beacons</a></li>
+  <li><a href="{{ route('beacons.show', $beacon->name) }}">{{ $beacon->name }}</a></li>
+  <li class="active">Edit beacon</li>
+</ol>
+@endsection
+
 @section('content')
 <div class="row">
   <div class="col-sm-12">
