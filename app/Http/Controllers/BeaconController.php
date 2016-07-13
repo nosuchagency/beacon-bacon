@@ -12,7 +12,7 @@ use GuzzleHttp\Client;
 class BeaconController extends Controller
 {
     /**
-     * Instantiate a new CategoryController instance.
+     * Instantiate a new controller instance.
      *
      * @return void
      */

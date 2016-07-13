@@ -57,17 +57,17 @@ Route::group(['prefix' => 'places/{place}'], function(){
 Route::group(['prefix' => 'teams', 'namespace' => 'Teamwork'], function()
 {
     Route::get('/', 'TeamController@index')->name('teams.index');
+    Route::get('switch/{id}', 'TeamController@switchTeam')->name('teams.switch');
     //Route::get('create', 'TeamController@create')->name('teams.create');
     //Route::post('teams', 'TeamController@store')->name('teams.store');
     //Route::get('edit/{id}', 'TeamController@edit')->name('teams.edit');
     //Route::put('edit/{id}', 'TeamController@update')->name('teams.update');
     //Route::delete('destroy/{id}', 'TeamController@destroy')->name('teams.destroy');
-    Route::get('switch/{id}', 'TeamController@switchTeam')->name('teams.switch');
 
-    /*Route::get('members/{id}', 'TeamMemberController@show')->name('teams.members.show');
-    Route::get('members/resend/{invite_id}', 'TeamMemberController@resendInvite')->name('teams.members.resend_invite');
-    Route::post('members/{id}', 'TeamMemberController@invite')->name('teams.members.invite');
-    Route::delete('members/{id}/{user_id}', 'TeamMemberController@destroy')->name('teams.members.destroy');*/
+    // Route::get('members/{id}', 'TeamMemberController@show')->name('teams.members.show');
+    // Route::get('members/resend/{invite_id}', 'TeamMemberController@resendInvite')->name('teams.members.resend_invite');
+    // Route::post('members/{id}', 'TeamMemberController@invite')->name('teams.members.invite');
+    // Route::delete('members/{id}/{user_id}', 'TeamMemberController@destroy')->name('teams.members.destroy');
 
     Route::get('accept/{token}', 'AuthController@acceptInvite')->name('teams.accept_invite');
 });
@@ -80,4 +80,17 @@ Route::group(['prefix' => 'users', 'namespace' => 'Teamwork'], function(){
     Route::get('resend/{invite_id}', 'TeamMemberController@resendInvite')->name('teams.members.resend_invite');
     Route::post('/', 'TeamMemberController@invite')->name('teams.members.invite');
     Route::delete('/{user_id}', 'TeamMemberController@destroy')->name('teams.members.destroy');
+});
+
+Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@index']);
+Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+
+Route::post('profile/apikey', ['as' => 'apikey.store', 'uses' => 'ProfileController@storeApi']);
+Route::delete('profile/apikey/{id}', ['as' => 'apikey.destroy', 'uses' => 'ProfileController@destroyApi']);
+
+Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api'], function(){
+    Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function(){
+        Route::get('profile', ['uses' => 'ProfileController@index']);
+    });
 });

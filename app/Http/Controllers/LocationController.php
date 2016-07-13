@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class LocationController extends Controller
 {
     /**
-     * Instantiate a new CategoryController instance.
+     * Instantiate a new controller instance.
      *
      * @return void
      */

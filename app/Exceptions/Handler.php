@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -49,6 +50,8 @@ class Handler extends ExceptionHandler
         if ($e instanceof TokenMismatchException){
             // Catch it here and do what you want. For example...
             return redirect()->back();
+        } elseif ($e instanceof AuthenticationException) {
+            return $this->unauthenticated($request, $e);
         }
 
         if (config('app.debug') && !$this->shouldntReport($e)) {
@@ -80,5 +83,21 @@ class Handler extends ExceptionHandler
             $e->getStatusCode(),
             $e->getHeaders()
         );
+    }
+
+    /**
+     * Convert an authentication exception into an unauthenticated response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Auth\AuthenticationException  $e
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $e)
+    {
+        if ($request->ajax() || $request->wantsJson()) {
+            return response(['error' => 'Unauthorized.'], 401);
+        } else {
+            return redirect()->guest('login');
+        }
     }
 }

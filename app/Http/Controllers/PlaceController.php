@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PlaceController extends Controller
 {
     /**
-     * Instantiate a new PlaceController instance.
+     * Instantiate a new controller instance.
      *
      * @return void
      */
