@@ -72,6 +72,10 @@ class AddDataStructure extends Migration
             $table->text('description');
             $table->string('posX');
             $table->string('posY');
+            $table->string('beacon_uid', 10);
+            $table->string('proximity_uuid');
+            $table->integer('major');
+            $table->integer('minor');
             $table->integer('created_by');
 
             $table->timestamps();

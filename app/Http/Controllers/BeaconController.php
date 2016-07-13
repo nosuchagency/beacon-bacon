@@ -7,6 +7,7 @@ use App\Place;
 use App\Beacon;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class BeaconController extends Controller
 {
@@ -36,11 +37,18 @@ class BeaconController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $places = Place::lists('name', 'id');
         $maps = Map::lists('name', 'id');
-        return view('beacons.create', compact('places', 'maps'));
+
+        $devices = $this->getBeaconsFromWebservice();
+
+        if ($request->input('beacon_uid')) {
+            $beacon = $this->getBeaconFromWebservice($request->input('beacon_uid'));
+        }
+
+        return view('beacons.create', compact('places', 'maps', 'devices', 'beacon'));
     }
 
     /**
@@ -114,5 +122,57 @@ class BeaconController extends Controller
         $beacon = Beacon::findOrFail($id);
         $beacon->delete();
         return redirect()->route('beacons.index');
+    }
+
+    /**
+     * Get beacons from Kontakt webservice
+     * @return Illuminate\Support\Collection
+     */
+    protected function getBeaconsFromWebservice()
+    {
+        $client = new Client([
+            'base_uri' => 'https://api.kontakt.io/',
+            'headers' => [
+                'Accept' => 'application/vnd.com.kontakt+json;version=7',
+                'Api-Key' => config('services.kontakt.key'),
+                'User-Agent' => 'BeaconBacon'
+            ]
+        ]);
+
+        try {
+            $response = $client->request('GET', '/device');
+            $results = json_decode($response->getBody()->getContents());
+            $devices = collect();
+
+            foreach ($results->devices as $device) {
+                $devices->put($device->uniqueId, $device->uniqueId . ($device->alias ? ' (' . $device->alias . ')' : ''));
+            }
+
+            return $devices;
+        }
+        catch (\Exception $e) {
+            return [];
+        }
+    }
+
+    protected function getBeaconFromWebservice($beaconId)
+    {
+        $client = new Client([
+            'base_uri' => 'https://api.kontakt.io/',
+            'headers' => [
+                'Accept' => 'application/vnd.com.kontakt+json;version=7',
+                'Api-Key' => config('services.kontakt.key'),
+                'User-Agent' => 'BeaconBacon'
+            ]
+        ]);
+
+        try {
+            $response = $client->request('GET', '/device/'.$beaconId);
+            $results = json_decode($response->getBody()->getContents());
+            return $results;
+        }
+        catch (\Exception $e) {
+            return null;
+        }
     }
 }

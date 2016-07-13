@@ -12,6 +12,38 @@
         <div class="box-body">
           <div class="row">
             <div class="col-sm-2">
+              <strong>Beacon ID</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $beacon->beacon_uid }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>Proximity UUID</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $beacon->proximity_uuid }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>Major</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $beacon->major }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>Minor</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $beacon->minor }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
               <strong>Place</strong>
             </div>
             <div class="col-sm-10">

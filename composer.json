@@ -12,7 +12,7 @@
         "laravelcollective/html": "5.2.*",
         "lavary/laravel-menu": "dev-master",
         "mpociot/teamwork": "~3.0",
-        "guzzlehttp/guzzle": "~5.0",
+        "guzzlehttp/guzzle": "~6.0",
         "intervention/image": "^2.3"
     },
     "require-dev": {

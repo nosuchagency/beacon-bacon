@@ -16,7 +16,10 @@ class Beacon extends Model
      *
      * @var array
      */
-    protected $fillable = ['place_id', 'map_id', 'name', 'description', 'posX', 'posY'];
+    protected $fillable = [
+        'place_id', 'map_id', 'name', 'description', 'posX', 'posY',
+        'beacon_uid', 'proximity_uuid', 'major', 'minor'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
