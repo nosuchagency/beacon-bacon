@@ -10,6 +10,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -55,23 +56,30 @@ class Handler extends ExceptionHandler
             return $this->unauthenticated($request, $e);
         }
 
+        if (config('app.debug') && !$request->wantsJson()) {
+            return $this->renderExceptionWithWhoops($request, $e);
+        }
+
         if ($request->wantsJson()) {
             if ($e instanceof ValidationException) {
                 $code = 400;
-            }
-            else {
-                $code = $e->getCode() ? $e->getCode() : 404;
+                $error = 'Validation error';
+            } elseif ($e instanceof ModelNotFoundException) {
+                $code = 404;
+                $error = 'Model not found';
+            } elseif ($e instanceof MethodNotAllowedHttpException) {
+                $code = 405;
+                $error = 'Method not allowed';
+            } else {
+                $code = $e->getCode() ? $e->getCode() : 500;
+                $error = 'An error occurred';
             }
 
             return response()->json([
                 'code' => $code,
-                'error' => 'An error occurred',
+                'error' => $error,
                 'description' => $e->getMessage()
             ], $code);
-        }
-
-        if (config('app.debug')) {
-            return $this->renderExceptionWithWhoops($request, $e);
         }
 
         return parent::render($request, $e);
