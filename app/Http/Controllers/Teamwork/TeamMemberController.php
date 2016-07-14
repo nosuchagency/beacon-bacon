@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Teamwork;
 
+Use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Mpociot\Teamwork\TeamInvite;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Mpociot\Teamwork\Facades\Teamwork;
-use Mpociot\Teamwork\TeamInvite;
 
 class TeamMemberController extends Controller
 {
@@ -33,13 +34,41 @@ class TeamMemberController extends Controller
     }
 
     /**
+     * Create a user and put it on the current team..
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        $data = $request->all();
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+
+        $team = auth()->user()->currentTeam;
+        $user->teams()->attach($team);
+        $user->switchTeam($team);
+
+        return redirect(route('teams.members.show'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param int $user_id
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function destroy($user_id)
+    public function uninvite($user_id)
     {
         $teamModel = config('teamwork.team_model');
         $team_id = auth()->user()->current_team_id;
@@ -60,6 +89,29 @@ class TeamMemberController extends Controller
             $user->delete();
         }
 
+        return redirect(route('teams.members.show'));
+    }
+
+    /**
+     * Delete a user.
+     * @param  [type] $user_id [description]
+     * @return [type]          [description]
+     */
+    public function destroy($user_id)
+    {
+        $userModel = config('teamwork.user_model');
+        $user = $userModel::findOrFail($user_id);
+
+        if ($user->teams()->count() > 1) {
+            // Dont allow delete if user is in more teams
+            return redirect(route('teams.members.show'));
+        }
+
+        foreach ($user->teams as $team) {
+            $user->detachTeam($team);
+        }
+
+        $user->delete();
         return redirect(route('teams.members.show'));
     }
 
@@ -107,4 +159,16 @@ class TeamMemberController extends Controller
         return redirect(route('teams.members.show'));
     }
 
+    /**
+     * Delete an invitation.
+     *
+     * @param $invite_id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function deleteInvite($invite_id)
+    {
+        $invite = TeamInvite::findOrFail($invite_id);
+        $invite->delete();
+        return redirect(route('teams.members.show'));
+    }
 }

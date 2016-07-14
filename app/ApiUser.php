@@ -14,7 +14,7 @@ class ApiUser extends User
     protected static function boot()
     {
         static::addGlobalScope('api_token', function (Builder $builder) {
-            $builder->join('api_tokens', 'users.id', '=', 'api_tokens.team_id')->select(['users.*', 'api_tokens.team_id']);
+            $builder->join('api_keys', 'users.id', '=', 'api_keys.user_id');
         });
     }
 }

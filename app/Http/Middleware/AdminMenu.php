@@ -72,6 +72,7 @@ class AdminMenu
 
             if(Auth::user()->isOwnerOfCurrentTeam()) {
                 $menu->add('<i class="fa fa-users"></i><span>Users</span>', ['route' => 'teams.members.show']);
+                $menu->add('<i class="fa fa-terminal"></i><span>API keys</span>', ['route' => 'apikeys.index']);
             }
 
         });

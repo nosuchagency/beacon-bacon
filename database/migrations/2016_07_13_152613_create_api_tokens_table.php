@@ -12,12 +12,13 @@ class CreateApiTokensTable extends Migration
      */
     public function up()
     {
-        Schema::create('api_tokens', function (Blueprint $table) {
+        Schema::create('api_keys', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('team_id');
             $table->integer('user_id');
             $table->string('name');
             $table->string('api_token', 60)->unique();
+            $table->dateTime('last_used')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateApiTokensTable extends Migration
      */
     public function down()
     {
-        Schema::drop('api_tokens');
+        Schema::drop('api_keys');
     }
 }
