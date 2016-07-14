@@ -104,5 +104,13 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
         Route::get('place/{id}', ['uses' => 'PlaceController@show']);
         Route::put('place/{id}', ['uses' => 'PlaceController@update']);
         Route::delete('place/{id}', ['uses' => 'PlaceController@destroy']);
+
+        // Maps
+        Route::get('map', ['uses' => 'MapController@index']);
+        Route::post('map', ['uses' => 'MapController@store']);
+        Route::get('map/deleted', ['uses' => 'MapController@deleted']);
+        Route::get('map/{id}', ['uses' => 'MapController@show']);
+        Route::put('map/{id}', ['uses' => 'MapController@update']);
+        Route::delete('map/{id}', ['uses' => 'MapController@destroy']);
     });
 });
