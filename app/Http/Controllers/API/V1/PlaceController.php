@@ -61,7 +61,7 @@ class PlaceController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-           'name' => 'required|max:255',
+           'name' => 'max:255',
         ]);
 
         $model = Place::findOrFail($id);
