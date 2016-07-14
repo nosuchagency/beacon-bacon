@@ -31,4 +31,16 @@ class Category extends Model
      * @var array
      */
     protected $hidden = ['deleted_at'];
+
+    /**
+     * Return full path to icon.
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getIconAttribute($value)
+    {
+        !$value ?: asset('uploads/categories/'.$this->id.'/'.$value);
+    }
 }

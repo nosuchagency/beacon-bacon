@@ -33,7 +33,8 @@ class Map extends Model
     protected $hidden = ['deleted_at'];
 
     /**
-     * Get the place
+     * Get the place.
+     *
      * @return Illuminate\Database\Query\Builder
      */
     public function place()
@@ -42,11 +43,24 @@ class Map extends Model
     }
 
     /**
-     * Get locations on this map
+     * Get locations on this map.
+     *
      * @return Illuminate\Database\Query\Builder
      */
     public function locations()
     {
         return $this->hasMany('App\Location');
+    }
+
+    /**
+     * Return full path to image.
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getImageAttribute($value)
+    {
+        return !$value ?: asset('uploads/maps/'.$this->id.'/'.$value);
     }
 }

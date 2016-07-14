@@ -40,7 +40,7 @@
 
             <div class="col-sm-10">
               @if($map->image)
-                <img src="{{ asset('uploads/maps/' . $map->id . '/' . $map->image) }}" class="img-responsive" />
+                <img src="{{ $map->image }}" class="img-responsive" />
               @endif
               {!! Form::file('image', null, ['class' => 'form-control']) !!}
             </div>

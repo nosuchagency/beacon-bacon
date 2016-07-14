@@ -53,7 +53,7 @@
           <h3 class="box-title">Location on map</h3>
         </div>
         <div class="box-body">
-          <img src="{{ asset('uploads/maps/' . $mapId . '/' . $map->image) }}" class="img-responsive" />
+          <img src="{{ $map->image }}" class="img-responsive" />
         </div>
         <div class="box-footer">
           <a href="{{ route('maps.show', [$placeId, $mapId]) }}" class="btn btn-default">Cancel</a>

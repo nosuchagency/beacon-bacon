@@ -39,7 +39,7 @@
 
             <div class="col-sm-10">
               @if($category->icon)
-                <img src="{{ asset('uploads/categories/' . $category->id . '/' . $category->icon) }}" />
+                <img src="{{ $category->icon }}" />
               @endif
               {!! Form::file('icon', null, ['class' => 'form-control']) !!}
             </div>
