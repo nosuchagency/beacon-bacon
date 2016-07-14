@@ -2,9 +2,9 @@
 
 namespace App;
 
+use App\Traits\UsedByTeams;
 use App\Traits\HasCreatedBy;
 use Illuminate\Database\Eloquent\Model;
-use Mpociot\Teamwork\Traits\UsedByTeams;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Map extends Model
@@ -24,6 +24,13 @@ class Map extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['deleted_at'];
 
     /**
      * Get the place

@@ -96,5 +96,13 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
     Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function(){
         // Profile routes
         Route::get('profile', ['uses' => 'ProfileController@index']);
+
+        // Places
+        Route::get('place', ['uses' => 'PlaceController@index']);
+        Route::post('place', ['uses' => 'PlaceController@store']);
+        Route::get('place/deleted', ['uses' => 'PlaceController@deleted']);
+        Route::get('place/{id}', ['uses' => 'PlaceController@show']);
+        Route::put('place/{id}', ['uses' => 'PlaceController@update']);
+        Route::delete('place/{id}', ['uses' => 'PlaceController@destroy']);
     });
 });

@@ -2,8 +2,8 @@
 
 namespace App;
 
+use App\Traits\UsedByTeams;
 use Illuminate\Database\Eloquent\Model;
-use Mpociot\Teamwork\Traits\UsedByTeams;
 
 class ApiKey extends Model
 {

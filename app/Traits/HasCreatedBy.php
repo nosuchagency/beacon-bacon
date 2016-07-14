@@ -15,7 +15,12 @@ trait HasCreatedBy
             static::userGuard();
 
             if (!isset($model->created_by)) {
-                $model->created_by = auth()->user()->getKey();
+                if (auth()->guard('api')->check()) {
+                    $model->created_by = auth()->guard('api')->user()->getKey();
+                }
+                else {
+                    $model->created_by = auth()->user()->getKey();
+                }
             }
         });
     }
@@ -26,7 +31,7 @@ trait HasCreatedBy
      */
     public function creator()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'created_by', 'id');
     }
 
     /**
@@ -34,8 +39,12 @@ trait HasCreatedBy
      */
     protected static function userGuard()
     {
+        if (auth()->guard('api')->check()) {
+            return;
+        }
+
         if (auth()->guest()) {
-            throw new Exception('No authenticated user.');
+            throw new \Exception('No authenticated user.');
         }
     }
 }

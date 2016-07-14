@@ -14,7 +14,6 @@ class AddDataStructure extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('uuid');
             $table->integer('team_id');
             $table->string('name');
             $table->integer('created_by');

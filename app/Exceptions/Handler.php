@@ -55,16 +55,23 @@ class Handler extends ExceptionHandler
             return $this->unauthenticated($request, $e);
         }
 
-        if (config('app.debug') && !$this->shouldntReport($e)) {
-            return $this->renderExceptionWithWhoops($request, $e);
+        if ($request->wantsJson()) {
+            if ($e instanceof ValidationException) {
+                $code = 400;
+            }
+            else {
+                $code = $e->getCode() ? $e->getCode() : 404;
+            }
+
+            return response()->json([
+                'code' => $code,
+                'error' => 'An error occurred',
+                'description' => $e->getMessage()
+            ], $code);
         }
 
-        if ($request->wantsJson()) {
-            return response()->json([
-                'code' => $e->getCode(),
-                'error' => 'Something weird happened',
-                'description' => $e->getMessage()
-            ], $e->getCode());
+        if (config('app.debug')) {
+            return $this->renderExceptionWithWhoops($request, $e);
         }
 
         return parent::render($request, $e);
@@ -89,7 +96,7 @@ class Handler extends ExceptionHandler
 
         return new \Illuminate\Http\Response(
             $whoops->handleException($e),
-            $e->getStatusCode(),
+            $e->getCode() ? $e->getCode() : 404,
             $e->getHeaders()
         );
     }
