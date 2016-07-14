@@ -96,6 +96,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
     Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function(){
         // Profile routes
         Route::get('profile', ['uses' => 'ProfileController@index']);
+        Route::put('profile', ['uses' => 'ProfileController@update']);
 
         // Places
         Route::get('place', ['uses' => 'PlaceController@index']);
@@ -112,5 +113,29 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
         Route::get('map/{id}', ['uses' => 'MapController@show']);
         Route::put('map/{id}', ['uses' => 'MapController@update']);
         Route::delete('map/{id}', ['uses' => 'MapController@destroy']);
+
+        // Locations
+        Route::get('location', ['uses' => 'LocationController@index']);
+        Route::post('location', ['uses' => 'LocationController@store']);
+        Route::get('location/deleted', ['uses' => 'LocationController@deleted']);
+        Route::get('location/{id}', ['uses' => 'LocationController@show']);
+        Route::put('location/{id}', ['uses' => 'LocationController@update']);
+        Route::delete('location/{id}', ['uses' => 'LocationController@destroy']);
+
+        // Categories
+        Route::get('category', ['uses' => 'CategoryController@index']);
+        Route::post('category', ['uses' => 'CategoryController@store']);
+        Route::get('category/deleted', ['uses' => 'CategoryController@deleted']);
+        Route::get('category/{id}', ['uses' => 'CategoryController@show']);
+        Route::put('category/{id}', ['uses' => 'CategoryController@update']);
+        Route::delete('category/{id}', ['uses' => 'CategoryController@destroy']);
+
+        // Beacons
+        Route::get('beacons', ['uses' => 'BeaconController@index']);
+        Route::post('beacons', ['uses' => 'BeaconController@store']);
+        Route::get('beacons/deleted', ['uses' => 'BeaconController@deleted']);
+        Route::get('beacons/{id}', ['uses' => 'BeaconController@show']);
+        Route::put('beacons/{id}', ['uses' => 'BeaconController@update']);
+        Route::delete('beacons/{id}', ['uses' => 'BeaconController@destroy']);
     });
 });
