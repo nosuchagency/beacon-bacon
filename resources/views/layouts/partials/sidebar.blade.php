@@ -17,7 +17,8 @@
         </div>
 
         <!-- Sidebar Menu -->
-        {!! $AdminMenu->asUl(['class' => 'sidebar-menu']) !!}
+        @include('custom-menu')
+        <br /><br />
         <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

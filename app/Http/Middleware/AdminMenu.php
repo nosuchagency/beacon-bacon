@@ -73,6 +73,10 @@ class AdminMenu
             if(Auth::user()->isOwnerOfCurrentTeam()) {
                 $menu->add('<i class="fa fa-users"></i><span>Users</span>', ['route' => 'teams.members.show']);
                 $menu->add('<i class="fa fa-terminal"></i><span>API keys</span>', ['route' => 'apikeys.index']);
+
+                $settings = $menu->add('<i class="fa fa-cog"></i><span>Settings</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>', ['url' => '#', 'class' => 'treeview']);
+                $settings->add('<i class="fa fa-envelope"></i><span>E-mail</span>', ['route' => 'settings.email']);
+                $settings->add('<i class="fa fa-pencil"></i><span>Templates</span>', ['route' => 'settings.templates']);
             }
 
         });

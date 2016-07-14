@@ -78,15 +78,23 @@ Route::group(['prefix' => 'users', 'namespace' => 'Teamwork'], function(){
     Route::delete('/{user_id}', 'TeamMemberController@destroy')->name('teams.members.destroy');
 });
 
-// Profile routes
-Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@index']);
-Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+Route::group(['middleware' => 'auth'], function(){
+    // Profile routes
+    Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@index']);
+    Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 
-// Api keys
-Route::get('apikeys', ['as' => 'apikeys.index', 'uses' => 'ApiController@index']);
-Route::post('apikeys', ['as' => 'apikeys.store', 'uses' => 'ApiController@store']);
-Route::delete('apikeys/{id}', ['as' => 'apikeys.destroy', 'uses' => 'ApiController@destroy']);
+    // Api keys
+    Route::get('apikeys', ['as' => 'apikeys.index', 'uses' => 'ApiController@index']);
+    Route::post('apikeys', ['as' => 'apikeys.store', 'uses' => 'ApiController@store']);
+    Route::delete('apikeys/{id}', ['as' => 'apikeys.destroy', 'uses' => 'ApiController@destroy']);
+
+    // Settings
+    Route::get('settings/email', ['as' => 'settings.email', 'uses' => 'SettingController@email']);
+    Route::put('settings/email', ['as' => 'settings.email.update', 'uses' => 'SettingController@emailUpdate']);
+    Route::get('settings/templates', ['as' => 'settings.templates', 'uses' => 'SettingController@templates']);
+    Route::put('settings/templates', ['as' => 'settings.templates.update', 'uses' => 'SettingController@templatesUpdate']);
+});
 
 /**
  * API ROUTES
