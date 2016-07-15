@@ -32,6 +32,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\HandleInvitation::class,
             \App\Http\Middleware\AdminMenu::class,
             \App\Http\Middleware\ConfigLoader::class,
+            \Xinax\LaravelGettext\Middleware\GettextMiddleware::class,
         ],
 
         'api' => [

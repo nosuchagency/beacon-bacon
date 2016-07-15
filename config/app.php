@@ -163,6 +163,7 @@ return [
         Mpociot\Teamwork\TeamworkServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
+        Xinax\LaravelGettext\LaravelGettextServiceProvider::class,
     ],
 
     /*

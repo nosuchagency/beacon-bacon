@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "854c1afdfecd5359404bd7cb4d0c2f7a",
-    "content-hash": "da7e66d6052af69d1a1342509a8ee5f3",
+    "hash": "3407c45c069718075ee1ef4c46c70b1c",
+    "content-hash": "ab427cd3fe529dbafd531c7e634d2d9b",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -2604,6 +2604,60 @@
                 "environment"
             ],
             "time": "2016-06-14 14:14:52"
+        },
+        {
+            "name": "xinax/laravel-gettext",
+            "version": "3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xinax/laravel-gettext.git",
+                "reference": "442a828c5d0a0d92bef5720e8e37664d11554bf1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xinax/laravel-gettext/zipball/442a828c5d0a0d92bef5720e8e37664d11554bf1",
+                "reference": "442a828c5d0a0d92bef5720e8e37664d11554bf1",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "1.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Xinax\\LaravelGettext\\": "src/"
+                },
+                "files": [
+                    "src/Xinax/LaravelGettext/Support/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolás Daniel Palumbo",
+                    "email": "n@xinax.net"
+                }
+            ],
+            "description": "Adds localization support to laravel applications in an easy way using PoEdit and GNU-Gettext.",
+            "homepage": "https://github.com/xinax/laravel-gettext",
+            "keywords": [
+                "gettext",
+                "laravel",
+                "laravel-gettext",
+                "localization",
+                "poEdit",
+                "translation"
+            ],
+            "time": "2016-03-10 13:02:54"
         }
     ],
     "packages-dev": [
