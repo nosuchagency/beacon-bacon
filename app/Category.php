@@ -5,11 +5,12 @@ namespace App;
 use App\Traits\UsedByTeams;
 use App\Traits\HasCreatedBy;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use SoftDeletes, UsedByTeams, HasCreatedBy;
+    use SoftDeletes, UsedByTeams, HasCreatedBy, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +34,13 @@ class Category extends Model
     protected $hidden = ['deleted_at'];
 
     /**
+     * Set which attributes to log.
+     *
+     * @var array
+     */
+    protected static $logAttributes = ['name', 'internal_name', 'icon'];
+
+    /**
      * Return full path to icon.
      *
      * @param string $value
@@ -42,5 +50,17 @@ class Category extends Model
     public function getIconAttribute($value)
     {
         !$value ?: asset('uploads/categories/'.$this->id.'/'.$value);
+    }
+
+    /**
+     * Set the log name when using API.
+     *
+     * @param string $eventName
+     *
+     * @return string
+     */
+    public function getLogNameToUse($eventName = '')
+    {
+        return auth()->guard('api')->check() ? 'api_log' : config('laravel-activitylog.default_log_name');
     }
 }

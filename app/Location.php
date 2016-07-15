@@ -5,11 +5,12 @@ namespace App;
 use App\Traits\UsedByTeams;
 use App\Traits\HasCreatedBy;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Location extends Model
 {
-    use SoftDeletes, UsedByTeams, HasCreatedBy;
+    use SoftDeletes, UsedByTeams, HasCreatedBy, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +32,13 @@ class Location extends Model
      * @var array
      */
     protected $hidden = ['deleted_at'];
+
+    /**
+     * Set which attributes to log.
+     *
+     * @var array
+     */
+    protected static $logAttributes = ['category_id', 'name', 'posX', 'posY'];
 
     /**
      * Get the place
@@ -57,5 +65,17 @@ class Location extends Model
     public function category()
     {
         return $this->belongsTo('App\Category');
+    }
+
+    /**
+     * Set the log name when using API.
+     *
+     * @param string $eventName
+     *
+     * @return string
+     */
+    public function getLogNameToUse($eventName = '')
+    {
+        return auth()->guard('api')->check() ? 'api_log' : config('laravel-activitylog.default_log_name');
     }
 }

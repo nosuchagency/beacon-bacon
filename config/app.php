@@ -162,6 +162,7 @@ return [
         Lavary\Menu\ServiceProvider::class,
         Mpociot\Teamwork\TeamworkServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Spatie\Activitylog\ActivitylogServiceProvider::class,
     ],
 
     /*
