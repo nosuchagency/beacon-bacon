@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Menu;
 use App\Place;
 use Illuminate\Http\Request;
 
@@ -92,5 +93,17 @@ class PlaceController extends Controller
     public function deleted()
     {
         return Place::onlyTrashed()->get();
+    }
+
+    /**
+     * Get menu items.
+     *
+     * @param int $id
+     *
+     * @return json
+     */
+    public function menu($id)
+    {
+        return Menu::orderBy('order')->with('category')->get();
     }
 }

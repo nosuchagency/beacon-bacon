@@ -17,6 +17,13 @@ class Menu extends Model
     protected $fillable = ['place_id', 'category_id', 'title', 'order'];
 
     /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['team_id', 'place_id', 'category_id'];
+
+    /**
      * Disable timestamps.
      *
      * @var bool

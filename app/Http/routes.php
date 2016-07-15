@@ -119,6 +119,11 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
         Route::put('place/{id}', ['uses' => 'PlaceController@update']);
         Route::delete('place/{id}', ['uses' => 'PlaceController@destroy']);
 
+        // Place menu
+        Route::group(['prefix' => 'place/{id}'], function(){
+            Route::get('menu', ['uses' => 'PlaceController@menu']);
+        });
+
         // Maps
         Route::get('map', ['uses' => 'MapController@index']);
         Route::post('map', ['uses' => 'MapController@store']);

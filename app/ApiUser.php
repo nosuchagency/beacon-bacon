@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ApiUser extends User
 {
+    /**
+     * Set database table.
+     *
+     * @var string
+     */
     protected $table = 'users';
 
     /**
-     * Boot the global scope
+     * Boot the global scope.
      */
     protected static function boot()
     {
