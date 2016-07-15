@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use App\Map;
 use App\Place;
 use App\Http\Requests;
@@ -72,6 +73,13 @@ class MapController extends Controller
     public function show($placeId, $id)
     {
         $map = Map::findOrFail($id);
+
+        if ($map->image) {
+            $image = Image::make($map->image);
+            $map->width = $image->width();
+            $map->height = $image->height();
+        }
+
         return view('maps.show', compact('map', 'placeId'));
     }
 

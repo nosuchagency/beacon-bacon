@@ -53,19 +53,7 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6">
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title">Floor image</h3>
-      </div>
-      <div class="box-body">
-        @if($map->image)
-          <img src="{{ $map->image }}" class="img-responsive" />
-        @endif
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6">
+  <div class="col-sm-12">
     <div class="box box-primary">
       <div class="box-header with-border">
         <h3 class="box-title">Locations</h3>
@@ -101,6 +89,25 @@
             @endforeach
             </tbody>
           </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Floor image</h3>
+      </div>
+      <div class="box-body">
+        @if($map->image)
+        <div style="position: relative; width: {{ $map->width }}px; height: {{ $map->height }}px; background-image: url({{ $map->image }});">
+          @foreach($map->locations as $index => $location)
+            <img src="{{ $location->category->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px" />
+          @endforeach
+        </div>
+        @endif
       </div>
     </div>
   </div>
