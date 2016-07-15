@@ -72,4 +72,114 @@
       </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-6">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Menu</h3>
+        </div>
+        <div class="box-body">
+          <ul id="menu-list" class="todo-list ui-sortable">
+          @foreach($menuitems as $item)
+            <li id="menuitem-{{ $item->id }}">
+              <span class="handle ui-sortable-handle">
+                <i class="fa fa-ellipsis-v"></i>
+                <i class="fa fa-ellipsis-v"></i>
+              </span>
+              @if($item->category_id)
+                <span class="text">{{ $item->category->name }}</span>
+              @else
+                <span class="text"><big>- {{ $item->title }} -</big></span>
+              @endif
+              <div class="tools">
+                <i class="fa fa-trash-o"></i>
+              </div>
+            </li>
+          @endforeach
+          </ul>
+        </div>
+      </div>
+  </div>
+  <div class="col-sm-6">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Add menu item</h3>
+        </div>
+        {!! Form::open(['route' => ['menu.store', $place->id], 'method' => 'POST']) !!}
+        <div class="box-body">
+          <div class="form-group">
+            {!! Form::label('type', 'Type') !!}
+            {!! Form::select('type', ['category' => 'Category', 'title' => 'Title'], null, ['class' => 'form-control', 'id' => 'menu-item-type']) !!}
+          </div>
+          <div class="form-group" id="category-type">
+            {!! Form::label('category', 'Category') !!}
+            {!! Form::select('category', $categories, '', ['class' => 'form-control']) !!}
+          </div>
+          <div class="form-group" id="title-type" style="display: none">
+            {!! Form::label('title', 'Title') !!}
+            {!! Form::text('title', null, ['class' => 'form-control']) !!}
+          </div>
+        </div>
+        <div class="box-footer">
+          <button type="submit" class="btn btn-info pull-right">Add</button>
+        </div>
+        {!! Form::close() !!}
+      </div>
+  </div>
+</div>
+@endsection
+
+@section('footer')
+<script>
+// send csrf token in ajax header
+$.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+
+$(document).ready(function(){
+  $('#menu-item-type').change(function(){
+    if ($(this).val() == 'title') {
+      $('#title-type').show();
+      $('#category-type').hide();
+    }
+    else {
+      $('#title-type').hide();
+      $('#category-type').show();
+    }
+  });
+
+  $('#menu-list').sortable({
+    placeholder: 'sort-highlight',
+    handle: '.handle',
+    containment: 'parent',
+    forcePlaceholderSize: true,
+    zIndex: 999999,
+    update: function(event, ui){
+      var sorted = $('#menu-list').sortable('serialize');
+
+      $.ajax({
+        type: 'POST',
+        url: '{{ route('menu.update', $place->id) }}',
+        data: sorted,
+        success: function(){
+          // show notification maybe?
+        }
+      });
+    }
+  });
+
+  $('.tools .fa', $('#menu-list')).click(function(){
+    var parent = $(this).closest('li');
+
+    $.ajax({
+      type: 'DELETE',
+      url: '{{ route('menu.destroy', $place->id) }}',
+      data: 'menuitem=' + parent.attr('id'),
+      success: function(){
+        // show notification maybe?
+        parent.fadeOut();
+      }.bind(this)
+    });
+  });
+});
+</script>
 @endsection

@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu;
 use App\Place;
-use App\Http\Requests;
+use App\Category;
 use Illuminate\Http\Request;
 
 class PlaceController extends Controller
 {
     /**
      * Instantiate a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -26,6 +25,7 @@ class PlaceController extends Controller
     public function index()
     {
         $places = Place::all();
+
         return view('places.index', compact('places'));
     }
 
@@ -42,7 +42,8 @@ class PlaceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -52,38 +53,46 @@ class PlaceController extends Controller
         ]);
 
         $place = Place::create($request->all());
+
         return redirect()->route('places.show', $place->id);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $place = Place::findOrFail($id);
-        return view('places.show', compact('place'));
+        $menuitems = Menu::orderBy('order')->get();
+        $categories = Category::lists('name', 'id')->prepend('', '');
+
+        return view('places.show', compact('place', 'menuitems', 'categories'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $place = Place::findOrFail($id);
+
         return view('places.edit', compact('place'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -94,19 +103,96 @@ class PlaceController extends Controller
 
         $place = Place::findOrFail($id);
         $place->update($request->all());
+
         return redirect()->route('places.show', $id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $place = Place::findOrFail($id);
         $place->delete();
+
         return redirect()->route('places.index');
+    }
+
+    /**
+     * Save a new menu item to database.
+     *
+     * @param Request $request
+     * @param int     $placeId
+     *
+     * @return json
+     */
+    public function storeMenuItem(Request $request, $placeId)
+    {
+        $this->validate($request, [
+            'category' => 'required_if:type,category',
+            'title' => 'required_if:type,title',
+        ]);
+
+        Menu::create([
+            'place_id' => $placeId,
+            'category_id' => $request->input('category'),
+            'title' => $request->input('title'),
+        ]);
+
+        return redirect()->route('places.show', $placeId);
+    }
+
+    /**
+     * Update the order of menu items.
+     *
+     * @param Request $request
+     * @param int     $placeId
+     *
+     * @return json
+     */
+    public function updateMenuOrder(Request $request, $placeId)
+    {
+        if ($request->has('menuitem')) {
+            foreach ($request->menuitem as $index => $id) {
+                Menu::findOrFail($id)->update(['order' => $index]);
+            }
+
+            return response()->json([
+                'status' => 'ok',
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+        ]);
+    }
+
+    /**
+     * Delete menu item.
+     *
+     * @param Request $request
+     * @param int     $placeId
+     *
+     * @return json
+     */
+    public function destroyMenuItem(Request $request, $placeId)
+    {
+        if ($request->has('menuitem')) {
+            $id = str_replace('menuitem-', '', $request->menuitem);
+
+            Menu::findOrFail($id)->delete();
+
+            return response()->json([
+                'status' => 'ok',
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+        ]);
     }
 }

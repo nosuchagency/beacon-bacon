@@ -24,6 +24,11 @@ Route::resource('categories', 'CategoryController');
 Route::resource('beacons', 'BeaconController');
 
 Route::group(['prefix' => 'places/{place}'], function(){
+    // Menu
+    Route::post('menu', ['as' => 'menu.store', 'uses' => 'PlaceController@storeMenuItem']);
+    Route::post('menu/order', ['as' => 'menu.update', 'uses' => 'PlaceController@updateMenuOrder']);
+    Route::delete('menu', ['as' => 'menu.destroy', 'uses' => 'PlaceController@destroyMenuItem']);
+
     // Maps
     Route::get('maps', ['as' => 'maps.index', 'uses' => 'MapController@index']);
     Route::get('maps/create', ['as' => 'maps.create', 'uses' => 'MapController@create']);

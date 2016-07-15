@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
             return $this->unauthenticated($request, $e);
         }
 
-        if (config('app.debug') && !$request->wantsJson()) {
+        if (config('app.debug') && $this->shouldReport($e) && !$request->wantsJson()) {
             return $this->renderExceptionWithWhoops($request, $e);
         }
 
