@@ -68,7 +68,11 @@
           <h3 class="box-title">Location on map</h3>
         </div>
         <div class="box-body">
-          <img src="{{ $location->map->image }}" class="img-responsive" />
+          <div class="map" style="position: relative; width: {{ $location->mapWidth }}px; height: {{ $location->mapHeight }}px; background-image: url({{ $location->map->image }})">
+          @if($location->category->icon)
+            <img src="{{ $location->category->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px;" />
+          @endif
+          </div>
         </div>
         <div class="box-footer">
           <a href="{{ route('maps.show', [$placeId, $mapId]) }}" class="btn btn-default">Back</a>

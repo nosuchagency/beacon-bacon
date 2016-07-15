@@ -69,7 +69,7 @@ class Map extends Model
      */
     public function getImageAttribute($value)
     {
-        return !$value ?: asset('uploads/maps/'.$this->id.'/'.$value);
+        return !$value ? '' : asset('uploads/maps/'.$this->id.'/'.$value);
     }
 
     /**

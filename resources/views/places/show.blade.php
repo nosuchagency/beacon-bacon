@@ -51,6 +51,7 @@
                   <th style="width: 10px">#</th>
                   <th>Name</th>
                   <th>Floor no.</th>
+                  <th>Locations</th>
                   <th class="text-right">Actions</th>
                 </tr>
               @foreach($place->maps as $index => $map)
@@ -58,6 +59,7 @@
                   <td>{{ $index+1 }}</td>
                   <td><a href="{{ route('maps.show', [$place->id, $map->id]) }}">{{ $map->name }}</a></td>
                   <td>{{ $map->order }}</td>
+                  <td>{{ $map->locations()->count() }}</td>
                   <td class="text-right">
                     {!! Form::open(['route' => ['maps.destroy', $place->id, $map->id], 'method' => 'DELETE']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}

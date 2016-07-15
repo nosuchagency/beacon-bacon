@@ -45,22 +45,5 @@
       </div>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-sm-12">
-      <div class="box box-primary">
-        <div class="box-header with-border">
-          <h3 class="box-title">Location on map</h3>
-        </div>
-        <div class="box-body">
-          <img src="{{ $map->image }}" class="img-responsive" />
-        </div>
-        <div class="box-footer">
-          <a href="{{ route('maps.show', [$placeId, $mapId]) }}" class="btn btn-default">Cancel</a>
-          <button type="submit" class="btn btn-info pull-right">Save</button>
-        </div>
-      </div>
-  </div>
-</div>
 {!! Form::close() !!}
 @endsection

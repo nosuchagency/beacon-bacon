@@ -49,7 +49,7 @@ class Category extends Model
      */
     public function getIconAttribute($value)
     {
-        !$value ?: asset('uploads/categories/'.$this->id.'/'.$value);
+        return !$value ? '' : asset('uploads/categories/'.$this->id.'/'.$value);
     }
 
     /**

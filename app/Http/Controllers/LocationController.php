@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use App\Map;
 use App\Place;
 use App\Category;
@@ -72,6 +73,19 @@ class LocationController extends Controller
     public function show($placeId, $mapId, $id)
     {
         $location = Location::findOrFail($id);
+
+        if ($location->category->icon) {
+            $icon = Image::make($location->category->icon);
+            $location->iconWidth = $icon->width();
+            $location->iconHeight = $icon->height();
+        }
+
+        if ($location->map->image) {
+            $image = Image::make($location->map->image);
+            $location->mapWidth = $image->width();
+            $location->mapHeight = $image->height();
+        }
+
         return view('locations.show', compact('location', 'placeId', 'mapId'));
     }
 
@@ -87,6 +101,19 @@ class LocationController extends Controller
         $places = Place::lists('name', 'id');
         $categories = Category::lists('name', 'id');
         $maps = Map::lists('name', 'id');
+
+        if ($location->category->icon) {
+            $icon = Image::make($location->category->icon);
+            $location->iconWidth = $icon->width();
+            $location->iconHeight = $icon->height();
+        }
+
+        if ($location->map->image) {
+            $image = Image::make($location->map->image);
+            $location->mapWidth = $image->width();
+            $location->mapHeight = $image->height();
+        }
+
         return view('locations.edit', compact('location', 'places', 'categories', 'maps', 'placeId', 'mapId'));
     }
 

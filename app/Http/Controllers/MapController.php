@@ -99,7 +99,7 @@ class MapController extends Controller
         $this->validate($request, [
            'name' => 'required|max:255',
            'order' => 'required|numeric',
-           'image' => 'required|image',
+           'image' => 'image',
         ]);
 
         $map = Map::findOrFail($id);
@@ -107,7 +107,7 @@ class MapController extends Controller
 
         $this->uploadMap($map, $request);
 
-        return redirect()->route('places.show', $placeId);
+        return redirect()->route('maps.show', [$placeId, $id]);
     }
 
     /**
