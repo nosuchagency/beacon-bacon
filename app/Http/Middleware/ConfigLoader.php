@@ -41,6 +41,11 @@ class ConfigLoader
             (new \Illuminate\Mail\MailServiceProvider(app()))->register();
         }
 
+        if (auth()->guard('api')->check()) {
+            config(['laravel-activitylog.guard' => 'api']);
+            (new \Spatie\Activitylog\ActivitylogServiceProvider(app()))->register();
+        }
+
         return $next($request);
     }
 }
