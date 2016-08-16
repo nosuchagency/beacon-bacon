@@ -27,7 +27,7 @@
                   <th>Name</th>
                   <th>Place</th>
                   <th>Floor</th>
-                  <th>Category</th>
+                  <th>POI</th>
                   <th class="text-right">Actions</th>
                 </tr>
               @foreach($locations as $index => $location)
@@ -36,7 +36,7 @@
                   <td><a href="{{ route('locations.show', [$placeId, $mapId, $location->id]) }}">{{ $location->name }}</a></td>
                   <td>{{ $location->place->name }}</td>
                   <td>{{ $location->map->name }}</td>
-                  <td>{{ $location->category->name }}</td>
+                  <td>{{ $location->poi->name }}</td>
                   <td class="text-right">
                     {!! Form::open(['route' => ['locations.destroy', $placeId, $mapId, $location->id], 'method' => 'DELETE']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}

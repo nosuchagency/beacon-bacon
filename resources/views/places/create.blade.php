@@ -26,6 +26,49 @@
               {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
             </div>
           </div>
+          
+          
+          
+          
+          
+          
+          
+          <div class="form-group">
+            {!! Form::label('address', 'Address', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('address', null, ['class' => 'form-control', 'placeholder' => 'Enter address']) !!}
+            </div>
+          </div>
+          
+          <div class="form-group">
+            {!! Form::label('zipcode', 'ZIP Code', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('zipcode', null, ['class' => 'form-control', 'placeholder' => 'Enter ZIP Code']) !!}
+            </div>
+          </div>
+          
+          <div class="form-group">
+            {!! Form::label('city', 'City', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Enter city']) !!}
+            </div>
+          </div>                    
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
         </div>
         <div class="box-footer">
           <a href="{{ route('places.index') }}" class="btn btn-default">Cancel</a>

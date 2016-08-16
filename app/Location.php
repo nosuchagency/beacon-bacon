@@ -17,7 +17,7 @@ class Location extends Model
      *
      * @var array
      */
-    protected $fillable = ['place_id', 'map_id', 'category_id', 'name', 'posX', 'posY'];
+    protected $fillable = ['place_id', 'map_id', 'poi_id', 'name', 'posX', 'posY'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,7 +38,7 @@ class Location extends Model
      *
      * @var array
      */
-    protected static $logAttributes = ['category_id', 'name', 'posX', 'posY'];
+    protected static $logAttributes = ['poi_id', 'name', 'posX', 'posY'];
 
     /**
      * Get the place
@@ -59,12 +59,12 @@ class Location extends Model
     }
 
     /**
-     * Get the category
+     * Get the poi
      * @return Illuminate\Database\Query\Builder
      */
-    public function category()
+    public function poi()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo('App\Poi');
     }
 
     /**
