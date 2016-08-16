@@ -6,3 +6,5 @@ Homestead.json
 .env
 public/uploads
 storage/framework/messages
+
+.env.example

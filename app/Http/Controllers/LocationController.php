@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Image;
 use App\Map;
 use App\Place;
-use App\Category;
+use App\Poi;
 use App\Location;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -42,10 +42,10 @@ class LocationController extends Controller
      */
     public function create($placeId, $mapId)
     {
-        $categories = Category::lists('name', 'id');
+        $pois = Poi::lists('name', 'id');
         $place = Place::findOrFail($placeId);
         $map = Map::findOrFail($mapId);
-        return view('locations.create', compact('categories', 'place', 'map', 'placeId', 'mapId'));
+        return view('locations.create', compact('pois', 'place', 'map', 'placeId', 'mapId'));
     }
 
     /**
@@ -74,8 +74,8 @@ class LocationController extends Controller
     {
         $location = Location::findOrFail($id);
 
-        if ($location->category->icon) {
-            $icon = Image::make($location->category->icon);
+        if ($location->poi->icon) {
+            $icon = Image::make($location->poi->icon);
             $location->iconWidth = $icon->width();
             $location->iconHeight = $icon->height();
         }
@@ -99,11 +99,11 @@ class LocationController extends Controller
     {
         $location = Location::findOrFail($id);
         $places = Place::lists('name', 'id');
-        $categories = Category::lists('name', 'id');
+        $pois = Poi::lists('name', 'id');
         $maps = Map::lists('name', 'id');
 
-        if ($location->category->icon) {
-            $icon = Image::make($location->category->icon);
+        if ($location->poi->icon) {
+            $icon = Image::make($location->poi->icon);
             $location->iconWidth = $icon->width();
             $location->iconHeight = $icon->height();
         }
@@ -114,7 +114,7 @@ class LocationController extends Controller
             $location->mapHeight = $image->height();
         }
 
-        return view('locations.edit', compact('location', 'places', 'categories', 'maps', 'placeId', 'mapId'));
+        return view('locations.edit', compact('location', 'places', 'pois', 'maps', 'placeId', 'mapId'));
     }
 
     /**

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Category;
+use App\Poi;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class PoiController extends Controller
 {
     /**
      * Return a list of items.
@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->filteredAndOrdered($request, new Category())->paginate($this->pageSize);
+        return $this->filteredAndOrdered($request, new Poi())->paginate($this->pageSize);
     }
 
     /**
@@ -34,7 +34,7 @@ class CategoryController extends Controller
             'icon' => 'required|image',
         ]);
 
-        return response(Category::create($request->all()), 201);
+        return response(Poi::create($request->all()), 201);
     }
 
     /**
@@ -47,9 +47,9 @@ class CategoryController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $place = Category::findOrFail($id);
+        $poi = Poi::findOrFail($id);
 
-        return $this->attachResources($request, $place);
+        return $this->attachResources($request, $poi);
     }
 
     /**
@@ -68,7 +68,7 @@ class CategoryController extends Controller
             'icon' => 'image',
         ]);
 
-        $model = Category::findOrFail($id);
+        $model = Poi::findOrFail($id);
         $model->update($request->all());
 
         return $model;
@@ -83,7 +83,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::findOrFail($id)->delete();
+        Poi::findOrFail($id)->delete();
 
         return response('', 204);
     }
@@ -95,6 +95,6 @@ class CategoryController extends Controller
      */
     public function deleted()
     {
-        return Category::onlyTrashed()->get();
+        return Poi::onlyTrashed()->get();
     }
 }

@@ -38,10 +38,10 @@
           </div>
           <div class="row">
             <div class="col-sm-2">
-              <strong>Category</strong>
+              <strong>POI</strong>
             </div>
             <div class="col-sm-10">
-              {{ $location->category->name }}
+              {{ $location->poi->name }}
             </div>
           </div>
           <div class="row">
@@ -69,8 +69,8 @@
         </div>
         <div class="box-body">
           <div class="map" style="position: relative; width: {{ $location->mapWidth }}px; height: {{ $location->mapHeight }}px; background-image: url({{ $location->map->image }})">
-          @if($location->category->icon)
-            <img src="{{ $location->category->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px;" />
+          @if($location->poi->icon)
+            <img src="{{ $location->poi->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px;" />
           @endif
           </div>
         </div>

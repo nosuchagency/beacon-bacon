@@ -27,10 +27,10 @@
         </div>
         <div class="box-body">
           <div class="form-group">
-            {!! Form::label('category_id', 'Category', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('poi_id', 'POI', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::select('category_id', $categories, $location->category_id, ['class' => 'form-control']) !!}
+              {!! Form::select('poi_id', $pois, $location->poi_id, ['class' => 'form-control']) !!}
             </div>
           </div>
           <div class="form-group">
@@ -57,8 +57,8 @@
         </div>
         <div class="box-body">
           <div class="map" style="position: relative; width: {{ $location->mapWidth }}px; height: {{ $location->mapHeight }}px; background-image: url({{ $location->map->image }})">
-          @if($location->category->icon)
-            <img src="{{ $location->category->icon }}" style="cursor: move" id="draggable" />
+          @if($location->poi->icon)
+            <img src="{{ $location->poi->icon }}" style="cursor: move" id="draggable" />
           @endif
           </div>
         </div>

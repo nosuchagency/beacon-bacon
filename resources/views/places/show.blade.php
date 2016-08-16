@@ -18,6 +18,7 @@
           <h3 class="box-title">Place details</h3>
         </div>
         <div class="box-body">
+
           <div class="row">
             <div class="col-sm-2">
               <strong>Name</strong>
@@ -26,9 +27,36 @@
               {{ $place->name }}
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>Address</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $place->address }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>ZIP Code</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $place->zipcode }}
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>City</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $place->city }}
+            </div>
+          </div>          
+          
         </div>
         <div class="box-footer">
-          <a href="{{ route('places.index') }}" class="btn btn-default">Back</a>
           <a href="{{ route('places.edit', $place->id) }}" class="btn btn-info pull-right">Edit</a>
         </div>
       </div>
@@ -89,8 +117,8 @@
                 <i class="fa fa-ellipsis-v"></i>
                 <i class="fa fa-ellipsis-v"></i>
               </span>
-              @if($item->category_id)
-                <span class="text">{{ $item->category->name }}</span>
+              @if($item->poi_id)
+                <span class="text">{{ $item->poi->name }}</span>
               @else
                 <span class="text"><big>- {{ $item->title }} -</big></span>
               @endif
@@ -112,11 +140,11 @@
         <div class="box-body">
           <div class="form-group">
             {!! Form::label('type', 'Type') !!}
-            {!! Form::select('type', ['category' => 'Category', 'title' => 'Title'], null, ['class' => 'form-control', 'id' => 'menu-item-type']) !!}
+            {!! Form::select('type', ['poi' => 'poi', 'title' => 'Title'], null, ['class' => 'form-control', 'id' => 'menu-item-type']) !!}
           </div>
-          <div class="form-group" id="category-type">
-            {!! Form::label('category', 'Category') !!}
-            {!! Form::select('category', $categories, '', ['class' => 'form-control']) !!}
+          <div class="form-group" id="poi-type">
+            {!! Form::label('poi', 'poi') !!}
+            {!! Form::select('poi', $pois, '', ['class' => 'form-control']) !!}
           </div>
           <div class="form-group" id="title-type" style="display: none">
             {!! Form::label('title', 'Title') !!}
@@ -141,11 +169,11 @@ $(document).ready(function(){
   $('#menu-item-type').change(function(){
     if ($(this).val() == 'title') {
       $('#title-type').show();
-      $('#category-type').hide();
+      $('#poi-type').hide();
     }
     else {
       $('#title-type').hide();
-      $('#category-type').show();
+      $('#poi-type').show();
     }
   });
 

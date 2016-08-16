@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Poi;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class PoiController extends Controller
 {
     /**
      * Instantiate a new controller instance.
@@ -25,8 +25,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        $pois = Poi::all();
+        return view('pois.index', compact('pois'));
     }
 
     /**
@@ -36,7 +36,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('pois.create');
     }
 
     /**
@@ -53,11 +53,11 @@ class CategoryController extends Controller
            'icon' => 'required|image',
         ]);
 
-        $category = Category::create($request->except('icon'));
+        $Poi = Poi::create($request->except('icon'));
 
-        $this->uploadIcon($category, $request);
+        $this->uploadIcon($Poi, $request);
 
-        return redirect()->route('categories.show', $category->id);
+        return redirect()->route('pois.show', $Poi->id);
     }
 
     /**
@@ -68,8 +68,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::findOrFail($id);
-        return view('categories.show', compact('category'));
+        $poi = Poi::findOrFail($id);
+        return view('pois.show', compact('poi'));
     }
 
     /**
@@ -80,8 +80,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('categories.edit', compact('category'));
+        $poi = Poi::findOrFail($id);
+        return view('pois.edit', compact('poi'));
     }
 
     /**
@@ -99,12 +99,12 @@ class CategoryController extends Controller
            'icon' => 'required|image',
         ]);
 
-        $category = Category::findOrFail($id);
-        $category->update($request->except('icon'));
+        $poi = Poi::findOrFail($id);
+        $poi->update($request->except('icon'));
 
-        $this->uploadIcon($category, $request);
+        $this->uploadIcon($poi, $request);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('pois.index');
     }
 
     /**
@@ -115,33 +115,33 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-        return redirect()->route('categories.index');
+        $poi = Poi::findOrFail($id);
+        $poi->delete();
+        return redirect()->route('pois.index');
     }
 
     /**
      * Upload icon
-     * @param  Category $category
+     * @param  Poi $Poi
      * @param  Request  $request
      * @return void
      */
-    protected function uploadIcon(Category $category, Request $request)
+    protected function uploadIcon(Poi $poi, Request $request)
     {
         if (!$request->hasFile('icon')) {
             return;
         }
 
-        $destinationPath = public_path('uploads/categories/' . $category->id);
+        $destinationPath = public_path('uploads/pois/' . $poi->id);
         $fileName = $request->file('icon')->getClientOriginalName();
 
-        if ($category->icon && is_file($destinationPath . '/' . $category->icon)) {
-            unlink($destinationPath . '/' . $category->icon);
+        if ($poi->icon && is_file($destinationPath . '/' . $poi->icon)) {
+            unlink($destinationPath . '/' . $poi->icon);
         }
 
         $request->file('icon')->move($destinationPath, $fileName);
 
-        $category->update([
+        $poi->update([
             'icon' => $fileName
         ]);
     }

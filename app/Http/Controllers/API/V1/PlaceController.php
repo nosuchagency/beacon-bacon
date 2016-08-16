@@ -104,6 +104,6 @@ class PlaceController extends Controller
      */
     public function menu($id)
     {
-        return Menu::orderBy('order')->with('category')->get();
+        return Menu::orderBy('order')->with('poi')->get();
     }
 }

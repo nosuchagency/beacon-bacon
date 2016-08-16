@@ -69,7 +69,7 @@
                 <th>Name</th>
                 <th>Place</th>
                 <th>Floor</th>
-                <th>Category</th>
+                <th>POI</th>
                 <th class="text-right">Actions</th>
               </tr>
             @foreach($map->locations as $index => $location)
@@ -78,7 +78,7 @@
                 <td><a href="{{ route('locations.show', [$placeId, $map->id, $location->id]) }}">{{ $location->name }}</a></td>
                 <td>{{ $location->place->name }}</td>
                 <td>{{ $location->map->name }}</td>
-                <td>{{ $location->category->name }}</td>
+                <td>{{ $location->poi->name }}</td>
                 <td class="text-right">
                   {!! Form::open(['route' => ['locations.destroy', $placeId, $map->id, $location->id], 'method' => 'DELETE']) !!}
                   {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
@@ -104,7 +104,7 @@
         @if($map->image)
         <div style="position: relative; width: {{ $map->width }}px; height: {{ $map->height }}px; background-image: url({{ $map->image }});">
           @foreach($map->locations as $index => $location)
-            <img src="{{ $location->category->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px" />
+            <img src="{{ $location->poi->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px" />
           @endforeach
         </div>
         @endif

@@ -20,7 +20,7 @@ Route::auth();
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::resource('places', 'PlaceController');
-Route::resource('categories', 'CategoryController');
+Route::resource('pois', 'PoiController');
 Route::resource('beacons', 'BeaconController');
 
 Route::group(['prefix' => 'places/{place}'], function(){
@@ -140,13 +140,13 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
         Route::put('location/{id}', ['uses' => 'LocationController@update']);
         Route::delete('location/{id}', ['uses' => 'LocationController@destroy']);
 
-        // Categories
-        Route::get('category', ['uses' => 'CategoryController@index']);
-        Route::post('category', ['uses' => 'CategoryController@store']);
-        Route::get('category/deleted', ['uses' => 'CategoryController@deleted']);
-        Route::get('category/{id}', ['uses' => 'CategoryController@show']);
-        Route::put('category/{id}', ['uses' => 'CategoryController@update']);
-        Route::delete('category/{id}', ['uses' => 'CategoryController@destroy']);
+        // Pois
+        Route::get('poi', ['uses' => 'PoiController@index']);
+        Route::post('poi', ['uses' => 'PoiController@store']);
+        Route::get('poi/deleted', ['uses' => 'PoiController@deleted']);
+        Route::get('poi/{id}', ['uses' => 'PoiController@show']);
+        Route::put('poi/{id}', ['uses' => 'PoiController@update']);
+        Route::delete('poi/{id}', ['uses' => 'PoiController@destroy']);
 
         // Beacons
         Route::get('beacons', ['uses' => 'BeaconController@index']);

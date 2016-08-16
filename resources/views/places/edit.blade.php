@@ -20,6 +20,7 @@
         </div>
         {!! Form::open(['route' => ['places.update', $place->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
         <div class="box-body">
+          
           <div class="form-group">
             {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
 
@@ -27,6 +28,31 @@
               {!! Form::text('name', $place->name, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
             </div>
           </div>
+          
+          <div class="form-group">
+            {!! Form::label('address', 'Address', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('address', $place->address, ['class' => 'form-control', 'placeholder' => 'Enter address']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('zipcode', 'ZIP Code', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('zipcode', $place->zipcode, ['class' => 'form-control', 'placeholder' => 'Enter ZIP Code']) !!}
+            </div>
+          </div>
+          
+          <div class="form-group">
+            {!! Form::label('city', 'City', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('city', $place->city, ['class' => 'form-control', 'placeholder' => 'Enter city']) !!}
+            </div>
+          </div>          
+          
         </div>
         <div class="box-footer">
           <a href="{{ route('places.show', $place->id) }}" class="btn btn-default">Cancel</a>

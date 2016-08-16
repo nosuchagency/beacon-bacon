@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Menu;
 use App\Place;
-use App\Category;
+use App\Poi;
 use Illuminate\Http\Request;
 
 class PlaceController extends Controller
@@ -68,9 +68,9 @@ class PlaceController extends Controller
     {
         $place = Place::findOrFail($id);
         $menuitems = Menu::orderBy('order')->get();
-        $categories = Category::lists('name', 'id')->prepend('', '');
+        $pois = Poi::lists('name', 'id')->prepend('', '');
 
-        return view('places.show', compact('place', 'menuitems', 'categories'));
+        return view('places.show', compact('place', 'menuitems', 'pois'));
     }
 
     /**
@@ -133,13 +133,13 @@ class PlaceController extends Controller
     public function storeMenuItem(Request $request, $placeId)
     {
         $this->validate($request, [
-            'category' => 'required_if:type,category',
+            'poi' => 'required_if:type,poi',
             'title' => 'required_if:type,title',
         ]);
 
         Menu::create([
             'place_id' => $placeId,
-            'category_id' => $request->input('category'),
+            'poi_id' => $request->input('poi'),
             'title' => $request->input('title'),
         ]);
 

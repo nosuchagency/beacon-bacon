@@ -6,7 +6,7 @@ use Auth;
 use Menu;
 use Closure;
 use App\Place;
-use App\Category;
+use App\Poi;
 
 class AdminMenu
 {
@@ -48,9 +48,9 @@ class AdminMenu
                 }
             }
 
-            $menu->raw('CATEGORIES', ['class' => 'header']);
-            $menu->add('<i class="fa fa-plus"></i><span>Create category</span>', ['route' => 'categories.create']);
-            $menu->add('<i class="fa fa-circle-o text-yellow"></i><span>View all</span>', ['route' => 'categories.index']);
+            $menu->raw('POIS', ['class' => 'header']);
+            $menu->add('<i class="fa fa-plus"></i><span>Create POI</span>', ['route' => 'pois.create']);
+            $menu->add('<i class="fa fa-circle-o text-yellow"></i><span>View all</span>', ['route' => 'pois.index']);
 
             // $menu->raw('FLOORS', ['class' => 'header']);
             // $menu->add('<i class="fa fa-plus"></i><span>Create floor</span>', ['route' => 'maps.create']);

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Poi extends Model
 {
     use SoftDeletes, UsedByTeams, HasCreatedBy, LogsActivity;
 
@@ -49,7 +49,7 @@ class Category extends Model
      */
     public function getIconAttribute($value)
     {
-        return !$value ? '' : asset('uploads/categories/'.$this->id.'/'.$value);
+        return !$value ? '' : asset('uploads/pois/'.$this->id.'/'.$value);
     }
 
     /**
