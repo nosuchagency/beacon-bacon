@@ -18,7 +18,7 @@ class Beacon extends Model
      * @var array
      */
     protected $fillable = [
-        'place_id', 'map_id', 'name', 'description', 'posX', 'posY',
+        'place_id', 'floor_id', 'name', 'description', 'posX', 'posY',
         'beacon_uid', 'proximity_uuid', 'major', 'minor'
     ];
 
@@ -53,12 +53,12 @@ class Beacon extends Model
     }
 
     /**
-     * Get the map
+     * Get the floor
      * @return Illuminate\Database\Query\Builder
      */
-    public function map()
+    public function floor()
     {
-        return $this->belongsTo('App\Map');
+        return $this->belongsTo('App\floor');
     }
 
     /**

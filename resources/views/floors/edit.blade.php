@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('contentheader_title', 'Create new floor')
+@section('contentheader_title', 'Edit ' . $floor->name)
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
   <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="{{ route('places.index') }}">Places</a></li>
-  <li><a href="{{ route('places.show', $placeId) }}">{{ $place->name }}</a></li>
-  <li class="active">Create floor</li>
+  <li><a href="{{ route('places.show', $floor->place_id) }}">{{ $floor->place->name }}</a></li>
+  <li class="active">Edit floor</li>
 </ol>
 @endsection
 
@@ -18,14 +18,14 @@
         <div class="box-header with-border">
           <h3 class="box-title">Floor details</h3>
         </div>
-        {!! Form::open(['route' => ['maps.store', $placeId], 'method' => 'POST', 'class' => 'form-horizontal', 'files' => true]) !!}
+        {!! Form::open(['route' => ['floors.update', $placeId, $floor->id], 'method' => 'PUT', 'class' => 'form-horizontal', 'files' => true]) !!}
         {!! Form::hidden('place_id', $placeId) !!}
         <div class="box-body">
           <div class="form-group">
             {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
+              {!! Form::text('name', $floor->name, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
             </div>
           </div>
           <div class="form-group">
@@ -39,12 +39,15 @@
             {!! Form::label('image', 'Image', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
+              @if($floor->image)
+                <img src="{{ $floor->image }}" class="img-responsive" />
+              @endif
               {!! Form::file('image', null, ['class' => 'form-control']) !!}
             </div>
           </div>
         </div>
         <div class="box-footer">
-          <a href="{{ route('places.show', $placeId) }}" class="btn btn-default">Cancel</a>
+          <a href="{{ route('floors.show', [$placeId, $floor->id]) }}" class="btn btn-default">Cancel</a>
           <button type="submit" class="btn btn-info pull-right">Save</button>
         </div>
         {!! Form::close() !!}

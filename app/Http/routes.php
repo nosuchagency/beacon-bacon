@@ -29,16 +29,16 @@ Route::group(['prefix' => 'places/{place}'], function(){
     Route::post('menu/order', ['as' => 'menu.update', 'uses' => 'PlaceController@updateMenuOrder']);
     Route::delete('menu', ['as' => 'menu.destroy', 'uses' => 'PlaceController@destroyMenuItem']);
 
-    // Maps
-    Route::get('maps', ['as' => 'maps.index', 'uses' => 'MapController@index']);
-    Route::get('maps/create', ['as' => 'maps.create', 'uses' => 'MapController@create']);
-    Route::post('maps', ['as' => 'maps.store', 'uses' => 'MapController@store']);
-    Route::get('maps/{map}', ['as' => 'maps.show', 'uses' => 'MapController@show']);
-    Route::get('maps/{map}/edit', ['as' => 'maps.edit', 'uses' => 'MapController@edit']);
-    Route::put('maps/{map}', ['as' => 'maps.update', 'uses' => 'MapController@update']);
-    Route::delete('maps/{map}', ['as' => 'maps.destroy', 'uses' => 'MapController@destroy']);
+    // floors
+    Route::get('floors', ['as' => 'floors.index', 'uses' => 'floorController@index']);
+    Route::get('floors/create', ['as' => 'floors.create', 'uses' => 'floorController@create']);
+    Route::post('floors', ['as' => 'floors.store', 'uses' => 'floorController@store']);
+    Route::get('floors/{floor}', ['as' => 'floors.show', 'uses' => 'floorController@show']);
+    Route::get('floors/{floor}/edit', ['as' => 'floors.edit', 'uses' => 'floorController@edit']);
+    Route::put('floors/{floor}', ['as' => 'floors.update', 'uses' => 'floorController@update']);
+    Route::delete('floors/{floor}', ['as' => 'floors.destroy', 'uses' => 'floorController@destroy']);
 
-    Route::group(['prefix' => 'maps/{map}'], function(){
+    Route::group(['prefix' => 'floors/{floor}'], function(){
         // Locations
         Route::get('locations', ['as' => 'locations.index', 'uses' => 'LocationController@index']);
         Route::get('locations/create', ['as' => 'locations.create', 'uses' => 'LocationController@create']);
@@ -124,13 +124,13 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
             Route::get('menu', ['uses' => 'PlaceController@menu']);
         });
 
-        // Maps
-        Route::get('map', ['uses' => 'MapController@index']);
-        Route::post('map', ['uses' => 'MapController@store']);
-        Route::get('map/deleted', ['uses' => 'MapController@deleted']);
-        Route::get('map/{id}', ['uses' => 'MapController@show']);
-        Route::put('map/{id}', ['uses' => 'MapController@update']);
-        Route::delete('map/{id}', ['uses' => 'MapController@destroy']);
+        // floors
+        Route::get('floor', ['uses' => 'floorController@index']);
+        Route::post('floor', ['uses' => 'floorController@store']);
+        Route::get('floor/deleted', ['uses' => 'floorController@deleted']);
+        Route::get('floor/{id}', ['uses' => 'floorController@show']);
+        Route::put('floor/{id}', ['uses' => 'floorController@update']);
+        Route::delete('floor/{id}', ['uses' => 'floorController@destroy']);
 
         // Locations
         Route::get('location', ['uses' => 'LocationController@index']);

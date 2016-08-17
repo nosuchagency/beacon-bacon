@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Map extends Model
+class Floor extends Model
 {
     use SoftDeletes, UsedByTeams, HasCreatedBy, LogsActivity;
 
@@ -51,7 +51,7 @@ class Map extends Model
     }
 
     /**
-     * Get locations on this map.
+     * Get locations on this floor.
      *
      * @return Illuminate\Database\Query\Builder
      */
@@ -69,7 +69,7 @@ class Map extends Model
      */
     public function getImageAttribute($value)
     {
-        return !$value ? '' : asset('uploads/maps/'.$this->id.'/'.$value);
+        return !$value ? '' : asset('uploads/floors/'.$this->id.'/'.$value);
     }
 
     /**

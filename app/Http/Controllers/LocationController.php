@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Image;
-use App\Map;
+use App\Floor;
 use App\Place;
 use App\Poi;
 use App\Location;
@@ -27,12 +27,12 @@ class LocationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($placeId, $mapId)
+    public function index($placeId, $floorId)
     {
         $locations = Location::all();
         $place = Place::findOrFail($placeId);
-        $map = Map::findOrFail($mapId);
-        return view('locations.index', compact('locations', 'place', 'map', 'placeId', 'mapId'));
+        $floor = Floor::findOrFail($floorId);
+        return view('locations.index', compact('locations', 'place', 'floor', 'placeId', 'floorId'));
     }
 
     /**
@@ -40,12 +40,12 @@ class LocationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($placeId, $mapId)
+    public function create($placeId, $floorId)
     {
         $pois = Poi::lists('name', 'id');
         $place = Place::findOrFail($placeId);
-        $map = Map::findOrFail($mapId);
-        return view('locations.create', compact('pois', 'place', 'map', 'placeId', 'mapId'));
+        $floor = Floor::findOrFail($floorId);
+        return view('locations.create', compact('pois', 'place', 'floor', 'placeId', 'floorId'));
     }
 
     /**
@@ -54,14 +54,14 @@ class LocationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $placeId, $mapsId)
+    public function store(Request $request, $placeId, $floorsId)
     {
         $this->validate($request, [
            'name' => 'required|max:255',
         ]);
 
         $location = Location::create($request->all());
-        return redirect()->route('locations.show', [$placeId, $mapsId, $location->id]);
+        return redirect()->route('locations.show', [$placeId, $floorsId, $location->id]);
     }
 
     /**
@@ -70,7 +70,7 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($placeId, $mapId, $id)
+    public function show($placeId, $floorId, $id)
     {
         $location = Location::findOrFail($id);
 
@@ -80,13 +80,13 @@ class LocationController extends Controller
             $location->iconHeight = $icon->height();
         }
 
-        if ($location->map->image) {
-            $image = Image::make($location->map->image);
-            $location->mapWidth = $image->width();
-            $location->mapHeight = $image->height();
+        if ($location->floor->image) {
+            $image = Image::make($location->floor->image);
+            $location->floorWidth = $image->width();
+            $location->floorHeight = $image->height();
         }
 
-        return view('locations.show', compact('location', 'placeId', 'mapId'));
+        return view('locations.show', compact('location', 'placeId', 'floorId'));
     }
 
     /**
@@ -95,12 +95,12 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($placeId, $mapId, $id)
+    public function edit($placeId, $floorId, $id)
     {
         $location = Location::findOrFail($id);
         $places = Place::lists('name', 'id');
         $pois = Poi::lists('name', 'id');
-        $maps = Map::lists('name', 'id');
+        $floors = Floor::lists('name', 'id');
 
         if ($location->poi->icon) {
             $icon = Image::make($location->poi->icon);
@@ -108,13 +108,13 @@ class LocationController extends Controller
             $location->iconHeight = $icon->height();
         }
 
-        if ($location->map->image) {
-            $image = Image::make($location->map->image);
-            $location->mapWidth = $image->width();
-            $location->mapHeight = $image->height();
+        if ($location->floor->image) {
+            $image = Image::make($location->floor->image);
+            $location->floorWidth = $image->width();
+            $location->floorHeight = $image->height();
         }
 
-        return view('locations.edit', compact('location', 'places', 'pois', 'maps', 'placeId', 'mapId'));
+        return view('locations.edit', compact('location', 'places', 'pois', 'floors', 'placeId', 'floorId'));
     }
 
     /**
@@ -124,7 +124,7 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $placeId, $mapId, $id)
+    public function update(Request $request, $placeId, $floorId, $id)
     {
         $this->validate($request, [
            'name' => 'required|max:255',
@@ -132,7 +132,7 @@ class LocationController extends Controller
 
         $location = Location::findOrFail($id);
         $location->update($request->all());
-        return redirect()->route('maps.show', [$placeId, $mapId]);
+        return redirect()->route('floors.show', [$placeId, $floorId]);
     }
 
     /**
@@ -141,10 +141,10 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($placeId, $mapId, $id)
+    public function destroy($placeId, $floorId, $id)
     {
         $location = Location::findOrFail($id);
         $location->delete();
-        return redirect()->route('maps.show', [$placeId, $mapId]);
+        return redirect()->route('floors.show', [$placeId, $floorId]);
     }
 }

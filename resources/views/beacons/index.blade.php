@@ -31,7 +31,7 @@
                   <td>{{ $index+1 }}</td>
                   <td><a href="{{ route('beacons.show', $beacon->id) }}">{{ $beacon->name }}</a></td>
                   <td>{{ $beacon->place->name }}</td>
-                  <td>{{ $beacon->map->name }}</td>
+                  <td>{{ $beacon->floor->name }}</td>
                   <td class="text-right">
                     {!! Form::open(['route' => ['beacons.destroy', $beacon->id], 'method' => 'DELETE']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}

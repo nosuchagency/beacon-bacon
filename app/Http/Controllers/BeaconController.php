@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Map;
+use App\Floor;
 use App\Place;
 use App\Beacon;
 use App\Http\Requests;
@@ -40,7 +40,7 @@ class BeaconController extends Controller
     public function create(Request $request)
     {
         $places = Place::lists('name', 'id');
-        $maps = Map::lists('name', 'id');
+        $floors = Floor::lists('name', 'id');
 
         $devices = $this->getBeaconsFromWebservice();
 
@@ -48,7 +48,7 @@ class BeaconController extends Controller
             $beacon = $this->getBeaconFromWebservice($request->input('beacon_uid'));
         }
 
-        return view('beacons.create', compact('places', 'maps', 'devices', 'beacon'));
+        return view('beacons.create', compact('places', 'floors', 'devices', 'beacon'));
     }
 
     /**
@@ -89,8 +89,8 @@ class BeaconController extends Controller
     {
         $beacon = Beacon::findOrFail($id);
         $places = Place::lists('name', 'id');
-        $maps = Map::lists('name', 'id');
-        return view('beacons.edit', compact('beacon', 'places', 'maps'));
+        $floors = Floor::lists('name', 'id');
+        return view('beacons.edit', compact('beacon', 'places', 'floors'));
     }
 
     /**

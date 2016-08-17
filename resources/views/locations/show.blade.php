@@ -7,7 +7,7 @@
   <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="{{ route('places.index') }}">Places</a></li>
   <li><a href="{{ route('places.show', $placeId) }}">{{ $location->place->name }}</a></li>
-  <li><a href="{{ route('maps.show', [$placeId, $mapId]) }}">{{ $location->map->name }}</a></li>
+  <li><a href="{{ route('floors.show', [$placeId, $floorId]) }}">{{ $location->floor->name }}</a></li>
   <li class="active">{{ $location->name }}</li>
 </ol>
 @endsection
@@ -33,7 +33,7 @@
               <strong>Floor</strong>
             </div>
             <div class="col-sm-10">
-              {{ $location->map->name }}
+              {{ $location->floor->name }}
             </div>
           </div>
           <div class="row">
@@ -54,8 +54,8 @@
           </div>
         </div>
         <div class="box-footer">
-          <a href="{{ route('maps.show', [$placeId, $mapId]) }}" class="btn btn-default">Back</a>
-          <a href="{{ route('locations.edit', [$placeId, $mapId, $location->id]) }}" class="btn btn-info pull-right">Edit</a>
+          <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">Back</a>
+          <a href="{{ route('locations.edit', [$placeId, $floorId, $location->id]) }}" class="btn btn-info pull-right">Edit</a>
         </div>
       </div>
   </div>
@@ -65,18 +65,18 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Location on map</h3>
+          <h3 class="box-title">Location on floor</h3>
         </div>
         <div class="box-body">
-          <div class="map" style="position: relative; width: {{ $location->mapWidth }}px; height: {{ $location->mapHeight }}px; background-image: url({{ $location->map->image }})">
+          <div class="floor" style="position: relative; width: {{ $location->floorWidth }}px; height: {{ $location->floorHeight }}px; background-image: url({{ $location->floor->image }})">
           @if($location->poi->icon)
             <img src="{{ $location->poi->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px;" />
           @endif
           </div>
         </div>
         <div class="box-footer">
-          <a href="{{ route('maps.show', [$placeId, $mapId]) }}" class="btn btn-default">Back</a>
-          <a href="{{ route('locations.edit', [$placeId, $mapId, $location->id]) }}" class="btn btn-info pull-right">Edit</a>
+          <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">Back</a>
+          <a href="{{ route('locations.edit', [$placeId, $floorId, $location->id]) }}" class="btn btn-info pull-right">Edit</a>
         </div>
       </div>
   </div>

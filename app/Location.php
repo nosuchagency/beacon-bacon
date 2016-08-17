@@ -17,7 +17,7 @@ class Location extends Model
      *
      * @var array
      */
-    protected $fillable = ['place_id', 'map_id', 'poi_id', 'name', 'posX', 'posY'];
+    protected $fillable = ['place_id', 'floor_id', 'poi_id', 'name', 'posX', 'posY'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -50,12 +50,12 @@ class Location extends Model
     }
 
     /**
-     * Get the map
+     * Get the floor
      * @return Illuminate\Database\Query\Builder
      */
-    public function map()
+    public function floor()
     {
-        return $this->belongsTo('App\Map');
+        return $this->belongsTo('App\Floor');
     }
 
     /**

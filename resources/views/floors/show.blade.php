@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('contentheader_title', $map->name)
+@section('contentheader_title', $floor->name)
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
   <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="{{ route('places.index') }}">Places</a></li>
-  <li><a href="{{ route('places.show', $map->place_id) }}">{{ $map->place->name }}</a></li>
-  <li class="active">{{ $map->name }}</li>
+  <li><a href="{{ route('places.show', $floor->place_id) }}">{{ $floor->place->name }}</a></li>
+  <li class="active">{{ $floor->name }}</li>
 </ol>
 @endsection
 
@@ -24,7 +24,7 @@
               <strong>Place</strong>
             </div>
             <div class="col-sm-10">
-              {{ $map->place->name }}
+              {{ $floor->place->name }}
             </div>
           </div>
           <div class="row">
@@ -32,7 +32,7 @@
               <strong>Name</strong>
             </div>
             <div class="col-sm-10">
-              {{ $map->name }}
+              {{ $floor->name }}
             </div>
           </div>
           <div class="row">
@@ -40,13 +40,13 @@
               <strong>Floor no.</strong>
             </div>
             <div class="col-sm-10">
-              {{ $map->order }}
+              {{ $floor->order }}
             </div>
           </div>
         </div>
         <div class="box-footer">
           <a href="{{ route('places.show', $placeId) }}" class="btn btn-default">Back</a>
-          <a href="{{ route('maps.edit', [$placeId, $map->id]) }}" class="btn btn-info pull-right">Edit</a>
+          <a href="{{ route('floors.edit', [$placeId, $floor->id]) }}" class="btn btn-info pull-right">Edit</a>
         </div>
       </div>
   </div>
@@ -58,7 +58,7 @@
       <div class="box-header with-border">
         <h3 class="box-title">Locations</h3>
         <div class="pull-right box-tools">
-          <a href="{{ route('locations.create', [$placeId, $map->id]) }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add location</a>
+          <a href="{{ route('locations.create', [$placeId, $floor->id]) }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add location</a>
         </div>
       </div>
       <div class="box-body no-padding">
@@ -72,17 +72,17 @@
                 <th>POI</th>
                 <th class="text-right">Actions</th>
               </tr>
-            @foreach($map->locations as $index => $location)
+            @foreach($floor->locations as $index => $location)
               <tr>
                 <td>{{ $index+1 }}</td>
-                <td><a href="{{ route('locations.show', [$placeId, $map->id, $location->id]) }}">{{ $location->name }}</a></td>
+                <td><a href="{{ route('locations.show', [$placeId, $floor->id, $location->id]) }}">{{ $location->name }}</a></td>
                 <td>{{ $location->place->name }}</td>
-                <td>{{ $location->map->name }}</td>
+                <td>{{ $location->floor->name }}</td>
                 <td>{{ $location->poi->name }}</td>
                 <td class="text-right">
-                  {!! Form::open(['route' => ['locations.destroy', $placeId, $map->id, $location->id], 'method' => 'DELETE']) !!}
+                  {!! Form::open(['route' => ['locations.destroy', $placeId, $floor->id, $location->id], 'method' => 'DELETE']) !!}
                   {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                  <a href="{{ route('locations.edit', [$placeId, $map->id, $location->id]) }}" class="btn btn-primary btn-sm">Edit</a>
+                  <a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" class="btn btn-primary btn-sm">Edit</a>
                   {!! Form::close() !!}
                 </td>
               </tr>
@@ -101,9 +101,9 @@
         <h3 class="box-title">Floor image</h3>
       </div>
       <div class="box-body">
-        @if($map->image)
-        <div style="position: relative; width: {{ $map->width }}px; height: {{ $map->height }}px; background-image: url({{ $map->image }});">
-          @foreach($map->locations as $index => $location)
+        @if($floor->image)
+        <div style="position: relative; width: {{ $floor->width }}px; height: {{ $floor->height }}px; background-image: url({{ $floor->image }});">
+          @foreach($floor->locations as $index => $location)
             <img src="{{ $location->poi->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px" />
           @endforeach
         </div>

@@ -7,16 +7,16 @@
   <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="{{ route('places.index') }}">Places</a></li>
   <li><a href="{{ route('places.show', $placeId) }}">{{ $location->place->name }}</a></li>
-  <li><a href="{{ route('maps.show', [$placeId, $mapId]) }}">{{ $location->map->name }}</a></li>
-  <li><a href="{{ route('locations.show', [$placeId, $mapId, $location->id]) }}">{{ $location->map->name }}</a></li>
+  <li><a href="{{ route('floors.show', [$placeId, $floorId]) }}">{{ $location->floor->name }}</a></li>
+  <li><a href="{{ route('locations.show', [$placeId, $floorId, $location->id]) }}">{{ $location->floor->name }}</a></li>
   <li class="active">Edit location</li>
 </ol>
 @endsection
 
 @section('content')
-{!! Form::open(['route' => ['locations.update', $placeId, $mapId, $location->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+{!! Form::open(['route' => ['locations.update', $placeId, $floorId, $location->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 {!! Form::hidden('place_id', $placeId) !!}
-{!! Form::hidden('map_id', $mapId) !!}
+{!! Form::hidden('floor_id', $floorId) !!}
 {!! Form::hidden('posX', $location->posX ? $location->posX : 10, ['id' => 'posX']) !!}
 {!! Form::hidden('posY', $location->posY ? $location->posY : 10, ['id' => 'posY']) !!}
 <div class="row">
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="box-footer">
-          <a href="{{ route('locations.show', [$placeId, $mapId, $location->id]) }}" class="btn btn-default">Cancel</a>
+          <a href="{{ route('locations.show', [$placeId, $floorId, $location->id]) }}" class="btn btn-default">Cancel</a>
           <button type="submit" class="btn btn-info pull-right">Save</button>
         </div>
       </div>
@@ -53,17 +53,17 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Location on map</h3>
+          <h3 class="box-title">Location on floor</h3>
         </div>
         <div class="box-body">
-          <div class="map" style="position: relative; width: {{ $location->mapWidth }}px; height: {{ $location->mapHeight }}px; background-image: url({{ $location->map->image }})">
+          <div class="floor" style="position: relative; width: {{ $location->floorWidth }}px; height: {{ $location->floorHeight }}px; background-image: url({{ $location->floor->image }})">
           @if($location->poi->icon)
             <img src="{{ $location->poi->icon }}" style="cursor: move" id="draggable" />
           @endif
           </div>
         </div>
         <div class="box-footer">
-          <a href="{{ route('maps.show', [$placeId, $mapId]) }}" class="btn btn-default">Cancel</a>
+          <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">Cancel</a>
           <button type="submit" class="btn btn-info pull-right">Save</button>
         </div>
       </div>

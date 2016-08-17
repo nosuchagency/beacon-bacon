@@ -69,7 +69,7 @@
         <div class="box-header with-border">
           <h3 class="box-title">Floor list</h3>
           <div class="pull-right box-tools">
-            <a href="{{ route('maps.create', $place->id) }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add floor</a>
+            <a href="{{ route('floors.create', $place->id) }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add floor</a>
           </div>
         </div>
         <div class="box-body no-padding">
@@ -82,16 +82,16 @@
                   <th>Locations</th>
                   <th class="text-right">Actions</th>
                 </tr>
-              @foreach($place->maps as $index => $map)
+              @foreach($place->floors as $index => $floor)
                 <tr>
                   <td>{{ $index+1 }}</td>
-                  <td><a href="{{ route('maps.show', [$place->id, $map->id]) }}">{{ $map->name }}</a></td>
-                  <td>{{ $map->order }}</td>
-                  <td>{{ $map->locations()->count() }}</td>
+                  <td><a href="{{ route('floors.show', [$place->id, $floor->id]) }}">{{ $floor->name }}</a></td>
+                  <td>{{ $floor->order }}</td>
+                  <td>{{ $floor->locations()->count() }}</td>
                   <td class="text-right">
-                    {!! Form::open(['route' => ['maps.destroy', $place->id, $map->id], 'method' => 'DELETE']) !!}
+                    {!! Form::open(['route' => ['floors.destroy', $place->id, $floor->id], 'method' => 'DELETE']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                    <a href="{{ route('maps.edit', [$place->id, $map->id]) }}" class="btn btn-info btn-sm">Edit</a>
+                    <a href="{{ route('floors.edit', [$place->id, $floor->id]) }}" class="btn btn-info btn-sm">Edit</a>
                     {!! Form::close() !!}
                   </td>
                 </tr>

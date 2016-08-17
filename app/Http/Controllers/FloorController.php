@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Image;
-use App\Map;
+use App\Floor;
 use App\Place;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
-class MapController extends Controller
+class FloorController extends Controller
 {
     /**
      * Instantiate a new controller instance.
@@ -27,9 +27,9 @@ class MapController extends Controller
      */
     public function index($placeId)
     {
-        $maps = Map::all();
+        $floors = Floor::all();
         $place = Place::findOrFail($placeId);
-        return view('maps.index', compact('maps', 'place', 'placeId'));
+        return view('floors.index', compact('floors', 'place', 'placeId'));
     }
 
     /**
@@ -40,7 +40,7 @@ class MapController extends Controller
     public function create($placeId)
     {
         $place = Place::findOrFail($placeId);
-        return view('maps.create', compact('place', 'placeId'));
+        return view('floors.create', compact('place', 'placeId'));
     }
 
     /**
@@ -57,11 +57,11 @@ class MapController extends Controller
            'image' => 'required|image',
         ]);
 
-        $map = Map::create($request->except('image'));
+        $floor = Floor::create($request->except('image'));
 
-        $this->uploadMap($map, $request);
+        $this->uploadFloor($floor, $request);
 
-        return redirect()->route('maps.show', [$placeId, $map->id]);
+        return redirect()->route('floors.show', [$placeId, $floor->id]);
     }
 
     /**
@@ -72,15 +72,15 @@ class MapController extends Controller
      */
     public function show($placeId, $id)
     {
-        $map = Map::findOrFail($id);
+        $floor = Floor::findOrFail($id);
 
-        if ($map->image) {
-            $image = Image::make($map->image);
-            $map->width = $image->width();
-            $map->height = $image->height();
+        if ($floor->image) {
+            $image = Image::make($floor->image);
+            $floor->width = $image->width();
+            $floor->height = $image->height();
         }
 
-        return view('maps.show', compact('map', 'placeId'));
+        return view('floors.show', compact('floor', 'placeId'));
     }
 
     /**
@@ -91,8 +91,8 @@ class MapController extends Controller
      */
     public function edit($placeId, $id)
     {
-        $map = Map::findOrFail($id);
-        return view('maps.edit', compact('map', 'placeId'));
+        $floor = Floor::findOrFail($id);
+        return view('floors.edit', compact('floor', 'placeId'));
     }
 
     /**
@@ -110,12 +110,12 @@ class MapController extends Controller
            'image' => 'image',
         ]);
 
-        $map = Map::findOrFail($id);
-        $map->update($request->except('image'));
+        $floor = Floor::findOrFail($id);
+        $floor->update($request->except('image'));
 
-        $this->uploadMap($map, $request);
+        $this->uploadFloor($floor, $request);
 
-        return redirect()->route('maps.show', [$placeId, $id]);
+        return redirect()->route('floors.show', [$placeId, $id]);
     }
 
     /**
@@ -126,33 +126,33 @@ class MapController extends Controller
      */
     public function destroy($placeId, $id)
     {
-        $map = Map::findOrFail($id);
-        $map->delete();
+        $floor = Floor::findOrFail($id);
+        $floor->delete();
         return redirect()->route('places.show', $placeId);
     }
 
     /**
      * Upload image
-     * @param  Map $map
+     * @param  Floor $floor
      * @param  Request  $request
      * @return void
      */
-    protected function uploadMap(Map $map, Request $request)
+    protected function uploadFloor(Floor $floor, Request $request)
     {
         if (!$request->hasFile('image')) {
             return;
         }
 
-        $destinationPath = public_path('uploads/maps/' . $map->id);
+        $destinationPath = public_path('uploads/floors/' . $floor->id);
         $fileName = $request->file('image')->getClientOriginalName();
 
-        if ($map->image && is_file($destinationPath . '/' . $map->image)) {
-            unlink($destinationPath . '/' . $map->image);
+        if ($floor->image && is_file($destinationPath . '/' . $floor->image)) {
+            unlink($destinationPath . '/' . $floor->image);
         }
 
         $request->file('image')->move($destinationPath, $fileName);
 
-        $map->update([
+        $floor->update([
             'image' => $fileName
         ]);
     }
