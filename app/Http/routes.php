@@ -30,13 +30,13 @@ Route::group(['prefix' => 'places/{place}'], function(){
     Route::delete('menu', ['as' => 'menu.destroy', 'uses' => 'PlaceController@destroyMenuItem']);
 
     // floors
-    Route::get('floors', ['as' => 'floors.index', 'uses' => 'floorController@index']);
-    Route::get('floors/create', ['as' => 'floors.create', 'uses' => 'floorController@create']);
-    Route::post('floors', ['as' => 'floors.store', 'uses' => 'floorController@store']);
-    Route::get('floors/{floor}', ['as' => 'floors.show', 'uses' => 'floorController@show']);
-    Route::get('floors/{floor}/edit', ['as' => 'floors.edit', 'uses' => 'floorController@edit']);
-    Route::put('floors/{floor}', ['as' => 'floors.update', 'uses' => 'floorController@update']);
-    Route::delete('floors/{floor}', ['as' => 'floors.destroy', 'uses' => 'floorController@destroy']);
+    Route::get('floors', ['as' => 'floors.index', 'uses' => 'FloorController@index']);
+    Route::get('floors/create', ['as' => 'floors.create', 'uses' => 'FloorController@create']);
+    Route::post('floors', ['as' => 'floors.store', 'uses' => 'FloorController@store']);
+    Route::get('floors/{floor}', ['as' => 'floors.show', 'uses' => 'FloorController@show']);
+    Route::get('floors/{floor}/edit', ['as' => 'floors.edit', 'uses' => 'FloorController@edit']);
+    Route::put('floors/{floor}', ['as' => 'floors.update', 'uses' => 'FloorController@update']);
+    Route::delete('floors/{floor}', ['as' => 'floors.destroy', 'uses' => 'FloorController@destroy']);
 
     Route::group(['prefix' => 'floors/{floor}'], function(){
         // Locations
