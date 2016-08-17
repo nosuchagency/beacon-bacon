@@ -25,46 +25,28 @@ class AdminMenu
                 return;
             }
 
-            /*if (Auth::user()->currentTeam) {
-                $menu->add('<i class="fa fa-dashboard"></i><span class="nav-label">Dashboard</span>', [ 'route' => 'dashboard' ]);
-
-                $booking = $menu->add('<i class="fa fa-calendar"></i><span class="nav-label">Booking</span>', '#');
-                $booking->add('Bookings', [ 'route' => 'bookings.index' ]);
-
-                //$menu->divide();
-            }*/
-
             $menu->add('<i class="fa fa-dashboard"></i><span>Dashboard</span>', ['route' => 'home']);
 
             $menu->raw('PLACES', ['class' => 'header']);
-            $menu->add('<i class="fa fa-plus"></i><span>Create place</span>', ['route' => 'places.create']);
-
             foreach (Place::all() as $index => $place) {
                 $menu->add('<i class="fa fa-globe"></i><span>' . $place->name . '</span>', ['route' => ['places.show', $place->id]]);
 
                 if ($index == 4) {
-                    $menu->add('<i class="fa fa-circle-o text-aqua"></i><span>View all</span>', ['route' => 'places.index']);
+                    $menu->add('<i class="fa fa-circle-o text-aqua"></i><span>All Places</span>', ['route' => 'places.index']);
                     break;
                 }
             }
+            $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'places.create']);
 
-            $menu->raw('POIS', ['class' => 'header']);
-            $menu->add('<i class="fa fa-plus"></i><span>Create POI</span>', ['route' => 'pois.create']);
-            $menu->add('<i class="fa fa-circle-o text-yellow"></i><span>View all</span>', ['route' => 'pois.index']);
-
-            // $menu->raw('FLOORS', ['class' => 'header']);
-            // $menu->add('<i class="fa fa-plus"></i><span>Create floor</span>', ['route' => 'maps.create']);
-            // $menu->add('<i class="fa fa-circle-o text-red"></i><span>View all</span>', ['route' => 'maps.index']);
-            //
-            // $menu->raw('LOCATIONS', ['class' => 'header']);
-            // $menu->add('<i class="fa fa-plus"></i><span>Create location</span>', ['route' => 'locations.create']);
-            // $menu->add('<i class="fa fa-circle-o text-green"></i><span>View all</span>', ['route' => 'locations.index']);
+            $menu->raw('POINT OF INTERESTS', ['class' => 'header']);
+            $menu->add('<i class="fa fa-circle-o text-yellow"></i><span>All POIs</span>', ['route' => 'pois.index']);
+            $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'pois.create']);            
 
             $menu->raw('BEACONS', ['class' => 'header']);
-            $menu->add('<i class="fa fa-plus"></i><span>Create beacon</span>', ['route' => 'beacons.create']);
-            $menu->add('<i class="fa fa-circle-o text-blue"></i><span>View all</span>', ['route' => 'beacons.index']);
+            $menu->add('<i class="fa fa-circle-o text-blue"></i><span>All Beacons</span>', ['route' => 'beacons.index']);
+            $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'beacons.create']);
 
-            $menu->raw('SYSTEM', ['class' => 'header']);
+            $menu->raw('SETTINGS', ['class' => 'header']);
 
             if(Auth::user()->teams()->count() <> 1) {
                 $menu->add('<i class="fa fa-users"></i><span>Teams</span>', ['route' => 'teams.index']);
@@ -72,12 +54,9 @@ class AdminMenu
 
             if(Auth::user()->isOwnerOfCurrentTeam()) {
                 $menu->add('<i class="fa fa-users"></i><span>Users</span>', ['route' => 'teams.members.show']);
-
-                $settings = $menu->add('<i class="fa fa-cog"></i><span>Settings</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>', ['url' => '#', 'class' => 'treeview']);
-                $settings->add('<i class="fa fa-envelope"></i><span>E-mail</span>', ['route' => 'settings.email']);
-                $settings->add('<i class="fa fa-pencil"></i><span>Templates</span>', ['route' => 'settings.templates']);
-
-                $menu->add('<i class="fa fa-terminal"></i><span>API keys</span>', ['route' => 'apikeys.index']);
+                $menu->add('<i class="fa fa-envelope"></i><span>Email Settings</span>', ['route' => 'settings.email']);
+                $menu->add('<i class="fa fa-pencil"></i><span>Email Templates</span>', ['route' => 'settings.templates']);
+                $menu->add('<i class="fa fa-terminal"></i><span>API Keys</span>', ['route' => 'apikeys.index']);
             }
 
         });

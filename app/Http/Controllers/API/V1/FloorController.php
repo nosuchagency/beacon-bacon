@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Map;
+use App\Floor;
 use Illuminate\Http\Request;
 
-class MapController extends Controller
+class FloorController extends Controller
 {
     /**
      * Return a list of items.
@@ -16,7 +16,7 @@ class MapController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->filteredAndOrdered($request, new Map())->paginate($this->pageSize);
+        return $this->filteredAndOrdered($request, new Floor())->paginate($this->pageSize);
     }
 
     /**
@@ -33,7 +33,7 @@ class MapController extends Controller
             'image' => 'required|image',
         ]);
 
-        return response(Map::create($request->all()), 201);
+        return response(Floor::create($request->all()), 201);
     }
 
     /**
@@ -46,7 +46,7 @@ class MapController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $place = Map::findOrFail($id);
+        $place = Floor::findOrFail($id);
 
         return $this->attachResources($request, $place);
     }
@@ -66,7 +66,7 @@ class MapController extends Controller
             'image' => 'image',
         ]);
 
-        $model = Map::findOrFail($id);
+        $model = Floor::findOrFail($id);
         $model->update($request->all());
 
         return $model;
@@ -81,7 +81,7 @@ class MapController extends Controller
      */
     public function destroy($id)
     {
-        Map::findOrFail($id)->delete();
+        Floor::findOrFail($id)->delete();
 
         return response('', 204);
     }
@@ -93,6 +93,6 @@ class MapController extends Controller
      */
     public function deleted()
     {
-        return Map::onlyTrashed()->get();
+        return Floor::onlyTrashed()->get();
     }
 }

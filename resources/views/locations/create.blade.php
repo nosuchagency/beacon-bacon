@@ -7,15 +7,15 @@
   <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="{{ route('places.index') }}">Places</a></li>
   <li><a href="{{ route('places.show', $placeId) }}">{{ $place->name }}</a></li>
-  <li><a href="{{ route('maps.show', [$placeId, $mapId]) }}">{{ $map->name }}</a></li>
+  <li><a href="{{ route('floors.show', [$placeId, $floorId]) }}">{{ $floor->name }}</a></li>
   <li class="active">Create location</li>
 </ol>
 @endsection
 
 @section('content')
-{!! Form::open(['route' => ['locations.store', $placeId, $mapId], 'method' => 'POST', 'class' => 'form-horizontal']) !!}
+{!! Form::open(['route' => ['locations.store', $placeId, $floorId], 'method' => 'POST', 'class' => 'form-horizontal']) !!}
 {!! Form::hidden('place_id', $placeId) !!}
-{!! Form::hidden('map_id', $mapId) !!}
+{!! Form::hidden('floor_id', $floorId) !!}
 <div class="row">
   <div class="col-sm-12">
       <div class="box box-primary">
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="box-footer">
-          <a href="{{ route('maps.show', [$placeId, $mapId]) }}" class="btn btn-default">Cancel</a>
+          <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">Cancel</a>
           <button type="submit" class="btn btn-info pull-right">Save</button>
         </div>
       </div>

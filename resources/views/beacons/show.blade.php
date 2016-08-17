@@ -63,7 +63,7 @@
               <strong>Floor</strong>
             </div>
             <div class="col-sm-10">
-              {{ $beacon->map->name }}
+              {{ $beacon->floor->name }}
             </div>
           </div>
           <div class="row">

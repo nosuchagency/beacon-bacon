@@ -41,12 +41,12 @@ class Place extends Model
     protected static $logAttributes = ['name'];
 
     /**
-     * Get maps belonging to this place
+     * Get floors belonging to this place
      * @return Illuminate\Database\Query\Builder
      */
-    public function maps()
+    public function floors()
     {
-      return $this->hasMany('App\Map');
+      return $this->hasMany('App\Floor');
     }
 
     /**

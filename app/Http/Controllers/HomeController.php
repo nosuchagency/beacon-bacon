@@ -7,7 +7,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Map;
+use App\Floor;
 use App\Place;
 use App\Beacon;
 use App\Location;
@@ -38,10 +38,10 @@ class HomeController extends Controller
     public function index()
     {
         $places = Place::count();
-        $maps = Map::count();
+        $floors = Floor::count();
         $locations = Location::count();
         $beacons = Beacon::count();
 
-        return view('home', compact('places', 'maps', 'locations', 'beacons'));
+        return view('home', compact('places', 'floors', 'locations', 'beacons'));
     }
 }

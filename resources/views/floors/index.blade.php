@@ -27,15 +27,15 @@
                   <th>Floor no.</th>
                   <th class="text-right">Actions</th>
                 </tr>
-              @foreach($maps as $index => $map)
+              @foreach($floors as $index => $floor)
                 <tr>
                   <td>{{ $index+1 }}</td>
-                  <td><a href="{{ route('maps.show', [$placeId, $map->id]) }}">{{ $map->name }}</a></td>
-                  <td>{{ $map->order }}</td>
+                  <td><a href="{{ route('floors.show', [$placeId, $floor->id]) }}">{{ $floor->name }}</a></td>
+                  <td>{{ $floor->order }}</td>
                   <td class="text-right">
-                    {!! Form::open(['route' => ['maps.destroy', $placeId, $map->id], 'method' => 'DELETE']) !!}
+                    {!! Form::open(['route' => ['floors.destroy', $placeId, $floor->id], 'method' => 'DELETE']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                    <a href="{{ route('maps.edit', [$placeId, $map->id]) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{{ route('floors.edit', [$placeId, $floor->id]) }}" class="btn btn-primary btn-sm">Edit</a>
                     {!! Form::close() !!}
                   </td>
                 </tr>
