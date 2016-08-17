@@ -58,7 +58,7 @@ class Beacon extends Model
      */
     public function floor()
     {
-        return $this->belongsTo('App\floor');
+        return $this->belongsTo('App\Floor');
     }
 
     /**
