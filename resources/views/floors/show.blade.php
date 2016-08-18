@@ -19,6 +19,7 @@
           <h3 class="box-title">Floor details</h3>
         </div>
         <div class="box-body">
+
           <div class="row">
             <div class="col-sm-2">
               <strong>Place</strong>
@@ -27,6 +28,7 @@
               {{ $floor->place->name }}
             </div>
           </div>
+
           <div class="row">
             <div class="col-sm-2">
               <strong>Name</strong>
@@ -35,6 +37,7 @@
               {{ $floor->name }}
             </div>
           </div>
+
           <div class="row">
             <div class="col-sm-2">
               <strong>Floor no.</strong>
@@ -43,6 +46,62 @@
               {{ $floor->order }}
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>Map - Width in Centimeters</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $floor->map_width_in_centimeters }}
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>Map - Height in Centimeters</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $floor->map_height_in_centimeters }}
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>Map - Width in Pixels</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $floor->map_width_in_pixels }}
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>Map - Height in Pixels</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $floor->map_height_in_pixels }}
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>Map - Pixel/Centimeter Ratio</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $floor->map_pixel_to_centimeter_ratio }}
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-sm-2">
+              <strong>Map - Walkable Color in HEX</strong>
+            </div>
+            <div class="col-sm-10">
+              {{ $floor->map_walkable_color }}
+            </div>
+          </div>
+
         </div>
         <div class="box-footer">
           <a href="{{ route('places.show', $placeId) }}" class="btn btn-default">Back</a>
@@ -94,11 +153,25 @@
   </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="row">
   <div class="col-sm-12">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Floor image</h3>
+        <h3 class="box-title">Map</h3>
       </div>
       <div class="box-body">
         @if($floor->image)
