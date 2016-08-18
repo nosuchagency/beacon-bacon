@@ -20,20 +20,37 @@
         </div>
         {!! Form::open(['route' => ['beacons.update', $beacon->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
         <div class="box-body">
+          
           <div class="form-group">
-            {!! Form::label('place_id', 'Place', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('beacon_uid', 'Beacon UID', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::select('place_id', $places, $beacon->place_id, ['class' => 'form-control']) !!}
+              {!! Form::text('beacon_uid', $beacon->beacon_uid, ['class' => 'form-control']) !!}              
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('proximity_uuid', 'Proximity UUID', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('proximity_uuid', $beacon->proximity_uuid, ['class' => 'form-control']) !!}
             </div>
           </div>
           <div class="form-group">
-            {!! Form::label('floor_id', 'Floor', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('major', 'Major', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::select('floor_id', $floors, $beacon->floor_id, ['class' => 'form-control']) !!}
+              {!! Form::text('major', $beacon->major, ['class' => 'form-control']) !!}
             </div>
           </div>
+          <div class="form-group">
+            {!! Form::label('minor', 'Minor', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('minor', $beacon->minor, ['class' => 'form-control']) !!}
+            </div>
+          </div>
+
           <div class="form-group">
             {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
 
@@ -41,13 +58,15 @@
               {!! Form::text('name', $beacon->name, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
             </div>
           </div>
+
           <div class="form-group">
             {!! Form::label('description', 'Description', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::textarea('description', $beacon->description, ['class' => 'form-control', 'placeholder' => 'Enter description']) !!}
             </div>
-          </div>
+          </div>          
+          
         </div>
         <div class="box-footer">
           <a href="{{ route('beacons.index') }}" class="btn btn-default">Cancel</a>

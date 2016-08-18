@@ -55,7 +55,7 @@
               <strong>Place</strong>
             </div>
             <div class="col-sm-10">
-              {{ $beacon->place->name }}
+              {{ $beacon->place->name or 'Not assigned' }}
             </div>
           </div>
           <div class="row">
@@ -63,7 +63,7 @@
               <strong>Floor</strong>
             </div>
             <div class="col-sm-10">
-              {{ $beacon->floor->name }}
+              {{ $beacon->floor->name or 'Not assigned' }}
             </div>
           </div>
           <div class="row">
