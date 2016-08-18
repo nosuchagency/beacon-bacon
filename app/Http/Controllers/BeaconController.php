@@ -39,16 +39,16 @@ class BeaconController extends Controller
      */
     public function create(Request $request)
     {
-        $places = Place::lists('name', 'id');
-        $floors = Floor::lists('name', 'id');
+//        $places = Place::lists('name', 'id');
+//        $floors = Floor::lists('name', 'id');
 
-        $devices = $this->getBeaconsFromWebservice();
+//        $devices = $this->getBeaconsFromWebservice();
 
-        if ($request->input('beacon_uid')) {
-            $beacon = $this->getBeaconFromWebservice($request->input('beacon_uid'));
-        }
+//        if ($request->input('beacon_uid')) {
+ //           $beacon = $this->getBeaconFromWebservice($request->input('beacon_uid'));
+   //     }
 
-        return view('beacons.create', compact('places', 'floors', 'devices', 'beacon'));
+        return view('beacons.create');
     }
 
     /**
@@ -88,9 +88,10 @@ class BeaconController extends Controller
     public function edit($id)
     {
         $beacon = Beacon::findOrFail($id);
-        $places = Place::lists('name', 'id');
-        $floors = Floor::lists('name', 'id');
-        return view('beacons.edit', compact('beacon', 'places', 'floors'));
+//        $places = Place::lists('name', 'id');
+//        $floors = Floor::lists('name', 'id');
+
+        return view('beacons.edit', compact('beacon'));
     }
 
     /**
