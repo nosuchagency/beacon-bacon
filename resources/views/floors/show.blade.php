@@ -16,7 +16,7 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Floor details</h3>
+          <h3 class="box-title">Details</h3>
         </div>
         <div class="box-body">
 
@@ -159,7 +159,7 @@
   <div class="col-sm-12">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Map</h3>
+        <h3 class="box-title">Map Preview</h3>
       </div>
       <div class="box-body">
         @if($floor->image)
