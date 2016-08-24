@@ -37,6 +37,23 @@ class PlaceController extends Controller
     }
 
     /**
+     * Return an IMS Location
+     *
+     * @param Request $request
+     * @param int     $id
+     *
+     * @return json
+     */
+    public function find(Request $request, $id)
+    {
+        $place = Place::findOrFail($id);
+        
+        $request = Request::instance()->getContent();
+
+        return $request;
+    }
+
+    /**
      * Return a single item.
      *
      * @param Request $request
