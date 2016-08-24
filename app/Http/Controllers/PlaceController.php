@@ -67,7 +67,7 @@ class PlaceController extends Controller
     public function show($id)
     {
         $place = Place::findOrFail($id);
-        $menuitems = Menu::orderBy('order')->get();
+        $menuitems = Menu::where('place_id', $id)->orderBy('order')->get();
         $pois = Poi::lists('name', 'id')->prepend('', '');
 
         return view('places.show', compact('place', 'menuitems', 'pois'));

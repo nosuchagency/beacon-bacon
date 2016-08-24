@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('contentheader_title', $location->name)
+@section('contentheader_title', 'Beacon: ' . $location->beacon->name)
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
@@ -38,18 +38,10 @@
           </div>
           <div class="row">
             <div class="col-sm-2">
-              <strong>POI</strong>
+              <strong>Beacon</strong>
             </div>
             <div class="col-sm-10">
-              {{ $location->poi->name }}
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-2">
-              <strong>Name</strong>
-            </div>
-            <div class="col-sm-10">
-              {{ $location->name }}
+              {{ $location->beacon->name }}
             </div>
           </div>
         </div>
@@ -68,10 +60,8 @@
           <h3 class="box-title">Location on floor</h3>
         </div>
         <div class="box-body">
-          <div class="floor" style="position: relative; width: {{ $location->floorWidth }}px; height: {{ $location->floorHeight }}px; background-image: url({{ $location->floor->image }})">
-          @if($location->poi->icon)
-            <img src="{{ $location->poi->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px;" />
-          @endif
+          <div class="floor" style="position: relative; width: {{ $location->mapWidth }}px; height: {{ $location->mapHeight }}px; background-image: url({{ $location->floor->image }})">
+          	<img src="{{URL::asset('/img/radio-waves.png')}}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px;" />
           </div>
         </div>
         <div class="box-footer">

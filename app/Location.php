@@ -17,7 +17,7 @@ class Location extends Model
      *
      * @var array
      */
-    protected $fillable = ['place_id', 'floor_id', 'poi_id', 'name', 'posX', 'posY'];
+    protected $fillable = ['place_id', 'floor_id', 'poi_id', 'beacon_id', 'type', 'name', 'posX', 'posY', 'parameter_one', 'parameter_two', 'parameter_three', 'parameter_four', 'parameter_five'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,7 +38,7 @@ class Location extends Model
      *
      * @var array
      */
-    protected static $logAttributes = ['poi_id', 'name', 'posX', 'posY'];
+    protected static $logAttributes = ['poi_id', 'beacon_id', 'type', 'name', 'posX', 'posY'];
 
     /**
      * Get the place
@@ -66,6 +66,15 @@ class Location extends Model
     {
         return $this->belongsTo('App\Poi');
     }
+    
+    /**
+     * Get the beacon
+     * @return Illuminate\Database\Query\Builder
+     */
+    public function beacon()
+    {
+        return $this->belongsTo('App\Beacon');
+    }    
 
     /**
      * Set the log name when using API.

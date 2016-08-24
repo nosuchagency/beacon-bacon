@@ -37,14 +37,7 @@
               {!! Form::number('order', 0, ['class' => 'form-control']) !!}
             </div>
           </div>
-          
-          
-          
-          
-          
-          
-          
-          
+
           <div class="form-group">
             {!! Form::label('image', 'Map', ['class' => 'col-sm-2 control-label']) !!}
 
@@ -52,9 +45,7 @@
               {!! Form::file('image', null, ['class' => 'form-control']) !!}
             </div>
           </div>
-          
-          
-          
+
           <div class="form-group">
             {!! Form::label('map_width_in_centimeters', 'Map - Width in Centimeters', ['class' => 'col-sm-2 control-label']) !!}
 
@@ -91,7 +82,7 @@
             {!! Form::label('map_pixel_to_centimeter_ratio', 'Map - Pixel/Centimeter Ratio', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('map_pixel_to_centimeter_ratio', null, ['class' => 'form-control', 'placeholder' => 'Enter the ratio']) !!}
+              {!! Form::number('map_pixel_to_centimeter_ratio', null, ['class' => 'form-control', 'placeholder' => 'Enter the ratio', 'step' => 'any']) !!}
             </div>
           </div>
 

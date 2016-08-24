@@ -17,7 +17,7 @@ class Poi extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'internal_name', 'icon'];
+    protected $fillable = ['name', 'type', 'internal_name', 'icon'];
 
     /**
      * The attributes that should be mutated to dates.

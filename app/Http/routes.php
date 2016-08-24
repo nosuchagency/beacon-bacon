@@ -41,7 +41,7 @@ Route::group(['prefix' => 'places/{place}'], function(){
     Route::group(['prefix' => 'floors/{floor}'], function(){
         // Locations
         Route::get('locations', ['as' => 'locations.index', 'uses' => 'LocationController@index']);
-        Route::get('locations/create', ['as' => 'locations.create', 'uses' => 'LocationController@create']);
+        Route::get('locations/create/{type}', ['as' => 'locations.create', 'uses' => 'LocationController@create']);
         Route::post('locations', ['as' => 'locations.store', 'uses' => 'LocationController@store']);
         Route::get('locations/{location}', ['as' => 'locations.show', 'uses' => 'LocationController@show']);
         Route::get('locations/{location}/edit', ['as' => 'locations.edit', 'uses' => 'LocationController@edit']);
@@ -122,6 +122,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
         // Place menu
         Route::group(['prefix' => 'place/{id}'], function(){
             Route::get('menu', ['uses' => 'PlaceController@menu']);
+            Route::post('find', ['uses' => 'PlaceController@find']);            
         });
 
         // floors
