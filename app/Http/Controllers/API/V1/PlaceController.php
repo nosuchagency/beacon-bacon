@@ -48,9 +48,20 @@ class PlaceController extends Controller
     {
         $place = Place::findOrFail($id);
         
-        $request = Request::instance()->getContent();
+        $request = (object) $request->json()->all();
 
-        return $request;
+        $response = new \stdClass();
+        $response->status = 'Found';
+
+        $response->floor = new \stdClass();
+        $response->floor->id = 2;
+
+        $response->location = new \stdClass();
+        $response->location->id = 34;
+        $response->location->posX = 344;
+        $response->location->posY = 544;
+
+        return response( json_encode( $response ), 200);
     }
 
     /**
@@ -123,16 +134,5 @@ class PlaceController extends Controller
     {
         return Menu::where('place_id', $id)->orderBy('order')->with('poi')->get();
     }
-    
-    /**
-     * Find something...
-     *
-     * @param int $id
-     *
-     * @return json
-     */
-    public function find($id)
-    {
-        return Menu::orderBy('order')->with('poi')->get();
-    }    
+
 }
