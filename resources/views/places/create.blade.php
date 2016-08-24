@@ -27,12 +27,6 @@
             </div>
           </div>
           
-          
-          
-          
-          
-          
-          
           <div class="form-group">
             {!! Form::label('address', 'Address', ['class' => 'col-sm-2 control-label']) !!}
 
@@ -55,20 +49,16 @@
             <div class="col-sm-10">
               {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Enter city']) !!}
             </div>
-          </div>                    
+          </div>
           
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+          <div class="form-group">
+            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
         </div>
         <div class="box-footer">
           <a href="{{ route('places.index') }}" class="btn btn-default">Cancel</a>

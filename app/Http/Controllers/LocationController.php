@@ -6,6 +6,7 @@ use Image;
 use App\Floor;
 use App\Place;
 use App\Poi;
+use App\Beacon;
 use App\Location;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -40,12 +41,22 @@ class LocationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($placeId, $floorId)
+    public function create ($placeId, $floorId, $type = 'poi')
     {
         $pois = Poi::lists('name', 'id');
+        $beacons = Beacon::lists('name', 'id');
         $place = Place::findOrFail($placeId);
         $floor = Floor::findOrFail($floorId);
-        return view('locations.create', compact('pois', 'place', 'floor', 'placeId', 'floorId'));
+
+		if ( $type == 'beacon' ) {
+			return view('locations.create.beacon', compact('beacons', 'place', 'floor', 'placeId', 'floorId'));			
+		}
+
+		if ( $type == 'ims' ) {
+			return view('locations.create.ims', compact('place', 'floor', 'placeId', 'floorId'));			
+		}
+
+		return view('locations.create.poi', compact('pois', 'place', 'floor', 'placeId', 'floorId'));			
     }
 
     /**
@@ -56,12 +67,14 @@ class LocationController extends Controller
      */
     public function store(Request $request, $placeId, $floorsId)
     {
+	    /*
         $this->validate($request, [
            'name' => 'required|max:255',
         ]);
-
-        $location = Location::create($request->all());
-        return redirect()->route('locations.show', [$placeId, $floorsId, $location->id]);
+        */
+        
+        $location = Location::create( $request->all() );
+        return redirect()->route('locations.edit', [$placeId, $floorsId, $location->id]);
     }
 
     /**
@@ -72,21 +85,31 @@ class LocationController extends Controller
      */
     public function show($placeId, $floorId, $id)
     {
+
         $location = Location::findOrFail($id);
-
-        if ($location->poi->icon) {
-            $icon = Image::make($location->poi->icon);
-            $location->iconWidth = $icon->width();
-            $location->iconHeight = $icon->height();
-        }
-
         if ($location->floor->image) {
             $image = Image::make($location->floor->image);
-            $location->floorWidth = $image->width();
-            $location->floorHeight = $image->height();
+            $location->mapWidth = $image->width();
+            $location->mapHeight = $image->height();
+        }
+        
+        if ( ! empty( $location->poi ) ) {
+
+	        if ($location->poi->icon) {
+	            $icon = Image::make($location->poi->icon);
+	            $location->iconWidth = $icon->width();
+	            $location->iconHeight = $icon->height();
+	        }
+
+			return view('locations.show.poi', compact('location', 'placeId', 'floorId'));
         }
 
-        return view('locations.show', compact('location', 'placeId', 'floorId'));
+        if ( ! empty( $location->beacon ) ) {
+
+			return view('locations.show.beacon', compact('location', 'placeId', 'floorId'));
+        }
+
+		return view('locations.show.ims', compact('location', 'placeId', 'floorId'));        
     }
 
     /**
@@ -97,24 +120,37 @@ class LocationController extends Controller
      */
     public function edit($placeId, $floorId, $id)
     {
+
         $location = Location::findOrFail($id);
+
         $places = Place::lists('name', 'id');
         $pois = Poi::lists('name', 'id');
+        $beacons = Beacon::lists('name', 'id');        
         $floors = Floor::lists('name', 'id');
 
-        if ($location->poi->icon) {
-            $icon = Image::make($location->poi->icon);
-            $location->iconWidth = $icon->width();
-            $location->iconHeight = $icon->height();
-        }
 
         if ($location->floor->image) {
             $image = Image::make($location->floor->image);
-            $location->floorWidth = $image->width();
-            $location->floorHeight = $image->height();
+            $location->mapWidth = $image->width();
+            $location->mapHeight = $image->height();
         }
 
-        return view('locations.edit', compact('location', 'places', 'pois', 'floors', 'placeId', 'floorId'));
+        if ( ! empty( $location->poi ) ) {
+
+	        if ($location->poi->icon) {
+	            $icon = Image::make($location->poi->icon);
+	            $location->iconWidth = $icon->width();
+	            $location->iconHeight = $icon->height();
+	        }
+
+			return view('locations.edit.poi', compact('pois','location', 'placeId', 'floorId'));
+        }
+
+        if ( ! empty( $location->beacon ) ) {
+			return view('locations.edit.beacon', compact('beacons','location', 'placeId', 'floorId'));
+        }
+        
+		return view('locations.edit.ims', compact('location', 'placeId', 'floorId'));        
     }
 
     /**

@@ -117,7 +117,9 @@
       <div class="box-header with-border">
         <h3 class="box-title">Locations</h3>
         <div class="pull-right box-tools">
-          <a href="{{ route('locations.create', [$placeId, $floor->id]) }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add location</a>
+          <a href="{{ route('locations.create', [$placeId, $floor->id, 'poi']) }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add POI</a>
+          <a href="{{ route('locations.create', [$placeId, $floor->id, 'beacon']) }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add Beacon</a>
+          <a href="{{ route('locations.create', [$placeId, $floor->id, 'ims']) }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add IMS</a>                    
         </div>
       </div>
       <div class="box-body no-padding">
@@ -126,18 +128,18 @@
               <tr>
                 <th style="width: 10px">#</th>
                 <th>Name</th>
-                <th>Place</th>
-                <th>Floor</th>
                 <th>POI</th>
+                <th>Beacon</th>
+                <th>IMS</th>
                 <th class="text-right">Actions</th>
               </tr>
             @foreach($floor->locations as $index => $location)
               <tr>
                 <td>{{ $index+1 }}</td>
-                <td><a href="{{ route('locations.show', [$placeId, $floor->id, $location->id]) }}">{{ $location->name }}</a></td>
-                <td>{{ $location->place->name }}</td>
-                <td>{{ $location->floor->name }}</td>
-                <td>{{ $location->poi->name }}</td>
+                <td><a href="{{ route('locations.show', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a></td>
+                <td>{{ $location->poi->name or 'n/a' }}</td>
+                <td>{{ $location->beacon->beacon_uid or 'n/a' }}</td>
+                <td>n/a</td>
                 <td class="text-right">
                   {!! Form::open(['route' => ['locations.destroy', $placeId, $floor->id, $location->id], 'method' => 'DELETE']) !!}
                   {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
@@ -153,20 +155,6 @@
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="row">
   <div class="col-sm-12">
     <div class="box box-primary">
@@ -177,7 +165,11 @@
         @if($floor->image)
         <div style="position: relative; width: {{ $floor->width }}px; height: {{ $floor->height }}px; background-image: url({{ $floor->image }});">
           @foreach($floor->locations as $index => $location)
-            <img src="{{ $location->poi->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px" />
+	          
+	          @if($location->poi)
+			  	<img src="{{ $location->poi->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px;" />
+			  @endif
+			  	
           @endforeach
         </div>
         @endif

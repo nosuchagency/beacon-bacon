@@ -104,6 +104,18 @@ class PlaceController extends Controller
      */
     public function menu($id)
     {
-        return Menu::orderBy('order')->with('poi')->get();
+        return Menu::where('place_id', $id)->orderBy('order')->with('poi')->get();
     }
+    
+    /**
+     * Find something...
+     *
+     * @param int $id
+     *
+     * @return json
+     */
+    public function find($id)
+    {
+        return Menu::orderBy('order')->with('poi')->get();
+    }    
 }
