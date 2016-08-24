@@ -113,10 +113,10 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
 
         // Places
         Route::get('place', ['uses' => 'PlaceController@index']);
-        Route::post('place/find', ['uses' => 'PlaceController@find']);
         Route::get('place/deleted', ['uses' => 'PlaceController@deleted']);
         Route::get('place/{id}', ['uses' => 'PlaceController@show']);
         Route::put('place/{id}', ['uses' => 'PlaceController@update']);
+        Route::post('place/{id}/find', ['uses' => 'PlaceController@find']);        
         Route::delete('place/{id}', ['uses' => 'PlaceController@destroy']);
 
         // Place menu
