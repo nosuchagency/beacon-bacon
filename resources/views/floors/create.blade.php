@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('contentheader_title', 'Create new floor')
+@section('contentheader_title', 'Create floor')
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
   <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="{{ route('places.index') }}">Places</a></li>
   <li><a href="{{ route('places.show', $placeId) }}">{{ $place->name }}</a></li>
-  <li class="active">Create floor</li>
+  <li class="active">Creating new floor</li>
 </ol>
 @endsection
 
@@ -16,7 +16,7 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Floor details</h3>
+          <h3 class="box-title">Details</h3>
         </div>
         {!! Form::open(['route' => ['floors.store', $placeId], 'method' => 'POST', 'class' => 'form-horizontal', 'files' => true]) !!}
         {!! Form::hidden('place_id', $placeId) !!}

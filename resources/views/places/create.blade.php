@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('contentheader_title', 'Create new place')
+@section('contentheader_title', 'Create place')
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
   <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="{{ route('places.index') }}">Places</a></li>
-  <li class="active">Create place</li>
+  <li class="active">Creating</li>
 </ol>
 @endsection
 
@@ -15,7 +15,7 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Place details</h3>
+          <h3 class="box-title">Details</h3>
         </div>
         {!! Form::open(['route' => 'places.store', 'method' => 'POST', 'class' => 'form-horizontal']) !!}
         <div class="box-body">

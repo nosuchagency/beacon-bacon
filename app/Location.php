@@ -17,7 +17,7 @@ class Location extends Model
      *
      * @var array
      */
-    protected $fillable = ['place_id', 'floor_id', 'poi_id', 'beacon_id', 'type', 'name', 'posX', 'posY', 'parameter_one', 'parameter_two', 'parameter_three', 'parameter_four', 'parameter_five'];
+    protected $fillable = ['place_id', 'floor_id', 'poi_id', 'type', 'name', 'posX', 'posY', 'parameter_one', 'parameter_two', 'parameter_three', 'parameter_four', 'parameter_five'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,7 +38,7 @@ class Location extends Model
      *
      * @var array
      */
-    protected static $logAttributes = ['poi_id', 'beacon_id', 'type', 'name', 'posX', 'posY'];
+    protected static $logAttributes = ['poi_id', 'type', 'name', 'posX', 'posY'];
 
     /**
      * Get the place
@@ -73,7 +73,7 @@ class Location extends Model
      */
     public function beacon()
     {
-        return $this->belongsTo('App\Beacon');
+        return $this->hasOne('App\Beacon');
     }    
 
     /**
