@@ -167,7 +167,7 @@
       </div>
       <div class="box-body">
         @if($floor->image)
-				<div id="floor-map-preview" class="map" style="background-image: url({{ $location->floor->image }}); background-size: cover; position: relative; width: 100%;">
+				<div id="floor-map-preview" class="map" style="background-image: url({{ $floor->image }}); background-size: cover; position: relative; width: 100%;">
           @foreach($floor->locations as $index => $location)
 	          
 	          @if($location->poi)
