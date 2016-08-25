@@ -24,9 +24,9 @@
       </div>
       <div class="modal-body">
 
-        <div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); height: 620px; overflow: hidden; position: relative; width: 620px;">
+        <div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); cursor: crosshair; height: 620px; overflow: hidden; position: relative; width: 620px;">
 		          @if($location->poi->icon)
-					<img id="floor-beacon" src="{{ $location->poi->icon }}" style="position: absolute;" />
+					<img id="floor-beacon" src="{{ $location->poi->icon }}" style="cursor: move; position: absolute;" />
 				  @endif
 		</div>
 
@@ -135,6 +135,16 @@ function calculate_icon_position_y ( posY ) {
 	return Math.round( posY - ( ICON_HEIGHT / 2 ) );	
 }
 
+function map_modal () {
+	var posX = $( '#posX' ).val();
+	var posY = $( '#posY' ).val();
+
+	$( '#floor-beacon' ).css( {
+		left : calculate_icon_position_x( posX ),
+		top : calculate_icon_position_y( posY )
+	} );	
+}
+
 function map_preview () {
 	var floor_map_preview_width = $( '#floor-map-preview' ).width();
 
@@ -148,7 +158,7 @@ function map_preview () {
 
 	$( '#floor-beacon-preview' ).css( {
 		left : calculate_icon_position_x( posX * ratio ),
-		top :  calculate_icon_position_y( posY * ratio )
+		top : calculate_icon_position_y( posY * ratio )
 	} );
 }
 
@@ -158,10 +168,36 @@ $( window ).resize( function () {
 
 $( document ).ready( function ( ) {
 	map_preview();
+	map_modal();
+	
+	$( '#posX' ).keyup( function() {
+		map_preview();
+		map_modal();
+	} );
+	
+	$( '#posY' ).keyup( function() {
+		map_preview();
+		map_modal();	
+	} );
 
-	$( '#floor-beacon' ).css( {
-		left : calculate_icon_position_x( {{ $location->posX ? $location->posX : 25 }} ),
-		top : calculate_icon_position_y( {{ $location->posY ? $location->posY : 25 }} )
+	$( '#floor-map' ).dblclick( function ( event ) { 
+		backgroundPosition = $('#floor-map').css('background-position').split(' ');
+
+		backgroundPositionX = parseInt( backgroundPosition[0], 10 );
+		backgroundPositionY = parseInt( backgroundPosition[1], 10 );			
+
+		var posX = Math.round( event.offsetX + Math.abs( backgroundPositionX ) );
+		var posY = Math.round( event.offsetY + Math.abs( backgroundPositionY ) );
+
+		$( '#posX' ).val( posX );
+		$( '#posY' ).val( posY );
+
+		$( '#floor-beacon' ).css( {
+			left : calculate_icon_position_x( event.offsetX ),
+			top : calculate_icon_position_y( event.offsetY )
+		} );
+
+		map_preview();		
 	} );
 
 	$( '#floor-map' ).backgroundDraggable( {

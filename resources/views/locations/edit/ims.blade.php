@@ -24,8 +24,8 @@
       </div>
       <div class="modal-body">
 
-        <div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); height: 620px; overflow: hidden; position: relative; width: 620px;">
-			<img id="floor-beacon" src="{{URL::asset('/img/font-awesome-dot-circle-o.png')}}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px;" />
+        <div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); cursor: crosshair; height: 620px; overflow: hidden; position: relative; width: 620px;">
+			<img id="floor-beacon" src="{{URL::asset('/img/font-awesome-dot-circle-o.png')}}" style="cursor: move; position: absolute;" />
 		</div>
 
       </div>
