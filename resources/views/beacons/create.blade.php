@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('contentheader_title', 'Create new beacon')
+@section('contentheader_title', 'Create beacon')
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
   <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="{{ route('beacons.index') }}">Beacons</a></li>
-  <li class="active">Create beacon</li>
+  <li class="active">Creating</li>
 </ol>
 @endsection
 
@@ -15,7 +15,7 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Beacon details</h3>
+          <h3 class="box-title">Details</h3>
         </div>
         {!! Form::open(['route' => 'beacons.store', 'method' => 'POST', 'class' => 'form-horizontal']) !!}
         <div class="box-body">
@@ -75,4 +75,25 @@
       </div>
   </div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+
+var dirty = false;
+$( document ).ready( function ( ) {
+
+	$( '#name' ).focus( function () {
+		dirty = true;
+	} );
+	
+	$( '#beacon_uid' ).keyup( function () {
+		if ( dirty == false ) {
+			$( '#name' ).val( $( '#beacon_uid' ).val() );
+		}
+	} );
+
+} );
+
+</script>	
 @endsection

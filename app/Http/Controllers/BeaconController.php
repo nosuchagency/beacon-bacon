@@ -64,7 +64,7 @@ class BeaconController extends Controller
         ]);
 
         $beacon = Beacon::create($request->all());
-        return redirect()->route('beacons.show', $beacon->id);
+        return redirect()->route('beacons.index');
     }
 
     /**

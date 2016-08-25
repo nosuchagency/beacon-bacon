@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Menu;
 use App\Place;
+use App\Poi;
 use Illuminate\Http\Request;
 
 class PlaceController extends Controller
@@ -61,7 +62,7 @@ class PlaceController extends Controller
         $response->location->posX = 344;
         $response->location->posY = 544;
 
-        return response( json_encode( $response ), 200);
+        return response()->json( $response );
     }
 
     /**
@@ -76,7 +77,19 @@ class PlaceController extends Controller
     {
         $place = Place::findOrFail($id);
 
-        return $this->attachResources($request, $place);
+		$place = $this->attachResources($request, $place);
+		foreach( $place->floors as $floor ) {
+			foreach( $floor->locations as $location ) {
+				if ( $location->poi_id > 0 ) {
+					$poi = Poi::findOrFail( $location->poi_id );
+					$location->poi = $poi;
+				} else {
+					$location->poi = null;
+				}
+			}
+		}
+
+		return $place;
     }
 
     /**

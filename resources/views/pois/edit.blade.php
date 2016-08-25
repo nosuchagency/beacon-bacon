@@ -7,7 +7,7 @@
   <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="{{ route('pois.index') }}">Point of Interests</a></li>
   <li><a href="{{ route('pois.show', $poi->name) }}">{{ $poi->name }}</a></li>
-  <li class="active">Edit POI</li>
+  <li class="active">Editing</li>
 </ol>
 @endsection
 
@@ -16,7 +16,7 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">POI details</h3>
+          <h3 class="box-title">Details</h3>
         </div>
         {!! Form::open(['route' => ['pois.update', $poi->id], 'method' => 'PUT', 'class' => 'form-horizontal', 'files' => true]) !!}
         <div class="box-body">

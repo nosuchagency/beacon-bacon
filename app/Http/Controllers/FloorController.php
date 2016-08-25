@@ -76,8 +76,8 @@ class FloorController extends Controller
 
         if ($floor->image) {
             $image = Image::make($floor->image);
-            $floor->width = $image->width();
-            $floor->height = $image->height();
+            $floor->mapWidth = $image->width();
+            $floor->mapHeight = $image->height();
         }
 
         return view('floors.show', compact('floor', 'placeId'));

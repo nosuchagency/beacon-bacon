@@ -50,14 +50,13 @@ class PoiController extends Controller
         $this->validate($request, [
            'name' => 'required|max:255',
            'internal_name' => 'required|max:255',
-           'icon' => 'required|image',
         ]);
 
         $Poi = Poi::create($request->except('icon'));
 
         $this->uploadIcon($Poi, $request);
 
-        return redirect()->route('pois.show', $Poi->id);
+        return redirect()->route('pois.index');
     }
 
     /**

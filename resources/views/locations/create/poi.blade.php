@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('contentheader_title', 'Create POI')
+@section('contentheader_title', 'Create POI Location')
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
@@ -8,7 +8,7 @@
   <li><a href="{{ route('places.index') }}">Places</a></li>
   <li><a href="{{ route('places.show', $placeId) }}">{{ $place->name }}</a></li>
   <li><a href="{{ route('floors.show', [$placeId, $floorId]) }}">{{ $floor->name }}</a></li>
-  <li class="active">Create POI</li>
+  <li class="active">Creating POI Location</li>
 </ol>
 @endsection
 
@@ -25,6 +25,7 @@
           <h3 class="box-title">Details</h3>
         </div>
         <div class="box-body">
+
           <div class="form-group">
             {!! Form::label('poi_id', 'POI', ['class' => 'col-sm-2 control-label']) !!}
 
@@ -32,6 +33,7 @@
               {!! Form::select('poi_id', $pois, null, ['class' => 'form-control']) !!}
             </div>
           </div>
+
           <div class="form-group">
             {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
 
@@ -39,6 +41,7 @@
               {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
             </div>
           </div>
+
         </div>
         <div class="box-footer">
           <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">Cancel</a>
@@ -48,4 +51,25 @@
   </div>
 </div>
 {!! Form::close() !!}
+@endsection
+
+@section('footer')
+<script>
+
+var dirty = false;
+$( document ).ready( function ( ) {
+
+	$( '#name' ).focus( function () {
+		dirty = true;
+	} );
+	
+	$( '#poi_id' ).change( function () {
+		if ( dirty == false ) {
+			$( '#name' ).val( $( '#poi_id option:selected' ).text() );
+		}
+	} );
+
+} );
+
+</script>	
 @endsection

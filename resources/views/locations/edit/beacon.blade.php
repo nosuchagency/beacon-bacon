@@ -24,8 +24,8 @@
       </div>
       <div class="modal-body">
 
-        <div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); height: 620px; overflow: hidden; position: relative; width: 620px;">
-			<img id="floor-beacon" src="{{URL::asset('/img/radio-waves.png')}}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px;" />
+        <div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); cursor: crosshair; height: 620px; overflow: hidden; position: relative; width: 620px;">
+			<img id="floor-beacon" src="{{URL::asset('/img/font-awesome-bullseye.png')}}" style="cursor: move; position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px;" />
 		</div>
 
       </div>
@@ -45,25 +45,25 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Location details</h3>
+          <h3 class="box-title">Details</h3>
         </div>
         <div class="box-body">
 	        
+          <div class="form-group">
+            {!! Form::label('beacon_id', 'Beacon', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::select('beacon_id', $beacons, $location->beacon->id, ['class' => 'form-control']) !!}
+            </div>
+          </div>
+          
           <div class="form-group">
             {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::text('name', $location->name, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
             </div>
-          </div>
-	        
-          <div class="form-group">
-            {!! Form::label('beacon_id', 'Beacon', ['class' => 'col-sm-2 control-label']) !!}
-
-            <div class="col-sm-10">
-              {!! Form::select('beacon_id', $beacons, $location->beacon_id, ['class' => 'form-control']) !!}
-            </div>
-          </div>
+          </div>          
 
           <div class="form-group">
 			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Location on Map</h5>
@@ -98,14 +98,14 @@
 
             <div class="col-sm-10">
 				<div id="floor-map-preview" class="map" style="background-image: url({{ $location->floor->image }}); background-size: cover; position: relative; width: 100%;">
-					<img id="floor-beacon-preview" src="{{URL::asset('/img/radio-waves.png')}}" style="position: absolute;" />
+					<img id="floor-beacon-preview" src="{{URL::asset('/img/font-awesome-bullseye.png')}}" style="position: absolute;" />
 				</div>				
             </div>
           </div>
 
         </div>
         <div class="box-footer">
-          <a href="{{ route('locations.show', [$placeId, $floorId, $location->id]) }}" class="btn btn-default">Cancel</a>
+          <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">Cancel</a>
           <button type="submit" class="btn btn-info pull-right">Save</button>
         </div>
       </div>
@@ -120,8 +120,8 @@
 var MAP_WIDTH = {{ $location->mapWidth }};
 var MAP_HEIGHT = {{ $location->mapHeight }};
 
-var ICON_WIDTH = 25;
-var ICON_HEIGHT = 25;
+var ICON_WIDTH = 32;
+var ICON_HEIGHT = 32;
 
 function calculate_icon_position_x ( posX ) {
 	return Math.round( posX - ( ICON_WIDTH / 2 ) );
@@ -129,6 +129,16 @@ function calculate_icon_position_x ( posX ) {
 
 function calculate_icon_position_y ( posY ) {
 	return Math.round( posY - ( ICON_HEIGHT / 2 ) );	
+}
+
+function map_modal () {
+	var posX = $( '#posX' ).val();
+	var posY = $( '#posY' ).val();
+
+	$( '#floor-beacon' ).css( {
+		left : calculate_icon_position_x( posX ),
+		top : calculate_icon_position_y( posY )
+	} );	
 }
 
 function map_preview () {
@@ -144,7 +154,7 @@ function map_preview () {
 
 	$( '#floor-beacon-preview' ).css( {
 		left : calculate_icon_position_x( posX * ratio ),
-		top :  calculate_icon_position_y( posY * ratio )
+		top : calculate_icon_position_y( posY * ratio )
 	} );
 }
 
@@ -154,10 +164,36 @@ $( window ).resize( function () {
 
 $( document ).ready( function ( ) {
 	map_preview();
+	map_modal();
+	
+	$( '#posX' ).keyup( function() {
+		map_preview();
+		map_modal();
+	} );
+	
+	$( '#posY' ).keyup( function() {
+		map_preview();
+		map_modal();	
+	} );
 
-	$( '#floor-beacon' ).css( {
-		left : calculate_icon_position_x( {{ $location->posX ? $location->posX : 25 }} ),
-		top : calculate_icon_position_y( {{ $location->posY ? $location->posY : 25 }} )
+	$( '#floor-map' ).dblclick( function ( event ) { 
+		backgroundPosition = $('#floor-map').css('background-position').split(' ');
+
+		backgroundPositionX = parseInt( backgroundPosition[0], 10 );
+		backgroundPositionY = parseInt( backgroundPosition[1], 10 );			
+
+		var posX = Math.round( event.offsetX + Math.abs( backgroundPositionX ) );
+		var posY = Math.round( event.offsetY + Math.abs( backgroundPositionY ) );
+
+		$( '#posX' ).val( posX );
+		$( '#posY' ).val( posY );
+
+		$( '#floor-beacon' ).css( {
+			left : calculate_icon_position_x( event.offsetX ),
+			top : calculate_icon_position_y( event.offsetY )
+		} );
+
+		map_preview();		
 	} );
 
 	$( '#floor-map' ).backgroundDraggable( {

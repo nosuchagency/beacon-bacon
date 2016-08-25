@@ -52,6 +52,16 @@ class Poi extends Model
         return !$value ? '' : asset('uploads/pois/'.$this->id.'/'.$value);
     }
 
+
+    /**
+     * Get locations belonging to this poi
+     * @return Illuminate\Database\Query\Builder
+     */
+    public function locations()
+    {
+      return $this->hasMany('App\Location');
+    }
+
     /**
      * Set the log name when using API.
      *

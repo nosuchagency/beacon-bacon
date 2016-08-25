@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('contentheader_title', 'Create IMS')
+@section('contentheader_title', 'Create IMS Location')
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
@@ -8,7 +8,7 @@
   <li><a href="{{ route('places.index') }}">Places</a></li>
   <li><a href="{{ route('places.show', $placeId) }}">{{ $place->name }}</a></li>
   <li><a href="{{ route('floors.show', [$placeId, $floorId]) }}">{{ $floor->name }}</a></li>
-  <li class="active">Create IMS</li>
+  <li class="active">Creating IMS Location</li>
 </ol>
 @endsection
 
@@ -51,4 +51,25 @@
   </div>
 </div>
 {!! Form::close() !!}
+@endsection
+
+@section('footer')
+<script>
+
+var dirty = false;
+$( document ).ready( function ( ) {
+
+	$( '#name' ).focus( function () {
+		dirty = true;
+	} );
+	
+	$( '#parameter_one' ).keyup( function () {
+		if ( dirty == false ) {
+			$( '#name' ).val( $( '#parameter_one' ).val() );
+		}
+	} );
+
+} );
+
+</script>	
 @endsection

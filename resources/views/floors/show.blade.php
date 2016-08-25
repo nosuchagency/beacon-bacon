@@ -131,15 +131,19 @@
                 <th>POI</th>
                 <th>Beacon</th>
                 <th>IMS</th>
-                <th class="text-right">Actions</th>
+                <th class="text-right"></th>
               </tr>
             @foreach($floor->locations as $index => $location)
               <tr>
                 <td>{{ $index+1 }}</td>
-                <td><a href="{{ route('locations.show', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a></td>
+                <td><a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a></td>
                 <td>{{ $location->poi->name or 'n/a' }}</td>
                 <td>{{ $location->beacon->beacon_uid or 'n/a' }}</td>
-                <td>n/a</td>
+				@if($location->type == 'ims')
+                <td>{{ $location->name or 'n/a' }}</td>
+                @else
+                <td>n/a</td>                
+                @endif
                 <td class="text-right">
                   {!! Form::open(['route' => ['locations.destroy', $placeId, $floor->id, $location->id], 'method' => 'DELETE']) !!}
                   {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
@@ -163,11 +167,15 @@
       </div>
       <div class="box-body">
         @if($floor->image)
-        <div style="position: relative; width: {{ $floor->width }}px; height: {{ $floor->height }}px; background-image: url({{ $floor->image }});">
+				<div id="floor-map-preview" class="map" style="background-image: url({{ $location->floor->image }}); background-size: cover; position: relative; width: 100%;">
           @foreach($floor->locations as $index => $location)
 	          
 	          @if($location->poi)
-			  	<img src="{{ $location->poi->icon }}" style="position: absolute; top: {{ $location->posY }}px; left: {{ $location->posX }}px;" />
+			  	<img class="floor-map-preview-location" data-height="64" data-width="64" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->icon }}" style="position: absolute;" />
+			  @elseif($location->beacon)	
+			  	<img class="floor-map-preview-location" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{URL::asset('/img/font-awesome-bullseye.png')}}" style="position: absolute;" />
+			  @else
+			  	<img class="floor-map-preview-location" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{URL::asset('/img/font-awesome-dot-circle-o.png')}}" style="position: absolute;" />
 			  @endif
 			  	
           @endforeach
@@ -177,4 +185,51 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+
+var MAP_WIDTH = {{ $floor->mapWidth }};
+var MAP_HEIGHT = {{ $floor->mapHeight }};
+
+function calculate_icon_position_x ( posX, iconWidth ) {
+	return Math.round( posX - ( iconWidth / 2 ) );
+}
+
+function calculate_icon_position_y ( posY, iconHeight ) {
+	return Math.round( posY - ( iconHeight / 2 ) );	
+}
+
+function map_preview () {
+	var floor_map_preview_width = $( '#floor-map-preview' ).width();
+
+	var ratio = floor_map_preview_width / MAP_WIDTH;
+	var floor_map_preview_height = Math.round( MAP_HEIGHT * ratio );
+
+	$( '#floor-map-preview' ).css( 'height', floor_map_preview_height + 'px' );
+	$( '.floor-map-preview-location' ).each( function ( index, location ) {
+		console.log( location );
+		
+		var posX = $( location ).data( 'position-x' );
+		var posY = $( location ).data( 'position-y' );
+		var iconWidth = $( location ).data( 'width' );
+		var iconHeight = $( location ).data( 'height' );		
+		
+		$( location ).css( {
+			left : calculate_icon_position_x( posX * ratio, iconWidth ),
+			top : calculate_icon_position_y( posY * ratio, iconHeight )
+		} );
+		
+	} );
+}
+
+$( window ).resize( function () {
+	map_preview();
+} );
+
+$( document ).ready( function ( ) {
+	map_preview();
+} );
+</script>
 @endsection

@@ -39,11 +39,11 @@ class AdminMenu
             $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'places.create']);
 
             $menu->raw('POINT OF INTERESTS', ['class' => 'header']);
-            $menu->add('<i class="fa fa-circle-o text-yellow"></i><span>All POIs</span>', ['route' => 'pois.index']);
+            $menu->add('<i class="fa fa-map-marker"></i><span>All POIs</span>', ['route' => 'pois.index']);
             $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'pois.create']);            
 
             $menu->raw('BEACONS', ['class' => 'header']);
-            $menu->add('<i class="fa fa-circle-o text-blue"></i><span>All Beacons</span>', ['route' => 'beacons.index']);
+            $menu->add('<i class="fa fa-bullseye"></i><span>All Beacons</span>', ['route' => 'beacons.index']);
             $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'beacons.create']);
 
             $menu->raw('SETTINGS', ['class' => 'header']);

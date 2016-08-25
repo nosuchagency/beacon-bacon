@@ -6,7 +6,7 @@
 <ol class="breadcrumb">
   <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="{{ route('pois.index') }}">Point of Interests</a></li>
-  <li class="active">Create Point of Interest</li>
+  <li class="active">Creating</li>
 </ol>
 @endsection
 
@@ -49,4 +49,25 @@
       </div>
   </div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+
+var dirty = false;
+$( document ).ready( function ( ) {
+
+	$( '#internal_name' ).focus( function () {
+		dirty = true;
+	} );
+	
+	$( '#name' ).keyup( function () {
+		if ( dirty == false ) {
+			$( '#internal_name' ).val( $( '#name' ).val() );
+		}
+	} );
+
+} );
+
+</script>	
 @endsection

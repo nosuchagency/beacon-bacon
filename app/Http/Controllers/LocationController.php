@@ -43,11 +43,15 @@ class LocationController extends Controller
      */
     public function create ($placeId, $floorId, $type = 'poi')
     {
-        $pois = Poi::lists('name', 'id');
-        $beacons = Beacon::lists('name', 'id');
         $place = Place::findOrFail($placeId);
         $floor = Floor::findOrFail($floorId);
 
+        $pois = Poi::lists( 'name', 'id' );
+		$pois->prepend( 'Select POI...', 0 );
+        
+        $beacons = Beacon::where( 'location_id', 0 )->lists('name', 'id');
+		$beacons->prepend( 'Select Beacon...', 0 );
+        
 		if ( $type == 'beacon' ) {
 			return view('locations.create.beacon', compact('beacons', 'place', 'floor', 'placeId', 'floorId'));			
 		}
@@ -67,13 +71,21 @@ class LocationController extends Controller
      */
     public function store(Request $request, $placeId, $floorsId)
     {
-	    /*
         $this->validate($request, [
            'name' => 'required|max:255',
         ]);
-        */
-        
+
         $location = Location::create( $request->all() );
+
+        $beacon_id = $request->input('beacon_id');
+        if ( ! empty( $beacon_id ) ) {
+	        $beacon = Beacon::findOrFail($beacon_id);
+	        $beacon->place_id = $request->input('place_id');	        
+	        $beacon->floor_id = $request->input('floor_id');
+	        $beacon->location_id = $location->id;
+	        $beacon->save();
+        }
+
         return redirect()->route('locations.edit', [$placeId, $floorsId, $location->id]);
     }
 
@@ -120,14 +132,12 @@ class LocationController extends Controller
      */
     public function edit($placeId, $floorId, $id)
     {
+        $place = Place::findOrFail($placeId);
+        $floor = Floor::findOrFail($floorId);
+        $location = Location::findOrFail($id);        
 
-        $location = Location::findOrFail($id);
-
-        $places = Place::lists('name', 'id');
-        $pois = Poi::lists('name', 'id');
-        $beacons = Beacon::lists('name', 'id');        
-        $floors = Floor::lists('name', 'id');
-
+        $pois = Poi::lists( 'name', 'id' );
+        $beacons = Beacon::where( 'location_id', 0 )->lists('name', 'id');
 
         if ($location->floor->image) {
             $image = Image::make($location->floor->image);
@@ -147,6 +157,8 @@ class LocationController extends Controller
         }
 
         if ( ! empty( $location->beacon ) ) {
+       		$beacons->prepend( $location->beacon->name, $location->beacon->id );
+
 			return view('locations.edit.beacon', compact('beacons','location', 'placeId', 'floorId'));
         }
         
@@ -166,6 +178,14 @@ class LocationController extends Controller
            'name' => 'required|max:255',
         ]);
 
+        $beacon_id = $request->input('beacon_id');
+        if ( ! empty( $beacon_id ) ) {
+	        $beacon = Beacon::findOrFail($beacon_id);
+	        $beacon->place_id = $request->input('place_id');	        
+	        $beacon->floor_id = $request->input('floor_id');
+	        $beacon->save();
+        }
+
         $location = Location::findOrFail($id);
         $location->update($request->all());
         return redirect()->route('floors.show', [$placeId, $floorId]);
@@ -181,6 +201,7 @@ class LocationController extends Controller
     {
         $location = Location::findOrFail($id);
         $location->delete();
+
         return redirect()->route('floors.show', [$placeId, $floorId]);
     }
 }
