@@ -64,7 +64,7 @@ class PlaceController extends Controller
             'Password' => config('services.ims.password'),
             'ClientInfo' => config('services.ims.client'),
         ];
-
+        
 		$response = '';
         SoapWrapper::service('imssecurity', function ($service) use ($payload, &$response) {
 			$response = $service->call('Login', [$payload]);

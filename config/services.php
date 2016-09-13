@@ -44,7 +44,7 @@ return [
     ],
 
     'ims' => [
-        'username' => env('IMS_CLIENT', ''),
+        'username' => env('IMS_USERNAME', ''),
         'password' => env('IMS_PASSWORD', ''),
         'client' => env('IMS_CLIENT', ''),
     ],
