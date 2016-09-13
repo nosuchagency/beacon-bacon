@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API\V1;
 use App\Menu;
 use App\Place;
 use App\Poi;
+use App\Location;
 use Illuminate\Http\Request;
+use Artisaninweb\SoapWrapper\Facades\SoapWrapper;
 
 class PlaceController extends Controller
 {
@@ -48,19 +50,83 @@ class PlaceController extends Controller
     public function find(Request $request, $id)
     {
         $place = Place::findOrFail($id);
+
+        SoapWrapper::add(function ($service) {
+            $service
+                ->name('imssecurity')
+                ->wsdl('https://ims.lyngsoesystems.com/kkbtest/ImsWs/soap/Security?wsdl')
+                ->trace(true)
+                ->cache(WSDL_CACHE_NONE);
+        });
+
+        $payload = [
+            'Username' => config('services.ims.username'),
+            'Password' => config('services.ims.password'),
+            'ClientInfo' => config('services.ims.client'),
+        ];
+
+		$response = '';
+        SoapWrapper::service('imssecurity', function ($service) use ($payload, &$response) {
+			$response = $service->call('Login', [$payload]);
+        });
+
+		$token = $response->Token;
+        
+        SoapWrapper::add(function ($service) {
+            $service
+                ->name('imsquery')
+                ->wsdl('https://ims.lyngsoesystems.com/kkbtest/ImsWs/soap/Query?wsdl')
+                ->trace(true)
+                ->cache(WSDL_CACHE_NONE);
+        });        
         
         $request = (object) $request->json()->all();
+        $locations = Location::where( 'type', 'ims' )->lists('parameter_one', 'id');
+        
+		$ims_locations = [];
+        foreach( $locations as $id => $parameter_one ) {
+			$ims_locations[$id] = $parameter_one;
+        }
 
-        $response = new \stdClass();
+        $payload = [
+            'Token' => $token,
+            'BibliographicRecordId' => $request->data['Faust'],
+            'IlsStatusKey' => 0,
+            'Excluded' => false,
+        ];        
+        
+		$response = '';
+        SoapWrapper::service('imsquery', function ($service) use ($payload, &$response) {
+			$response = $service->call('FindItems', [$payload]);
+        });        
+        
+        $ims_found_location = 0;
+		foreach( $response->Items as $item ) {			
+			if ( in_array( $item->PlacementInfo->ShortPlacementText, $ims_locations ) ) {
+				$ims_found_location = array_search( $item->PlacementInfo->ShortPlacementText, $ims_locations );
+			}
+		}
+
+        $response = new \stdClass();        
+        if ( empty( $ims_found_location ) ) {
+	        $response->status = 'Not Found';
+	        $response->data = [];
+	        
+            return response()->json( $response );
+        }
+        
+        $location = Location::findOrFail($ims_found_location);
+
         $response->status = 'Found';
+        $response->data = new \stdClass();
 
-        $response->floor = new \stdClass();
-        $response->floor->id = 2;
+        $response->data->floor = new \stdClass();
+        $response->data->floor->id = $location->floor_id;
 
-        $response->location = new \stdClass();
-        $response->location->id = 34;
-        $response->location->posX = 344;
-        $response->location->posY = 544;
+        $response->data->location = new \stdClass();
+        $response->data->location->id = $location->id;
+        $response->data->location->posX = $location->posX;
+        $response->data->location->posY = $location->posY;
 
         return response()->json( $response );
     }

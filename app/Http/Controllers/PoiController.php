@@ -36,7 +36,9 @@ class PoiController extends Controller
      */
     public function create()
     {
-        return view('pois.create');
+	    $types = array('icon' => 'Icon', 'area' => 'Area');
+   
+        return view('pois.create', compact('types'));
     }
 
     /**
@@ -52,9 +54,9 @@ class PoiController extends Controller
            'internal_name' => 'required|max:255',
         ]);
 
-        $Poi = Poi::create($request->except('icon'));
+        $poi = Poi::create($request->except('icon'));
 
-        $this->uploadIcon($Poi, $request);
+        $this->uploadIcon($poi, $request);
 
         return redirect()->route('pois.index');
     }
@@ -80,7 +82,9 @@ class PoiController extends Controller
     public function edit($id)
     {
         $poi = Poi::findOrFail($id);
-        return view('pois.edit', compact('poi'));
+	    $types = array('icon' => 'Icon', 'area' => 'Area');        
+
+        return view('pois.edit', compact('poi','types'));
     }
 
     /**
@@ -95,7 +99,6 @@ class PoiController extends Controller
         $this->validate($request, [
            'name' => 'required|max:255',
            'internal_name' => 'required|max:255',
-           'icon' => 'required|image',
         ]);
 
         $poi = Poi::findOrFail($id);
@@ -116,6 +119,7 @@ class PoiController extends Controller
     {
         $poi = Poi::findOrFail($id);
         $poi->delete();
+
         return redirect()->route('pois.index');
     }
 

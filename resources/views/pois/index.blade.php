@@ -22,7 +22,9 @@
                 <tr>
                   <th style="width: 10px">#</th>
                   <th>Name</th>
-                  <th>Internal name</th>                  
+                  <th>Internal name</th>
+                  <th>Type</th>
+                  <th>Color</th>
                   <th class="text-right"></th>
                 </tr>
               @foreach($pois as $index => $poi)
@@ -30,6 +32,8 @@
                   <td>{{ $index+1 }}</td>
                   <td><a href="{{ route('pois.edit', $poi->id) }}">{{ $poi->name }}</a></td>
                   <td>{{ $poi->internal_name }}</td>
+                  <td>{{ $poi->type or 'Icon' }}</td>
+                  <td>{{ $poi->color or 'n/a' }}</td>                                    
                   <td class="text-right">
                     {!! Form::open(['route' => ['pois.destroy', $poi->id], 'method' => 'DELETE']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}

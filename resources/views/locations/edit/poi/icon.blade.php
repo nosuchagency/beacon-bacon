@@ -124,15 +124,17 @@
 var MAP_WIDTH = {{ $location->mapWidth }};
 var MAP_HEIGHT = {{ $location->mapHeight }};
 
-var ICON_WIDTH = {{ $location->iconWidth }};
-var ICON_HEIGHT = {{ $location->iconHeight }};
+var ICON_WIDTH = {{ $location->iconWidth or 0 }};
+var ICON_HEIGHT = {{ $location->iconHeight or 0 }};
+
+var POI_TYPE = '{{ $location->poi->type }}';
 
 function calculate_icon_position_x ( posX ) {
 	return Math.round( posX - ( ICON_WIDTH / 2 ) );
 }
 
 function calculate_icon_position_y ( posY ) {
-	return Math.round( posY - ( ICON_HEIGHT / 2 ) );	
+	return Math.round( posY - ( ICON_HEIGHT / 2 ) );
 }
 
 function map_modal () {

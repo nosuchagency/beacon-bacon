@@ -21,6 +21,9 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::resource('places', 'PlaceController');
 Route::resource('pois', 'PoiController');
+
+Route::get('beacons/import', ['as' => 'beacons.import', 'uses' => 'BeaconController@import']);
+Route::post('beacons/import', ['as' => 'beacons.importing', 'uses' => 'BeaconController@importing']);
 Route::resource('beacons', 'BeaconController');
 
 Route::group(['prefix' => 'places/{place}'], function(){
@@ -119,13 +122,11 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
         Route::get('place/deleted', ['uses' => 'PlaceController@deleted']);
         Route::get('place/{id}', ['uses' => 'PlaceController@show']);
         Route::put('place/{id}', ['uses' => 'PlaceController@update']);
-//        Route::post('place/{id}/find', ['uses' => 'PlaceController@find']);        
         Route::delete('place/{id}', ['uses' => 'PlaceController@destroy']);
 
-        // Place menu
         Route::group(['prefix' => 'place/{id}'], function(){
             Route::get('menu', ['uses' => 'PlaceController@menu']);
-            Route::post('find', ['uses' => 'PlaceController@find']);            
+			Route::post('find', ['uses' => 'PlaceController@find']);
         });
 
         // floors

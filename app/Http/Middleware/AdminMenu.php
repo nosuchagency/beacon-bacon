@@ -45,6 +45,7 @@ class AdminMenu
             $menu->raw('BEACONS', ['class' => 'header']);
             $menu->add('<i class="fa fa-bullseye"></i><span>All Beacons</span>', ['route' => 'beacons.index']);
             $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'beacons.create']);
+            $menu->add('<i class="fa fa-cloud-download"></i><span>Import Beacons</span>', ['route' => 'beacons.import']);
 
             $menu->raw('SETTINGS', ['class' => 'header']);
 
