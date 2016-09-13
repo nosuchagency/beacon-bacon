@@ -41,5 +41,12 @@ return [
 
     'kontakt' => [
         'key' => env('KONTAKT_KEY')
-    ]
+    ],
+
+    'ims' => [
+        'username' => env('IMS_CLIENT', ''),
+        'password' => env('IMS_PASSWORD', ''),
+        'client' => env('IMS_CLIENT', ''),
+    ],
+
 ];

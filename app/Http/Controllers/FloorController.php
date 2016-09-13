@@ -54,6 +54,8 @@ class FloorController extends Controller
         $this->validate($request, [
            'name' => 'required|max:255',
            'order' => 'required|numeric',
+           'map_height_in_centimeters' => 'required|numeric',
+           'map_width_in_centimeters' => 'required|numeric',           
            'image' => 'required|image',
         ]);
 
@@ -92,6 +94,7 @@ class FloorController extends Controller
     public function edit($placeId, $id)
     {
         $floor = Floor::findOrFail($id);
+
         return view('floors.edit', compact('floor', 'placeId'));
     }
 
@@ -107,6 +110,8 @@ class FloorController extends Controller
         $this->validate($request, [
            'name' => 'required|max:255',
            'order' => 'required|numeric',
+           'map_height_in_centimeters' => 'required|numeric',
+           'map_width_in_centimeters' => 'required|numeric',
            'image' => 'image',
         ]);
 
@@ -127,7 +132,9 @@ class FloorController extends Controller
     public function destroy($placeId, $id)
     {
         $floor = Floor::findOrFail($id);
+        $floor->locations()->delete();
         $floor->delete();
+
         return redirect()->route('places.show', $placeId);
     }
 
@@ -151,9 +158,15 @@ class FloorController extends Controller
         }
 
         $request->file('image')->move($destinationPath, $fileName);
+        
+        $image = Image::make($destinationPath . '/' . $fileName);        
+        $map_pixel_to_centimeter_ratio = round( $image->width() / $floor->map_width_in_centimeters, 2 );
 
         $floor->update([
-            'image' => $fileName
+            'image' => $fileName,
+            'map_height_in_pixels' => $image->height(),
+            'map_width_in_pixels' => $image->width(),
+            'map_pixel_to_centimeter_ratio' => $map_pixel_to_centimeter_ratio
         ]);
     }
 }

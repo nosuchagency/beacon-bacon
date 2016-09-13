@@ -39,7 +39,12 @@
           </div>
 
           <div class="form-group">
-            {!! Form::label('image', 'Map', ['class' => 'col-sm-2 control-label']) !!}
+			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Floor Map</h5>
+            <div class="col-sm-10"></div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('image', 'Image', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::file('image', null, ['class' => 'form-control']) !!}
@@ -47,47 +52,23 @@
           </div>
 
           <div class="form-group">
-            {!! Form::label('map_width_in_centimeters', 'Map - Width in Centimeters', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('map_width_in_centimeters', 'Width in Centimeters', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::number('map_width_in_centimeters', null, ['class' => 'form-control', 'placeholder' => 'Enter map width in centimeters']) !!}
+              {!! Form::number('map_width_in_centimeters', null, ['class' => 'form-control', 'placeholder' => 'Enter width in centimeters']) !!}
             </div>
           </div>
 
           <div class="form-group">
-            {!! Form::label('map_height_in_centimeters', 'Map - Height in Centimeters', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('map_height_in_centimeters', 'Height in Centimeters', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::number('map_height_in_centimeters', null, ['class' => 'form-control', 'placeholder' => 'Enter map height in centimeters']) !!}
+              {!! Form::number('map_height_in_centimeters', null, ['class' => 'form-control', 'placeholder' => 'Enter height in centimeters']) !!}
             </div>
           </div>
 
           <div class="form-group">
-            {!! Form::label('map_width_in_pixels', 'Map - Width in Pixels', ['class' => 'col-sm-2 control-label']) !!}
-
-            <div class="col-sm-10">
-              {!! Form::number('map_width_in_pixels', null, ['class' => 'form-control', 'placeholder' => 'Enter map width in pixels']) !!}
-            </div>
-          </div>
-
-          <div class="form-group">
-            {!! Form::label('map_height_in_pixels', 'Map - Height in Centimeters', ['class' => 'col-sm-2 control-label']) !!}
-
-            <div class="col-sm-10">
-              {!! Form::number('map_height_in_pixels', null, ['class' => 'form-control', 'placeholder' => 'Enter map height in pixels']) !!}
-            </div>
-          </div>
-
-          <div class="form-group">
-            {!! Form::label('map_pixel_to_centimeter_ratio', 'Map - Pixel/Centimeter Ratio', ['class' => 'col-sm-2 control-label']) !!}
-
-            <div class="col-sm-10">
-              {!! Form::number('map_pixel_to_centimeter_ratio', null, ['class' => 'form-control', 'placeholder' => 'Enter the ratio', 'step' => 'any']) !!}
-            </div>
-          </div>
-
-          <div class="form-group">
-            {!! Form::label('map_walkable_color', 'Map - Walkable Color in HEX', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('map_walkable_color', 'Walkable Color (HEX)', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::text('map_walkable_color', null, ['class' => 'form-control', 'placeholder' => 'Enter walkable color in HEX']) !!}

@@ -117,6 +117,7 @@ class PlaceController extends Controller
     public function destroy($id)
     {
         $place = Place::findOrFail($id);
+        $place->floors()->delete();
         $place->delete();
 
         return redirect()->route('places.index');

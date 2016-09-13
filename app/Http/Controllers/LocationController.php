@@ -134,7 +134,7 @@ class LocationController extends Controller
     {
         $place = Place::findOrFail($placeId);
         $floor = Floor::findOrFail($floorId);
-        $location = Location::findOrFail($id);        
+        $location = Location::findOrFail($id);
 
         $pois = Poi::lists( 'name', 'id' );
         $beacons = Beacon::where( 'location_id', 0 )->lists('name', 'id');
@@ -153,7 +153,11 @@ class LocationController extends Controller
 	            $location->iconHeight = $icon->height();
 	        }
 
-			return view('locations.edit.poi', compact('pois','location', 'placeId', 'floorId'));
+			if ( $location->poi->type == 'area' ) {
+				return view('locations.edit.poi.area', compact('pois','location', 'placeId', 'floorId'));
+			}
+
+			return view('locations.edit.poi.icon', compact('pois','location', 'placeId', 'floorId'));
         }
 
         if ( ! empty( $location->beacon ) ) {
@@ -199,7 +203,16 @@ class LocationController extends Controller
      */
     public function destroy($placeId, $floorId, $id)
     {
-        $location = Location::findOrFail($id);
+		$location = Location::findOrFail($id);
+		
+		if ( $location->type == 'beacon' ) {
+			$beacon = Beacon::where( 'location_id', '=', $location->id )->first();
+			$beacon->place_id = 0;			
+			$beacon->floor_id = 0;
+			$beacon->location_id = 0;			
+			$beacon->save();
+		}
+        
         $location->delete();
 
         return redirect()->route('floors.show', [$placeId, $floorId]);

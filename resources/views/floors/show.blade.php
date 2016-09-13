@@ -21,84 +21,70 @@
         <div class="box-body">
 
           <div class="row">
-            <div class="col-sm-2">
-              <strong>Place</strong>
-            </div>
-            <div class="col-sm-10">
-              {{ $floor->place->name }}
-            </div>
-          </div>
+            <div class="col-sm-6">
 
-          <div class="row">
-            <div class="col-sm-2">
-              <strong>Name</strong>
-            </div>
-            <div class="col-sm-10">
-              {{ $floor->name }}
-            </div>
-          </div>
+	          <div class="row">
+	            <div class="col-sm-2">
+	              <strong>Place</strong>
+	            </div>
+	            <div class="col-sm-10">
+	              {{ $floor->place->name }}
+	            </div>
+	          </div>
+	
+	          <div class="row">
+	            <div class="col-sm-2">
+	              <strong>Name</strong>
+	            </div>
+	            <div class="col-sm-10">
+	              {{ $floor->name }}
+	            </div>
+	          </div>
+	
+	          <div class="row">
+	            <div class="col-sm-2">
+	              <strong>Floor no.</strong>
+	            </div>
+	            <div class="col-sm-10">
+	              {{ $floor->order }}
+	            </div>
+	          </div>
 
-          <div class="row">
-            <div class="col-sm-2">
-              <strong>Floor no.</strong>
             </div>
-            <div class="col-sm-10">
-              {{ $floor->order }}
-            </div>
-          </div>
+            <div class="col-sm-6">
 
-          <div class="row">
-            <div class="col-sm-2">
-              <strong>Map - Width in Centimeters</strong>
-            </div>
-            <div class="col-sm-10">
-              {{ $floor->map_width_in_centimeters }}
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-sm-2">
-              <strong>Map - Height in Centimeters</strong>
-            </div>
-            <div class="col-sm-10">
-              {{ $floor->map_height_in_centimeters }}
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-sm-2">
-              <strong>Map - Width in Pixels</strong>
-            </div>
-            <div class="col-sm-10">
-              {{ $floor->map_width_in_pixels }}
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-sm-2">
-              <strong>Map - Height in Pixels</strong>
-            </div>
-            <div class="col-sm-10">
-              {{ $floor->map_height_in_pixels }}
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-sm-2">
-              <strong>Map - Pixel/Centimeter Ratio</strong>
-            </div>
-            <div class="col-sm-10">
-              {{ $floor->map_pixel_to_centimeter_ratio }}
-            </div>
-          </div>
+				<table style="height: 400px; width: 400px;">
+					<tr style="height: 20px;">
+						<td style="width: 40px;"></td>
+						<td style="text-align: center; width: 320px;">
+							{{ $floor->map_width_in_centimeters }}cm
+						</td>
+						<td style="width: 40px;"></td>
+					</tr>
+					<tr style="height: 360px;">
+						<td style="width: 40px;">
+							{{ $floor->map_height_in_centimeters }}cm
+						</td>
+						<td style="width: 320px;">
+							<div style="background-image: url({{ $floor->image }}); background-position: center center; background-repeat: no-repeat; background-size: contain; border: 1px solid #333; height: 360px; line-height: 360px; text-align: center; width: 320px;">
+								{{ $floor->map_pixel_to_centimeter_ratio }} ratio
+							</div>							
+						</td>
+						<td style="width: 40px;">
+			              {{ $floor->map_height_in_pixels }}px
+						</td>
+					</tr>
+					<tr style="height: 20px;">
+						<td style="width: 40px;">
 
+						</td>
+						<td style="text-align: center; width: 320px;">
+							{{ $floor->map_width_in_pixels }}px
+						</td>
+						<td style="width: 40px;"></td>						
+					</tr>
+				</table>
 
-          <div class="row">
-            <div class="col-sm-2">
-              <strong>Map - Walkable Color in HEX</strong>
-            </div>
-            <div class="col-sm-10">
-              {{ $floor->map_walkable_color }}
             </div>
           </div>
 
@@ -167,11 +153,14 @@
       </div>
       <div class="box-body">
         @if($floor->image)
-				<div id="floor-map-preview" class="map" style="background-image: url({{ $floor->image }}); background-size: cover; position: relative; width: 100%;">
+		<div id="floor-map-preview" class="map" style="background-image: url({{ $floor->image }}); background-size: cover; position: relative; width: 100%;">
+			<canvas id="floor-map-preview-canvas" style="left: 0; position: absolute; top: 0;"></canvas>
           @foreach($floor->locations as $index => $location)
 	          
-	          @if($location->poi)
+	          @if($location->poi && $location->poi->type == 'icon' )
 			  	<img class="floor-map-preview-location" data-height="64" data-width="64" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->icon }}" style="position: absolute;" />
+	          @elseif($location->poi && $location->poi->type == 'area' )
+			  	<span class="floor-map-preview-location" data-hex="{{ $location->poi->color }}" data-position-area="{{ $location->area }}"></span>			  	
 			  @elseif($location->beacon)	
 			  	<img class="floor-map-preview-location" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{URL::asset('/img/font-awesome-bullseye.png')}}" style="position: absolute;" />
 			  @else
@@ -201,6 +190,20 @@ function calculate_icon_position_y ( posY, iconHeight ) {
 	return Math.round( posY - ( iconHeight / 2 ) );	
 }
 
+function hexToRgb ( hex ) {
+    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace( shorthandRegex, function ( m, r, g, b ) {
+        return r + r + g + g + b + b;
+    } );
+
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec( hex );
+    return result ? {
+        r : parseInt( result[1], 16 ),
+        g : parseInt( result[2], 16 ),
+        b : parseInt( result[3], 16 )
+    } : null;
+}
+
 function map_preview () {
 	var floor_map_preview_width = $( '#floor-map-preview' ).width();
 
@@ -208,8 +211,45 @@ function map_preview () {
 	var floor_map_preview_height = Math.round( MAP_HEIGHT * ratio );
 
 	$( '#floor-map-preview' ).css( 'height', floor_map_preview_height + 'px' );
+	
+	var canvas = $( '#floor-map-preview-canvas' );
+    canvas.attr( 'height', floor_map_preview_height ).attr( 'width', floor_map_preview_width );	
+
+	var context = canvas[0].getContext( '2d' );
+	context.globalCompositeOperation = 'destination-over';
+	context.strokeStyle = 'rgb(0, 0, 0)';
+	context.lineWidth = 1;
+
 	$( '.floor-map-preview-location' ).each( function ( index, location ) {
-		console.log( location );
+
+		var area = $( location ).data( 'position-area' );
+		if ( area ) {
+			points = area.split( ',' ).map( function ( point ) {
+				return parseInt( point * ratio, 10 );
+			} );
+			
+			context.fillStyle = 'rgb(255, 255, 255)';
+			context.beginPath();
+			context.moveTo( points[0], points[1] );
+			
+			for ( var i = 0; i < points.length; i += 2 ) {
+				context.fillRect( points[i] - 2, points[i+1] - 2, 4, 4 );
+				context.strokeRect( points[i] - 2, points[i+1] - 2, 4, 4 );
+		
+				if ( points.length > 2 && i > 1 ) {
+					context.lineTo( points[i], points[i+1] );
+				}
+			}
+
+			context.closePath();
+
+			var rgb = hexToRgb( $( location ).data( 'hex' ) );
+			context.fillStyle = 'rgba(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', 0.3)';
+			context.fill();
+			context.stroke();
+			
+			return;
+		}
 		
 		var posX = $( location ).data( 'position-x' );
 		var posY = $( location ).data( 'position-y' );

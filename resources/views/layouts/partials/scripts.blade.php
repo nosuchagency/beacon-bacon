@@ -15,6 +15,9 @@
 <!-- jQuery Draggable Background -->
 <script src="{{ asset('/js/draggable_background.js') }}" type="text/javascript"></script>
 
+<!-- jQuery Canvas Drawing -->
+<script src="{{ asset('/js/jquery.canvasAreaDraw.js') }}" type="text/javascript"></script>
+
 <!-- AdminLTE App -->
 <script src="{{ asset('/js/app.min.js') }}" type="text/javascript"></script>
 

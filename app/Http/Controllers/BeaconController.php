@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Floor;
 use App\Place;
 use App\Beacon;
+use App\Setting;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -30,6 +31,41 @@ class BeaconController extends Controller
     {
         $beacons = Beacon::all();
         return view('beacons.index', compact('beacons'));
+    }
+
+    /**
+     * Display import/settings page
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function import()
+    {
+	    $services = array(
+   	    	'' => 'Select Service' ,
+	    	'kontakt.io' => 'Kontakt.io',
+	    	'estimote' => 'estimote',
+	    );
+
+        return view('beacons.import', compact('services'));
+    }
+
+    /**
+     * Save import/settings
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function importing(Request $request)
+    {
+        $filtered = collect($request->all())->filter(function ($value, $key) {
+            return substr($key, 0, 1) != '_';
+        });
+
+        foreach ($filtered as $key => $value) {
+            $setting = Setting::firstOrCreate(['key' => str_replace('-', '.', $key)]);
+            $setting->update(['value' => $value]);
+        }
+        
+        return redirect()->route('beacons.import');    
     }
 
     /**
