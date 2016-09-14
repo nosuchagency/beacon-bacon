@@ -65,6 +65,22 @@ class BeaconController extends Controller
             $setting->update(['value' => $value]);
         }
         
+        $devices = $this->getBeaconsFromWebservice();
+        foreach( $devices as $device ) {
+	        $device = $this->getBeaconFromWebservice($device);
+			$beacon = Beacon::where( 'beacon_uid', '=', $device->uniqueId )->first();	        
+
+	        if( empty( $beacon ) ) {
+		        $beacon = Beacon::create([
+			        'name' => $device->uniqueId,
+			        'beacon_uid' => $device->uniqueId,
+			        'proximity_uuid' => $device->proximity,
+			        'minor' => $device->minor,
+	   		        'major' => $device->major, 		        		        
+		        ]);		        
+	        }
+        }
+        
         return redirect()->route('beacons.import');    
     }
 
@@ -177,7 +193,7 @@ class BeaconController extends Controller
         ]);
 
         try {
-            $response = $client->request('GET', '/device');
+            $response = $client->request('GET', '/device?maxResult=250');
             $results = json_decode($response->getBody()->getContents());
             $devices = collect();
 
