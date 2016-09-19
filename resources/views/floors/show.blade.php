@@ -124,7 +124,7 @@
                 <td>{{ $index+1 }}</td>
                 <td><a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a></td>
                 <td>{{ $location->poi->name or 'n/a' }}</td>
-                <td>{{ $location->beacon->beacon_uid or 'n/a' }}</td>
+                <td>{{ $location->beacon->name or 'n/a' }}</td>
 				@if($location->type == 'ims')
                 <td>{{ $location->name or 'n/a' }}</td>
                 @else
