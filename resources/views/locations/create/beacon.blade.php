@@ -30,7 +30,7 @@
             {!! Form::label('beacon_id', 'Beacon', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::select('beacon_id', $beacons, null, ['class' => 'form-control']) !!}
+              {!! Form::select('beacon_id', $beacons_select, null, ['class' => 'form-control']) !!}
             </div>
           </div>
 

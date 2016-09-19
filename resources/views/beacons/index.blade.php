@@ -22,7 +22,8 @@
                 <tr>
                   <th style="width: 10px">#</th>
                   <th>Name</th>
-                  <th>Proximity UUID</th>                  
+                  <th>Major</th>
+				  <th>Minor</th>
                   <th>Place</th>
                   <th>Floor</th>
                   <th class="text-right"></th>
@@ -31,7 +32,8 @@
                 <tr>
                   <td>{{ $index+1 }}</td>
                   <td><a href="{{ route('beacons.edit', $beacon->id) }}">{{ $beacon->name }}</a></td>
-                  <td>{{ $beacon->proximity_uuid }}</td>                  
+                  <td>{{ $beacon->major or 'n/a' }}</td>
+                  <td>{{ $beacon->minor or 'n/a' }}</td>
                   <td>{{ $beacon->place->name or 'Not assigned' }}</td>
                   <td>{{ $beacon->floor->name or 'Not assigned' }}</td>
                   <td class="text-right">
