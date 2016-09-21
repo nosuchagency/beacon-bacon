@@ -65,12 +65,12 @@ class PlaceController extends Controller
             'ClientInfo' => config('services.ims.client'),
         ];
         
-		$response = '';
-        SoapWrapper::service('imssecurity', function ($service) use ($payload, &$response) {
-			$response = $service->call('Login', [$payload]);
+		$ims_response = '';
+        SoapWrapper::service('imssecurity', function ($service) use ($payload, &$ims_response) {
+			$ims_response = $service->call('Login', [$payload]);
         });
 
-		$token = $response->Token;
+		$token = $ims_response->Token;
         
         SoapWrapper::add(function ($service) {
             $service
@@ -95,19 +95,26 @@ class PlaceController extends Controller
             'Excluded' => false,
         ];        
         
-		$response = '';
-        SoapWrapper::service('imsquery', function ($service) use ($payload, &$response) {
-			$response = $service->call('FindItems', [$payload]);
+		$ims_response = '';
+        SoapWrapper::service('imsquery', function ($service) use ($payload, &$ims_response) {
+			$ims_response = $service->call('FindItems', [$payload]);
         });        
-        
+
+        $response = new \stdClass();        
+        if ( empty( $ims_response->Items ) ) {
+	        $response->status = 'Not Found';
+	        $response->data = [];
+	        
+            return response()->json( $response );	        
+        }
+
         $ims_found_location = 0;
-		foreach( $response->Items as $item ) {			
+		foreach( $ims_response->Items as $item ) {			
 			if ( in_array( $item->PlacementInfo->ShortPlacementText, $ims_locations ) ) {
 				$ims_found_location = array_search( $item->PlacementInfo->ShortPlacementText, $ims_locations );
 			}
 		}
 
-        $response = new \stdClass();        
         if ( empty( $ims_found_location ) ) {
 	        $response->status = 'Not Found';
 	        $response->data = [];
