@@ -15,28 +15,6 @@
 
 @section('content')
 
-<div class="modal fade" id="mapModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" style="width: 650px;">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Draw POI on Map</h4>
-      </div>
-      <div class="modal-body">
-
-        <div class="map" style="height: 620px; overflow: scroll; position: relative; width: 620px;">
-	        <canvas id="floor-map" height="{{ $location->mapHeight }}" width="{{ $location->mapWidth }}" style="background-image: url({{ $location->floor->image }}); cursor: crosshair;"></canvas>
-		</div>
-
-      </div>
-      <div class="modal-footer">
-        <button id="canvas_reset_button" type="button" class="btn btn-default">Start Over</button>	      
-        <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 {!! Form::open(['route' => ['locations.update', $placeId, $floorId, $location->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 {!! Form::hidden('place_id', $placeId) !!}
 {!! Form::hidden('floor_id', $floorId) !!}
@@ -80,9 +58,9 @@
           </div>
 
           <div class="form-group">
-			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Map Preview</h5>
+			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Draw POI on Map</h5>
             <div class="col-sm-10">
-				<button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#mapModal">Draw POI on Map</button>
+	            <button type="button" class="btn btn-info pull-right" id="canvas_reset_button">Start Over</button>
             </div>
           </div>
 
@@ -90,7 +68,11 @@
             <div class="col-sm-2"></div>
 
             <div class="col-sm-10">
-				<canvas id="floor-map-preview" class="map" style="background-image: url({{ $location->floor->image }}); background-size: cover; position: relative; width: 100%;"></canvas>				
+	            
+	            <div id="floor-map-container" style="overflow: scroll; width: 100%;">
+					<canvas id="floor-map" height="{{ $location->mapHeight }}" width="{{ $location->mapWidth }}" style="background-image: url({{ $location->floor->image }}); cursor: crosshair;"></canvas>
+	            </div>
+
             </div>
           </div>
 
@@ -111,6 +93,9 @@
 var MAP_WIDTH = {{ $location->mapWidth }};
 var MAP_HEIGHT = {{ $location->mapHeight }};
 
+var MAP_WIDTH_CENTIMETERS = {{ $location->mapWidthCentimeters }};
+var MAP_HEIGHT_CENTIMETERS = {{ $location->mapHeightCentimeters }};
+
 var AREA_COLOR = '{{ $location->poi->color }}';
 
 function hexToRgb ( hex ) {
@@ -127,68 +112,20 @@ function hexToRgb ( hex ) {
     } : null;
 }
 
-function map_preview () {
-	var floor_map_preview_width = $( '#floor-map-preview' ).width();
+function floor_map () {
+	var floor_map_width = $( '#floor-map-container' ).width();		
+		
+	ratio = floor_map_width / MAP_WIDTH;
+	var floor_map_height = Math.round( MAP_HEIGHT * ratio );
 
-	var ratio = floor_map_preview_width / MAP_WIDTH;
-	var floor_map_preview_height = Math.round( MAP_HEIGHT * ratio );
-
-	var canvas = $( '#floor-map-preview' );
-	canvas.css( 'height', floor_map_preview_height + 'px' );
-    canvas.attr( 'height', floor_map_preview_height ).attr( 'width', floor_map_preview_width );
-	
-	var area = $( '#area' );
-	var context = canvas[0].getContext( '2d' );
-
-	if ( area.val().length > 0 ) {
-        points = area.val().split( ',' ).map( function ( point ) {
-			return parseInt( point * ratio, 10 );
-        } );
-	} else {
-		points = [];
-	}	
-
-	if ( points.length < 2 ) {
-		return false;
-	}
-
-	context.globalCompositeOperation = 'destination-over';
-	context.fillStyle = 'rgb(255, 255, 255)'
-	context.strokeStyle = 'rgb(0, 0, 0)';
-	context.lineWidth = 1;
-	
-	context.beginPath();
-	context.moveTo( points[0], points[1] );
-	
-	for ( var i = 0; i < points.length; i += 2 ) {
-		context.fillRect( points[i] - 2, points[i+1] - 2, 4, 4 );
-		context.strokeRect( points[i] - 2, points[i+1] - 2, 4, 4 );
-
-		if ( points.length > 2 && i > 1 ) {
-			context.lineTo( points[i], points[i+1] );
-		}
-	}
-
-	context.closePath();
-	
-	var rgb = hexToRgb( AREA_COLOR );
-	context.fillStyle = 'rgba(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', 0.3)';
-	context.fill();
-	context.stroke();
+	$( '#floor-map-container' ).css( 'height', floor_map_height + 'px' );
 }
 
 $( window ).resize( function () {
-	map_preview();
+	floor_map();
 } );
 
 $( document ).ready( function ( ) {
-	map_preview();
-
-    $( '#area' ).on( 'keyup', function () {
-		map_preview();
-    } );
-
-//	map_modal();
 
     $( '#floor-map' ).canvasAreaDraw( {
 	    'input' : '#area',

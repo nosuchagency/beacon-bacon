@@ -15,29 +15,6 @@
 
 @section('content')
 
-<div class="modal fade" id="mapModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" style="width: 650px;">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Please POI on Map</h4>
-      </div>
-      <div class="modal-body">
-
-        <div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); cursor: crosshair; height: 620px; overflow: hidden; position: relative; width: 620px;">
-		          @if($location->poi->icon)
-					<img id="floor-beacon" src="{{ $location->poi->icon }}" style="cursor: move; position: absolute;" />
-				  @endif
-		</div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 {!! Form::open(['route' => ['locations.update', $placeId, $floorId, $location->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 {!! Form::hidden('place_id', $placeId) !!}
 {!! Form::hidden('floor_id', $floorId) !!}
@@ -89,9 +66,9 @@
           </div>
 
           <div class="form-group">
-			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Map Preview</h5>
-            <div class="col-sm-10">
-				<button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#mapModal">Place POI on Map</button>
+			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Place POI on Map</h5>
+            <div class="col-sm-10" style="text-align: right;">
+				<input type="checkbox" id="show-100" /> Show 100%				
             </div>
           </div>
 
@@ -99,10 +76,17 @@
             <div class="col-sm-2"></div>
 
             <div class="col-sm-10">
-				<div id="floor-map-preview" class="map" style="background-image: url({{ $location->floor->image }}); background-size: cover; position: relative; width: 100%;">
-		          @if($location->poi->icon)
-					<img id="floor-beacon-preview" src="{{ $location->poi->icon }}" style="position: absolute;" />
-				  @endif
+	            
+	            <div id="floor-map-container" style="overflow: scroll; width: 100%;">
+
+					<div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); background-size: cover; cursor: crosshair; overflow: hidden; position: relative; width: 100%; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">
+				          @if($location->poi->icon)
+							<img id="floor-poi" src="{{ $location->poi->icon }}" style="cursor: move; position: absolute;" />
+						  @endif
+					</div>
+
+	            </div>
+
 				</div>				
             </div>
           </div>
@@ -127,114 +111,91 @@ var MAP_HEIGHT = {{ $location->mapHeight }};
 var ICON_WIDTH = {{ $location->iconWidth or 0 }};
 var ICON_HEIGHT = {{ $location->iconHeight or 0 }};
 
-var POI_TYPE = '{{ $location->poi->type }}';
+var ratio = 1;
 
 function calculate_icon_position_x ( posX ) {
 	return Math.round( posX - ( ICON_WIDTH / 2 ) );
 }
 
 function calculate_icon_position_y ( posY ) {
-	return Math.round( posY - ( ICON_HEIGHT / 2 ) );
+	return Math.round( posY - ( ICON_HEIGHT / 2 ) );	
 }
 
-function map_modal () {
+function floor_map () {
+
+	var floor_map_width = $( '#floor-map-container' ).width();		
+		
+	ratio = floor_map_width / MAP_WIDTH;
+	var floor_map_height = Math.round( MAP_HEIGHT * ratio );
+
+	$( '#floor-map-container' ).css( 'height', floor_map_height + 'px' );
+
+	if ( $( '#show-100' ).is( ':checked') ) {
+		ratio = 1;
+		
+		$( '#floor-map' ).css( {
+			'height' : MAP_HEIGHT + 'px',
+			'width' : MAP_WIDTH + 'px'
+		} );
+		
+	} else {
+		$( '#floor-map' ).css( {
+			'height' : floor_map_height + 'px',
+			'width' : '100%'
+		} );
+	}
+
 	var posX = $( '#posX' ).val();
 	var posY = $( '#posY' ).val();
 
-	$( '#floor-beacon' ).css( {
-		left : calculate_icon_position_x( posX ),
-		top : calculate_icon_position_y( posY )
-	} );	
-}
-
-function map_preview () {
-	var floor_map_preview_width = $( '#floor-map-preview' ).width();
-
-	var ratio = floor_map_preview_width / MAP_WIDTH;
-	var floor_map_preview_height = Math.round( MAP_HEIGHT * ratio );
-
-	$( '#floor-map-preview' ).css( 'height', floor_map_preview_height + 'px' );
-
-	var posX = $( '#posX' ).val();
-	var posY = $( '#posY' ).val();
-
-	$( '#floor-beacon-preview' ).css( {
+	$( '#floor-poi' ).css( {
 		left : calculate_icon_position_x( posX * ratio ),
 		top : calculate_icon_position_y( posY * ratio )
 	} );
 }
 
 $( window ).resize( function () {
-	map_preview();
+	floor_map();
 } );
 
 $( document ).ready( function ( ) {
-	map_preview();
-	map_modal();
+	floor_map();
+
+	$( '#show-100' ).click( function () {
+		floor_map();
+	} );	
 	
 	$( '#posX' ).keyup( function() {
-		map_preview();
-		map_modal();
+		floor_map();
 	} );
 	
 	$( '#posY' ).keyup( function() {
-		map_preview();
-		map_modal();	
+		floor_map();
 	} );
 
-	$( '#floor-map' ).dblclick( function ( event ) { 
-		backgroundPosition = $('#floor-map').css('background-position').split(' ');
-
-		backgroundPositionX = parseInt( backgroundPosition[0], 10 );
-		backgroundPositionY = parseInt( backgroundPosition[1], 10 );			
-
-		var posX = Math.round( event.offsetX + Math.abs( backgroundPositionX ) );
-		var posY = Math.round( event.offsetY + Math.abs( backgroundPositionY ) );
+	$( '#floor-map' ).dblclick( function ( event ) {
+		
+		var posX = Math.round( event.offsetX / ratio );
+		var posY = Math.round( event.offsetY / ratio );
 
 		$( '#posX' ).val( posX );
 		$( '#posY' ).val( posY );
 
-		$( '#floor-beacon' ).css( {
+		$( '#floor-poi' ).animate( {
 			left : calculate_icon_position_x( event.offsetX ),
 			top : calculate_icon_position_y( event.offsetY )
 		} );
-
-		map_preview();		
 	} );
 
-	$( '#floor-map' ).backgroundDraggable( {
-		dragging: function ( xPos, yPos ) {
-			backgroundPosition = $('#floor-map').css('background-position').split(' ');
-
-			backgroundPositionX = parseInt( backgroundPosition[0], 10 );
-			backgroundPositionY = parseInt( backgroundPosition[1], 10 );	
-
-			var posX = parseInt( $( '#posX' ).val(), 10 ) + backgroundPositionX;			
-			var posY = parseInt( $( '#posY' ).val(), 10 ) + backgroundPositionY;
-
-			$( '#floor-beacon' ).css( {
-				left : calculate_icon_position_x( posX ),
-				top : calculate_icon_position_y( posY )
-			} );
-		}
-	} );
-
-	$( '#floor-beacon' ).draggable( {
+	$( '#floor-poi' ).draggable( {
 		containment: 'parent',
 		opacity: .7,
 		stop: function ( event, icon ) {
-			backgroundPosition = $('#floor-map').css('background-position').split(' ');
-
-			backgroundPositionX = parseInt( backgroundPosition[0], 10 );
-			backgroundPositionY = parseInt( backgroundPosition[1], 10 );			
-
-			var posX = Math.round( icon.position.left + ( ICON_WIDTH / 2 ) + Math.abs( backgroundPositionX ) );
-			var posY = Math.round( icon.position.top + ( ICON_HEIGHT / 2 ) + Math.abs( backgroundPositionY ) );
+			var posX = Math.round( ( icon.position.left + ( ICON_WIDTH / 2 ) ) / ratio );
+			var posY = Math.round( ( icon.position.top + ( ICON_HEIGHT / 2 ) ) / ratio );
 
 			$( '#posX' ).val( posX );
 			$( '#posY' ).val( posY );
-
-			map_preview();
 		}
 	} );
 } );

@@ -17,7 +17,7 @@ class Location extends Model
      *
      * @var array
      */
-    protected $fillable = ['place_id', 'floor_id', 'poi_id', 'type', 'name', 'posX', 'posY', 'area', 'parameter_one', 'parameter_two', 'parameter_three', 'parameter_four', 'parameter_five'];
+    protected $fillable = ['place_id', 'floor_id', 'poi_id', 'block_id', 'findable_id', 'type', 'name', 'posX', 'posY', 'area', 'rotation', 'parameter_one', 'parameter_two', 'parameter_three', 'parameter_four', 'parameter_five'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -65,6 +65,24 @@ class Location extends Model
     public function poi()
     {
         return $this->belongsTo('App\Poi');
+    }
+
+    /**
+     * Get the findable
+     * @return Illuminate\Database\Query\Builder
+     */
+    public function findable()
+    {
+        return $this->belongsTo('App\Findable');
+    }
+
+    /**
+     * Get the block
+     * @return Illuminate\Database\Query\Builder
+     */
+    public function block()
+    {
+        return $this->belongsTo('App\Block');
     }
     
     /**
