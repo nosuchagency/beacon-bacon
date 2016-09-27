@@ -21,6 +21,8 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::resource('places', 'PlaceController');
 Route::resource('pois', 'PoiController');
+Route::resource('findables', 'FindableController');
+Route::resource('blocks', 'BlockController');
 
 Route::get('beacons/import', ['as' => 'beacons.import', 'uses' => 'BeaconController@import']);
 Route::post('beacons/import', ['as' => 'beacons.importing', 'uses' => 'BeaconController@importing']);

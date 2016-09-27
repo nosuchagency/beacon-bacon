@@ -18,6 +18,9 @@
 <!-- jQuery Canvas Drawing -->
 <script src="{{ asset('/js/jquery.canvasAreaDraw.js') }}" type="text/javascript"></script>
 
+<!-- jQuery Rotatable -->
+<script src="{{ asset('/js/jquery.ui.rotatable.js') }}" type="text/javascript"></script>
+
 <!-- AdminLTE App -->
 <script src="{{ asset('/js/app.min.js') }}" type="text/javascript"></script>
 

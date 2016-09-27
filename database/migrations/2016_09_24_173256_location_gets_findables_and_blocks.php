@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class PoiGetsType extends Migration
+class LocationGetsFindablesAndBlocks extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,10 @@ class PoiGetsType extends Migration
      */
     public function up()
     {
-		Schema::table('pois', function ($table) {
-		    $table->string('type');
-		    $table->string('color');		    
-		});
-		
 		Schema::table('locations', function ($table) {
-		    $table->string('area', 1024);
+		    $table->integer('block_id');
+		    $table->integer('findable_id');
+		    $table->integer('rotation');		    		    			
 		});
     }
 
@@ -29,13 +26,10 @@ class PoiGetsType extends Migration
      */
     public function down()
     {
-		Schema::table('pois', function ($table) {
-		    $table->dropColumn('type');
-		    $table->dropColumn('color');		    
-		});
-		
 		Schema::table('locations', function ($table) {
-		    $table->dropColumn('area');
+		    $table->dropColumn('block_id');
+		    $table->dropColumn('findable_id');
+		    $table->dropColumn('rotation');
 		});
     }
 }

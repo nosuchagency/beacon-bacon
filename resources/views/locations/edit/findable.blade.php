@@ -18,7 +18,7 @@
 {!! Form::open(['route' => ['locations.update', $placeId, $floorId, $location->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 {!! Form::hidden('place_id', $placeId) !!}
 {!! Form::hidden('floor_id', $floorId) !!}
-{!! Form::hidden('type', 'beacon') !!}
+{!! Form::hidden('type', 'findable') !!}
 
 <div class="row">
   <div class="col-sm-12">
@@ -29,10 +29,10 @@
         <div class="box-body">
 	        
           <div class="form-group">
-            {!! Form::label('beacon_id', 'Beacon', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('findable_id', 'Type', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::select('beacon_id', $beacons_select, $location->beacon->id, ['class' => 'form-control']) !!}
+              {!! Form::select('findable_id', $findables, $location->findable->id, ['class' => 'form-control', 'readonly' => 'readonly']) !!}
             </div>
           </div>
           
@@ -42,7 +42,62 @@
             <div class="col-sm-10">
               {!! Form::text('name', $location->name, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
             </div>
-          </div>          
+          </div>
+
+          <div class="form-group">
+			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Parameters</h5>
+            <div class="col-sm-10"></div>
+          </div>
+          
+          @if($location->findable->parameter_one_name)
+	          <div class="form-group">
+	            {!! Form::label('parameter_one', $location->findable->parameter_one_name, ['class' => 'col-sm-2 control-label']) !!}
+	
+	            <div class="col-sm-10">
+	              {!! Form::text('parameter_one', $location->parameter_one, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_one_name]) !!}
+	            </div>
+	          </div>          
+		  @endif
+
+          @if($location->findable->parameter_two_name)          
+	          <div class="form-group">
+	            {!! Form::label('parameter_two', $location->findable->parameter_two_name, ['class' => 'col-sm-2 control-label']) !!}
+	
+	            <div class="col-sm-10">
+	              {!! Form::text('parameter_two', $location->parameter_two, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_two_name]) !!}
+	            </div>
+	          </div>          
+		  @endif
+		  
+          @if($location->findable->parameter_three_name)          
+	          <div class="form-group">
+	            {!! Form::label('parameter_three', $location->findable->parameter_three_name, ['class' => 'col-sm-2 control-label']) !!}
+	
+	            <div class="col-sm-10">
+	              {!! Form::text('parameter_three', $location->parameter_three, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_three_name]) !!}
+	            </div>
+	          </div>          
+		  @endif
+		  
+          @if($location->findable->parameter_four_name)          
+	          <div class="form-group">
+	            {!! Form::label('parameter_four', $location->findable->parameter_four_name, ['class' => 'col-sm-2 control-label']) !!}
+	
+	            <div class="col-sm-10">
+	              {!! Form::text('parameter_four', $location->parameter_four, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_four_name]) !!}
+	            </div>
+	          </div>          
+		  @endif
+		  
+          @if($location->findable->parameter_five_name)          
+	          <div class="form-group">
+	            {!! Form::label('parameter_five', $location->findable->parameter_five_name, ['class' => 'col-sm-2 control-label']) !!}
+	
+	            <div class="col-sm-10">
+	              {!! Form::text('parameter_five', $location->parameter_five, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_five_name]) !!}
+	            </div>
+	          </div>          
+		  @endif
 
           <div class="form-group">
 			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Location on Map</h5>
@@ -66,9 +121,9 @@
           </div>
 
           <div class="form-group">
-			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Place Beacon on Map</h5>
+			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Place Findable on Map</h5>
             <div class="col-sm-10" style="text-align: right;">
-				<input type="checkbox" id="show-grid" /> Show Grid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="show-100" /> Show 100%				
+				<input type="checkbox" id="show-100" /> Show 100%				
             </div>
           </div>
 
@@ -80,9 +135,7 @@
 	            <div id="floor-map-container" style="overflow: scroll; width: 100%;">
 
 					<div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); background-size: cover; cursor: crosshair; overflow: hidden; position: relative; width: 100%; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">
-						<div id="floor-map-grid" style="height: 100%; position: absolute; width: 100%;"></div>
-						<div style="height: 100%; position: absolute; width: 100%;"></div>						
-						<img id="floor-beacon" src="{{URL::asset('/img/font-awesome-bullseye.png')}}" style="cursor: move; position: absolute;" />
+						<img id="floor-findable" src="{{URL::asset('/img/font-awesome-dot-circle-o.png')}}" style="cursor: move; position: absolute;" />
 					</div>
 
 	            </div>
@@ -123,34 +176,6 @@ function calculate_icon_position_y ( posY ) {
 	return Math.round( posY - ( ICON_HEIGHT / 2 ) );	
 }
 
-function grid () {
-	if ( ! $( '#show-grid' ).is( ':checked') ) {
-		$( '#floor-map-grid' ).hide();
-		
-		return true;	
-	}
-
-	var map_width_meters = Math.ceil( MAP_WIDTH_CENTIMETERS / 100 );
-	var map_height_meters = Math.ceil( MAP_HEIGHT_CENTIMETERS / 100 );
-
-	var td_width_pixels = Math.ceil( MAP_WIDTH / map_width_meters * ratio );	
-	var td_height_pixels = Math.ceil( MAP_HEIGHT / map_height_meters * ratio );
-
-	var html = '<table border="1">';
-	for ( var row_counter = 0; row_counter <= map_height_meters; row_counter++ ) {
-   		html += '<tr>';
-   		
-   		for ( var column_counter = 0; column_counter <= map_width_meters; column_counter++ ) {    	
-	   		html += '<td style="height: ' + td_height_pixels + 'px; width: ' + td_width_pixels + 'px;"></td>';    	
-	   	}
-
-   		html += '</tr>';
-	}
-
-	html += '</table>';
-	$( '#floor-map-grid' ).html( html ).show();
-}
-
 function floor_map () {
 
 	var floor_map_width = $( '#floor-map-container' ).width();		
@@ -178,12 +203,10 @@ function floor_map () {
 	var posX = $( '#posX' ).val();
 	var posY = $( '#posY' ).val();
 
-	$( '#floor-beacon' ).css( {
+	$( '#floor-findable' ).css( {
 		left : calculate_icon_position_x( posX * ratio ),
 		top : calculate_icon_position_y( posY * ratio )
 	} );
-	
-	grid();
 }
 
 $( window ).resize( function () {
@@ -192,10 +215,6 @@ $( window ).resize( function () {
 
 $( document ).ready( function ( ) {
 	floor_map();
-		
-	$( '#show-grid' ).click( function () {
-		floor_map();
-	} );
 
 	$( '#show-100' ).click( function () {
 		floor_map();
@@ -217,13 +236,13 @@ $( document ).ready( function ( ) {
 		$( '#posX' ).val( posX );
 		$( '#posY' ).val( posY );
 
-		$( '#floor-beacon' ).animate( {
+		$( '#floor-findable' ).animate( {
 			left : calculate_icon_position_x( event.offsetX ),
 			top : calculate_icon_position_y( event.offsetY )
 		} );
 	} );
 
-	$( '#floor-beacon' ).draggable( {
+	$( '#floor-findable' ).draggable( {
 		containment: 'parent',
 		opacity: .7,
 		stop: function ( event, icon ) {
