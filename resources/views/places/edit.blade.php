@@ -30,6 +30,22 @@
           </div>
           
           <div class="form-group">
+            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier', $place->identifier, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+          
+          <div class="form-group">
+            {!! Form::label('place_id', 'Parent Place', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::select('place_id', $places, $place->place_id, ['class' => 'form-control']) !!}
+            </div>
+          </div>                    
+          
+          <div class="form-group">
             {!! Form::label('address', 'Address', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
@@ -52,14 +68,6 @@
               {!! Form::text('city', $place->city, ['class' => 'form-control', 'placeholder' => 'Enter city']) !!}
             </div>
           </div>
-          
-          <div class="form-group">
-            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
-
-            <div class="col-sm-10">
-              {!! Form::text('identifier', $place->identifier, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
-            </div>
-          </div>          
           
         </div>
         <div class="box-footer">

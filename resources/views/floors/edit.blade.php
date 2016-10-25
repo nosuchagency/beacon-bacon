@@ -39,7 +39,12 @@
           </div>
 
           <div class="form-group">
-            {!! Form::label('image', 'Map', ['class' => 'col-sm-2 control-label']) !!}
+			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Floor Map</h5>
+            <div class="col-sm-10"></div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('image', 'Image', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               @if($floor->image)
@@ -65,27 +70,12 @@
             </div>
           </div>
 
-          <div class="form-group">
-            {!! Form::label('map_width_in_pixels', 'Map - Width in Pixels', ['class' => 'col-sm-2 control-label']) !!}
-
-            <div class="col-sm-10">
-              {!! Form::number('map_width_in_pixels', $floor->map_width_in_pixels, ['class' => 'form-control', 'placeholder' => 'Enter map width in pixels']) !!}
-            </div>
-          </div>
 
           <div class="form-group">
-            {!! Form::label('map_height_in_pixels', 'Map - Height in Centimeters', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('map_background_color', 'Background Color (HEX)', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::number('map_height_in_pixels', $floor->map_height_in_pixels, ['class' => 'form-control', 'placeholder' => 'Enter map height in pixels']) !!}
-            </div>
-          </div>
-
-          <div class="form-group">
-            {!! Form::label('map_pixel_to_centimeter_ratio', 'Map - Pixel/Centimeter Ratio', ['class' => 'col-sm-2 control-label']) !!}
-
-            <div class="col-sm-10">
-              {!! Form::text('map_pixel_to_centimeter_ratio', $floor->map_pixel_to_centimeter_ratio, ['class' => 'form-control', 'placeholder' => 'Enter the ratio']) !!}
+              {!! Form::text('map_background_color', $floor->map_background_color, ['class' => 'form-control', 'placeholder' => 'Enter background color in HEX']) !!}
             </div>
           </div>
 
