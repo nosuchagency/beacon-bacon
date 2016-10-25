@@ -84,6 +84,15 @@ class PlaceController extends Controller
 	private function findableIMS ( $place, $findable, Request $request ) {
 
         $response = new \stdClass();
+        
+        
+        if ( empty( $request->data['Faust'] ) ) {
+	        $response->status = 'Not Found';
+	        $response->data = [];
+	        
+            return response()->json( $response );	        
+        }
+        
         $faust = $request->data['Faust'];
 
         SoapWrapper::add(function ($service) {
