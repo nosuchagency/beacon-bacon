@@ -49,7 +49,7 @@ class FindableController extends Controller
     {
         $this->validate($request, [
            'name' => 'required|max:255',
-           'internal_name' => 'required|max:255',
+           'identifier' => 'required|max:255',
         ]);
 
         $findable = Findable::create($request->all());
@@ -93,7 +93,7 @@ class FindableController extends Controller
     {
         $this->validate($request, [
            'name' => 'required|max:255',
-           'internal_name' => 'required|max:255',
+           'identifier' => 'required|max:255',
         ]);
 
         $findable = Findable::findOrFail($id);

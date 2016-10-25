@@ -6,6 +6,7 @@ use App\Menu;
 use App\Place;
 use App\Poi;
 use App\Location;
+use App\Findable;
 use Illuminate\Http\Request;
 use Artisaninweb\SoapWrapper\Facades\SoapWrapper;
 
@@ -40,7 +41,7 @@ class PlaceController extends Controller
     }
 
     /**
-     * Return an IMS Location
+     * Return a findable Location
      *
      * @param Request $request
      * @param int     $id
@@ -49,7 +50,41 @@ class PlaceController extends Controller
      */
     public function find(Request $request, $id)
     {
+        $response = new \stdClass();
+	    $identifier = $request->find_identifier;
+	    
+	    if ( empty( $identifier ) ) {
+	        $response->status = 'Not Found';
+	        $response->data = [];
+	        
+            return response()->json( $response );		    
+	    }
+
+	    $findable = Findable::where( 'identifier', $identifier )->first();
+	    
+	    if ( empty( $findable ) ) {
+	        $response->status = 'Not Found';
+	        $response->data = [];
+
+            return response()->json( $response );
+	    }
+
         $place = Place::findOrFail($id);
+
+	    if ( empty( $place ) ) {
+	        $response->status = 'Not Found';
+	        $response->data = [];
+
+            return response()->json( $response );
+	    }
+
+		return $this->{'findable' . $identifier}( $place, $findable, $request );
+    }
+
+	private function findableIMS ( $place, $findable, Request $request ) {
+
+        $response = new \stdClass();
+        $faust = $request->data['Faust'];
 
         SoapWrapper::add(function ($service) {
             $service
@@ -81,7 +116,7 @@ class PlaceController extends Controller
         });        
         
         $request = (object) $request->json()->all();
-        $locations = Location::where( 'type', 'ims' )->lists('parameter_one', 'id');
+        $locations = Location::where( 'findable_id', $findable->id )->lists('parameter_one', 'id');
         
 		$ims_locations = [];
         foreach( $locations as $id => $parameter_one ) {
@@ -90,22 +125,21 @@ class PlaceController extends Controller
 
         $payload = [
             'Token' => $token,
-            'BibliographicRecordId' => $request->data['Faust'],
+            'BibliographicRecordId' => $faust,
             'IlsStatusKey' => 0,
             'Excluded' => false,
-        ];        
+        ];
         
 		$ims_response = '';
         SoapWrapper::service('imsquery', function ($service) use ($payload, &$ims_response) {
 			$ims_response = $service->call('FindItems', [$payload]);
-        });        
+        });
 
-        $response = new \stdClass();        
         if ( empty( $ims_response->Items ) ) {
 	        $response->status = 'Not Found';
 	        $response->data = [];
 	        
-            return response()->json( $response );	        
+            return response()->json( $response );
         }
 
         $ims_found_location = 0;
@@ -122,7 +156,7 @@ class PlaceController extends Controller
             return response()->json( $response );
         }
         
-        $location = Location::findOrFail($ims_found_location);
+        $location = Location::findOrFail( $ims_found_location );
 
         $response->status = 'Found';
         $response->data = new \stdClass();
@@ -136,7 +170,7 @@ class PlaceController extends Controller
         $response->data->location->posY = $location->posY;
 
         return response()->json( $response );
-    }
+	}
 
     /**
      * Return a single item.

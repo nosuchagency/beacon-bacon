@@ -29,10 +29,10 @@
           </div>
 
           <div class="form-group">
-            {!! Form::label('internal_name', 'Internal name', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('internal_name', null, ['class' => 'form-control', 'placeholder' => 'Enter internal name']) !!}
+              {!! Form::text('identifier', null, ['class' => 'form-control', 'placeholder' => 'Enter identifier']) !!}
             </div>
           </div>
 
@@ -94,13 +94,13 @@
 var dirty = false;
 $( document ).ready( function ( ) {
 
-	$( '#internal_name' ).focus( function () {
+	$( '#identifier' ).focus( function () {
 		dirty = true;
 	} );
 	
 	$( '#name' ).keyup( function () {
 		if ( dirty == false ) {
-			$( '#internal_name' ).val( $( '#name' ).val() );
+			$( '#identifier' ).val( $( '#name' ).val() );
 		}
 	} );
 
