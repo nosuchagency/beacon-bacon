@@ -17,7 +17,7 @@ class Findable extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'internal_name', 'parameter_one_name', 'parameter_two_name', 'parameter_three_name', 'parameter_four_name', 'parameter_five_name'];
+    protected $fillable = ['name', 'identifier', 'parameter_one_name', 'parameter_two_name', 'parameter_three_name', 'parameter_four_name', 'parameter_five_name'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,7 +38,7 @@ class Findable extends Model
      *
      * @var array
      */
-    protected static $logAttributes = ['name', 'internal_name'];
+    protected static $logAttributes = ['name', 'identifier'];
 
     /**
      * Get locations belonging to this findable

@@ -25,14 +25,14 @@
                 <tr>
                   <th style="width: 10px">#</th>
                   <th>Name</th>
-                  <th>Internal name</th>
+                  <th>Identifier</th>
                   <th class="text-right"></th>
                 </tr>
               @foreach($findables as $index => $findable)
                 <tr>
                   <td>{{ $index+1 }}</td>
                   <td><a href="{{ route('findables.edit', $findable->id) }}">{{ $findable->name }}</a></td>
-                  <td>{{ $findable->internal_name }}</td>
+                  <td>{{ $findable->identifier }}</td>
                   <td class="text-right">
                     {!! Form::open(['route' => ['findables.destroy', $findable->id], 'method' => 'DELETE']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}

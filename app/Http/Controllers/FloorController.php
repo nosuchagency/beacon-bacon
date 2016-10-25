@@ -159,7 +159,8 @@ class FloorController extends Controller
 
         $request->file('image')->move($destinationPath, $fileName);
         
-        $image = Image::make($destinationPath . '/' . $fileName);        
+        $image = Image::make($destinationPath . '/' . $fileName);
+        $image->save( $destinationPath . '/original-' . $fileName );
         $map_pixel_to_centimeter_ratio = round( $image->width() / $floor->map_width_in_centimeters, 2 );
 
         $floor->update([

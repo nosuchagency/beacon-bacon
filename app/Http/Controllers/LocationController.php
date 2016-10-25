@@ -235,8 +235,35 @@ class LocationController extends Controller
         }
 
         $location->update($request->all());
+        
+   		if ( $location->type == 'block' ) {
+	   		$this->createFloorMap( $location );
+	   	}
 
         return redirect()->route('floors.show', [$placeId, $floorId]);
+    }
+
+
+    private function createFloorMap ( Location $location ) {
+
+		// vi skal have denne funktion til at køre i baggrunden
+
+
+		$locations = $location->floor->locations;
+	    $floorImage = Image::make( public_path( 'uploads/floors/' . $location->floor->id . '/original-' . basename( $location->floor->image ) ) );
+
+		foreach( $locations as $location ) {
+			if ( $location->type != 'block' || empty( $location->block->image ) ) {
+				continue;
+			}
+			
+			$blockImage = Image::make( $location->block->image );
+			$blockImage->rotate( -$location->rotation );		    		
+			
+		    $floorImage->insert( $blockImage, 'top-left', round( $location->posX - ( $blockImage->width() / 2 ) ), round( $location->posY - ( $blockImage->height() / 2 ) ) );
+		}
+		
+		$floorImage->save( base_path( 'public/uploads/floors/' . $location->floor->id . '/' . basename( $location->floor->image ) ) );
     }
 
     /**

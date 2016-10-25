@@ -29,10 +29,10 @@
           </div>
 
           <div class="form-group">
-            {!! Form::label('internal_name', 'Internal name', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('internal_name', $findable->internal_name, ['class' => 'form-control', 'placeholder' => 'Enter internal name']) !!}
+              {!! Form::text('identifier', $findable->identifier, ['class' => 'form-control', 'placeholder' => 'Enter identifier']) !!}
             </div>
           </div>
 

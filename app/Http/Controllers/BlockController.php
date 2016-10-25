@@ -114,6 +114,7 @@ class BlockController extends Controller
     public function destroy($id)
     {
         $block = Block::findOrFail($id);
+        $block->locations()->delete();
         $block->delete();
 
         return redirect()->route('blocks.index');
