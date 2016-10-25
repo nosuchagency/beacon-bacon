@@ -35,8 +35,11 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('places.create');
+    {        
+        $places = Place::lists( 'name', 'id' );
+		$places->prepend( 'Select parent place...', 0 );
+
+        return view('places.create', compact('places'));
     }
 
     /**
@@ -84,7 +87,10 @@ class PlaceController extends Controller
     {
         $place = Place::findOrFail($id);
 
-        return view('places.edit', compact('place'));
+        $places = Place::lists( 'name', 'id' );
+		$places->prepend( 'Select parent place...', 0 );        
+
+        return view('places.edit', compact('place','places'));
     }
 
     /**

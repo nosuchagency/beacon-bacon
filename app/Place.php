@@ -17,7 +17,7 @@ class Place extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'address', 'zipcode', 'city', 'identifier'];
+    protected $fillable = ['name', 'address', 'zipcode', 'city', 'identifier', 'place_id'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -47,6 +47,15 @@ class Place extends Model
     public function floors()
     {
       return $this->hasMany('App\Floor');
+    }
+
+    /**
+     * Get places belonging to this place
+     * @return Illuminate\Database\Query\Builder
+     */
+    public function places()
+    {
+      return $this->hasMany('App\Place');
     }
 
     /**

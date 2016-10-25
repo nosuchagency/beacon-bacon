@@ -17,7 +17,7 @@ class Floor extends Model
      *
      * @var array
      */
-    protected $fillable = ['place_id', 'name', 'order', 'image', 'map_width_in_centimeters', 'map_height_in_centimeters', 'map_width_in_pixels', 'map_height_in_pixels', 'map_pixel_to_centimeter_ratio', 'map_walkable_color'];
+    protected $fillable = ['place_id', 'name', 'order', 'image', 'map_width_in_centimeters', 'map_height_in_centimeters', 'map_width_in_pixels', 'map_height_in_pixels', 'map_pixel_to_centimeter_ratio', 'map_walkable_color', 'map_background_color'];
 
     /**
      * The attributes that should be mutated to dates.

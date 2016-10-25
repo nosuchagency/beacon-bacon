@@ -19,11 +19,28 @@
         </div>
         {!! Form::open(['route' => 'places.store', 'method' => 'POST', 'class' => 'form-horizontal']) !!}
         <div class="box-body">
+
           <div class="form-group">
             {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
+            </div>
+          </div>
+          
+          <div class="form-group">
+            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>          
+          
+          <div class="form-group">
+            {!! Form::label('place_id', 'Parent Place', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::select('place_id', $places, null, ['class' => 'form-control']) !!}
             </div>
           </div>
           
@@ -48,14 +65,6 @@
 
             <div class="col-sm-10">
               {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Enter city']) !!}
-            </div>
-          </div>
-          
-          <div class="form-group">
-            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
-
-            <div class="col-sm-10">
-              {!! Form::text('identifier', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
             </div>
           </div>
 

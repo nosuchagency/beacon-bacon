@@ -68,6 +68,14 @@
           </div>
 
           <div class="form-group">
+            {!! Form::label('map_background_color', 'Background Color (HEX)', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('map_background_color', null, ['class' => 'form-control', 'placeholder' => 'Enter background color in HEX']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
             {!! Form::label('map_walkable_color', 'Walkable Color (HEX)', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
