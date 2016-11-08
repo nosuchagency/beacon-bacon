@@ -98,7 +98,7 @@ class PlaceController extends Controller
         SoapWrapper::add(function ($service) {
             $service
                 ->name('imssecurity')
-                ->wsdl('https://ims.lyngsoesystems.com/kkbtest/ImsWs/soap/Security?wsdl')
+                ->wsdl('https://ims.lyngsoesystems.com/kkb/ImsWs/soap/Security?wsdl')
                 ->trace(true)
                 ->cache(WSDL_CACHE_NONE);
         });
@@ -119,7 +119,7 @@ class PlaceController extends Controller
         SoapWrapper::add(function ($service) {
             $service
                 ->name('imsquery')
-                ->wsdl('https://ims.lyngsoesystems.com/kkbtest/ImsWs/soap/Query?wsdl')
+                ->wsdl('https://ims.lyngsoesystems.com/kkb/ImsWs/soap/Query?wsdl')
                 ->trace(true)
                 ->cache(WSDL_CACHE_NONE);
         });        
