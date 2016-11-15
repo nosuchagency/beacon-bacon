@@ -162,12 +162,12 @@
       </div>
       <div class="box-body">
         @if($floor->image)
-		<div id="floor-map-preview" class="map" style="background-image: url({{ $floor->image }}); background-size: cover; position: relative; width: 100%;">
+		<div id="floor-map-preview" class="map" style="background-image: url({{ $floor->image }}?random={{ str_random(60) }}); background-size: cover; position: relative; width: 100%;">
 			<canvas id="floor-map-preview-canvas" style="left: 0; position: absolute; top: 0;"></canvas>
           @foreach($floor->locations as $index => $location)
 	          
 	          @if($location->poi && $location->poi->type == 'icon' )
-			  	<img class="floor-map-preview-location" data-height="64" data-width="64" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->icon }}" style="position: absolute;" />
+			  	<img class="floor-map-preview-location" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->icon }}" style="height: 32px; position: absolute; width: 32px;" />
 	          @elseif($location->poi && $location->poi->type == 'area' )
 			  	<span class="floor-map-preview-location" data-hex="{{ $location->poi->color }}" data-position-area="{{ $location->area }}"></span>			  	
 			  @elseif($location->type == 'beacon')	

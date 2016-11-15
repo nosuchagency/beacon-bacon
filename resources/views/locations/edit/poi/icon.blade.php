@@ -81,7 +81,7 @@
 
 					<div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); background-size: cover; cursor: crosshair; overflow: hidden; position: relative; width: 100%; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">
 				          @if($location->poi->icon)
-							<img id="floor-poi" src="{{ $location->poi->icon }}" style="cursor: move; position: absolute;" />
+							<img id="floor-poi" src="{{ $location->poi->icon }}" style="cursor: move; height: {{ $location->iconHeight }}px; position: absolute; width: {{ $location->iconWidth }}px;" />
 						  @endif
 					</div>
 
@@ -107,6 +107,9 @@
 
 var MAP_WIDTH = {{ $location->mapWidth }};
 var MAP_HEIGHT = {{ $location->mapHeight }};
+
+var ICON_WIDTH_ORIGINAL = {{ $location->iconWidth or 0 }};
+var ICON_HEIGHT_ORIGINAL = {{ $location->iconHeight or 0 }};
 
 var ICON_WIDTH = {{ $location->iconWidth or 0 }};
 var ICON_HEIGHT = {{ $location->iconHeight or 0 }};
@@ -138,19 +141,27 @@ function floor_map () {
 			'width' : MAP_WIDTH + 'px'
 		} );
 		
+		ICON_HEIGHT = ICON_HEIGHT_ORIGINAL * 4;
+		ICON_WIDTH = ICON_WIDTH_ORIGINAL * 4;
+		
 	} else {
 		$( '#floor-map' ).css( {
 			'height' : floor_map_height + 'px',
 			'width' : '100%'
 		} );
+		
+		ICON_HEIGHT = ICON_HEIGHT_ORIGINAL;
+		ICON_WIDTH = ICON_WIDTH_ORIGINAL;
 	}
 
 	var posX = $( '#posX' ).val();
 	var posY = $( '#posY' ).val();
 
 	$( '#floor-poi' ).css( {
+		height : ICON_HEIGHT,
 		left : calculate_icon_position_x( posX * ratio ),
-		top : calculate_icon_position_y( posY * ratio )
+		top : calculate_icon_position_y( posY * ratio ),
+		width : ICON_WIDTH		
 	} );
 }
 

@@ -191,8 +191,9 @@ class LocationController extends Controller
 
         if ($location->poi->icon) {
             $icon = Image::make($location->poi->icon);
-            $location->iconWidth = $icon->width();
-            $location->iconHeight = $icon->height();
+
+            $location->iconWidth = 32;
+            $location->iconHeight = round( 32 / $icon->width() * $icon->height() );
         }
 
 		if ( $location->poi->type == 'area' ) {
