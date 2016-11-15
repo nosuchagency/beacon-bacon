@@ -153,7 +153,7 @@ class PlaceController extends Controller
 
         $ims_found_location = 0;
 		foreach( $ims_response->Items as $item ) {			
-			if ( in_array( $item->PlacementInfo->ShortPlacementText, $ims_locations ) ) {
+			if ( ! empty( $item->PlacementInfo->ShortPlacementText ) && in_array( $item->PlacementInfo->ShortPlacementText, $ims_locations ) ) {
 				$ims_found_location = array_search( $item->PlacementInfo->ShortPlacementText, $ims_locations );
 			}
 		}
