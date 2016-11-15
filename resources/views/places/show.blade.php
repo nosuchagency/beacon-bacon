@@ -20,7 +20,12 @@
         <div class="box-body">
 
           <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-6">
+	            
+	            
+	            
+			<div class="row">
+	           <div class="col-sm-2">
               <strong>Name</strong>
             </div>
             <div class="col-sm-10">
@@ -55,14 +60,67 @@
             </div>
           </div>
 
+	            
+	            
+            </div>
+            <div class="col-sm-6">
+	            
           <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-4">
               <strong>Identifier</strong>
             </div>
-            <div class="col-sm-10">
+            <div class="col-sm-8">
               {{ $place->identifier }}
             </div>
+          </div>	   	            	            
+	            
+<div class="row">
+	           <div class="col-sm-4">
+              <strong>Parent Place</strong>
+            </div>
+            <div class="col-sm-8">
+              {{ $place->parent_place }}
+            </div>
           </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <strong>Menu Order</strong>
+            </div>
+            <div class="col-sm-8">
+              {{ $place->order }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <strong>Enable Positioning</strong>
+            </div>
+            <div class="col-sm-8">
+              {{ $place->beacon_positioning_enabled }}
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-4">
+              <strong>Enable Proximity</strong>
+            </div>
+            <div class="col-sm-8">
+              {{ $place->beacon_proximity_enabled }}
+            </div>
+          </div>
+
+          
+	            
+	            
+            </div>            
+          </div>  
+
+
+
+
+
+          
           
         </div>
         <div class="box-footer">

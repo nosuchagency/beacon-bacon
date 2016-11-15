@@ -29,22 +29,6 @@
           </div>
           
           <div class="form-group">
-            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
-
-            <div class="col-sm-10">
-              {!! Form::text('identifier', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
-            </div>
-          </div>          
-          
-          <div class="form-group">
-            {!! Form::label('place_id', 'Parent Place', ['class' => 'col-sm-2 control-label']) !!}
-
-            <div class="col-sm-10">
-              {!! Form::select('place_id', $places, null, ['class' => 'form-control']) !!}
-            </div>
-          </div>
-          
-          <div class="form-group">
             {!! Form::label('address', 'Address', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
@@ -67,6 +51,51 @@
               {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Enter city']) !!}
             </div>
           </div>
+          
+          <div class="form-group">
+			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">System</h5>
+            <div class="col-sm-10"></div>
+          </div>          
+          
+          <div class="form-group">
+            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+          
+          <div class="form-group">
+            {!! Form::label('place_id', 'Parent Place', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::select('place_id', $places, null, ['class' => 'form-control']) !!}
+            </div>
+          </div>
+          
+          <div class="form-group">
+            {!! Form::label('order', 'Menu Order', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('order', null, ['class' => 'form-control', 'placeholder' => 'Enter the menu order of this place']) !!}
+            </div>
+          </div>
+          
+          <div class="form-group">
+            {!! Form::label('beacon_positioning_enabled', 'Enable Positioning', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::checkbox('beacon_positioning_enabled', 1, false) !!}
+            </div>
+          </div>
+          
+          <div class="form-group">
+            {!! Form::label('beacon_proximity_enabled', 'Enable Proximity', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::checkbox('beacon_proximity_enabled', 1, false) !!}
+            </div>
+          </div>                              
 
         </div>
         <div class="box-footer">

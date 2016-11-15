@@ -17,7 +17,7 @@ class Place extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'address', 'zipcode', 'city', 'identifier', 'place_id'];
+    protected $fillable = ['name', 'address', 'zipcode', 'city', 'identifier', 'place_id', 'order', 'beacon_positioning_enabled', 'beacon_proximity_enabled'];
 
     /**
      * The attributes that should be mutated to dates.
