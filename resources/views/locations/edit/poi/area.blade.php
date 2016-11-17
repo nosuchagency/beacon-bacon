@@ -70,7 +70,7 @@
             <div class="col-sm-10">
 	            
 	            <div id="floor-map-container" style="overflow: scroll; width: 100%;">
-					<canvas id="floor-map" height="{{ $location->mapHeight }}" width="{{ $location->mapWidth }}" style="background-image: url({{ $location->floor->image }}); cursor: crosshair;"></canvas>
+					<canvas id="floor-map" height="{{ $location->mapHeight }}" width="{{ $location->mapWidth }}" style="background-image: url({{ $location->floor->image }}?random={{ str_random(60) }}); cursor: crosshair;"></canvas>
 	            </div>
 
             </div>

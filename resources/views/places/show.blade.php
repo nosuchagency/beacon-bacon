@@ -184,9 +184,9 @@
                 <i class="fa fa-ellipsis-v"></i>
                 <i class="fa fa-ellipsis-v"></i>
               </span>
-              @if($item->poi_id)
+              @if($item->poi)
                 <span class="text">{{ $item->poi->name }}</span>
-              @else
+              @elseif( $item->title )
                 <span class="text"><big>- {{ $item->title }} -</big></span>
               @endif
               <div class="tools">

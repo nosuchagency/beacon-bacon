@@ -145,7 +145,7 @@
 	            
 	            <div id="floor-map-container" style="overflow: scroll; width: 100%;">
 
-					<div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); background-size: cover; cursor: crosshair; height: {{ $location->mapHeight }}px; overflow: hidden; position: relative; width: 100%; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; width: {{ $location->mapWidth }}px;">
+					<div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}?random={{ str_random(60) }}); background-size: cover; cursor: crosshair; height: {{ $location->mapHeight }}px; overflow: hidden; position: relative; width: 100%; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; width: {{ $location->mapWidth }}px;">
 				          @if($location->block->image)
 						  	<div id="floor-block" style="cursor: move; height: {{ $location->imageHeight or 0 }}px; position: absolute; width: {{ $location->imageWidth or 0 }}px;">
 								<img src="{{ $location->block->image }}" alt="" />
