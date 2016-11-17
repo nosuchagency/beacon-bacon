@@ -66,7 +66,7 @@
 							{{ $floor->map_height_in_centimeters }}cm
 						</td>
 						<td style="width: 320px;">
-							<div style="background-image: url({{ $floor->image }}); background-position: center center; background-repeat: no-repeat; background-size: contain; border: 1px solid #333; height: 360px; line-height: 360px; text-align: center; width: 320px;">
+							<div style="background-image: url({{ $floor->image }}?random={{ str_random(60) }}); background-position: center center; background-repeat: no-repeat; background-size: contain; border: 1px solid #333; height: 360px; line-height: 360px; text-align: center; width: 320px;">
 								{{ $floor->map_pixel_to_centimeter_ratio }} ratio
 							</div>							
 						</td>

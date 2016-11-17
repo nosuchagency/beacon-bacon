@@ -79,7 +79,7 @@
 	            
 	            <div id="floor-map-container" style="overflow: scroll; width: 100%;">
 
-					<div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}); background-size: cover; cursor: crosshair; overflow: hidden; position: relative; width: 100%; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">
+					<div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}?random={{ str_random(60) }}); background-size: cover; cursor: crosshair; overflow: hidden; position: relative; width: 100%; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">
 				          @if($location->poi->icon)
 							<img id="floor-poi" src="{{ $location->poi->icon }}" style="cursor: move; height: {{ $location->iconHeight }}px; position: absolute; width: {{ $location->iconWidth }}px;" />
 						  @endif
