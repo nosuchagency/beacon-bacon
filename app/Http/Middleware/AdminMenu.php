@@ -40,7 +40,7 @@ class AdminMenu
 
             $menu->raw('POINT OF INTERESTS', ['class' => 'header']);
             $menu->add('<i class="fa fa-circle-o text-yellow"></i><span>All POIs</span>', ['route' => 'pois.index']);
-            $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'pois.create']);            
+            $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'pois.create']);
 
             $menu->raw('BEACONS', ['class' => 'header']);
             $menu->add('<i class="fa fa-circle-o text-blue"></i><span>All Beacons</span>', ['route' => 'beacons.index']);
@@ -52,13 +52,10 @@ class AdminMenu
                 $menu->add('<i class="fa fa-users"></i><span>Teams</span>', ['route' => 'teams.index']);
             }
 
-            if(Auth::user()->isOwnerOfCurrentTeam()) {
                 $menu->add('<i class="fa fa-users"></i><span>Users</span>', ['route' => 'teams.members.show']);
                 $menu->add('<i class="fa fa-envelope"></i><span>Email Settings</span>', ['route' => 'settings.email']);
                 $menu->add('<i class="fa fa-pencil"></i><span>Email Templates</span>', ['route' => 'settings.templates']);
                 $menu->add('<i class="fa fa-terminal"></i><span>API Keys</span>', ['route' => 'apikeys.index']);
-            }
-
         });
 
         return $next($request);
