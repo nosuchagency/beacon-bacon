@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Floor;
 use App\Place;
 use App\Beacon;
+use App\Setting;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -30,6 +31,58 @@ class BeaconController extends Controller
     {
         $beacons = Beacon::all();
         return view('beacons.index', compact('beacons'));
+    }
+
+    /**
+     * Display import/settings page
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function import()
+    {
+	    $services = array(
+   	    	'' => 'Select Service' ,
+	    	'kontakt.io' => 'Kontakt.io',
+	    	'estimote' => 'estimote',
+	    );
+
+        return view('beacons.import', compact('services'));
+    }
+
+    /**
+     * Save import/settings
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function importing(Request $request)
+    {
+        $filtered = collect($request->all())->filter(function ($value, $key) {
+            return substr($key, 0, 1) != '_';
+        });
+
+        foreach ($filtered as $key => $value) {
+            $setting = Setting::firstOrCreate(['key' => str_replace('-', '.', $key)]);
+            $setting->update(['value' => $value]);
+        }
+        
+        $devices = $this->getBeaconsFromWebservice();
+        foreach( $devices as $device ) {
+			$beacon = Beacon::where( 'beacon_uid', '=', $device )->first();	        
+
+	        if( empty( $beacon ) ) {
+		        $device = $this->getBeaconFromWebservice($device);		        
+		        
+		        $beacon = Beacon::create([
+			        'name' => $device->uniqueId,
+			        'beacon_uid' => $device->uniqueId,
+			        'proximity_uuid' => $device->proximity,
+			        'minor' => $device->minor,
+	   		        'major' => $device->major, 		        		        
+		        ]);		        
+	        }
+        }
+        
+        return redirect()->route('beacons.import');    
     }
 
     /**
@@ -64,7 +117,7 @@ class BeaconController extends Controller
         ]);
 
         $beacon = Beacon::create($request->all());
-        return redirect()->route('beacons.show', $beacon->id);
+        return redirect()->route('beacons.index');
     }
 
     /**
@@ -141,7 +194,7 @@ class BeaconController extends Controller
         ]);
 
         try {
-            $response = $client->request('GET', '/device');
+            $response = $client->request('GET', '/device?maxResult=1000');
             $results = json_decode($response->getBody()->getContents());
             $devices = collect();
 

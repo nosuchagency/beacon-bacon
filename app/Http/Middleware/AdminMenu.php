@@ -39,12 +39,17 @@ class AdminMenu
             $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'places.create']);
 
             $menu->raw('POINT OF INTERESTS', ['class' => 'header']);
-            $menu->add('<i class="fa fa-circle-o text-yellow"></i><span>All POIs</span>', ['route' => 'pois.index']);
+            $menu->add('<i class="fa fa-map-marker"></i><span>All POIs</span>', ['route' => 'pois.index']);
             $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'pois.create']);
 
+            $menu->raw('BUILDING BLOCKS', ['class' => 'header']);
+            $menu->add('<i class="fa fa-square"></i><span>All Blocks</span>', ['route' => 'blocks.index']);
+            $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'blocks.create']);
+
             $menu->raw('BEACONS', ['class' => 'header']);
-            $menu->add('<i class="fa fa-circle-o text-blue"></i><span>All Beacons</span>', ['route' => 'beacons.index']);
+            $menu->add('<i class="fa fa-bullseye"></i><span>All Beacons</span>', ['route' => 'beacons.index']);
             $menu->add('<i class="fa fa-plus"></i><span>Add New</span>', ['route' => 'beacons.create']);
+            $menu->add('<i class="fa fa-cloud-download"></i><span>Import Beacons</span>', ['route' => 'beacons.import']);
 
             $menu->raw('SETTINGS', ['class' => 'header']);
 
@@ -54,6 +59,7 @@ class AdminMenu
 
                 $menu->add('<i class="fa fa-users"></i><span>Users</span>', ['route' => 'teams.members.show']);
                 $menu->add('<i class="fa fa-envelope"></i><span>Email Settings</span>', ['route' => 'settings.email']);
+				$menu->add('<i class="fa fa-dot-circle-o"></i><span>Findables</span>', ['route' => 'findables.index']);
                 $menu->add('<i class="fa fa-pencil"></i><span>Email Templates</span>', ['route' => 'settings.templates']);
                 $menu->add('<i class="fa fa-terminal"></i><span>API Keys</span>', ['route' => 'apikeys.index']);
         });

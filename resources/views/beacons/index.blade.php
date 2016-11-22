@@ -14,7 +14,7 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Beacon list</h3>
+          <h3 class="box-title">List</h3>
         </div>
         <div class="box-body no-padding">
           <table class="table">
@@ -22,14 +22,18 @@
                 <tr>
                   <th style="width: 10px">#</th>
                   <th>Name</th>
+                  <th>Major</th>
+				  <th>Minor</th>
                   <th>Place</th>
                   <th>Floor</th>
-                  <th class="text-right">Actions</th>
+                  <th class="text-right"></th>
                 </tr>
               @foreach($beacons as $index => $beacon)
                 <tr>
                   <td>{{ $index+1 }}</td>
-                  <td><a href="{{ route('beacons.show', $beacon->id) }}">{{ $beacon->name }}</a></td>
+                  <td><a href="{{ route('beacons.edit', $beacon->id) }}">{{ $beacon->name }}</a></td>
+                  <td>{{ $beacon->major or 'n/a' }}</td>
+                  <td>{{ $beacon->minor or 'n/a' }}</td>
                   <td>{{ $beacon->place->name or 'Not assigned' }}</td>
                   <td>{{ $beacon->floor->name or 'Not assigned' }}</td>
                   <td class="text-right">

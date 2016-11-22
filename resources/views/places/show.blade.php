@@ -15,12 +15,17 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Place details</h3>
+          <h3 class="box-title">Details</h3>
         </div>
         <div class="box-body">
 
           <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-6">
+	            
+	            
+	            
+			<div class="row">
+	           <div class="col-sm-2">
               <strong>Name</strong>
             </div>
             <div class="col-sm-10">
@@ -55,14 +60,67 @@
             </div>
           </div>
 
+	            
+	            
+            </div>
+            <div class="col-sm-6">
+	            
           <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-4">
               <strong>Identifier</strong>
             </div>
-            <div class="col-sm-10">
+            <div class="col-sm-8">
               {{ $place->identifier }}
             </div>
+          </div>	   	            	            
+	            
+<div class="row">
+	           <div class="col-sm-4">
+              <strong>Parent Place</strong>
+            </div>
+            <div class="col-sm-8">
+              {{ $place->parent_place }}
+            </div>
           </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <strong>Menu Order</strong>
+            </div>
+            <div class="col-sm-8">
+              {{ $place->order }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <strong>Enable Positioning</strong>
+            </div>
+            <div class="col-sm-8">
+              {{ $place->beacon_positioning_enabled }}
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-4">
+              <strong>Enable Proximity</strong>
+            </div>
+            <div class="col-sm-8">
+              {{ $place->beacon_proximity_enabled }}
+            </div>
+          </div>
+
+          
+	            
+	            
+            </div>            
+          </div>  
+
+
+
+
+
+          
           
         </div>
         <div class="box-footer">
@@ -76,7 +134,7 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Floor list</h3>
+          <h3 class="box-title">Floors</h3>
           <div class="pull-right box-tools">
             <a href="{{ route('floors.create', $place->id) }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add floor</a>
           </div>
@@ -89,7 +147,7 @@
                   <th>Name</th>
                   <th>Floor no.</th>
                   <th>Locations</th>
-                  <th class="text-right">Actions</th>
+                  <th class="text-right"></th>
                 </tr>
               @foreach($place->floors as $index => $floor)
                 <tr>
@@ -126,9 +184,9 @@
                 <i class="fa fa-ellipsis-v"></i>
                 <i class="fa fa-ellipsis-v"></i>
               </span>
-              @if($item->poi_id)
+              @if($item->poi)
                 <span class="text">{{ $item->poi->name }}</span>
-              @else
+              @elseif( $item->title )
                 <span class="text"><big>- {{ $item->title }} -</big></span>
               @endif
               <div class="tools">
@@ -149,10 +207,10 @@
         <div class="box-body">
           <div class="form-group">
             {!! Form::label('type', 'Type') !!}
-            {!! Form::select('type', ['poi' => 'poi', 'title' => 'Title'], null, ['class' => 'form-control', 'id' => 'menu-item-type']) !!}
+            {!! Form::select('type', ['poi' => 'POI', 'title' => 'Title'], null, ['class' => 'form-control', 'id' => 'menu-item-type']) !!}
           </div>
           <div class="form-group" id="poi-type">
-            {!! Form::label('poi', 'poi') !!}
+            {!! Form::label('poi', 'POI') !!}
             {!! Form::select('poi', $pois, '', ['class' => 'form-control']) !!}
           </div>
           <div class="form-group" id="title-type" style="display: none">

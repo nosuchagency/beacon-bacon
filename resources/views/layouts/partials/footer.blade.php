@@ -5,5 +5,5 @@
         Mmmm.... Bacon!
     </div>
     <!-- Default to the left -->
-    <strong>Created by <a href="http://nosuchagency.com">no such agency</a> - see code at <a href="https://github.com/nosuchagency/beacon-bacon">Github</a></strong>
+    <strong>Created by <a href="http://nosuchagency.com">no such agency</a> - fork code at <a href="https://github.com/nosuchagency/beacon-bacon">Github</a></strong>
 </footer>

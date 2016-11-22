@@ -17,7 +17,7 @@ class Poi extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'type', 'internal_name', 'icon'];
+    protected $fillable = ['name', 'type', 'color', 'internal_name', 'icon'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -50,6 +50,16 @@ class Poi extends Model
     public function getIconAttribute($value)
     {
         return !$value ? '' : asset('uploads/pois/'.$this->id.'/'.$value);
+    }
+
+
+    /**
+     * Get locations belonging to this poi
+     * @return Illuminate\Database\Query\Builder
+     */
+    public function locations()
+    {
+      return $this->hasMany('App\Location');
     }
 
     /**

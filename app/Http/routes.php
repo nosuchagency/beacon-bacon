@@ -21,15 +21,21 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::resource('places', 'PlaceController');
 Route::resource('pois', 'PoiController');
+Route::resource('findables', 'FindableController');
+Route::resource('blocks', 'BlockController');
+
+Route::get('beacons/import', ['as' => 'beacons.import', 'uses' => 'BeaconController@import']);
+Route::post('beacons/import', ['as' => 'beacons.importing', 'uses' => 'BeaconController@importing']);
 Route::resource('beacons', 'BeaconController');
 
 Route::group(['prefix' => 'places/{place}'], function(){
-    // Menu
+
+	/* Menu Routes */
     Route::post('menu', ['as' => 'menu.store', 'uses' => 'PlaceController@storeMenuItem']);
     Route::post('menu/order', ['as' => 'menu.update', 'uses' => 'PlaceController@updateMenuOrder']);
     Route::delete('menu', ['as' => 'menu.destroy', 'uses' => 'PlaceController@destroyMenuItem']);
 
-    // floors
+	/* Floors Routes */
     Route::get('floors', ['as' => 'floors.index', 'uses' => 'FloorController@index']);
     Route::get('floors/create', ['as' => 'floors.create', 'uses' => 'FloorController@create']);
     Route::post('floors', ['as' => 'floors.store', 'uses' => 'FloorController@store']);
@@ -37,6 +43,8 @@ Route::group(['prefix' => 'places/{place}'], function(){
     Route::get('floors/{floor}/edit', ['as' => 'floors.edit', 'uses' => 'FloorController@edit']);
     Route::put('floors/{floor}', ['as' => 'floors.update', 'uses' => 'FloorController@update']);
     Route::delete('floors/{floor}', ['as' => 'floors.destroy', 'uses' => 'FloorController@destroy']);
+
+
 
     Route::group(['prefix' => 'floors/{floor}'], function(){
         // Locations
@@ -113,16 +121,14 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
 
         // Places
         Route::get('place', ['uses' => 'PlaceController@index']);
-        Route::post('place', ['uses' => 'PlaceController@store']);
         Route::get('place/deleted', ['uses' => 'PlaceController@deleted']);
         Route::get('place/{id}', ['uses' => 'PlaceController@show']);
         Route::put('place/{id}', ['uses' => 'PlaceController@update']);
         Route::delete('place/{id}', ['uses' => 'PlaceController@destroy']);
 
-        // Place menu
         Route::group(['prefix' => 'place/{id}'], function(){
             Route::get('menu', ['uses' => 'PlaceController@menu']);
-            Route::post('find', ['uses' => 'PlaceController@find']);            
+			Route::post('find', ['uses' => 'PlaceController@find']);
         });
 
         // floors

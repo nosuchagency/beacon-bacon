@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('contentheader_title', 'Create IMS')
+@section('contentheader_title', 'Create Building Block Location')
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
@@ -8,7 +8,7 @@
   <li><a href="{{ route('places.index') }}">Places</a></li>
   <li><a href="{{ route('places.show', $placeId) }}">{{ $place->name }}</a></li>
   <li><a href="{{ route('floors.show', [$placeId, $floorId]) }}">{{ $floor->name }}</a></li>
-  <li class="active">Create IMS</li>
+  <li class="active">Creating Building Block</li>
 </ol>
 @endsection
 
@@ -16,7 +16,7 @@
 {!! Form::open(['route' => ['locations.store', $placeId, $floorId], 'method' => 'POST', 'class' => 'form-horizontal']) !!}
 {!! Form::hidden('place_id', $placeId) !!}
 {!! Form::hidden('floor_id', $floorId) !!}
-{!! Form::hidden('type', 'ims') !!}
+{!! Form::hidden('type', 'block') !!}
 
 <div class="row">
   <div class="col-sm-12">
@@ -27,18 +27,26 @@
         <div class="box-body">
 
           <div class="form-group">
-            {!! Form::label('parameter_one', 'IMS Identifier', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('block_id', 'Building Block', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('parameter_one', null, ['class' => 'form-control', 'placeholder' => 'Enter IMS Identifier']) !!}
+              {!! Form::select('block_id', $blocks, null, ['class' => 'form-control']) !!}
             </div>
           </div>
-          
+
+          <div class="form-group">
+            {!! Form::label('findable_id', 'Type', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::select('findable_id', $findables, null, ['class' => 'form-control']) !!}
+            </div>
+          </div>
+
           <div class="form-group">
             {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter location name']) !!}
+              {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
             </div>
           </div>
 
@@ -51,4 +59,25 @@
   </div>
 </div>
 {!! Form::close() !!}
+@endsection
+
+@section('footer')
+<script>
+
+var dirty = false;
+$( document ).ready( function ( ) {
+
+	$( '#name' ).focus( function () {
+		dirty = true;
+	} );
+	
+	$( '#poi_id' ).change( function () {
+		if ( dirty == false ) {
+			$( '#name' ).val( $( '#poi_id option:selected' ).text() );
+		}
+	} );
+
+} );
+
+</script>	
 @endsection
