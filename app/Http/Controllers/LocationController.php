@@ -49,45 +49,45 @@ class LocationController extends Controller
     {
         $place = Place::findOrFail($placeId);
         $floor = Floor::findOrFail($floorId);
-        
+
 		if ( $type == 'beacon' ) {
-			
+
 	        $beacons = Beacon::where( 'location_id', 0 )->lists('name', 'id');
-	        
-			$beacons_select = [];
-			$beacons_select[0] = 'Select Beacon...';
-			
+
+			    $beacons_select = [];
+			    $beacons_select[0] = 'Select Beacon...';
+
 	        $beacons = Beacon::where( 'location_id', 0 )->get();
 			foreach( $beacons as $beacon ) {
 				$beacons_select[ $beacon->id ] = $beacon->name . ' (' . $beacon->major . ' : ' . $beacon->minor . ')';
-			}			
+			}
 
-			return view('locations.create.beacon', compact('beacons_select', 'place', 'floor', 'placeId', 'floorId'));			
+			return view('locations.create.beacon', compact('beacons_select', 'place', 'floor', 'placeId', 'floorId'));
 		}
 
 		if ( $type == 'findable' ) {
-			
-	        $findables = Findable::lists( 'name', 'id' );
-			$findables->prepend( 'Select type...', 0 );			
 
-			return view('locations.create.findable', compact('findables', 'place', 'floor', 'placeId', 'floorId'));			
+	        $findables = Findable::lists( 'name', 'id' );
+			$findables->prepend( 'Select type...', 0 );
+
+			return view('locations.create.findable', compact('findables', 'place', 'floor', 'placeId', 'floorId'));
 		}
-		
+
 		if ( $type == 'block' ) {
-			
+
 	        $blocks = Block::lists( 'name', 'id' );
 			$blocks->prepend( 'Select block...', 0 );
-			
+
 	        $findables = Findable::lists( 'name', 'id' );
 			$findables->prepend( 'Is this block findable?', 0 );
 
 			return view('locations.create.block', compact('blocks','findables','place', 'floor', 'placeId', 'floorId'));
-		}		
+		}
 
         $pois = Poi::lists( 'name', 'id' );
 		$pois->prepend( 'Select POI...', 0 );
 
-		return view('locations.create.poi', compact('pois', 'place', 'floor', 'placeId', 'floorId'));			
+		return view('locations.create.poi', compact('pois', 'place', 'floor', 'placeId', 'floorId'));
     }
 
     /**
@@ -107,7 +107,7 @@ class LocationController extends Controller
         $beacon_id = $request->input('beacon_id');
         if ( ! empty( $beacon_id ) ) {
 	        $beacon = Beacon::findOrFail($beacon_id);
-	        $beacon->place_id = $request->input('place_id');	        
+	        $beacon->place_id = $request->input('place_id');
 	        $beacon->floor_id = $request->input('floor_id');
 	        $beacon->location_id = $location->id;
 	        $beacon->save();
@@ -124,7 +124,7 @@ class LocationController extends Controller
      */
     public function show($placeId, $floorId, $id)
     {
-        return redirect()->route('locations.edit', [$placeId, $floorId, $id]);     
+        return redirect()->route('locations.edit', [$placeId, $floorId, $id]);
     }
 
     /**
@@ -153,37 +153,37 @@ class LocationController extends Controller
 	        $beacons = Beacon::where( 'location_id', 0 )->get();
 			foreach( $beacons as $beacon ) {
 				$beacons_select[ $beacon->id ] = $beacon->name . ' (' . $beacon->major . ' : ' . $beacon->minor . ')';
-			}			
-			
-			$beacons_select[ $location->beacon->id ] = $location->beacon->name . ' (' . $location->beacon->major . ' : ' . $location->beacon->minor . ')';	
+			}
+
+			$beacons_select[ $location->beacon->id ] = $location->beacon->name . ' (' . $location->beacon->major . ' : ' . $location->beacon->minor . ')';
 
 			return view('locations.edit.beacon', compact('beacons_select','location', 'placeId', 'floorId'));
 		}
 
 		if ( $location->type == 'findable' ) {
-			
+
 	        $findables = Findable::lists( 'name', 'id' );
 			$findables->prepend( 'Select type...', 0 );
 
-			return view('locations.edit.findable', compact('findables','location', 'placeId', 'floorId'));		
+			return view('locations.edit.findable', compact('findables','location', 'placeId', 'floorId'));
 		}
 
 		if ( $location->type == 'block' ) {
-			
+
 	        $blocks = Block::lists( 'name', 'id' );
 			$blocks->prepend( 'Select Block...', 0 );
-			
+
 	        $findables = Findable::lists( 'name', 'id' );
 			$findables->prepend( 'Is findable?', 0 );
-			
+
 	        if ($location->block->image) {
 	            $image = Image::make($location->block->image);
 	            $location->imageWidth = $image->width();
 	            $location->imageHeight = $image->height();
 	        }
-	        
+
 	        $location->imageRotation = deg2rad( $location->rotation );
-	        
+
 			return view('locations.edit.block', compact('blocks','findables','location','placeId','floor','floorId'));
 		}
 
@@ -220,9 +220,9 @@ class LocationController extends Controller
 
 		if ( $location->type == 'beacon' ) {
 			$beacon = Beacon::where( 'location_id', '=', $location->id )->first();
-			$beacon->place_id = 0;			
+			$beacon->place_id = 0;
 			$beacon->floor_id = 0;
-			$beacon->location_id = 0;			
+			$beacon->location_id = 0;
 			$beacon->save();
 		}
 
@@ -231,12 +231,12 @@ class LocationController extends Controller
 	        $beacon = Beacon::findOrFail($beacon_id);
 	        $beacon->place_id = $request->input('place_id');
 	        $beacon->floor_id = $request->input('floor_id');
-	        $beacon->location_id = $location->id;	        
+	        $beacon->location_id = $location->id;
 	        $beacon->save();
         }
 
         $location->update($request->all());
-        
+
    		if ( $location->type == 'block' ) {
 	   		$this->createFloorMap( $location );
 	   	}
@@ -244,27 +244,25 @@ class LocationController extends Controller
         return redirect()->route('floors.show', [$placeId, $floorId]);
     }
 
-
     private function createFloorMap ( Location $location ) {
+      $locations = $location->floor->locations;
+      $floorImage = Image::make( public_path( 'uploads/floors/' . $location->floor->id . '/original-' . basename( $location->floor->image ) ) );
 
-		// vi skal have denne funktion til at køre i baggrunden
+      foreach( $locations as $location ) {
+        if ( $location->type != 'block' || empty( $location->block->image ) ) {
+          continue;
+        }
 
+        try {
+          $blockImage = Image::make( $location->block->image );
+          $blockImage->rotate( -$location->rotation );
+          $floorImage->insert( $blockImage, 'top-left', round( $location->posX - ( $blockImage->width() / 2 ) ), round( $location->posY - ( $blockImage->height() / 2 ) ) );
+        }
+        catch( \Exception $e) {
+        }
+      }
 
-		$locations = $location->floor->locations;
-	    $floorImage = Image::make( public_path( 'uploads/floors/' . $location->floor->id . '/original-' . basename( $location->floor->image ) ) );
-
-		foreach( $locations as $location ) {
-			if ( $location->type != 'block' || empty( $location->block->image ) ) {
-				continue;
-			}
-			
-			$blockImage = Image::make( $location->block->image );
-			$blockImage->rotate( -$location->rotation );		    		
-			
-		    $floorImage->insert( $blockImage, 'top-left', round( $location->posX - ( $blockImage->width() / 2 ) ), round( $location->posY - ( $blockImage->height() / 2 ) ) );
-		}
-		
-		$floorImage->save( base_path( 'public/uploads/floors/' . $location->floor->id . '/' . basename( $location->floor->image ) ) );
+      $floorImage->save( base_path( 'public/uploads/floors/' . $location->floor->id . '/' . basename( $location->floor->image ) ) );
     }
 
     /**
@@ -276,15 +274,15 @@ class LocationController extends Controller
     public function destroy($placeId, $floorId, $id)
     {
 		$location = Location::findOrFail($id);
-		
+
 		if ( $location->type == 'beacon' ) {
 			$beacon = Beacon::where( 'location_id', '=', $location->id )->first();
-			$beacon->place_id = 0;			
+			$beacon->place_id = 0;
 			$beacon->floor_id = 0;
-			$beacon->location_id = 0;			
+			$beacon->location_id = 0;
 			$beacon->save();
 		}
-        
+
         $location->delete();
 
         return redirect()->route('floors.show', [$placeId, $floorId]);

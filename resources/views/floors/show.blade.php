@@ -31,7 +31,7 @@
 	              {{ $floor->place->name }}
 	            </div>
 	          </div>
-	
+
 	          <div class="row">
 	            <div class="col-sm-2">
 	              <strong>Name</strong>
@@ -40,7 +40,7 @@
 	              {{ $floor->name }}
 	            </div>
 	          </div>
-	
+
 	          <div class="row">
 	            <div class="col-sm-2">
 	              <strong>Floor no.</strong>
@@ -68,7 +68,7 @@
 						<td style="width: 320px;">
 							<div style="background-image: url({{ $floor->image }}?random={{ str_random(60) }}); background-position: center center; background-repeat: no-repeat; background-size: contain; border: 1px solid #333; height: 360px; line-height: 360px; text-align: center; width: 320px;">
 								{{ $floor->map_pixel_to_centimeter_ratio }} ratio
-							</div>							
+							</div>
 						</td>
 						<td style="width: 40px;">
 			              {{ $floor->map_height_in_pixels }}px
@@ -81,7 +81,7 @@
 						<td style="text-align: center; width: 320px;">
 							{{ $floor->map_width_in_pixels }}px
 						</td>
-						<td style="width: 40px;"></td>						
+						<td style="width: 40px;"></td>
 					</tr>
 				</table>
 
@@ -103,9 +103,13 @@
       <div class="box-header with-border">
         <h3 class="box-title">Locations</h3>
         <div class="pull-right box-tools">
+          <input type="checkbox" value="Yes" id="hide_beacons_checkbox" /> <span style="margin: 0 25px 0 5px">Hide Beacons</span>
+          <input type="checkbox" value="Yes" id="hide_blocks_checkbox" /> <span style="margin: 0 25px 0 5px">Hide Blocks</span>
+          <input type="checkbox" value="Yes" id="hide_findables_checkbox" /> <span style="margin: 0 25px 0 5px">Hide Findables</span>
+
           <a href="{{ route('locations.create', [$placeId, $floor->id, 'poi']) }}" class="btn btn-success btn-sm"><i class="fa fa-map-marker"></i> Add POI</a>
           <a href="{{ route('locations.create', [$placeId, $floor->id, 'beacon']) }}" class="btn btn-success btn-sm"><i class="fa fa-bullseye"></i> Add Beacon</a>
-          <a href="{{ route('locations.create', [$placeId, $floor->id, 'block']) }}" class="btn btn-success btn-sm"><i class="fa fa-square"></i> Add Block</a>          
+          <a href="{{ route('locations.create', [$placeId, $floor->id, 'block']) }}" class="btn btn-success btn-sm"><i class="fa fa-square"></i> Add Block</a>
           <a href="{{ route('locations.create', [$placeId, $floor->id, 'findable']) }}" class="btn btn-success btn-sm"><i class="fa fa-dot-circle-o"></i> Add Findable</a>
         </div>
       </div>
@@ -113,32 +117,39 @@
         <table class="table">
             <tbody>
               <tr>
-                <th style="width: 10px">#</th>
                 <th>Name</th>
                 <th>POI</th>
                 <th>Beacon</th>
                 <th>Block</th>
-                <th>Findable</th>                
+                <th>Findable</th>
                 <th class="text-right"></th>
               </tr>
             @foreach($floor->locations as $index => $location)
-              <tr>
-                <td>{{ $index+1 }}</td>
+              <tr class="
+              @if($location->type == 'block')
+              block-in-list
+              @elseif($location->type == 'findable')
+              findable-in-list
+              @elseif($location->type == 'beacon')
+              beacon-in-list
+              @endif
+              ">
                 <td><a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a></td>
                 <td>{{ $location->poi->name or 'n/a' }}</td>
                 <td>{{ $location->beacon->name or 'n/a' }}</td>
 
-				@if($location->type == 'block')
-                <td>{{ $location->name or 'n/a' }}</td>
-                @else
-                <td>n/a</td>                
-                @endif                
-
-				@if($location->type == 'findable')
+                @if($location->type == 'block')
                 <td>{{ $location->name or 'n/a' }}</td>
                 @else
                 <td>n/a</td>
                 @endif
+
+				        @if($location->type == 'findable')
+                <td>{{ $location->name or 'n/a' }}</td>
+                @else
+                <td>n/a</td>
+                @endif
+
                 <td class="text-right">
                   {!! Form::open(['route' => ['locations.destroy', $placeId, $floor->id, $location->id], 'method' => 'DELETE']) !!}
                   {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
@@ -165,17 +176,17 @@
 		<div id="floor-map-preview" class="map" style="background-image: url({{ $floor->image }}?random={{ str_random(60) }}); background-size: cover; position: relative; width: 100%;">
 			<canvas id="floor-map-preview-canvas" style="left: 0; position: absolute; top: 0;"></canvas>
           @foreach($floor->locations as $index => $location)
-	          
+
 	          @if($location->poi && $location->poi->type == 'icon' )
-			  	<img class="floor-map-preview-location" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->icon }}" style="height: 32px; position: absolute; width: 32px;" />
+			  	<img class="floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->icon }}" style="height: 32px; position: absolute; width: 32px;" />
 	          @elseif($location->poi && $location->poi->type == 'area' )
-			  	<span class="floor-map-preview-location" data-hex="{{ $location->poi->color }}" data-position-area="{{ $location->area }}"></span>			  	
-			  @elseif($location->type == 'beacon')	
-			  	<img class="floor-map-preview-location" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{URL::asset('/img/font-awesome-bullseye.png')}}" style="position: absolute;" />
-			  @elseif($location->type == 'findable')	
-			  	<img class="floor-map-preview-location" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{URL::asset('/img/font-awesome-dot-circle-o.png')}}" style="position: absolute;" />
+			  	<span class="floor-map-preview-location titletip" data-hex="{{ $location->poi->color }}" data-position-area="{{ $location->area }}"></span>
+			  @elseif($location->type == 'beacon')
+			  	<a class="beacon-on-map-preview floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="background-image: url({{URL::asset('/img/font-awesome-bullseye.png')}}); display: block; height: 32px; position: absolute; width: 32px;" title="Beacon: {{ $location->beacon->name }}" /></a>
+			  @elseif($location->type == 'findable')
+			  	<a class="findable-on-map-preview floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="background-image: url({{URL::asset('/img/font-awesome-dot-circle-o.png')}}); display: block; height: 32px; position: absolute; width: 32px;" title="Findable: {{ $location->name }}" /></a>
 			  @endif
-			  	
+
           @endforeach
         </div>
         @endif
@@ -196,7 +207,7 @@ function calculate_icon_position_x ( posX, iconWidth ) {
 }
 
 function calculate_icon_position_y ( posY, iconHeight ) {
-	return Math.round( posY - ( iconHeight / 2 ) );	
+	return Math.round( posY - ( iconHeight / 2 ) );
 }
 
 function hexToRgb ( hex ) {
@@ -220,9 +231,9 @@ function map_preview () {
 	var floor_map_preview_height = Math.round( MAP_HEIGHT * ratio );
 
 	$( '#floor-map-preview' ).css( 'height', floor_map_preview_height + 'px' );
-	
+
 	var canvas = $( '#floor-map-preview-canvas' );
-    canvas.attr( 'height', floor_map_preview_height ).attr( 'width', floor_map_preview_width );	
+  canvas.attr( 'height', floor_map_preview_height ).attr( 'width', floor_map_preview_width );
 
 	var context = canvas[0].getContext( '2d' );
 	context.globalCompositeOperation = 'destination-over';
@@ -236,15 +247,15 @@ function map_preview () {
 			points = area.split( ',' ).map( function ( point ) {
 				return parseInt( point * ratio, 10 );
 			} );
-			
+
 			context.fillStyle = 'rgb(255, 255, 255)';
 			context.beginPath();
 			context.moveTo( points[0], points[1] );
-			
+
 			for ( var i = 0; i < points.length; i += 2 ) {
 				context.fillRect( points[i] - 2, points[i+1] - 2, 4, 4 );
 				context.strokeRect( points[i] - 2, points[i+1] - 2, 4, 4 );
-		
+
 				if ( points.length > 2 && i > 1 ) {
 					context.lineTo( points[i], points[i+1] );
 				}
@@ -256,20 +267,20 @@ function map_preview () {
 			context.fillStyle = 'rgba(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', 0.3)';
 			context.fill();
 			context.stroke();
-			
+
 			return;
 		}
-		
+
 		var posX = $( location ).data( 'position-x' );
 		var posY = $( location ).data( 'position-y' );
 		var iconWidth = $( location ).data( 'width' );
-		var iconHeight = $( location ).data( 'height' );		
-		
+		var iconHeight = $( location ).data( 'height' );
+
 		$( location ).css( {
 			left : calculate_icon_position_x( posX * ratio, iconWidth ),
 			top : calculate_icon_position_y( posY * ratio, iconHeight )
 		} );
-		
+
 	} );
 }
 
@@ -279,6 +290,7 @@ $( window ).resize( function () {
 
 $( document ).ready( function ( ) {
 	map_preview();
+  jQuery( '.titletip' ).tooltip();
 } );
 </script>
 @endsection
