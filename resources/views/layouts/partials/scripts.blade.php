@@ -21,7 +21,13 @@
 <!-- jQuery Rotatable -->
 <script src="{{ asset('/js/jquery.ui.rotatable.js') }}" type="text/javascript"></script>
 
+<!-- jQuery Cookie -->
+<script src="{{ asset('/js/jquery.cookie.js') }}" type="text/javascript"></script>
+
 <!-- AdminLTE App -->
 <script src="{{ asset('/js/app.min.js') }}" type="text/javascript"></script>
+
+<!-- Beacon Bacon -->
+<script src="{{ asset('/js/beacon-bacon.js') }}" type="text/javascript"></script>
 
 @yield('footer')
