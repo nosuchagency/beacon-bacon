@@ -15,6 +15,21 @@ jQuery( 'document' ).ready( function ( ) {
     return false;
   } );
 
+  jQuery( '#hide_pois_checkbox' ).click( function ( event ) {
+    $( '.poi-in-list').toggle( ! this.checked );
+    $( '.poi-on-map-preview').toggle( ! this.checked );
+
+    jQuery.cookie( 'hide-pois', this.checked );
+  } );
+
+  if ( jQuery.cookie( 'hide-pois' ) == 'true' ) {
+    jQuery( '#hide_pois_checkbox' ).prop( 'checked', true );
+
+    $( '.poi-in-list' ).toggle( false );
+    $( '.poi-on-map-preview' ).toggle( false );
+  }
+  
+
   jQuery( '#hide_beacons_checkbox' ).click( function ( event ) {
     $( '.beacon-in-list').toggle( ! this.checked );
     $( '.beacon-on-map-preview').toggle( ! this.checked );

@@ -103,14 +103,16 @@
       <div class="box-header with-border">
         <h3 class="box-title">Locations</h3>
         <div class="pull-right box-tools">
-          <input type="checkbox" value="Yes" id="hide_beacons_checkbox" /> <span style="margin: 0 25px 0 5px">Hide Beacons</span>
-          <input type="checkbox" value="Yes" id="hide_blocks_checkbox" /> <span style="margin: 0 25px 0 5px">Hide Blocks</span>
+
+          <input type="checkbox" value="Yes" id="hide_pois_checkbox" /> <span style="margin: 0 25px 0 5px">Hide POIs</span>
           <input type="checkbox" value="Yes" id="hide_findables_checkbox" /> <span style="margin: 0 25px 0 5px">Hide Findables</span>
+          <input type="checkbox" value="Yes" id="hide_blocks_checkbox" /> <span style="margin: 0 25px 0 5px">Hide Blocks</span>
+          <input type="checkbox" value="Yes" id="hide_beacons_checkbox" /> <span style="margin: 0 25px 0 5px">Hide Beacons</span>
 
           <a href="{{ route('locations.create', [$placeId, $floor->id, 'poi']) }}" class="btn btn-success btn-sm"><i class="fa fa-map-marker"></i> Add POI</a>
-          <a href="{{ route('locations.create', [$placeId, $floor->id, 'beacon']) }}" class="btn btn-success btn-sm"><i class="fa fa-bullseye"></i> Add Beacon</a>
-          <a href="{{ route('locations.create', [$placeId, $floor->id, 'block']) }}" class="btn btn-success btn-sm"><i class="fa fa-square"></i> Add Block</a>
           <a href="{{ route('locations.create', [$placeId, $floor->id, 'findable']) }}" class="btn btn-success btn-sm"><i class="fa fa-dot-circle-o"></i> Add Findable</a>
+          <a href="{{ route('locations.create', [$placeId, $floor->id, 'block']) }}" class="btn btn-success btn-sm"><i class="fa fa-square"></i> Add Block</a>
+          <a href="{{ route('locations.create', [$placeId, $floor->id, 'beacon']) }}" class="btn btn-success btn-sm"><i class="fa fa-bullseye"></i> Add Beacon</a>
         </div>
       </div>
       <div class="box-body no-padding">
@@ -132,6 +134,8 @@
               findable-in-list
               @elseif($location->type == 'beacon')
               beacon-in-list
+              @else
+              poi-in-list
               @endif
               ">
                 <td><a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a></td>
@@ -178,13 +182,15 @@
           @foreach($floor->locations as $index => $location)
 
 	          @if($location->poi && $location->poi->type == 'icon' )
-			  	<img class="floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->icon }}" style="height: 32px; position: absolute; width: 32px;" />
+            <a class="poi-on-map-preview floor-map-preview-location poi titletip" data-height="-1" data-width="-1" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->icon }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="position: absolute;" title="POI: {{ $location->name }}">
+              <img src="{{ $location->poi->icon }}" style="height: 32px; width: auto;" />
+            </a>
 	          @elseif($location->poi && $location->poi->type == 'area' )
 			  	<span class="floor-map-preview-location titletip" data-hex="{{ $location->poi->color }}" data-position-area="{{ $location->area }}"></span>
 			  @elseif($location->type == 'beacon')
-			  	<a class="beacon-on-map-preview floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="background-image: url({{URL::asset('/img/font-awesome-bullseye.png')}}); display: block; height: 32px; position: absolute; width: 32px;" title="Beacon: {{ $location->beacon->name }}" /></a>
+			  	<a class="beacon-on-map-preview floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="background-image: url({{URL::asset('/img/font-awesome-bullseye.png')}}); display: block; height: 32px; position: absolute; width: 32px;" title="Beacon: {{ $location->beacon->name }}"></a>
 			  @elseif($location->type == 'findable')
-			  	<a class="findable-on-map-preview floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="background-image: url({{URL::asset('/img/font-awesome-dot-circle-o.png')}}); display: block; height: 32px; position: absolute; width: 32px;" title="Findable: {{ $location->name }}" /></a>
+			  	<a class="findable-on-map-preview floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="background-image: url({{URL::asset('/img/font-awesome-dot-circle-o.png')}}); display: block; height: 32px; position: absolute; width: 32px;" title="Findable: {{ $location->name }}"></a>
 			  @endif
 
           @endforeach
@@ -275,6 +281,12 @@ function map_preview () {
 		var posY = $( location ).data( 'position-y' );
 		var iconWidth = $( location ).data( 'width' );
 		var iconHeight = $( location ).data( 'height' );
+
+    /* POI Icon - Get Width and Height from Icon (Image) */
+    if ( iconWidth == -1 || iconHeight == -1 ) {
+      iconWidth = $( location ).first().width();
+  		iconHeight = $( location ).first().height();
+    }
 
 		$( location ).css( {
 			left : calculate_icon_position_x( posX * ratio, iconWidth ),
