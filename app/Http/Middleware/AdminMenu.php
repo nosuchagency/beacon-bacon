@@ -57,11 +57,13 @@ class AdminMenu
                 $menu->add('<i class="fa fa-users"></i><span>Teams</span>', ['route' => 'teams.index']);
             }
 
-            $menu->add('<i class="fa fa-users"></i><span>Users</span>', ['route' => 'teams.members.show']);
-            $menu->add('<i class="fa fa-envelope"></i><span>Email Settings</span>', ['route' => 'settings.email']);
-				    $menu->add('<i class="fa fa-dot-circle-o"></i><span>Findables</span>', ['route' => 'findables.index']);
-            $menu->add('<i class="fa fa-pencil"></i><span>Email Templates</span>', ['route' => 'settings.templates']);
-            $menu->add('<i class="fa fa-terminal"></i><span>API Keys</span>', ['route' => 'apikeys.index']);
+            if(Auth::user()->isOwnerOfCurrentTeam()) {
+              $menu->add('<i class="fa fa-users"></i><span>Users</span>', ['route' => 'teams.members.show']);
+              $menu->add('<i class="fa fa-envelope"></i><span>Email Settings</span>', ['route' => 'settings.email']);
+				      $menu->add('<i class="fa fa-dot-circle-o"></i><span>Findables</span>', ['route' => 'findables.index']);
+              $menu->add('<i class="fa fa-pencil"></i><span>Email Templates</span>', ['route' => 'settings.templates']);
+              $menu->add('<i class="fa fa-terminal"></i><span>API Keys</span>', ['route' => 'apikeys.index']);
+            }
         });
 
         return $next($request);
