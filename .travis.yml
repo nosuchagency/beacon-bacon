@@ -4,5 +4,6 @@ php:
   
 script:
   - composer install
+  - phpunit tests/ExampleTest.php
   - bash deploy.sh
 
