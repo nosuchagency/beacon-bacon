@@ -3,5 +3,6 @@ php:
   - 7.0
   
 script:
+  - composer install
   - bash deploy.sh
 
