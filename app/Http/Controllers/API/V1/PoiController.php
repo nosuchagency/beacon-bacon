@@ -19,6 +19,7 @@ class PoiController extends Controller
         return $this->filteredAndOrdered($request, new Poi())->paginate($this->pageSize);
     }
 
+
     /**
      * Save a new item.
      *
