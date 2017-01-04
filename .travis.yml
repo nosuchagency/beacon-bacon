@@ -1,0 +1,11 @@
+language: php
+php:
+  - 7.0
+  
+script:
+  - composer install
+  - phpunit tests
+  
+after_success:
+  - bash deploy.sh    
+
