@@ -89,6 +89,7 @@
             {!! Form::label('beacon_positioning_enabled', 'Enable Positioning', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
+              {!! Form::hidden('beacon_positioning_enabled', 0) !!}
               {!! Form::checkbox('beacon_positioning_enabled', 1, $place->beacon_positioning_enabled) !!}
             </div>
           </div>
@@ -97,13 +98,22 @@
             {!! Form::label('beacon_proximity_enabled', 'Enable Proximity', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
+              {!! Form::hidden('beacon_proximity_enabled', 0) !!}
               {!! Form::checkbox('beacon_proximity_enabled', 1, $place->beacon_proximity_enabled) !!}
             </div>
-          </div>                 
-          
-          
-          
-          
+          </div>
+          <div class="form-group">
+            {!! Form::label('activated', 'Activated', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::hidden('activated', 0) !!}
+              {!! Form::checkbox('activated', 1, $place->activated) !!}
+            </div>
+          </div>
+
+
+
+
         </div>
         <div class="box-footer">
           <a href="{{ route('places.show', $place->id) }}" class="btn btn-default">Cancel</a>
