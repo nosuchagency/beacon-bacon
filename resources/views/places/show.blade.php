@@ -109,6 +109,14 @@
               {{ $place->beacon_proximity_enabled }}
             </div>
           </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <strong>Activated</strong>
+                </div>
+                <div class="col-sm-8">
+                  {{ $place->activated }}
+                </div>
+              </div>
 
           
 	            

@@ -21,6 +21,7 @@ class PlaceController extends Controller
      */
     public function index(Request $request)
     {
+    	$request->request->add(array('activated' => 1));
         return $this->filteredAndOrdered($request, new Place())->paginate($this->pageSize);
     }
 
