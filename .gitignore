@@ -8,3 +8,4 @@ public/uploads
 storage/framework/messages
 .env.example
 .DS_Store
+/.idea
