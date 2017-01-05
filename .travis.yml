@@ -4,8 +4,7 @@ php:
   
 script:
   - composer install
+  - php artisan migrate
   - phpunit tests
   
-after_success:
-  - bash deploy.sh    
 
