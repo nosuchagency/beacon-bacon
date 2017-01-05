@@ -285,6 +285,10 @@ class LocationController extends Controller
 
         $location->delete();
 
+	    if ( $location->type == 'block' ) {
+		    $this->createFloorMap( $location );
+	    }
+
         return redirect()->route('floors.show', [$placeId, $floorId]);
     }
 }
