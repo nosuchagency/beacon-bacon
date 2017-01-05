@@ -57,7 +57,7 @@ class LocationController extends Controller
 			    $beacons_select = [];
 			    $beacons_select[0] = 'Select Beacon...';
 
-	        $beacons = Beacon::where( 'location_id', 0 )->get();
+	        $beacons = Beacon::where( 'location_id', 0 )->get()->sortBy('name');
 			foreach( $beacons as $beacon ) {
 				$beacons_select[ $beacon->id ] = $beacon->name . ' (' . $beacon->major . ' : ' . $beacon->minor . ')';
 			}
@@ -284,6 +284,10 @@ class LocationController extends Controller
 		}
 
         $location->delete();
+
+	    if ( $location->type == 'block' ) {
+		    $this->createFloorMap( $location );
+	    }
 
         return redirect()->route('floors.show', [$placeId, $floorId]);
     }
