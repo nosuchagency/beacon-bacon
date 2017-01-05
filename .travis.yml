@@ -6,6 +6,4 @@ script:
   - composer install
   - phpunit tests
   
-after_success:
-  - bash deploy.sh    
 
