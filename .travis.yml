@@ -4,7 +4,6 @@ php:
   
 script:
   - composer install
-  - php artisan migrate
   - phpunit tests
   
 
