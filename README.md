@@ -16,7 +16,7 @@ Read more on [beaconbacon.io](https://beaconbacon.io) (Currently under developme
 
 The API (V1) documentation can be found [here](https://documenter.getpostman.com/view/918890/beacon-bacon-api-v1-documentation/2SJVeB). Documentation is currently being updated - any found typos and errors can be directed at webmaster@nosuchagency.dk.
 
-## Practical Example
+## iOS SDK (sort of)
 
 Our good friends [Mustache](http://mustache.dk/) has created an iOS app using Beacon Bacon, and put it on GitHub. It's not a SDK, but it's a very good start. Find it [here](https://github.com/mustachedk/beacon-bacon-ios). 
 
