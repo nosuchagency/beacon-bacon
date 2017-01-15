@@ -132,12 +132,12 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api
         });
 
         // floors
-        Route::get('floor', ['uses' => 'floorController@index']);
-        Route::post('floor', ['uses' => 'floorController@store']);
-        Route::get('floor/deleted', ['uses' => 'floorController@deleted']);
-        Route::get('floor/{id}', ['uses' => 'floorController@show']);
-        Route::put('floor/{id}', ['uses' => 'floorController@update']);
-        Route::delete('floor/{id}', ['uses' => 'floorController@destroy']);
+        Route::get('floor', ['uses' => 'FloorController@index']);
+        Route::post('floor', ['uses' => 'FloorController@store']);
+        Route::get('floor/deleted', ['uses' => 'FloorController@deleted']);
+        Route::get('floor/{id}', ['uses' => 'FloorController@show']);
+        Route::put('floor/{id}', ['uses' => 'FloorController@update']);
+        Route::delete('floor/{id}', ['uses' => 'FloorController@destroy']);
 
         // Locations
         Route::get('location', ['uses' => 'LocationController@index']);
