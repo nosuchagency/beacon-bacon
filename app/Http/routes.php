@@ -15,7 +15,8 @@
  * WEB ROUTES
  */
 
-Route::auth();
+//Route::auth();
+Auth::routes();
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
@@ -107,6 +108,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('settings/email', ['as' => 'settings.email.update', 'uses' => 'SettingController@emailUpdate']);
     Route::get('settings/templates', ['as' => 'settings.templates', 'uses' => 'SettingController@templates']);
     Route::put('settings/templates', ['as' => 'settings.templates.update', 'uses' => 'SettingController@templatesUpdate']);
+
+    Route::get('/logout', 'Auth\LoginController@logout');
 });
 
 /**
