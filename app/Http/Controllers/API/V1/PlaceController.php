@@ -126,7 +126,7 @@ class PlaceController extends Controller
         });        
         
         $request = (object) $request->json()->all();
-        $locations = Location::where( 'findable_id', $findable->id )->lists('parameter_one', 'id');
+        $locations = Location::where( 'findable_id', $findable->id )->pluck('parameter_one', 'id');
         
 		$ims_locations = [];
         foreach( $locations as $id => $parameter_one ) {

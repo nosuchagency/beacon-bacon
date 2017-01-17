@@ -2,13 +2,14 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
 use Mpociot\Teamwork\Traits\UserHasTeams;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use UserHasTeams, LogsActivity;
+    use UserHasTeams, LogsActivity, Notifiable;
 
     /**
      * The attributes that are mass assignable.

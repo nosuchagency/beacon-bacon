@@ -92,8 +92,8 @@ class BeaconController extends Controller
      */
     public function create(Request $request)
     {
-//        $places = Place::lists('name', 'id');
-//        $floors = Floor::lists('name', 'id');
+//        $places = Place::pluck('name', 'id');
+//        $floors = Floor::pluck('name', 'id');
 
 //        $devices = $this->getBeaconsFromWebservice();
 
@@ -141,8 +141,8 @@ class BeaconController extends Controller
     public function edit($id)
     {
         $beacon = Beacon::findOrFail($id);
-//        $places = Place::lists('name', 'id');
-//        $floors = Floor::lists('name', 'id');
+//        $places = Place::pluck('name', 'id');
+//        $floors = Floor::pluck('name', 'id');
 
         return view('beacons.edit', compact('beacon'));
     }

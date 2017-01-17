@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Jobs\GenerateMap;
 use Image;
 use App\Floor;
 use App\Place;
@@ -10,6 +12,7 @@ use App\Beacon;
 use App\Block;
 use App\Findable;
 use App\Location;
+use App\Setting;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -52,7 +55,7 @@ class LocationController extends Controller
 
 		if ( $type == 'beacon' ) {
 
-	        $beacons = Beacon::where( 'location_id', 0 )->lists('name', 'id');
+	        $beacons = Beacon::where( 'location_id', 0 )->pluck('name', 'id');
 
 			    $beacons_select = [];
 			    $beacons_select[0] = 'Select Beacon...';
@@ -67,7 +70,7 @@ class LocationController extends Controller
 
 		if ( $type == 'findable' ) {
 
-	        $findables = Findable::lists( 'name', 'id' );
+	        $findables = Findable::pluck( 'name', 'id' );
 			$findables->prepend( 'Select type...', 0 );
 
 			return view('locations.create.findable', compact('findables', 'place', 'floor', 'placeId', 'floorId'));
@@ -75,16 +78,16 @@ class LocationController extends Controller
 
 		if ( $type == 'block' ) {
 
-	        $blocks = Block::lists( 'name', 'id' );
+	        $blocks = Block::pluck( 'name', 'id' );
 			$blocks->prepend( 'Select block...', 0 );
 
-	        $findables = Findable::lists( 'name', 'id' );
+	        $findables = Findable::pluck( 'name', 'id' );
 			$findables->prepend( 'Is this block findable?', 0 );
 
 			return view('locations.create.block', compact('blocks','findables','place', 'floor', 'placeId', 'floorId'));
 		}
 
-        $pois = Poi::lists( 'name', 'id' );
+        $pois = Poi::pluck( 'name', 'id' );
 		$pois->prepend( 'Select POI...', 0 );
 
 		return view('locations.create.poi', compact('pois', 'place', 'floor', 'placeId', 'floorId'));
@@ -162,7 +165,7 @@ class LocationController extends Controller
 
 		if ( $location->type == 'findable' ) {
 
-	        $findables = Findable::lists( 'name', 'id' );
+	        $findables = Findable::pluck( 'name', 'id' );
 			$findables->prepend( 'Select type...', 0 );
 
 			return view('locations.edit.findable', compact('findables','location', 'placeId', 'floorId'));
@@ -170,10 +173,10 @@ class LocationController extends Controller
 
 		if ( $location->type == 'block' ) {
 
-	        $blocks = Block::lists( 'name', 'id' );
+	        $blocks = Block::pluck( 'name', 'id' );
 			$blocks->prepend( 'Select Block...', 0 );
 
-	        $findables = Findable::lists( 'name', 'id' );
+	        $findables = Findable::pluck( 'name', 'id' );
 			$findables->prepend( 'Is findable?', 0 );
 
 	        if ($location->block->image) {
@@ -187,7 +190,7 @@ class LocationController extends Controller
 			return view('locations.edit.block', compact('blocks','findables','location','placeId','floor','floorId'));
 		}
 
-        $pois = Poi::lists( 'name', 'id' );
+        $pois = Poi::pluck( 'name', 'id' );
 
         if ($location->poi->icon) {
             $icon = Image::make($location->poi->icon);
@@ -238,31 +241,14 @@ class LocationController extends Controller
         $location->update($request->all());
 
    		if ( $location->type == 'block' ) {
-	   		$this->createFloorMap( $location );
+            $locations = Location::with('block')->get()->where('floor_id', $floorId);
+
+            $floor = $location->floor;
+
+            dispatch(new GenerateMap($locations->toArray(), $floor));
 	   	}
 
         return redirect()->route('floors.show', [$placeId, $floorId]);
-    }
-
-    private function createFloorMap ( Location $location ) {
-      $locations = $location->floor->locations;
-      $floorImage = Image::make( public_path( 'uploads/floors/' . $location->floor->id . '/original-' . basename( $location->floor->image ) ) );
-
-      foreach( $locations as $location ) {
-        if ( $location->type != 'block' || empty( $location->block->image ) ) {
-          continue;
-        }
-
-        try {
-          $blockImage = Image::make( $location->block->image );
-          $blockImage->rotate( -$location->rotation );
-          $floorImage->insert( $blockImage, 'top-left', round( $location->posX - ( $blockImage->width() / 2 ) ), round( $location->posY - ( $blockImage->height() / 2 ) ) );
-        }
-        catch( \Exception $e) {
-        }
-      }
-
-      $floorImage->save( base_path( 'public/uploads/floors/' . $location->floor->id . '/' . basename( $location->floor->image ) ) );
     }
 
     /**
@@ -286,7 +272,12 @@ class LocationController extends Controller
         $location->delete();
 
 	    if ( $location->type == 'block' ) {
-		    $this->createFloorMap( $location );
+
+            $locations = Location::with('block')->get()->where('floor_id', $floorId);
+
+            $floor = $location->floor;
+
+            dispatch(new GenerateMap($locations->toArray(), $floor));
 	    }
 
         return redirect()->route('floors.show', [$placeId, $floorId]);
