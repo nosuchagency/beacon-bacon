@@ -36,7 +36,7 @@ class PlaceController extends Controller
      */
     public function create()
     {        
-        $places = Place::lists( 'name', 'id' );
+        $places = Place::pluck( 'name', 'id' );
 		$places->prepend( 'Select parent place...', 0 );
 
         return view('places.create', compact('places'));
@@ -71,7 +71,7 @@ class PlaceController extends Controller
     {
         $place = Place::findOrFail($id);
         $menuitems = Menu::where('place_id', $id)->orderBy('order')->get();
-        $pois = Poi::lists('name', 'id')->prepend('', '');
+        $pois = Poi::pluck('name', 'id')->prepend('', '');
 
         return view('places.show', compact('place', 'menuitems', 'pois'));
     }
@@ -87,7 +87,7 @@ class PlaceController extends Controller
     {
         $place = Place::findOrFail($id);
 
-        $places = Place::lists( 'name', 'id' );
+        $places = Place::pluck( 'name', 'id' );
 		$places->prepend( 'Select parent place...', 0 );        
 
         return view('places.edit', compact('place','places'));

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use Image;
 use App\Floor;
 use Illuminate\Http\Request;
 
@@ -30,17 +31,23 @@ class FloorController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
+            'map_height_in_centimeters' => 'required|numeric',
+            'map_width_in_centimeters' => 'required|numeric',
             'image' => 'required|image',
         ]);
 
-        return response(Floor::create($request->all()), 201);
+        $floor = Floor::create($request->except('image'));
+
+        $this->uploadFloor($floor, $request);
+
+        return response($floor, 201);
     }
 
     /**
      * Return a single item.
      *
      * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return json
      */
@@ -55,21 +62,26 @@ class FloorController extends Controller
      * Update a single item.
      *
      * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return json
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'max:255',
-            'image' => 'image',
+            'name' => 'required|max:255',
+            'map_height_in_centimeters' => 'required|numeric',
+            'map_width_in_centimeters' => 'required|numeric',
+            'image' => 'required|image',
         ]);
 
-        $model = Floor::findOrFail($id);
-        $model->update($request->all());
+        $floor = Floor::findOrFail($id);
 
-        return $model;
+        $floor->update($request->except('image'));
+
+        $this->uploadFloor($floor, $request);
+
+        return $floor;
     }
 
     /**
@@ -94,5 +106,32 @@ class FloorController extends Controller
     public function deleted()
     {
         return Floor::onlyTrashed()->get();
+    }
+
+    protected function uploadFloor(Floor $floor, Request $request)
+    {
+        if (!$request->hasFile('image')) {
+            return;
+        }
+
+        $destinationPath = public_path('uploads/floors/' . $floor->id);
+        $fileName = $request->file('image')->getClientOriginalName();
+
+        if ($floor->image && is_file($destinationPath . '/' . $floor->image)) {
+            unlink($destinationPath . '/' . $floor->image);
+        }
+
+        $request->file('image')->move($destinationPath, $fileName);
+
+        $image = Image::make($destinationPath . '/' . $fileName);
+        $image->save($destinationPath . '/original-' . $fileName);
+        $map_pixel_to_centimeter_ratio = round($image->width() / $floor->map_width_in_centimeters, 2);
+
+        $floor->update([
+            'image' => $fileName,
+            'map_height_in_pixels' => $image->height(),
+            'map_width_in_pixels' => $image->width(),
+            'map_pixel_to_centimeter_ratio' => $map_pixel_to_centimeter_ratio
+        ]);
     }
 }
