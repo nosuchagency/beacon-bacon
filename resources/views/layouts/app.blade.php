@@ -44,7 +44,7 @@ desired effect
         <!-- Main content -->
         <section class="content">
 
-            @if(count($errors))
+            @if(isset($errors) && count($errors))
             <div class="callout callout-danger">
                 <h4><strong>Whoops!</strong> There were some problems with your input.</h4>
                 <ul>

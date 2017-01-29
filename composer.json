@@ -11,7 +11,7 @@
         "filp/whoops": "^2.1",
         "laravelcollective/html": "5.3.*",
         "lavary/laravel-menu": "dev-master",
-        "mpociot/teamwork": "~3.0",
+        "mpociot/teamwork": "~4.0",
         "guzzlehttp/guzzle": "~6.0",
         "intervention/image": "^2.3",
         "spatie/laravel-activitylog": "^1.2",
