@@ -40,7 +40,7 @@
             </div>
             <div class="col-sm-10">
               @if($poi->icon)
-                <img src="{{ $poi->icon }}" />
+                <img src="{{ $poi->getVirtualIconPath() }}" />
               @endif
             </div>
           </div>

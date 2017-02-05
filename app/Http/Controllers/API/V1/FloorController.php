@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use File;
 use Image;
 use App\Floor;
 use Illuminate\Http\Request;
@@ -17,7 +18,18 @@ class FloorController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->filteredAndOrdered($request, new Floor())->paginate($this->pageSize);
+
+        $floors = $this->filteredAndOrdered($request, new Floor())->paginate($this->pageSize);
+
+        foreach ($floors->items() as $floor) {
+            if ($floor->image) {
+                $floor->image = url('api/v1/floors/' . $floor->id . '/image');
+            } else {
+                $floor->image = null;
+            }
+        }
+
+        return $floors;
     }
 
     /**
@@ -33,7 +45,7 @@ class FloorController extends Controller
             'name' => 'required|max:255',
             'map_height_in_centimeters' => 'required|numeric',
             'map_width_in_centimeters' => 'required|numeric',
-            'image' => 'required|image',
+            'image' => 'required|imageable',
         ]);
 
         $floor = Floor::create($request->except('image'));
@@ -53,9 +65,15 @@ class FloorController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $place = Floor::findOrFail($id);
+        $floor = Floor::find($id);
 
-        return $this->attachResources($request, $place);
+        if(!$floor) {
+            return response(['message' => 'Resource not found',], 404);
+        }
+
+        $floor->image = url('api/v1/floors/' . $floor->id . '/image');
+
+        return $this->attachResources($request, $floor);
     }
 
     /**
@@ -72,10 +90,14 @@ class FloorController extends Controller
             'name' => 'required|max:255',
             'map_height_in_centimeters' => 'required|numeric',
             'map_width_in_centimeters' => 'required|numeric',
-            'image' => 'required|image',
+            'image' => 'required|imageable',
         ]);
 
-        $floor = Floor::findOrFail($id);
+        $floor = Floor::find($id);
+
+        if(!$floor) {
+            return response(['message' => 'Resource not found',], 404);
+        }
 
         $floor->update($request->except('image'));
 
@@ -93,7 +115,13 @@ class FloorController extends Controller
      */
     public function destroy($id)
     {
-        Floor::findOrFail($id)->delete();
+        $floor = Floor::find($id);
+
+        if (!$floor) {
+            return response(['message' => 'Resource not found',], 404);
+        }
+
+        $floor->delete();
 
         return response('', 204);
     }
@@ -110,18 +138,23 @@ class FloorController extends Controller
 
     protected function uploadFloor(Floor $floor, Request $request)
     {
-        if (!$request->hasFile('image')) {
-            return;
+        $destinationPath = storage_path() . '/app/floors/' . $floor->id;
+
+        if(!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath);
         }
 
-        $destinationPath = public_path('uploads/floors/' . $floor->id);
-        $fileName = $request->file('image')->getClientOriginalName();
+        $image = Image::make($request->image);
+
+        $fileName = md5($request->image) . '.' . substr($image->mime, strpos($image->mime, "/") + 1);
+
+        $file = storage_path() . '/app/floors/' . $floor->id . '/' . $fileName;
+
+        $image->save($file);
 
         if ($floor->image && is_file($destinationPath . '/' . $floor->image)) {
             unlink($destinationPath . '/' . $floor->image);
         }
-
-        $request->file('image')->move($destinationPath, $fileName);
 
         $image = Image::make($destinationPath . '/' . $fileName);
         $image->save($destinationPath . '/original-' . $fileName);

@@ -41,17 +41,24 @@ class Poi extends Model
     protected static $logAttributes = ['name', 'internal_name', 'icon'];
 
     /**
-     * Return full path to icon.
-     *
-     * @param string $value
+     * Return full virtual path to icon.
      *
      * @return string
      */
-    public function getIconAttribute($value)
+    public function getVirtualIconPath()
     {
-        return !$value ? '' : asset('uploads/pois/'.$this->id.'/'.$value);
+        return !$this->icon ? '' :  url('/pois/' . $this->id . '/image');
     }
 
+    /**
+     * Return full physical path to icon.
+     *
+     * @return string
+     */
+    public function getPhysicalIconPath()
+    {
+        return !$this->icon ? '' :  storage_path() . '/app/pois/' . $this->id . '/' . $this->icon;
+    }
 
     /**
      * Get locations belonging to this poi
@@ -59,7 +66,7 @@ class Poi extends Model
      */
     public function locations()
     {
-      return $this->hasMany('App\Location');
+        return $this->hasMany('App\Location');
     }
 
     /**

@@ -77,7 +77,7 @@ class FloorController extends Controller
         $floor = Floor::findOrFail($id);
 
         if ($floor->image) {
-            $image = Image::make($floor->image);
+            $image = Image::make($floor->getPhysicalIconPath());
             $floor->mapWidth = $image->width();
             $floor->mapHeight = $image->height();
         }
@@ -124,6 +124,19 @@ class FloorController extends Controller
     }
 
     /**
+     * Get the specified image resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function image($id)
+    {
+        $floor = Floor::findOrFail($id);
+
+        return Image::make($floor->getPhysicalIconPath())->response();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -150,14 +163,18 @@ class FloorController extends Controller
             return;
         }
 
-        $destinationPath = public_path('uploads/floors/' . $floor->id);
-        $fileName = $request->file('image')->getClientOriginalName();
+        $request->file('image')->store('floors/' . $floor->id);
+        $fileName = $request->image->hashName();
+        $destinationPath = storage_path() . '/app/floors/' . $floor->id;
+
+        /*$destinationPath = public_path('uploads/floors/' . $floor->id);
+        $fileName = $request->file('image')->getClientOriginalName();*/
 
         if ($floor->image && is_file($destinationPath . '/' . $floor->image)) {
             unlink($destinationPath . '/' . $floor->image);
         }
 
-        $request->file('image')->move($destinationPath, $fileName);
+        //$request->file('image')->move($destinationPath, $fileName);
         
         $image = Image::make($destinationPath . '/' . $fileName);
         $image->save( $destinationPath . '/original-' . $fileName );

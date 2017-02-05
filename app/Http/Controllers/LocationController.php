@@ -143,7 +143,7 @@ class LocationController extends Controller
         $location = Location::findOrFail($id);
 
         if ($location->floor->image) {
-            $image = Image::make($location->floor->image);
+            $image = Image::make($location->floor->getPhysicalIconPath());
             $location->mapWidth = $image->width();
             $location->mapHeight = $image->height();
         }
@@ -180,7 +180,7 @@ class LocationController extends Controller
 			$findables->prepend( 'Is findable?', 0 );
 
 	        if ($location->block->image) {
-	            $image = Image::make($location->block->image);
+	            $image = Image::make($location->block->getPhysicalIconPath());
 	            $location->imageWidth = $image->width();
 	            $location->imageHeight = $image->height();
 	        }
@@ -193,7 +193,7 @@ class LocationController extends Controller
         $pois = Poi::pluck( 'name', 'id' );
 
         if ($location->poi->icon) {
-            $icon = Image::make($location->poi->icon);
+            $icon = Image::make($location->poi->getPhysicalIconPath());
 
             $location->iconWidth = 32;
             $location->iconHeight = round( 32 / $icon->width() * $icon->height() );

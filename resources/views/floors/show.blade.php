@@ -66,7 +66,7 @@
 							{{ $floor->map_height_in_centimeters }}cm
 						</td>
 						<td style="width: 320px;">
-							<div style="background-image: url({{ $floor->image }}?random={{ str_random(60) }}); background-position: center center; background-repeat: no-repeat; background-size: contain; border: 1px solid #333; height: 360px; line-height: 360px; text-align: center; width: 320px;">
+							<div style="background-image: url({{ $floor->getVirtualIconPath() }}?random={{ str_random(60) }}); background-position: center center; background-repeat: no-repeat; background-size: contain; border: 1px solid #333; height: 360px; line-height: 360px; text-align: center; width: 320px;">
 								{{ $floor->map_pixel_to_centimeter_ratio }} ratio
 							</div>
 						</td>
@@ -177,13 +177,13 @@
       </div>
       <div class="box-body">
         @if($floor->image)
-		<div id="floor-map-preview" class="map" style="background-image: url({{ $floor->image }}?random={{ str_random(60) }}); background-size: cover; position: relative; width: 100%;">
+		<div id="floor-map-preview" class="map" style="background-image: url({{ $floor->getVirtualIconPath() }}?random={{ str_random(60) }}); background-size: cover; position: relative; width: 100%;">
 			<canvas id="floor-map-preview-canvas" style="left: 0; position: absolute; top: 0;"></canvas>
           @foreach($floor->locations as $index => $location)
 
 	          @if($location->poi && $location->poi->type == 'icon' )
-            <a class="poi-on-map-preview floor-map-preview-location poi titletip" data-height="-1" data-width="-1" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->icon }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="position: absolute;" title="POI: {{ $location->name }}">
-              <img src="{{ $location->poi->icon }}" style="height: 32px; width: auto;" />
+            <a class="poi-on-map-preview floor-map-preview-location poi titletip" data-height="-1" data-width="-1" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->getVirtualIconPath() }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="position: absolute;" title="POI: {{ $location->name }}">
+              <img src="{{ $location->poi->getVirtualIconPath() }}" style="height: 32px; width: auto;" />
             </a>
 	          @elseif($location->poi && $location->poi->type == 'area' )
 			  	<span class="floor-map-preview-location titletip" data-hex="{{ $location->poi->color }}" data-position-area="{{ $location->area }}"></span>

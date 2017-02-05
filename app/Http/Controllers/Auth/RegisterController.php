@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use Auth;
 use App\Team;
 use App\User;
@@ -103,6 +104,8 @@ class RegisterController extends Controller
             $user->teams()->attach($team->id);
             $user->switchTeam($team->id);
         }
+
+        // Log the user in
 
         $this->guard()->login($user);
 

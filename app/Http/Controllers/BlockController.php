@@ -106,6 +106,19 @@ class BlockController extends Controller
     }
 
     /**
+     * Get the specified image resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function image($id)
+    {
+        $block = Block::findOrFail($id);
+
+        return Image::make($block->getPhysicalIconPath())->response();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -132,14 +145,13 @@ class BlockController extends Controller
             return;
         }
 
-        $destinationPath = public_path('uploads/blocks/' . $block->id);
-        $fileName = $request->file('image')->getClientOriginalName();
+        $request->file('image')->store('blocks/' . $block->id);
+        $fileName = $request->image->hashName();
+        $destinationPath = storage_path() . '/app/blocks/' . $block->id;
 
         if ($block->image && is_file($destinationPath . '/' . $block->image)) {
             unlink($destinationPath . '/' . $block->image);
         }
-
-        $request->file('image')->move($destinationPath, $fileName);
 
         $image = Image::make($destinationPath . '/' . $fileName);
 

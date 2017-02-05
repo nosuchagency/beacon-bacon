@@ -2,41 +2,40 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
 
-/**
- * WEB ROUTES
- */
-
-//Route::auth();
 Auth::routes();
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::resource('places', 'PlaceController');
 Route::resource('pois', 'PoiController');
+Route::get('pois/{id}/image', 'PoiController@image');
 Route::resource('findables', 'FindableController');
 Route::resource('blocks', 'BlockController');
+Route::get('blocks/{id}/image', 'BlockController@image');
 
 Route::get('beacons/import', ['as' => 'beacons.import', 'uses' => 'BeaconController@import']);
 Route::post('beacons/import', ['as' => 'beacons.importing', 'uses' => 'BeaconController@importing']);
 Route::resource('beacons', 'BeaconController');
 
+Route::get('floors/{id}/image', 'FloorController@image');
+
 Route::group(['prefix' => 'places/{place}'], function(){
 
-	/* Menu Routes */
+    /* Menu Routes */
     Route::post('menu', ['as' => 'menu.store', 'uses' => 'PlaceController@storeMenuItem']);
     Route::post('menu/order', ['as' => 'menu.update', 'uses' => 'PlaceController@updateMenuOrder']);
     Route::delete('menu', ['as' => 'menu.destroy', 'uses' => 'PlaceController@destroyMenuItem']);
 
-	/* Floors Routes */
+    /* Floors Routes */
     Route::get('floors', ['as' => 'floors.index', 'uses' => 'FloorController@index']);
     Route::get('floors/create', ['as' => 'floors.create', 'uses' => 'FloorController@create']);
     Route::post('floors', ['as' => 'floors.store', 'uses' => 'FloorController@store']);
@@ -44,8 +43,6 @@ Route::group(['prefix' => 'places/{place}'], function(){
     Route::get('floors/{floor}/edit', ['as' => 'floors.edit', 'uses' => 'FloorController@edit']);
     Route::put('floors/{floor}', ['as' => 'floors.update', 'uses' => 'FloorController@update']);
     Route::delete('floors/{floor}', ['as' => 'floors.destroy', 'uses' => 'FloorController@destroy']);
-
-
 
     Route::group(['prefix' => 'floors/{floor}'], function(){
         // Locations
@@ -112,58 +109,3 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/logout', 'Auth\LoginController@logout');
 });
 
-/**
- * API ROUTES
- */
-
-Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth:api'], function(){
-    Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function(){
-        // Profile routes
-        Route::get('profile', ['uses' => 'ProfileController@index']);
-        Route::put('profile', ['uses' => 'ProfileController@update']);
-
-        // Places
-        Route::get('place', ['uses' => 'PlaceController@index']);
-        Route::get('place/deleted', ['uses' => 'PlaceController@deleted']);
-        Route::get('place/{id}', ['uses' => 'PlaceController@show']);
-        Route::put('place/{id}', ['uses' => 'PlaceController@update']);
-        Route::delete('place/{id}', ['uses' => 'PlaceController@destroy']);
-
-        Route::group(['prefix' => 'place/{id}'], function(){
-            Route::get('menu', ['uses' => 'PlaceController@menu']);
-			Route::post('find', ['uses' => 'PlaceController@find']);
-        });
-
-        // floors
-        Route::get('floor', ['uses' => 'FloorController@index']);
-        Route::post('floor', ['uses' => 'FloorController@store']);
-        Route::get('floor/deleted', ['uses' => 'FloorController@deleted']);
-        Route::get('floor/{id}', ['uses' => 'FloorController@show']);
-        Route::put('floor/{id}', ['uses' => 'FloorController@update']);
-        Route::delete('floor/{id}', ['uses' => 'FloorController@destroy']);
-
-        // Locations
-        Route::get('location', ['uses' => 'LocationController@index']);
-        Route::post('location', ['uses' => 'LocationController@store']);
-        Route::get('location/deleted', ['uses' => 'LocationController@deleted']);
-        Route::get('location/{id}', ['uses' => 'LocationController@show']);
-        Route::put('location/{id}', ['uses' => 'LocationController@update']);
-        Route::delete('location/{id}', ['uses' => 'LocationController@destroy']);
-
-        // Pois
-        Route::get('poi', ['uses' => 'PoiController@index']);
-        Route::post('poi', ['uses' => 'PoiController@store']);
-        Route::get('poi/deleted', ['uses' => 'PoiController@deleted']);
-        Route::get('poi/{id}', ['uses' => 'PoiController@show']);
-        Route::put('poi/{id}', ['uses' => 'PoiController@update']);
-        Route::delete('poi/{id}', ['uses' => 'PoiController@destroy']);
-
-        // Beacons
-        Route::get('beacons', ['uses' => 'BeaconController@index']);
-        Route::post('beacons', ['uses' => 'BeaconController@store']);
-        Route::get('beacons/deleted', ['uses' => 'BeaconController@deleted']);
-        Route::get('beacons/{id}', ['uses' => 'BeaconController@show']);
-        Route::put('beacons/{id}', ['uses' => 'BeaconController@update']);
-        Route::delete('beacons/{id}', ['uses' => 'BeaconController@destroy']);
-    });
-});
