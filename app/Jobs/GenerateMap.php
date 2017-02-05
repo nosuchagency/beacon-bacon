@@ -32,23 +32,22 @@ class GenerateMap extends Job implements ShouldQueue
      */
     public function handle()
     {
-        $floorImage = Image::make( public_path( 'uploads/floors/' . $this->floor->id . '/original-' . basename( $this->floor->image ) ) );
+        $floorImage = Image::make(storage_path() . '/app/floors/' . $this->floor->id . '/original-' . basename($this->floor->image));
 
-        foreach( $this->locations as $location ) {
+        foreach ($this->locations as $location) {
 
-            if ( $location['type'] != 'block' || empty( $location['block']['image'] ) ) {
+            if ($location['type'] != 'block' || empty($location['block']['image'])) {
                 continue;
             }
 
             try {
-                $blockImage = Image::make( $location['block']['image'] );
-                $blockImage->rotate( -$location['rotation'] );
-                $floorImage->insert( $blockImage, 'top-left', round( $location['posX'] - ( $blockImage->width() / 2 ) ), round( $location['posY'] - ( $blockImage->height() / 2 ) ) );
-            }
-            catch( \Exception $e) {
+                $blockImage = Image::make(storage_path() . '/app/blocks/' . $location['block']['id'] . '/' .  $location['block']['image']);
+                $blockImage->rotate(-$location['rotation']);
+                $floorImage->insert($blockImage, 'top-left', round($location['posX'] - ($blockImage->width() / 2)), round($location['posY'] - ($blockImage->height() / 2)));
+            } catch (\Exception $e) {
             }
         }
 
-        $floorImage->save( base_path( 'public/uploads/floors/' . $this->floor->id . '/' . basename( $this->floor->image ) ) );
+        $floorImage->save(storage_path() . '/app/floors/' . $this->floor->id . '/' . basename($this->floor->image));
     }
 }
