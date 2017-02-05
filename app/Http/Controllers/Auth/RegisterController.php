@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 
+use Auth;
 use App\Team;
 use App\User;
 use Illuminate\Auth\GuardHelpers;
+use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -106,6 +106,7 @@ class RegisterController extends Controller
         }
 
         // Log the user in
+
         $this->guard()->login($user);
 
         return redirect($this->redirectPath());
