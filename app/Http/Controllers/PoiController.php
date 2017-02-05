@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use App\Poi;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -36,22 +37,22 @@ class PoiController extends Controller
      */
     public function create()
     {
-	    $types = array('icon' => 'Icon', 'area' => 'Area');
-   
+        $types = array('icon' => 'Icon', 'area' => 'Area');
+
         return view('pois.create', compact('types'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-           'name' => 'required|max:255',
-           'internal_name' => 'required|max:255',
+            'name' => 'required|max:255',
+            'internal_name' => 'required|max:255',
         ]);
 
         $poi = Poi::create($request->except('icon'));
@@ -64,7 +65,7 @@ class PoiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -76,29 +77,29 @@ class PoiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $poi = Poi::findOrFail($id);
-	    $types = array('icon' => 'Icon', 'area' => 'Area');        
+        $types = array('icon' => 'Icon', 'area' => 'Area');
 
-        return view('pois.edit', compact('poi','types'));
+        return view('pois.edit', compact('poi', 'types'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-           'name' => 'required|max:255',
-           'internal_name' => 'required|max:255',
+            'name' => 'required|max:255',
+            'internal_name' => 'required|max:255',
         ]);
 
         $poi = Poi::findOrFail($id);
@@ -110,9 +111,22 @@ class PoiController extends Controller
     }
 
     /**
+     * Get the specified image resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function image($id)
+    {
+        $poi = Poi::findOrFail($id);
+
+        return Image::make($poi->getPhysicalIconPath())->response();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -126,7 +140,7 @@ class PoiController extends Controller
     /**
      * Upload icon
      * @param  Poi $Poi
-     * @param  Request  $request
+     * @param  Request $request
      * @return void
      */
     protected function uploadIcon(Poi $poi, Request $request)
@@ -134,15 +148,13 @@ class PoiController extends Controller
         if (!$request->hasFile('icon')) {
             return;
         }
-
-        $destinationPath = public_path('uploads/pois/' . $poi->id);
-        $fileName = $request->file('icon')->getClientOriginalName();
+        $request->file('icon')->store('pois/' . $poi->id);
+        $fileName = $request->icon->hashName();
+        $destinationPath = storage_path() . '/app/pois/' . $poi->id;
 
         if ($poi->icon && is_file($destinationPath . '/' . $poi->icon)) {
             unlink($destinationPath . '/' . $poi->icon);
         }
-
-        $request->file('icon')->move($destinationPath, $fileName);
 
         $poi->update([
             'icon' => $fileName

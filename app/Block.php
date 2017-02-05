@@ -41,15 +41,23 @@ class Block extends Model
     protected static $logAttributes = ['name', 'image'];
 
     /**
-     * Return full path to image.
-     *
-     * @param string $value
+     * Return full virtual path to icon.
      *
      * @return string
      */
-    public function getImageAttribute($value)
+    public function getVirtualIconPath()
     {
-        return !$value ? '' : asset('uploads/blocks/'.$this->id.'/'.$value);
+        return !$this->image ? '' :  url('/blocks/' . $this->id . '/image');
+    }
+
+    /**
+     * Return full physical path to icon.
+     *
+     * @return string
+     */
+    public function getPhysicalIconPath()
+    {
+        return !$this->image ? '' :  storage_path() . '/app/blocks/' . $this->id . '/' . $this->image;
     }
 
 

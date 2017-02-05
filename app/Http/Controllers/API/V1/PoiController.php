@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use File;
+use Image;
 use App\Poi;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,17 @@ class PoiController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->filteredAndOrdered($request, new Poi())->paginate($this->pageSize);
+        $pois = $this->filteredAndOrdered($request, new Poi())->paginate($this->pageSize);
+
+        foreach ($pois->items() as $poi) {
+            if ($poi->icon) {
+                $poi->icon = url('api/v1/pois/' . $poi->id . '/icon');
+            } else {
+                $poi->icon = null;
+            }
+        }
+
+        return $pois;
     }
 
 
@@ -32,23 +44,35 @@ class PoiController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'internal_name' => 'required|max:255',
-            'icon' => 'required|image',
+            'icon' => 'required|imageable',
         ]);
 
-        return response(Poi::create($request->all()), 201);
+        $poi = Poi::create($request->except('icon'));
+
+        $this->uploadIcon($poi, $request);
+
+        $poi->icon = url('api/v1/pois/' . $poi->id . '/icon');
+
+        return response($poi, 201);
     }
 
     /**
      * Return a single item.
      *
      * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return json
      */
     public function show(Request $request, $id)
     {
-        $poi = Poi::findOrFail($id);
+        $poi = Poi::find($id);
+
+        if (!$poi) {
+            return response(['message' => 'Resource not found',], 404);
+        }
+
+        $poi->icon = url('api/v1/pois/' . $poi->id . '/icon');
 
         return $this->attachResources($request, $poi);
     }
@@ -57,7 +81,7 @@ class PoiController extends Controller
      * Update a single item.
      *
      * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return json
      */
@@ -66,13 +90,22 @@ class PoiController extends Controller
         $this->validate($request, [
             'name' => 'max:255',
             'internal_name' => 'max:255',
-            'icon' => 'image',
+            'icon' => 'required|imageable',
         ]);
 
-        $model = Poi::findOrFail($id);
-        $model->update($request->all());
+        $poi = Poi::find($id);
 
-        return $model;
+        if (!$poi) {
+            return response(['message' => 'Resource not found',], 404);
+        }
+
+        $poi->update($request->except('icon'));
+
+        $this->uploadIcon($poi, $request);
+
+        $poi->icon = url('api/v1/pois/' . $poi->id . '/icon');
+
+        return $poi;
     }
 
     /**
@@ -84,7 +117,13 @@ class PoiController extends Controller
      */
     public function destroy($id)
     {
-        Poi::findOrFail($id)->delete();
+        $poi = Poi::find($id);
+
+        if (!$poi) {
+            return response(['message' => 'Resource not found',], 404);
+        }
+
+        $poi->delete();
 
         return response('', 204);
     }
@@ -96,6 +135,33 @@ class PoiController extends Controller
      */
     public function deleted()
     {
-        return Poi::onlyTrashed()->get();
+        $pois = Poi::onlyTrashed()->get();
+
+        return $pois;
+    }
+
+    protected function uploadIcon(Poi $poi, Request $request)
+    {
+        $destinationPath = storage_path() . '/app/pois/' . $poi->id;
+
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath);
+        }
+
+        $image = Image::make($request->icon);
+
+        $fileName = md5($request->icon) . '.' . substr($image->mime, strpos($image->mime, "/") + 1);
+
+        $file = storage_path() . '/app/pois/' . $poi->id . '/' . $fileName;
+
+        $image->save($file);
+
+        if ($poi->icon && is_file($destinationPath . '/' . $poi->icon)) {
+            unlink($destinationPath . '/' . $poi->icon);
+        }
+
+        $poi->update([
+            'icon' => $fileName
+        ]);
     }
 }
