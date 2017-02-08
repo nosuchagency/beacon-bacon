@@ -61,6 +61,18 @@ class Floor extends Model
     }
 
     /**
+     * Return full path to image.
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getPublicImage()
+    {
+        return !$this->image ? '' : asset('storage/images/floors/' . $this->id . '/' . $this->image);
+    }
+
+    /**
      * Return full virtual path to icon.
      *
      * @return string
@@ -77,7 +89,7 @@ class Floor extends Model
      */
     public function getPhysicalIconPath()
     {
-        return !$this->image ? '' :  storage_path() . '/app/floors/' . $this->id . '/' . $this->image;
+        return !$this->image ? '' :  storage_path() . '/app/images/floors/' . $this->id . '/' . $this->image;
     }
 
     /**

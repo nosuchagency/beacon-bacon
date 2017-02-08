@@ -180,7 +180,8 @@ class LocationController extends Controller
 			$findables->prepend( 'Is findable?', 0 );
 
 	        if ($location->block->image) {
-	            $image = Image::make($location->block->getPhysicalIconPath());
+	            $path = $location->block->getPhysicalIconPath();
+	            $image = Image::make($path);
 	            $location->imageWidth = $image->width();
 	            $location->imageHeight = $image->height();
 	        }

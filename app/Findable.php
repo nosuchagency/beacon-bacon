@@ -17,7 +17,7 @@ class Findable extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'identifier', 'parameter_one_name', 'parameter_two_name', 'parameter_three_name', 'parameter_four_name', 'parameter_five_name'];
+    protected $fillable = ['name', 'identifier', 'parameter_one_name', 'parameter_two_name', 'parameter_three_name', 'parameter_four_name', 'parameter_five_name', 'custom_file'];
 
     /**
      * The attributes that should be mutated to dates.

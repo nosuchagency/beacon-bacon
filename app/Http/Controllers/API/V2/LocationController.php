@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\API\V2;
 
-use App\Poi;
+use App\Location;
 use Illuminate\Http\Request;
 
-class PoiController extends Controller
+class LocationController extends Controller
 {
     /**
      * Return a list of items.
@@ -16,19 +16,8 @@ class PoiController extends Controller
      */
     public function index(Request $request)
     {
-        $pois = $this->filteredAndOrdered($request, new Poi())->paginate($this->pageSize);
-
-        foreach ($pois->items() as $poi) {
-            if ($poi->icon) {
-                $poi->icon = $poi->getPublicImage();
-            } else {
-                $poi->icon = null;
-            }
-        }
-
-        return $pois;
+        return $this->filteredAndOrdered($request, new Location())->paginate($this->pageSize);
     }
-
 
     /**
      * Save a new item.
@@ -41,11 +30,9 @@ class PoiController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
-            'internal_name' => 'required|max:255',
-            'icon' => 'required|image',
         ]);
 
-        return response(Poi::create($request->all()), 201);
+        return response(Location::create($request->all()), 201);
     }
 
     /**
@@ -58,11 +45,13 @@ class PoiController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $poi = Poi::findOrFail($id);
+        $location = Location::find($id);
 
-        $poi->icon = $poi->getPublicImage();
+        if(!$location) {
+            return response(['message' => 'Resource not found',], 404);
+        }
 
-        return $this->attachResources($request, $poi);
+        return $this->attachResources($request, $location);
     }
 
     /**
@@ -77,14 +66,17 @@ class PoiController extends Controller
     {
         $this->validate($request, [
             'name' => 'max:255',
-            'internal_name' => 'max:255',
-            'icon' => 'image',
         ]);
 
-        $model = Poi::findOrFail($id);
-        $model->update($request->all());
+        $location = Location::find($id);
 
-        return $model;
+        if(!$location) {
+            return response(['message' => 'Resource not found',], 404);
+        }
+
+        $location->update($request->all());
+
+        return $location;
     }
 
     /**
@@ -96,7 +88,13 @@ class PoiController extends Controller
      */
     public function destroy($id)
     {
-        Poi::findOrFail($id)->delete();
+        $location = Location::find($id);
+
+        if(!$location) {
+            return response(['message' => 'Resource not found',], 404);
+        }
+
+        $location->delete();
 
         return response('', 204);
     }
@@ -108,6 +106,6 @@ class PoiController extends Controller
      */
     public function deleted()
     {
-        return Poi::onlyTrashed()->get();
+        return Location::onlyTrashed()->get();
     }
 }
