@@ -57,7 +57,7 @@ class Block extends Model
      */
     public function getPhysicalIconPath()
     {
-        return !$this->image ? '' :  storage_path() . '/app/blocks/' . $this->id . '/' . $this->image;
+        return !$this->image ? '' :  storage_path() . '/app/images/blocks/' . $this->id . '/' . $this->image;
     }
 
 

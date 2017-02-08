@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\API\V2;
 
 use App\Floor;
 use App\Poi;
@@ -23,7 +23,7 @@ class MediaController extends Controller
             return response(['message' => 'Resource not found',], 404);
         }
 
-        $path = storage_path() . '/app/pois/' . $poi->id . '/' . $poi->icon;
+        $path = storage_path() . '/app/images/pois/' . $poi->id . '/' . $poi->icon;
 
         if(!File::exists($path)) {
             return response(['message' => 'Resource not found',], 404);
@@ -46,7 +46,7 @@ class MediaController extends Controller
             return response(['message' => 'Resource not found',], 404);
         }
 
-        $path = storage_path() . '/app/floors/' . $floor->id . '/' . $floor->image;
+        $path = storage_path() . '/app/images/floors/' . $floor->id . '/' . $floor->image;
 
         if(!File::exists($path)) {
             return response(['message' => 'Resource not found',], 404);

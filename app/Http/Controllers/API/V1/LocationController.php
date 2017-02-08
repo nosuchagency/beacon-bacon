@@ -45,13 +45,9 @@ class LocationController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $location = Location::find($id);
+        $place = Location::findOrFail($id);
 
-        if(!$location) {
-            return response(['message' => 'Resource not found',], 404);
-        }
-
-        return $this->attachResources($request, $location);
+        return $this->attachResources($request, $place);
     }
 
     /**
@@ -68,15 +64,10 @@ class LocationController extends Controller
             'name' => 'max:255',
         ]);
 
-        $location = Location::find($id);
+        $model = Location::findOrFail($id);
+        $model->update($request->all());
 
-        if(!$location) {
-            return response(['message' => 'Resource not found',], 404);
-        }
-
-        $location->update($request->all());
-
-        return $location;
+        return $model;
     }
 
     /**
@@ -88,13 +79,7 @@ class LocationController extends Controller
      */
     public function destroy($id)
     {
-        $location = Location::find($id);
-
-        if(!$location) {
-            return response(['message' => 'Resource not found',], 404);
-        }
-
-        $location->delete();
+        Location::findOrFail($id)->delete();
 
         return response('', 204);
     }
