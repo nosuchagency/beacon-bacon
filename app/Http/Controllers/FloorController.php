@@ -134,7 +134,7 @@ class FloorController extends Controller
     {
         $floor = Floor::findOrFail($id);
 
-        return Image::make($floor->getPhysicalIconPath())->response();
+        return response()->file($floor->getPhysicalIconPath());
     }
 
     /**
