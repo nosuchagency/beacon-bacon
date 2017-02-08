@@ -24,18 +24,18 @@ Route::get('place/{id}', ['uses' => 'PlaceController@show']);
 Route::put('place/{id}', ['uses' => 'PlaceController@update']);
 Route::delete('place/{id}', ['uses' => 'PlaceController@destroy']);
 
-Route::group(['prefix' => 'place/{id}'], function () {
+Route::group(['prefix' => 'place/{id}'], function(){
     Route::get('menu', ['uses' => 'PlaceController@menu']);
     Route::post('find', ['uses' => 'PlaceController@find']);
 });
 
 // floors
-Route::get('floor', ['uses' => 'FloorController@index']);
-Route::post('floor', ['uses' => 'FloorController@store']);
-Route::get('floor/deleted', ['uses' => 'FloorController@deleted']);
-Route::get('floor/{id}', ['uses' => 'FloorController@show']);
-Route::put('floor/{id}', ['uses' => 'FloorController@update']);
-Route::delete('floor/{id}', ['uses' => 'FloorController@destroy']);
+Route::get('floor', ['uses' => 'floorController@index']);
+Route::post('floor', ['uses' => 'floorController@store']);
+Route::get('floor/deleted', ['uses' => 'floorController@deleted']);
+Route::get('floor/{id}', ['uses' => 'floorController@show']);
+Route::put('floor/{id}', ['uses' => 'floorController@update']);
+Route::delete('floor/{id}', ['uses' => 'floorController@destroy']);
 
 // Locations
 Route::get('location', ['uses' => 'LocationController@index']);
@@ -60,9 +60,3 @@ Route::get('beacons/deleted', ['uses' => 'BeaconController@deleted']);
 Route::get('beacons/{id}', ['uses' => 'BeaconController@show']);
 Route::put('beacons/{id}', ['uses' => 'BeaconController@update']);
 Route::delete('beacons/{id}', ['uses' => 'BeaconController@destroy']);
-
-// Media
-Route::get('floors/{id}/image', ['uses' => 'MediaController@image']);
-Route::get('pois/{id}/icon', ['uses' => 'MediaController@icon']);
-
-

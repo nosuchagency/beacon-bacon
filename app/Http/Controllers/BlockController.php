@@ -147,7 +147,7 @@ class BlockController extends Controller
 
         $request->file('image')->store('blocks/' . $block->id);
         $fileName = $request->image->hashName();
-        $destinationPath = storage_path() . '/app/blocks/' . $block->id;
+        $destinationPath = storage_path() . '/app/images/blocks/' . $block->id;
 
         if ($block->image && is_file($destinationPath . '/' . $block->image)) {
             unlink($destinationPath . '/' . $block->image);

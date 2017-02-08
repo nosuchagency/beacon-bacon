@@ -45,13 +45,9 @@ class BeaconController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $beacon = Beacon::find($id);
+        $place = Beacon::findOrFail($id);
 
-        if(!$beacon) {
-            return response(['message' => 'Resource not found',], 404);
-        }
-
-        return $this->attachResources($request, $beacon);
+        return $this->attachResources($request, $place);
     }
 
     /**
@@ -68,15 +64,10 @@ class BeaconController extends Controller
            'name' => 'max:255',
         ]);
 
-        $beacon = Beacon::find($id);
+        $model = Beacon::findOrFail($id);
+        $model->update($request->all());
 
-        if(!$beacon) {
-            return response(['message' => 'Resource not found',], 404);
-        }
-
-        $beacon->update($request->all());
-
-        return $beacon;
+        return $model;
     }
 
     /**
@@ -88,13 +79,7 @@ class BeaconController extends Controller
      */
     public function destroy($id)
     {
-        $beacon = Beacon::find($id);
-
-        if(!$beacon) {
-            return response(['message' => 'Resource not found',], 404);
-        }
-
-        $beacon->delete();
+        Beacon::findOrFail($id)->delete();
 
         return response('', 204);
     }

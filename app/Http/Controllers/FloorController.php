@@ -77,7 +77,8 @@ class FloorController extends Controller
         $floor = Floor::findOrFail($id);
 
         if ($floor->image) {
-            $image = Image::make($floor->getPhysicalIconPath());
+            $path = $floor->getPhysicalIconPath();
+            $image = Image::make($path);
             $floor->mapWidth = $image->width();
             $floor->mapHeight = $image->height();
         }
@@ -163,9 +164,9 @@ class FloorController extends Controller
             return;
         }
 
-        $request->file('image')->store('floors/' . $floor->id);
+        $request->file('image')->store('images/floors/' . $floor->id);
         $fileName = $request->image->hashName();
-        $destinationPath = storage_path() . '/app/floors/' . $floor->id;
+        $destinationPath = storage_path() . '/app/images/floors/' . $floor->id;
 
         /*$destinationPath = public_path('uploads/floors/' . $floor->id);
         $fileName = $request->file('image')->getClientOriginalName();*/

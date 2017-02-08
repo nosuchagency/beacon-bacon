@@ -148,9 +148,9 @@ class PoiController extends Controller
         if (!$request->hasFile('icon')) {
             return;
         }
-        $request->file('icon')->store('pois/' . $poi->id);
+        $request->file('icon')->store('images/pois/' . $poi->id);
         $fileName = $request->icon->hashName();
-        $destinationPath = storage_path() . '/app/pois/' . $poi->id;
+        $destinationPath = storage_path() . '/app/images/pois/' . $poi->id;
 
         if ($poi->icon && is_file($destinationPath . '/' . $poi->icon)) {
             unlink($destinationPath . '/' . $poi->icon);
