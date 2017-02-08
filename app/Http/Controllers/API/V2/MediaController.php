@@ -29,7 +29,7 @@ class MediaController extends Controller
             return response(['message' => 'Resource not found',], 404);
         }
 
-        return Image::make($path)->response();
+        return response()->file($path);
     }
 
     /**
@@ -52,6 +52,6 @@ class MediaController extends Controller
             return response(['message' => 'Resource not found',], 404);
         }
 
-        return Image::make($path)->response();
+        return response()->file($path);
     }
 }
