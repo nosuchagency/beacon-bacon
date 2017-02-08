@@ -120,7 +120,7 @@ class PoiController extends Controller
     {
         $poi = Poi::findOrFail($id);
 
-        return Image::make($poi->getPhysicalIconPath())->response();
+        return response()->file($poi->getPhysicalIconPath());
     }
 
     /**

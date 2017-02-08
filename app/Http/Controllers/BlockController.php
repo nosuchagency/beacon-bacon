@@ -115,7 +115,7 @@ class BlockController extends Controller
     {
         $block = Block::findOrFail($id);
 
-        return Image::make($block->getPhysicalIconPath())->response();
+        return response()->file($block->getPhysicalIconPath());
     }
 
     /**
