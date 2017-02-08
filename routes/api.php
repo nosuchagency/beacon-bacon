@@ -64,9 +64,3 @@ Route::delete('beacons/{id}', ['uses' => 'BeaconController@destroy']);
 // Media
 Route::get('floors/{id}/image', ['uses' => 'MediaController@image']);
 Route::get('pois/{id}/icon', ['uses' => 'MediaController@icon']);
-
-Route::get('/test', function()
-{
-    $output = shell_exec('cd .. && composer dump-autoload -o 2>&1');
-    echo $output;
-});
