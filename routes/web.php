@@ -14,7 +14,6 @@
 Auth::routes();
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-
 Route::resource('places', 'PlaceController');
 Route::resource('pois', 'PoiController');
 Route::get('pois/{id}/image', 'PoiController@image');

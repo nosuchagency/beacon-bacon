@@ -96,7 +96,7 @@ class FindableController extends Controller
     {
         $this->validate($request, [
            'name' => 'required|max:255',
-           'identifier' => 'required|max:255|unique:findables',
+           'identifier' => 'required|max:255',
         ]);
 
         $findable = Findable::findOrFail($id);

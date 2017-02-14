@@ -62,10 +62,42 @@
           </div>          
           
           <div class="form-group">
-            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('identifier1', 'Identifier1', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('identifier', $place->identifier, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+              {!! Form::text('identifier1', $place->identifier1, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier2', 'Identifier2', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier2', $place->identifier2, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier3', 'Identifier3', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier3', $place->identifier3, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier4', 'Identifier4', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier4', $place->identifier4, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier5', 'Identifier5', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier5', $place->identifier5, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
             </div>
           </div>
           

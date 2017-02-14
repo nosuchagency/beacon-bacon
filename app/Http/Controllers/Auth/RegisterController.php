@@ -35,6 +35,20 @@ class RegisterController extends Controller
     protected $redirectTo = '/';
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm(Request $request)
+    {
+        if($this->isTeamLimitReached() && !$request->session()->has('invite_token')) {
+            return view('auth.full');
+        }
+
+        return view('auth.register');
+    }
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -90,6 +104,10 @@ class RegisterController extends Controller
             );
         }
 
+        if($this->isTeamLimitReached() && !$request->session()->has('invite_token')) {
+            return view('auth.full');
+        }
+
         $user = $this->create($request->all());
 
         // If user was not invited, create and join a new team
@@ -111,4 +129,11 @@ class RegisterController extends Controller
 
         return redirect($this->redirectPath());
     }
+
+    private function isTeamLimitReached() {
+        $teamLimit = env('TEAM_LIMIT') ? env('TEAM_LIMIT') : 1;
+
+        return (Team::count() >= $teamLimit);
+    }
+
 }

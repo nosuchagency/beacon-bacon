@@ -67,7 +67,7 @@ class FloorController extends Controller
     {
         $floor = Floor::find($id);
 
-        if(!$floor) {
+        if(empty($floor)) {
             return response(['message' => 'Resource not found',], 404);
         }
 
@@ -95,7 +95,7 @@ class FloorController extends Controller
 
         $floor = Floor::find($id);
 
-        if(!$floor) {
+        if(empty($floor)) {
             return response(['message' => 'Resource not found',], 404);
         }
 
@@ -117,7 +117,7 @@ class FloorController extends Controller
     {
         $floor = Floor::find($id);
 
-        if (!$floor) {
+        if (empty($floor)) {
             return response(['message' => 'Resource not found',], 404);
         }
 
