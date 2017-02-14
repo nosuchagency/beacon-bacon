@@ -8,6 +8,5 @@ public/uploads
 public/storage/images/*
 storage/app/files/findables/*
 storage/framework/messages
-.env.example
 .DS_Store
 /.idea

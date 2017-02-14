@@ -47,7 +47,7 @@ class BeaconController extends Controller
     {
         $beacon = Beacon::find($id);
 
-        if(!$beacon) {
+        if(empty($beacon)) {
             return response(['message' => 'Resource not found',], 404);
         }
 
@@ -70,7 +70,7 @@ class BeaconController extends Controller
 
         $beacon = Beacon::find($id);
 
-        if(!$beacon) {
+        if(empty($beacon)) {
             return response(['message' => 'Resource not found',], 404);
         }
 
@@ -90,7 +90,7 @@ class BeaconController extends Controller
     {
         $beacon = Beacon::find($id);
 
-        if(!$beacon) {
+        if(empty($beacon)) {
             return response(['message' => 'Resource not found',], 404);
         }
 

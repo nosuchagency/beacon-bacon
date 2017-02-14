@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Floor;
+use App\Jobs\ImportBeaconsJob;
 use App\Place;
 use App\Beacon;
 use App\Setting;
@@ -40,11 +41,12 @@ class BeaconController extends Controller
      */
     public function import()
     {
-	    $services = array(
-   	    	'' => 'Select Service' ,
-	    	'kontakt.io' => 'Kontakt.io',
-	    	'estimote' => 'estimote',
-	    );
+        $services = array(
+            '' => 'Select Service',
+            'kontakt.io' => 'Kontakt.io',
+            'estimote' => 'estimote',
+            'test' => 'test'
+        );
 
         return view('beacons.import', compact('services'));
     }
@@ -64,25 +66,12 @@ class BeaconController extends Controller
             $setting = Setting::firstOrCreate(['key' => str_replace('-', '.', $key)]);
             $setting->update(['value' => $value]);
         }
-        
-        $devices = $this->getBeaconsFromWebservice();
-        foreach( $devices as $device ) {
-			$beacon = Beacon::where( 'beacon_uid', '=', $device )->first();	        
 
-	        if( empty( $beacon ) ) {
-		        $device = $this->getBeaconFromWebservice($device);		        
-		        
-		        $beacon = Beacon::create([
-			        'name' => $device->uniqueId,
-			        'beacon_uid' => $device->uniqueId,
-			        'proximity_uuid' => $device->proximity,
-			        'minor' => $device->minor,
-	   		        'major' => $device->major, 		        		        
-		        ]);		        
-	        }
-        }
-        
-        return redirect()->route('beacons.import');    
+        $service = $filtered->get('beacon-import-service');
+
+        dispatch(new ImportBeaconsJob($service));
+
+        return redirect()->route('beacons.import');
     }
 
     /**
@@ -98,8 +87,8 @@ class BeaconController extends Controller
 //        $devices = $this->getBeaconsFromWebservice();
 
 //        if ($request->input('beacon_uid')) {
- //           $beacon = $this->getBeaconFromWebservice($request->input('beacon_uid'));
-   //     }
+        //           $beacon = $this->getBeaconFromWebservice($request->input('beacon_uid'));
+        //     }
 
         return view('beacons.create');
     }
@@ -107,13 +96,13 @@ class BeaconController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-           'name' => 'required|max:255',
+            'name' => 'required|max:255',
         ]);
 
         $beacon = Beacon::create($request->all());
@@ -123,7 +112,7 @@ class BeaconController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -135,7 +124,7 @@ class BeaconController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -150,14 +139,14 @@ class BeaconController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-           'name' => 'required|max:255',
+            'name' => 'required|max:255',
         ]);
 
         $beacon = Beacon::findOrFail($id);
@@ -168,7 +157,7 @@ class BeaconController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -176,57 +165,5 @@ class BeaconController extends Controller
         $beacon = Beacon::findOrFail($id);
         $beacon->delete();
         return redirect()->route('beacons.index');
-    }
-
-    /**
-     * Get beacons from Kontakt webservice
-     * @return Illuminate\Support\Collection
-     */
-    protected function getBeaconsFromWebservice()
-    {
-        $client = new Client([
-            'base_uri' => 'https://api.kontakt.io/',
-            'headers' => [
-                'Accept' => 'application/vnd.com.kontakt+json;version=7',
-                'Api-Key' => config('services.kontakt.key'),
-                'User-Agent' => 'BeaconBacon'
-            ]
-        ]);
-
-        try {
-            $response = $client->request('GET', '/device?maxResult=1000');
-            $results = json_decode($response->getBody()->getContents());
-            $devices = collect();
-
-            foreach ($results->devices as $device) {
-                $devices->put($device->uniqueId, $device->uniqueId . ($device->alias ? ' (' . $device->alias . ')' : ''));
-            }
-
-            return $devices;
-        }
-        catch (\Exception $e) {
-            return [];
-        }
-    }
-
-    protected function getBeaconFromWebservice($beaconId)
-    {
-        $client = new Client([
-            'base_uri' => 'https://api.kontakt.io/',
-            'headers' => [
-                'Accept' => 'application/vnd.com.kontakt+json;version=7',
-                'Api-Key' => config('services.kontakt.key'),
-                'User-Agent' => 'BeaconBacon'
-            ]
-        ]);
-
-        try {
-            $response = $client->request('GET', '/device/'.$beaconId);
-            $results = json_decode($response->getBody()->getContents());
-            return $results;
-        }
-        catch (\Exception $e) {
-            return null;
-        }
     }
 }

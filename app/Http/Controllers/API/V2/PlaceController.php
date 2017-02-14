@@ -11,6 +11,8 @@ use File;
 use Image;
 use Illuminate\Http\Request;
 use Artisaninweb\SoapWrapper\Facades\SoapWrapper;
+use Cache;
+use Carbon\Carbon;
 
 class PlaceController extends Controller
 {
@@ -54,148 +56,27 @@ class PlaceController extends Controller
     public function find(Request $request, $id)
     {
         $identifier = $request->find_identifier;
-
         if (empty($identifier)) {
-            return $this->notFound();
+            return response(['message' => 'Resource not found',], 404);
         }
-
         $findable = Findable::where('identifier', $identifier)->first();
-
         if (empty($findable)) {
-            return $this->notFound();
+            return response(['message' => 'Resource not found',], 404);
         }
-
         $place = Place::find($id);
-
         if (!$place) {
-            return $this->notFound();
+            return response(['message' => 'Resource not found',], 404);
         }
-
         $class = "BB\\" . $identifier . "Plugin\\" . $identifier . "Plugin";
-
         if (!class_exists($class)) {
-            return $this->notFound();
+            return response(['message' => 'Resource not found',], 404);
         }
-
         $plugin = new $class;
-
         if (!method_exists($plugin, 'findable' . $identifier)) {
-            return $this->notFound();
+            return response(['message' => 'Resource not found',], 404);
         }
 
-        $data = $plugin->{'findable' . $identifier}($findable, $request);
-
-        return response($data, 200);
-    }
-
-    private function notFound()
-    {
-        $response = new \stdClass();
-        $response->status = 'Not Found';
-        $response->data = [];
-
-        return response()->json($response);
-    }
-
-    private function findableIMS($place, $findable, Request $request)
-    {
-
-        $response = new \stdClass();
-
-
-        if (empty($request->data['Faust'])) {
-            $response->status = 'Not Found';
-            $response->data = [];
-
-            return response()->json($response);
-        }
-
-        $faust = $request->data['Faust'];
-
-        SoapWrapper::add(function ($service) {
-            $service
-                ->name('imssecurity')
-                ->wsdl('https://ims.lyngsoesystems.com/kkb/ImsWs/soap/Security?wsdl')
-                ->trace(true)
-                ->cache(WSDL_CACHE_NONE);
-        });
-
-        $payload = [
-            'Username' => config('services.ims.username'),
-            'Password' => config('services.ims.password'),
-            'ClientInfo' => config('services.ims.client'),
-        ];
-
-        $ims_response = '';
-        SoapWrapper::service('imssecurity', function ($service) use ($payload, &$ims_response) {
-            $ims_response = $service->call('Login', [$payload]);
-        });
-
-        $token = $ims_response->Token;
-
-        SoapWrapper::add(function ($service) {
-            $service
-                ->name('imsquery')
-                ->wsdl('https://ims.lyngsoesystems.com/kkb/ImsWs/soap/Query?wsdl')
-                ->trace(true)
-                ->cache(WSDL_CACHE_NONE);
-        });
-
-        $request = (object)$request->json()->all();
-        $locations = Location::where('findable_id', $findable->id)->pluck('parameter_one', 'id');
-
-        $ims_locations = [];
-        foreach ($locations as $id => $parameter_one) {
-            $ims_locations[$id] = $parameter_one;
-        }
-
-        $payload = [
-            'Token' => $token,
-            'BibliographicRecordId' => $faust,
-            'IlsStatusKey' => 0,
-            'Excluded' => false,
-        ];
-
-        $ims_response = '';
-        SoapWrapper::service('imsquery', function ($service) use ($payload, &$ims_response) {
-            $ims_response = $service->call('FindItems', [$payload]);
-        });
-
-        if (empty($ims_response->Items)) {
-            $response->status = 'Not Found';
-            $response->data = [];
-
-            return response()->json($response);
-        }
-
-        $ims_found_location = 0;
-        foreach ($ims_response->Items as $item) {
-            if (!empty($item->ShortPlacementText) && in_array($item->ShortPlacementText, $ims_locations)) {
-                $ims_found_location = array_search($item->ShortPlacementText, $ims_locations);
-            }
-        }
-
-        if (empty($ims_found_location)) {
-            $response->status = 'Not Found';
-            $response->data = [];
-
-            return response()->json($response);
-        }
-
-        $location = Location::findOrFail($ims_found_location);
-
-        $response->status = 'Found';
-        $response->data = new \stdClass();
-
-        $response->data->floor = new \stdClass();
-        $response->data->floor->id = $location->floor_id;
-
-        $response->data->location = new \stdClass();
-        $response->data->location->id = $location->id;
-        $response->data->location->posX = $location->posX;
-        $response->data->location->posY = $location->posY;
-
-        return response()->json($response);
+        return $plugin->{'findable' . $identifier}($place, $findable, $request);
     }
 
     /**

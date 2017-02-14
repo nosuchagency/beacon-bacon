@@ -6,6 +6,10 @@ use App\Floor;
 use App\Poi;
 use Image;
 use File;
+use Artisaninweb\SoapWrapper\Facades\SoapWrapper;
+use App\Place;
+use App\Findable;
+use App\Location;
 
 class MediaController extends Controller
 {
@@ -19,13 +23,13 @@ class MediaController extends Controller
     {
         $poi = Poi::find($id);
 
-        if(!$poi) {
+        if (!$poi) {
             return response(['message' => 'Resource not found',], 404);
         }
 
         $path = storage_path() . '/app/images/pois/' . $poi->id . '/' . $poi->icon;
 
-        if(!File::exists($path)) {
+        if (!File::exists($path)) {
             return response(['message' => 'Resource not found',], 404);
         }
 
@@ -42,13 +46,13 @@ class MediaController extends Controller
     {
         $floor = Floor::find($id);
 
-        if(!$floor) {
+        if (!$floor) {
             return response(['message' => 'Resource not found',], 404);
         }
 
         $path = storage_path() . '/app/images/floors/' . $floor->id . '/' . $floor->image;
 
-        if(!File::exists($path)) {
+        if (!File::exists($path)) {
             return response(['message' => 'Resource not found',], 404);
         }
 

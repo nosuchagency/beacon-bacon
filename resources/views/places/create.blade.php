@@ -58,10 +58,42 @@
           </div>          
           
           <div class="form-group">
-            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('identifier1', 'Identifier1', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('identifier', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+              {!! Form::text('identifier1', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier2', 'Identifier2', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier2', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier3', 'Identifier3', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier3', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier4', 'Identifier4', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier4', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier5', 'Identifier5', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier5', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
             </div>
           </div>
           
