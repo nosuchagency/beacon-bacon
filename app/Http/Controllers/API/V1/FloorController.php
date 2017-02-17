@@ -57,7 +57,11 @@ class FloorController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $floor = Floor::findOrFail($id);
+        $floor = Floor::find($id);
+
+        if(empty($floor)) {
+            return response(['message' => 'Resource not found',], 404);
+        }
 
         $floor->image = $floor->getPublicImage();
 
@@ -79,10 +83,15 @@ class FloorController extends Controller
             'image' => 'image',
         ]);
 
-        $model = Floor::findOrFail($id);
-        $model->update($request->all());
+        $floor = Floor::find($id);
 
-        return $model;
+        if(empty($floor)) {
+            return response(['message' => 'Resource not found',], 404);
+        }
+
+        $floor->update($request->all());
+
+        return $floor;
     }
 
     /**
@@ -94,7 +103,13 @@ class FloorController extends Controller
      */
     public function destroy($id)
     {
-        Floor::findOrFail($id)->delete();
+        $floor = Floor::find($id);
+
+        if (empty($floor)) {
+            return response(['message' => 'Resource not found',], 404);
+        }
+
+        $floor->delete();
 
         return response('', 204);
     }

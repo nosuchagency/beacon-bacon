@@ -57,23 +57,23 @@ class PlaceController extends Controller
     {
         $identifier = $request->find_identifier;
         if (empty($identifier)) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'missing parameter', 'parameter' => 'identifier'], 400);
         }
         $findable = Findable::where('identifier', $identifier)->first();
         if (empty($findable)) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'resource not found', 'resource' => 'findable'], 404);
         }
         $place = Place::find($id);
         if (!$place) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'resource not found', 'resource' => 'place'], 404);
         }
         $class = "BB\\" . $identifier . "Plugin\\" . $identifier . "Plugin";
         if (!class_exists($class)) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'resource not found', 'resource' => 'class'], 404);
         }
         $plugin = new $class;
         if (!method_exists($plugin, 'findable' . $identifier)) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'resource not found', 'resource' => 'method'], 404);
         }
 
         return $plugin->{'findable' . $identifier}($place, $findable, $request);
@@ -92,7 +92,7 @@ class PlaceController extends Controller
         $place = Place::find($id);
 
         if (!$place) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'resource not found', 'resource' => 'place'], 404);
         }
 
         $place = $this->attachResources($request, $place);
@@ -108,7 +108,8 @@ class PlaceController extends Controller
                         continue;
                     }
 
-                    $location->poi = url('api/v2/pois/' . $poi->id . '/icon');
+                    $poi->icon = url('api/v2/pois/' . $poi->id . '/icon');
+                    $location->poi = $poi;
                 } else {
                     $location->poi = null;
                 }
@@ -135,7 +136,7 @@ class PlaceController extends Controller
         $place = Place::find($id);
 
         if (!$place) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'Resource not found', 'resource' => 'place'], 404);
         }
 
         $place->update($request->all());
@@ -155,7 +156,7 @@ class PlaceController extends Controller
         $place = Place::find($id);
 
         if (!$place) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'Resource not found', 'resource' => 'place'], 404);
         }
 
         $place->delete();
@@ -182,7 +183,15 @@ class PlaceController extends Controller
      */
     public function menu($id)
     {
-        return Menu::where('place_id', $id)->orderBy('order')->with('poi')->get();
+        $menus = Menu::where('place_id', $id)->orderBy('order')->with('poi')->get();
+
+        foreach($menus as $menu ) {
+            if($menu->poi) {
+                $menu->poi->icon = url('api/v2/pois/' . $menu->poi->id . '/icon');
+            }
+        }
+
+        return $menus;
     }
 
 }

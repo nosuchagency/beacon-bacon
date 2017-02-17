@@ -71,9 +71,14 @@ class LocationController extends Controller
 		if ( $type == 'findable' ) {
 
 	        $findables = Findable::pluck( 'name', 'id' );
-			$findables->prepend( 'Select type...', 0 );
+			$findables->prepend( 'Select Findable...', 0 );
+            $types = array(
+                '' => 'Select type...',
+                'point' => 'Point',
+                'area' => 'Area'
+            );
 
-			return view('locations.create.findable', compact('findables', 'place', 'floor', 'placeId', 'floorId'));
+			return view('locations.create.findable', compact('types','findables', 'place', 'floor', 'placeId', 'floorId'));
 		}
 
 		if ( $type == 'block' ) {
@@ -166,9 +171,9 @@ class LocationController extends Controller
 		if ( $location->type == 'findable' ) {
 
 	        $findables = Findable::pluck( 'name', 'id' );
-			$findables->prepend( 'Select type...', 0 );
+			$findables->prepend( 'Select Findable...', 0 );
 
-			return view('locations.edit.findable', compact('findables','location', 'placeId', 'floorId'));
+            return view('locations.edit.findable.icon', compact('findables','location', 'placeId', 'floorId'));
 		}
 
 		if ( $location->type == 'block' ) {

@@ -45,7 +45,7 @@ class PlaceController extends Controller
      * Return a findable Location
      *
      * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return json
      */
@@ -54,35 +54,37 @@ class PlaceController extends Controller
         $response = new \stdClass();
         $identifier = $request->find_identifier;
 
-        if ( empty( $identifier ) ) {
+        if (empty($identifier)) {
             $response->status = 'Not Found';
             $response->data = [];
 
-            return response()->json( $response );
+            return response()->json($response);
         }
-        $findable = Findable::where( 'identifier', $identifier )->first();
+        $findable = Findable::where('identifier', $identifier)->first();
 
-        if ( empty( $findable ) ) {
+        if (empty($findable)) {
             $response->status = 'Not Found';
             $response->data = [];
-            return response()->json( $response );
+            return response()->json($response);
         }
         $place = Place::findOrFail($id);
-        if ( empty( $place ) ) {
+        if (empty($place)) {
             $response->status = 'Not Found';
             $response->data = [];
-            return response()->json( $response );
+            return response()->json($response);
         }
-        return $this->{'findable' . $identifier}( $place, $findable, $request );
+        return $this->{'findable' . $identifier}($place, $findable, $request);
     }
-    private function findableIMS ( $place, $findable, Request $request ) {
+
+    private function findableIMS($place, $findable, Request $request)
+    {
         $response = new \stdClass();
 
-        if ( empty( $request->data['Faust'] ) ) {
+        if (empty($request->data['Faust'])) {
             $response->status = 'Not Found';
             $response->data = [];
 
-            return response()->json( $response );
+            return response()->json($response);
         }
 
         $faust = $request->data['Faust'];
@@ -113,11 +115,11 @@ class PlaceController extends Controller
                 ->cache(WSDL_CACHE_NONE);
         });
 
-        $request = (object) $request->json()->all();
-        $locations = Location::where( 'findable_id', $findable->id )->pluck('parameter_one', 'id');
+        $request = (object)$request->json()->all();
+        $locations = Location::where('findable_id', $findable->id)->pluck('parameter_one', 'id');
 
         $ims_locations = [];
-        foreach( $locations as $id => $parameter_one ) {
+        foreach ($locations as $id => $parameter_one) {
             $ims_locations[$id] = $parameter_one;
         }
         $payload = [
@@ -131,35 +133,42 @@ class PlaceController extends Controller
         SoapWrapper::service('imsquery', function ($service) use ($payload, &$ims_response) {
             $ims_response = $service->call('FindItems', [$payload]);
         });
-        if ( empty( $ims_response->Items ) ) {
+        if (empty($ims_response->Items)) {
             $response->status = 'Not Found';
             $response->data = [];
 
-            return response()->json( $response );
+            return response()->json($response);
         }
         $ims_found_location = 0;
-        foreach( $ims_response->Items as $item ) {
-            if ( ! empty( $item->PlacementInfo->ShortPlacementText ) && in_array( $item->PlacementInfo->ShortPlacementText, $ims_locations ) ) {
-                $ims_found_location = array_search( $item->PlacementInfo->ShortPlacementText, $ims_locations );
+        foreach ($ims_response->Items as $item) {
+            if (!empty($item->PlacementInfo->ShortPlacementText) && in_array($item->PlacementInfo->ShortPlacementText, $ims_locations)) {
+                $ims_found_location = array_search($item->PlacementInfo->ShortPlacementText, $ims_locations);
             }
         }
-        if ( empty( $ims_found_location ) ) {
+        if (empty($ims_found_location)) {
             $response->status = 'Not Found';
             $response->data = [];
 
-            return response()->json( $response );
+            return response()->json($response);
         }
 
-        $location = Location::findOrFail( $ims_found_location );
+        $location = Location::findOrFail($ims_found_location);
         $response->status = 'Found';
         $response->data = new \stdClass();
         $response->data->floor = new \stdClass();
         $response->data->floor->id = $location->floor_id;
+
         $response->data->location = new \stdClass();
         $response->data->location->id = $location->id;
-        $response->data->location->posX = $location->posX;
-        $response->data->location->posY = $location->posY;
-        return response()->json( $response );
+
+        if(!empty($location->area) && size_of(explode(',', $location->area)) > 0) {
+            $response->data->location->area = $location->area;
+        } else {
+            $response->data->location->posX = $location->posX;
+            $response->data->location->posY = $location->posY;
+        }
+
+        return response()->json($response);
     }
 
     /**
@@ -172,14 +181,26 @@ class PlaceController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $place = Place::findOrFail($id);
+        $place = Place::find($id);
+
+        if (!$place) {
+            return response(['message' => 'resource not found', 'resource' => 'place'], 404);
+        }
 
         $place = $this->attachResources($request, $place);
         foreach ($place->floors as $floor) {
+
             $floor->image = $floor->getPublicImage();
+
             foreach ($floor->locations as $location) {
                 if ($location->poi_id > 0) {
-                    $poi = Poi::findOrFail($location->poi_id);
+
+                    $poi = Poi::find($location->poi_id);
+
+                    if (!$poi) {
+                        continue;
+                    }
+
                     $poi->icon = $poi->getPublicImage();
                     $location->poi = $poi;
                 } else {
@@ -205,10 +226,15 @@ class PlaceController extends Controller
             'name' => 'max:255',
         ]);
 
-        $model = Place::findOrFail($id);
-        $model->update($request->all());
+        $place = Place::find($id);
 
-        return $model;
+        if (!$place) {
+            return response(['message' => 'Resource not found', 'resource' => 'place'], 404);
+        }
+
+        $place->update($request->all());
+
+        return $place;
     }
 
     /**
@@ -220,7 +246,13 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        Place::findOrFail($id)->delete();
+        $place = Place::find($id);
+
+        if (!$place) {
+            return response(['message' => 'Resource not found', 'resource' => 'place'], 404);
+        }
+
+        $place->delete();
 
         return response('', 204);
     }
