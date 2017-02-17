@@ -227,11 +227,13 @@ class PlaceController extends Controller
                         continue;
                     }
 
-                    $location->poi = url('api/v2/pois/' . $poi->id . '/icon');
+                    $poi->icon = url('api/v2/pois/' . $poi->id . '/icon');
+                    $location->poi = $poi;
                 } else {
                     $location->poi = null;
                 }
             }
+
         }
 
         return $place;
@@ -301,7 +303,15 @@ class PlaceController extends Controller
      */
     public function menu($id)
     {
-        return Menu::where('place_id', $id)->orderBy('order')->with('poi')->get();
+        $menus = Menu::where('place_id', $id)->orderBy('order')->with('poi')->get();
+
+        foreach($menus as $menu ) {
+            if($menu->poi) {
+                $menu->poi->icon = url('api/v2/pois/' . $menu->poi->id . '/icon');
+            }
+        }
+
+        return $menus;
     }
 
 }
