@@ -109,6 +109,7 @@ class PlaceController extends Controller
                     $location->poi = null;
                 }
             }
+
         }
 
         return $place;
@@ -170,8 +171,8 @@ class PlaceController extends Controller
     {
         $menus = Menu::where('place_id', $id)->orderBy('order')->with('poi')->get();
 
-        foreach ($menus as $menu) {
-            if ($menu->poi) {
+        foreach($menus as $menu ) {
+            if($menu->poi) {
                 $menu->poi->icon = url('api/v2/pois/' . $menu->poi->id . '/icon');
             }
         }
