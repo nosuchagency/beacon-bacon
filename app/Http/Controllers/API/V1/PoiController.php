@@ -76,15 +76,16 @@ class PoiController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'max:255',
-            'internal_name' => 'max:255',
-            'icon' => 'image',
+            'name' => 'required|max:255',
+            'internal_name' => 'required|max:255',
+            'icon' => 'required|image',
         ]);
 
-        $model = Poi::findOrFail($id);
-        $model->update($request->all());
+        $poi = Poi::findOrFail($id);
 
-        return $model;
+        $poi->update($request->all());
+
+        return $poi;
     }
 
     /**
@@ -96,7 +97,7 @@ class PoiController extends Controller
      */
     public function destroy($id)
     {
-        Poi::findOrFail($id)->delete();
+        $poi = Poi::findOrFail($id)->delete();
 
         return response('', 204);
     }

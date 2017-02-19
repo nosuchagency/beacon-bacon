@@ -36,8 +36,10 @@ class FindableController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
-        return view('findable.create');
+    {
+        $types = array('icon' => 'Icon', 'area' => 'Area');
+
+        return view('findable.create', compact('types'));
     }
 
     /**

@@ -57,23 +57,22 @@ class PlaceController extends Controller
     {
         $identifier = $request->find_identifier;
         if (empty($identifier)) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'missing parameter', 'parameter' => 'identifier'], 400);
         }
         $findable = Findable::where('identifier', $identifier)->first();
         if (empty($findable)) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'resource not found', 'resource' => 'findable'], 404);
         }
-        $place = Place::find($id);
-        if (!$place) {
-            return response(['message' => 'Resource not found',], 404);
-        }
+
+        $place = Place::findOrFail($id);
+
         $class = "BB\\" . $identifier . "Plugin\\" . $identifier . "Plugin";
         if (!class_exists($class)) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'resource not found', 'resource' => 'class'], 404);
         }
         $plugin = new $class;
         if (!method_exists($plugin, 'findable' . $identifier)) {
-            return response(['message' => 'Resource not found',], 404);
+            return response(['message' => 'resource not found', 'resource' => 'method'], 404);
         }
 
         return $plugin->{'findable' . $identifier}($place, $findable, $request);
@@ -89,11 +88,7 @@ class PlaceController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $place = Place::find($id);
-
-        if (!$place) {
-            return response(['message' => 'Resource not found',], 404);
-        }
+        $place = Place::findOrFail($id);
 
         $place = $this->attachResources($request, $place);
         foreach ($place->floors as $floor) {
@@ -131,14 +126,10 @@ class PlaceController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'max:255',
+            'name' => 'required|max:255',
         ]);
 
-        $place = Place::find($id);
-
-        if (!$place) {
-            return response(['message' => 'Resource not found',], 404);
-        }
+        $place = Place::findOrFail($id);
 
         $place->update($request->all());
 
@@ -154,13 +145,7 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        $place = Place::find($id);
-
-        if (!$place) {
-            return response(['message' => 'Resource not found',], 404);
-        }
-
-        $place->delete();
+        $place = Place::findOrFail($id)->delete();
 
         return response('', 204);
     }

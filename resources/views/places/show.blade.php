@@ -63,42 +63,42 @@
 
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Identifier1</strong>
+                                    <strong>Identifier 1</strong>
                                 </div>
                                 <div class="col-sm-8">
-                                    {{ $place->identifier1 }}
+                                    {{ $place->identifier_one }}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Identifier2</strong>
+                                    <strong>Identifier 2</strong>
                                 </div>
                                 <div class="col-sm-8">
-                                    {{ $place->identifier2 }}
+                                    {{ $place->identifier_two }}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Identifier3</strong>
+                                    <strong>Identifier 3</strong>
                                 </div>
                                 <div class="col-sm-8">
-                                    {{ $place->identifier3 }}
+                                    {{ $place->identifier_three }}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Identifier4</strong>
+                                    <strong>Identifier 4</strong>
                                 </div>
                                 <div class="col-sm-8">
-                                    {{ $place->identifier4 }}
+                                    {{ $place->identifier_four }}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Identifier5</strong>
+                                    <strong>Identifier 5</strong>
                                 </div>
                                 <div class="col-sm-8">
-                                    {{ $place->identifier5 }}
+                                    {{ $place->identifier_five }}
                                 </div>
                             </div>
 

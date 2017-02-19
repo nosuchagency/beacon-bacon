@@ -75,14 +75,15 @@ class FloorController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'max:255',
-            'image' => 'image',
+            'name' => 'required|max:255',
+            'image' => 'required|image',
         ]);
 
-        $model = Floor::findOrFail($id);
-        $model->update($request->all());
+        $floor = Floor::findOrFail($id);
 
-        return $model;
+        $floor->update($request->all());
+
+        return $floor;
     }
 
     /**
@@ -94,7 +95,7 @@ class FloorController extends Controller
      */
     public function destroy($id)
     {
-        Floor::findOrFail($id)->delete();
+        $floor = Floor::findOrFail($id)->delete();
 
         return response('', 204);
     }
