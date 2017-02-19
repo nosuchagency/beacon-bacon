@@ -43,10 +43,10 @@
           </div>
 
           <div class="form-group">
-            {!! Form::label('type', 'Type', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('draw_type', 'Type', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::select('type', $types, null, ['class' => 'form-control']) !!}
+              {!! Form::select('draw_type', $types, null, ['class' => 'form-control']) !!}
             </div>
           </div>
 

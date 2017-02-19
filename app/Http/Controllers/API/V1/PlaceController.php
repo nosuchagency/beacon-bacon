@@ -68,11 +68,7 @@ class PlaceController extends Controller
             return response()->json($response);
         }
         $place = Place::findOrFail($id);
-        if (empty($place)) {
-            $response->status = 'Not Found';
-            $response->data = [];
-            return response()->json($response);
-        }
+
         return $this->{'findable' . $identifier}($place, $findable, $request);
     }
 
@@ -153,6 +149,7 @@ class PlaceController extends Controller
         }
 
         $location = Location::findOrFail($ims_found_location);
+
         $response->status = 'Found';
         $response->data = new \stdClass();
         $response->data->floor = new \stdClass();
@@ -181,11 +178,7 @@ class PlaceController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $place = Place::find($id);
-
-        if (!$place) {
-            return response(['message' => 'resource not found', 'resource' => 'place'], 404);
-        }
+        $place = Place::findOrFail($id);
 
         $place = $this->attachResources($request, $place);
         foreach ($place->floors as $floor) {
@@ -223,14 +216,10 @@ class PlaceController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'max:255',
+            'name' => 'required|max:255',
         ]);
 
-        $place = Place::find($id);
-
-        if (!$place) {
-            return response(['message' => 'Resource not found', 'resource' => 'place'], 404);
-        }
+        $place = Place::findOrFail($id);
 
         $place->update($request->all());
 
@@ -246,13 +235,7 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        $place = Place::find($id);
-
-        if (!$place) {
-            return response(['message' => 'Resource not found', 'resource' => 'place'], 404);
-        }
-
-        $place->delete();
+        $place = Place::findOrFail($id)->delete();
 
         return response('', 204);
     }
@@ -276,7 +259,15 @@ class PlaceController extends Controller
      */
     public function menu($id)
     {
-        return Menu::where('place_id', $id)->orderBy('order')->with('poi')->get();
+        $menus = Menu::where('place_id', $id)->orderBy('order')->with('poi')->get();
+
+        foreach($menus as $menu ) {
+            if($menu->poi) {
+                $menu->poi->icon = $menu->poi->getPublicImage();
+            }
+        }
+
+        return $menus;
     }
 
 }

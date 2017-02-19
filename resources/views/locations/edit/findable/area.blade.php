@@ -45,15 +45,6 @@
                     </div>
 
                     <div class="form-group">
-                        <h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Draw POI on Map</h5>
-                        <div class="col-sm-10">
-                            <button type="button" class="btn btn-info pull-right" id="canvas_reset_button">Start Over
-                            </button>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
                         <h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Parameters</h5>
                         <div class="col-sm-10"></div>
                     </div>

@@ -66,11 +66,7 @@ class PoiController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $poi = Poi::find($id);
-
-        if (!$poi) {
-            return response(['message' => 'Resource not found',], 404);
-        }
+        $poi = Poi::findOrFail($id);
 
         $poi->icon = url('api/v2/pois/' . $poi->id . '/icon');
 
@@ -88,16 +84,12 @@ class PoiController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'max:255',
-            'internal_name' => 'max:255',
+            'name' => 'required|max:255',
+            'internal_name' => 'required|max:255',
             'icon' => 'required|imageable',
         ]);
 
-        $poi = Poi::find($id);
-
-        if (!$poi) {
-            return response(['message' => 'Resource not found',], 404);
-        }
+        $poi = Poi::findOrFail($id);
 
         $poi->update($request->except('icon'));
 
@@ -117,13 +109,7 @@ class PoiController extends Controller
      */
     public function destroy($id)
     {
-        $poi = Poi::find($id);
-
-        if (!$poi) {
-            return response(['message' => 'Resource not found',], 404);
-        }
-
-        $poi->delete();
+        $poi = Poi::findOrFail($id)->delete();
 
         return response('', 204);
     }

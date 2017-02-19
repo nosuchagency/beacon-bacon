@@ -21,11 +21,7 @@ class MediaController extends Controller
      */
     public function icon($id)
     {
-        $poi = Poi::find($id);
-
-        if (!$poi) {
-            return response(['message' => 'Resource not found',], 404);
-        }
+        $poi = Poi::findOrFail($id);
 
         $path = storage_path() . '/app/images/pois/' . $poi->id . '/' . $poi->icon;
 
@@ -44,11 +40,7 @@ class MediaController extends Controller
      */
     public function image($id)
     {
-        $floor = Floor::find($id);
-
-        if (!$floor) {
-            return response(['message' => 'Resource not found',], 404);
-        }
+        $floor = Floor::findOrFail($id);
 
         $path = storage_path() . '/app/images/floors/' . $floor->id . '/' . $floor->image;
 

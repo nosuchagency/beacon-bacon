@@ -45,9 +45,9 @@ class BeaconController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $place = Beacon::findOrFail($id);
+        $beacon = Beacon::findOrFail($id);
 
-        return $this->attachResources($request, $place);
+        return $this->attachResources($request, $beacon);
     }
 
     /**
@@ -61,13 +61,14 @@ class BeaconController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-           'name' => 'max:255',
+           'name' => 'required|max:255',
         ]);
 
-        $model = Beacon::findOrFail($id);
-        $model->update($request->all());
+        $beacon = Beacon::findOrFail($id);
 
-        return $model;
+        $beacon->update($request->all());
+
+        return $beacon;
     }
 
     /**
@@ -79,7 +80,7 @@ class BeaconController extends Controller
      */
     public function destroy($id)
     {
-        Beacon::findOrFail($id)->delete();
+        $beacon = Beacon::findOrFail($id)->delete();
 
         return response('', 204);
     }

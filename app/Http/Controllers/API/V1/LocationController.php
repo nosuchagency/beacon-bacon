@@ -45,9 +45,9 @@ class LocationController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $place = Location::findOrFail($id);
+        $location = Location::findOrFail($id);
 
-        return $this->attachResources($request, $place);
+        return $this->attachResources($request, $location);
     }
 
     /**
@@ -61,13 +61,14 @@ class LocationController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'max:255',
+            'name' => 'required|max:255',
         ]);
 
-        $model = Location::findOrFail($id);
-        $model->update($request->all());
+        $location = Location::findOrFail($id);
 
-        return $model;
+        $location->update($request->all());
+
+        return $location;
     }
 
     /**
@@ -79,7 +80,7 @@ class LocationController extends Controller
      */
     public function destroy($id)
     {
-        Location::findOrFail($id)->delete();
+        $location = Location::findOrFail($id)->delete();
 
         return response('', 204);
     }

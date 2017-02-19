@@ -63,10 +63,9 @@ class PlaceController extends Controller
         if (empty($findable)) {
             return response(['message' => 'resource not found', 'resource' => 'findable'], 404);
         }
-        $place = Place::find($id);
-        if (!$place) {
-            return response(['message' => 'resource not found', 'resource' => 'place'], 404);
-        }
+
+        $place = Place::findOrFail($id);
+
         $class = "BB\\" . $identifier . "Plugin\\" . $identifier . "Plugin";
         if (!class_exists($class)) {
             return response(['message' => 'resource not found', 'resource' => 'class'], 404);
@@ -89,11 +88,7 @@ class PlaceController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $place = Place::find($id);
-
-        if (!$place) {
-            return response(['message' => 'resource not found', 'resource' => 'place'], 404);
-        }
+        $place = Place::findOrFail($id);
 
         $place = $this->attachResources($request, $place);
         foreach ($place->floors as $floor) {
@@ -130,14 +125,10 @@ class PlaceController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'max:255',
+            'name' => 'required|max:255',
         ]);
 
-        $place = Place::find($id);
-
-        if (!$place) {
-            return response(['message' => 'Resource not found', 'resource' => 'place'], 404);
-        }
+        $place = Place::findOrFail($id);
 
         $place->update($request->all());
 
@@ -153,13 +144,7 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        $place = Place::find($id);
-
-        if (!$place) {
-            return response(['message' => 'Resource not found', 'resource' => 'place'], 404);
-        }
-
-        $place->delete();
+        $place = Place::findOrFail($id)->delete();
 
         return response('', 204);
     }
@@ -185,8 +170,8 @@ class PlaceController extends Controller
     {
         $menus = Menu::where('place_id', $id)->orderBy('order')->with('poi')->get();
 
-        foreach($menus as $menu ) {
-            if($menu->poi) {
+        foreach ($menus as $menu) {
+            if ($menu->poi) {
                 $menu->poi->icon = url('api/v2/pois/' . $menu->poi->id . '/icon');
             }
         }
