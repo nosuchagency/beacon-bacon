@@ -6,33 +6,36 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
+        "laravel/framework": "5.3.*",
         "barryvdh/laravel-debugbar": "^2.2",
         "filp/whoops": "^2.1",
-        "laravelcollective/html": "5.2.*",
+        "laravelcollective/html": "5.3.*",
         "lavary/laravel-menu": "dev-master",
-        "mpociot/teamwork": "~3.0",
+        "mpociot/teamwork": "~4.0",
         "guzzlehttp/guzzle": "~6.0",
         "intervention/image": "^2.3",
         "spatie/laravel-activitylog": "^1.2",
         "xinax/laravel-gettext": "^3.1",
 		"doctrine/dbal": "~2.3",
-		"artisaninweb/laravel-soap": "0.2.*"
+		"artisaninweb/laravel-soap": "0.2.*",
+        "pda/pheanstalk": "~3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
-        "symfony/css-selector": "2.8.*|3.0.*",
-        "symfony/dom-crawler": "2.8.*|3.0.*"
+        "symfony/css-selector": "3.1.*",
+        "symfony/dom-crawler": "3.1.*"
     },
     "autoload": {
         "classmap": [
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "BB\\":"storage/app/files/findables/"
         }
+
     },
     "autoload-dev": {
         "classmap": [

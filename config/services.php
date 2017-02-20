@@ -40,7 +40,8 @@ return [
     ],
 
     'kontakt' => [
-        'key' => env('KONTAKT_KEY')
+        'key' => env('KONTAKT_KEY'),
+        'version' => env('KONTAKT_VERSION')
     ],
 
     'ims' => [

@@ -2,45 +2,60 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use Auth;
 use App\Team;
 use App\User;
+use Illuminate\Auth\GuardHelpers;
 use Validator;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
-class AuthController extends Controller
+class RegisterController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Registration & Login Controller
+    | Register Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use RegistersUsers;
 
     /**
-     * Where to redirect users after login / registration.
+     * Where to redirect users after registration.
      *
      * @var string
      */
     protected $redirectTo = '/';
 
     /**
-     * Create a new authentication controller instance.
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm(Request $request)
+    {
+        if($this->isTeamLimitReached() && !$request->session()->has('invite_token')) {
+            return view('auth.full');
+        }
+
+        return view('auth.register');
+    }
+
+    /**
+     * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware('guest');
     }
 
     /**
@@ -54,8 +69,7 @@ class AuthController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-            'terms' => 'required',
+            'password' => 'required|min:6|confirmed',
         ]);
     }
 
@@ -90,6 +104,10 @@ class AuthController extends Controller
             );
         }
 
+        if($this->isTeamLimitReached() && !$request->session()->has('invite_token')) {
+            return view('auth.full');
+        }
+
         $user = $this->create($request->all());
 
         // If user was not invited, create and join a new team
@@ -106,8 +124,16 @@ class AuthController extends Controller
         }
 
         // Log the user in
-        Auth::guard($this->getGuard())->login($user);
+
+        $this->guard()->login($user);
 
         return redirect($this->redirectPath());
     }
+
+    private function isTeamLimitReached() {
+        $teamLimit = env('TEAM_LIMIT') ? env('TEAM_LIMIT') : 1;
+
+        return (Team::count() >= $teamLimit);
+    }
+
 }

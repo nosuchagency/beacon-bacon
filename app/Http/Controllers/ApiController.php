@@ -14,7 +14,7 @@ class ApiController extends Controller
     public function index()
     {
         $keys = ApiKey::all();
-        $users = auth()->user()->currentTeam->users()->orderBy('name')->lists('name', 'id');
+        $users = auth()->user()->currentTeam->users()->orderBy('name')->pluck('name', 'id');
 
         return view('apikeys.index', compact('keys', 'users'));
     }

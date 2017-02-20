@@ -27,7 +27,7 @@
           <h3 class="box-title">Details</h3>
         </div>
         <div class="box-body">
-	        
+
           <div class="form-group">
             {!! Form::label('findable_id', 'Type', ['class' => 'col-sm-2 control-label']) !!}
 
@@ -35,7 +35,7 @@
               {!! Form::select('findable_id', $findables, $location->findable->id, ['class' => 'form-control', 'readonly' => 'readonly']) !!}
             </div>
           </div>
-          
+
           <div class="form-group">
             {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
 
@@ -48,55 +48,55 @@
 			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Parameters</h5>
             <div class="col-sm-10"></div>
           </div>
-          
+
           @if($location->findable->parameter_one_name)
 	          <div class="form-group">
 	            {!! Form::label('parameter_one', $location->findable->parameter_one_name, ['class' => 'col-sm-2 control-label']) !!}
-	
+
 	            <div class="col-sm-10">
 	              {!! Form::text('parameter_one', $location->parameter_one, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_one_name]) !!}
 	            </div>
-	          </div>          
+	          </div>
 		  @endif
 
-          @if($location->findable->parameter_two_name)          
+          @if($location->findable->parameter_two_name)
 	          <div class="form-group">
 	            {!! Form::label('parameter_two', $location->findable->parameter_two_name, ['class' => 'col-sm-2 control-label']) !!}
-	
+
 	            <div class="col-sm-10">
 	              {!! Form::text('parameter_two', $location->parameter_two, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_two_name]) !!}
 	            </div>
-	          </div>          
+	          </div>
 		  @endif
-		  
-          @if($location->findable->parameter_three_name)          
+
+          @if($location->findable->parameter_three_name)
 	          <div class="form-group">
 	            {!! Form::label('parameter_three', $location->findable->parameter_three_name, ['class' => 'col-sm-2 control-label']) !!}
-	
+
 	            <div class="col-sm-10">
 	              {!! Form::text('parameter_three', $location->parameter_three, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_three_name]) !!}
 	            </div>
-	          </div>          
+	          </div>
 		  @endif
-		  
-          @if($location->findable->parameter_four_name)          
+
+          @if($location->findable->parameter_four_name)
 	          <div class="form-group">
 	            {!! Form::label('parameter_four', $location->findable->parameter_four_name, ['class' => 'col-sm-2 control-label']) !!}
-	
+
 	            <div class="col-sm-10">
 	              {!! Form::text('parameter_four', $location->parameter_four, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_four_name]) !!}
 	            </div>
-	          </div>          
+	          </div>
 		  @endif
-		  
-          @if($location->findable->parameter_five_name)          
+
+          @if($location->findable->parameter_five_name)
 	          <div class="form-group">
 	            {!! Form::label('parameter_five', $location->findable->parameter_five_name, ['class' => 'col-sm-2 control-label']) !!}
-	
+
 	            <div class="col-sm-10">
 	              {!! Form::text('parameter_five', $location->parameter_five, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_five_name]) !!}
 	            </div>
-	          </div>          
+	          </div>
 		  @endif
 
           <div class="form-group">
@@ -123,7 +123,7 @@
           <div class="form-group">
 			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Place Findable on Map</h5>
             <div class="col-sm-10" style="text-align: right;">
-				<input type="checkbox" id="show-100" /> Show 100%				
+				<input type="checkbox" id="show-100" /> Show 100%
             </div>
           </div>
 
@@ -131,10 +131,10 @@
             <div class="col-sm-2"></div>
 
             <div class="col-sm-10">
-	            
+
 	            <div id="floor-map-container" style="overflow: scroll; width: 100%;">
 
-					<div id="floor-map" class="map" style="background-image: url({{ $location->floor->image }}?random={{ str_random(60) }}); background-size: cover; cursor: crosshair; overflow: hidden; position: relative; width: 100%; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">
+					<div id="floor-map" class="map" style="background-image: url({{ $location->floor->getVirtualIconPath() }}?random={{ str_random(60) }}); background-size: cover; cursor: crosshair; overflow: hidden; position: relative; width: 100%; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;">
 						<img id="floor-findable" src="{{URL::asset('/img/font-awesome-dot-circle-o.png')}}" style="cursor: move; position: absolute;" />
 					</div>
 
@@ -173,13 +173,13 @@ function calculate_icon_position_x ( posX ) {
 }
 
 function calculate_icon_position_y ( posY ) {
-	return Math.round( posY - ( ICON_HEIGHT / 2 ) );	
+	return Math.round( posY - ( ICON_HEIGHT / 2 ) );
 }
 
 function floor_map () {
 
-	var floor_map_width = $( '#floor-map-container' ).width();		
-		
+	var floor_map_width = $( '#floor-map-container' ).width();
+
 	ratio = floor_map_width / MAP_WIDTH;
 	var floor_map_height = Math.round( MAP_HEIGHT * ratio );
 
@@ -187,12 +187,12 @@ function floor_map () {
 
 	if ( $( '#show-100' ).is( ':checked') ) {
 		ratio = 1;
-		
+
 		$( '#floor-map' ).css( {
 			'height' : MAP_HEIGHT + 'px',
 			'width' : MAP_WIDTH + 'px'
 		} );
-		
+
 	} else {
 		$( '#floor-map' ).css( {
 			'height' : floor_map_height + 'px',
@@ -218,18 +218,18 @@ $( document ).ready( function ( ) {
 
 	$( '#show-100' ).click( function () {
 		floor_map();
-	} );	
-	
+	} );
+
 	$( '#posX' ).keyup( function() {
 		floor_map();
 	} );
-	
+
 	$( '#posY' ).keyup( function() {
 		floor_map();
 	} );
 
 	$( '#floor-map' ).dblclick( function ( event ) {
-		
+
 		var posX = Math.round( event.offsetX / ratio );
 		var posY = Math.round( event.offsetY / ratio );
 

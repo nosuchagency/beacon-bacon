@@ -16,7 +16,18 @@ class FloorController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->filteredAndOrdered($request, new Floor())->paginate($this->pageSize);
+
+        $floors = $this->filteredAndOrdered($request, new Floor())->paginate($this->pageSize);
+
+        foreach ($floors->items() as $floor) {
+            if ($floor->image) {
+                $floor->image = $floor->getPublicImage();
+            } else {
+                $floor->image = null;
+            }
+        }
+
+        return $floors;
     }
 
     /**
@@ -46,9 +57,11 @@ class FloorController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $place = Floor::findOrFail($id);
+        $floor = Floor::findOrFail($id);
 
-        return $this->attachResources($request, $place);
+        $floor->image = $floor->getPublicImage();
+
+        return $this->attachResources($request, $floor);
     }
 
     /**
@@ -62,14 +75,15 @@ class FloorController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'max:255',
-            'image' => 'image',
+            'name' => 'required|max:255',
+            'image' => 'required|image',
         ]);
 
-        $model = Floor::findOrFail($id);
-        $model->update($request->all());
+        $floor = Floor::findOrFail($id);
 
-        return $model;
+        $floor->update($request->all());
+
+        return $floor;
     }
 
     /**
@@ -81,7 +95,7 @@ class FloorController extends Controller
      */
     public function destroy($id)
     {
-        Floor::findOrFail($id)->delete();
+        $floor = Floor::findOrFail($id)->delete();
 
         return response('', 204);
     }

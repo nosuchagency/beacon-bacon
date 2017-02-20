@@ -20,6 +20,18 @@ The API (V1) documentation can be found [here](https://documenter.getpostman.com
 
 Our good friends [Mustache](http://mustache.dk/) has created an iOS app using Beacon Bacon, and put it on GitHub. It's not a SDK, but it's a very good start. Find it [here](https://github.com/mustachedk/beacon-bacon-ios). 
 
+## Findables custom plug-ins
+
+For people interested in integrating 3rd party services or rearranging data internally, Beacon Bacon comes with an extendable structure. When a user creates a Findable the user has the option of uploading a .php-file as well. This .php-file has to follow a very strict structure in order to function. However, if the core structure has been implemented, the possibilities are endless. The major structure rules are as follow:
+
+* The Namespace MUST be namespace BB\{YOURNAME}Plugin
+* The class HAS to {YOURNAME}Plugin
+* One public function called Findable()
+* The public function has to return an array or a json object
+* The rest is up to you.
+
+An example of such a file can be found in storage/app/files/findables/TestPlugin.php. Whenever **place/{{id}}/find** is called with a payload corresponding to the Identifier chosen when creating the Findable, the new functionality will be invoked. 
+
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Beacon Bacon, please send an e-mail to us at webmaster@nosuchagency.dk. All security vulnerabilities will be promptly addressed.

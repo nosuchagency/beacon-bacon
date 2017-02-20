@@ -34,7 +34,7 @@
 
             <div class="col-sm-10">
               @if($block->image)
-                <img src="{{ $block->image }}" alt="" />
+                <img src="{{ $block->getVirtualIconPath() }}" alt="" />
               @endif
               {!! Form::file('image', null, ['class' => 'form-control']) !!}
             </div>

@@ -17,7 +17,7 @@ class Location extends Model
      *
      * @var array
      */
-    protected $fillable = ['place_id', 'floor_id', 'poi_id', 'block_id', 'findable_id', 'type', 'name', 'posX', 'posY', 'area', 'rotation', 'parameter_one', 'parameter_two', 'parameter_three', 'parameter_four', 'parameter_five'];
+    protected $fillable = ['place_id', 'floor_id', 'poi_id', 'block_id', 'findable_id', 'type', 'name', 'posX', 'posY', 'area', 'rotation', 'parameter_one', 'parameter_two', 'parameter_three', 'parameter_four', 'parameter_five', 'draw_type'];
 
     /**
      * The attributes that should be mutated to dates.

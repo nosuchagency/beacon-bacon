@@ -58,10 +58,42 @@
           </div>          
           
           <div class="form-group">
-            {!! Form::label('identifier', 'Identifier', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('identifier_one', 'Identifier 1', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('identifier', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+              {!! Form::text('identifier_one', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier_two', 'Identifier 2', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier_two', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier_three', 'Identifier 3', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier_three', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier_four', 'Identifier 4', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier_four', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
+            </div>
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('identifier_five', 'Identifier 5', ['class' => 'col-sm-2 control-label']) !!}
+
+            <div class="col-sm-10">
+              {!! Form::text('identifier_five', null, ['class' => 'form-control', 'placeholder' => 'Enter an identifier if one such is needed']) !!}
             </div>
           </div>
           

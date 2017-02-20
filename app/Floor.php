@@ -67,9 +67,29 @@ class Floor extends Model
      *
      * @return string
      */
-    public function getImageAttribute($value)
+    public function getPublicImage()
     {
-        return !$value ? '' : asset('uploads/floors/'.$this->id.'/'.$value);
+        return !$this->image ? '' : asset('storage/images/floors/' . $this->id . '/' . $this->image);
+    }
+
+    /**
+     * Return full virtual path to icon.
+     *
+     * @return string
+     */
+    public function getVirtualIconPath()
+    {
+        return !$this->image ? '' :  url('/floors/' . $this->id . '/image');
+    }
+
+    /**
+     * Return full physical path to icon.
+     *
+     * @return string
+     */
+    public function getPhysicalIconPath()
+    {
+        return !$this->image ? '' :  storage_path() . '/app/images/floors/' . $this->id . '/' . $this->image;
     }
 
     /**

@@ -22,14 +22,14 @@ class ConfigLoader
         // check if user is logged in
         if (auth()->check()) {
             // get the settings in a nice key=>value format
-            $settings = Setting::lists('value', 'key');
+            $settings = Setting::pluck('value', 'key');
         }
         // check for email input (ie. forgot password)
         elseif ($request->input('email')) {
             $user = User::whereEmail($request->input('email'))->first();
 
             if ($user) {
-                $settings = Setting::withoutGlobalScopes()->whereTeamId($user->current_team_id)->lists('value', 'key');
+                $settings = Setting::withoutGlobalScopes()->whereTeamId($user->current_team_id)->pluck('value', 'key');
             }
         }
 

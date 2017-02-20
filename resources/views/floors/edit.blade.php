@@ -48,7 +48,7 @@
 
             <div class="col-sm-10">
               @if($floor->image)
-                <img src="{{ $floor->image }}" class="img-responsive" style="height: auto; width: 400px;" />
+                <img src="{{ $floor->getVirtualIconPath() }}" class="img-responsive" style="height: auto; width: 400px;" />
               @endif
               {!! Form::file('image', null, ['class' => 'form-control']) !!}
             </div>

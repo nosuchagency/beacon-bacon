@@ -66,7 +66,7 @@
 							{{ $floor->map_height_in_centimeters }}cm
 						</td>
 						<td style="width: 320px;">
-							<div style="background-image: url({{ $floor->image }}?random={{ str_random(60) }}); background-position: center center; background-repeat: no-repeat; background-size: contain; border: 1px solid #333; height: 360px; line-height: 360px; text-align: center; width: 320px;">
+							<div style="background-image: url({{ $floor->getVirtualIconPath() }}?random={{ str_random(60) }}); background-position: center center; background-repeat: no-repeat; background-size: contain; border: 1px solid #333; height: 360px; line-height: 360px; text-align: center; width: 320px;">
 								{{ $floor->map_pixel_to_centimeter_ratio }} ratio
 							</div>
 						</td>
@@ -177,22 +177,23 @@
       </div>
       <div class="box-body">
         @if($floor->image)
-		<div id="floor-map-preview" class="map" style="background-image: url({{ $floor->image }}?random={{ str_random(60) }}); background-size: cover; position: relative; width: 100%;">
+		<div id="floor-map-preview" class="map" style="background-image: url({{ $floor->getVirtualIconPath() }}?random={{ str_random(60) }}); background-size: cover; position: relative; width: 100%;">
 			<canvas id="floor-map-preview-canvas" style="left: 0; position: absolute; top: 0;"></canvas>
           @foreach($floor->locations as $index => $location)
 
 	          @if($location->poi && $location->poi->type == 'icon' )
-            <a class="poi-on-map-preview floor-map-preview-location poi titletip" data-height="-1" data-width="-1" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->icon }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="position: absolute;" title="POI: {{ $location->name }}">
-              <img src="{{ $location->poi->icon }}" style="height: 32px; width: auto;" />
+            <a class="poi-on-map-preview floor-map-preview-location poi titletip" data-height="-1" data-width="-1" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" src="{{ $location->poi->getVirtualIconPath() }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="position: absolute;" title="POI: {{ $location->name }}">
+              <img src="{{ $location->poi->getVirtualIconPath() }}" style="height: 32px; width: auto;" />
             </a>
 	          @elseif($location->poi && $location->poi->type == 'area' )
 			  	<span class="floor-map-preview-location titletip" data-hex="{{ $location->poi->color }}" data-position-area="{{ $location->area }}"></span>
 			  @elseif($location->type == 'beacon')
 			  	<a class="beacon-on-map-preview floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="background-image: url({{URL::asset('/img/font-awesome-bullseye.png')}}); display: block; height: 32px; position: absolute; width: 32px;" title="Beacon: {{ $location->beacon->name }}"></a>
-			  @elseif($location->type == 'findable')
+			  @elseif($location->type == 'findable' && ($location->draw_type == 'point' || empty($location->draw_type)))
 			  	<a class="findable-on-map-preview floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="background-image: url({{URL::asset('/img/font-awesome-dot-circle-o.png')}}); display: block; height: 32px; position: absolute; width: 32px;" title="Findable: {{ $location->name }}"></a>
-			  @endif
-
+                @elseif($location->type == 'findable' && $location->draw_type == 'area' )
+                    <span class="floor-map-preview-location titletip" data-hex="#c1f188" data-position-area="{{ $location->area }}"></span>
+				@endif
           @endforeach
         </div>
         @endif
