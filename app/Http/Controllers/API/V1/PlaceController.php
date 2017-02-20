@@ -22,7 +22,14 @@ class PlaceController extends Controller
     public function index(Request $request)
     {
         $request->request->add(['activated' => 1]);
-        return $this->filteredAndOrdered($request, new Place())->paginate($this->pageSize);
+
+        $places = $this->filteredAndOrdered($request, new Place())->paginate($this->pageSize);
+
+        foreach($places as $place) {
+            $place->identifier = $place->identifier_one;
+        }
+
+        return $places;
     }
 
     /**
@@ -181,6 +188,7 @@ class PlaceController extends Controller
         $place = Place::findOrFail($id);
 
         $place = $this->attachResources($request, $place);
+        $place->identifier = $place->identifier_one;
         foreach ($place->floors as $floor) {
 
             $floor->image = $floor->getPublicImage();
