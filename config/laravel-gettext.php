@@ -19,6 +19,7 @@ return [
      */
     'supported-locales' => [
         'en_US',
+        'da_DK'
     ],
 
     /**

@@ -4,8 +4,8 @@
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
-  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-  <li class="active">Findables</li>
+  <li><a href="/"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
+  <li class="active">{{__('Findables')}}</li>
 </ol>
 @endsection
 
@@ -14,9 +14,9 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">List</h3>
+          <h3 class="box-title">{{__('List')}}</h3>
 	      <div class="pull-right box-tools">
-	        <a href="{{ route('findables.create') }}" class="btn btn-success btn-sm"><i class="fa fa-dot-circle-o"></i> Add Findable</a>
+	        <a href="{{ route('findables.create') }}" class="btn btn-success btn-sm"><i class="fa fa-dot-circle-o"></i> {{__('Add Findable')}}</a>
 	      </div>          
         </div>
         <div class="box-body no-padding">
@@ -24,8 +24,8 @@
               <tbody>
                 <tr>
                   <th style="width: 10px">#</th>
-                  <th>Name</th>
-                  <th>Identifier</th>
+                  <th>{{__('Name')}}</th>
+                  <th>{{__('Identifier')}}</th>
                   <th class="text-right"></th>
                 </tr>
               @foreach($findables as $index => $findable)
@@ -36,7 +36,7 @@
                   <td class="text-right">
                     {!! Form::open(['route' => ['findables.destroy', $findable->id], 'method' => 'DELETE']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                    <a href="{{ route('findables.edit', $findable->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{{ route('findables.edit', $findable->id) }}" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
                     {!! Form::close() !!}
                   </td>
                 </tr>

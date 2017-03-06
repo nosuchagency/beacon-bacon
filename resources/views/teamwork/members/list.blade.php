@@ -7,15 +7,15 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
-                    Account users
+                    {{__('Account users')}}
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th class="text-right">Action</th>
+                            <th>{{__('Name')}}</th>
+                            <th>{{__('Status')}}</th>
+                            <th class="text-right">{{__('Action')}}</th>
                         </tr>
                         </thead>
                         @foreach($team->users AS $user)
@@ -23,9 +23,9 @@
                                 <td>{{$user->name}}</td>
                                 <td>
                                     @if($user->isOwnerOfTeam($team))
-                                        <span class="label label-success">Owner</span>
+                                        <span class="label label-success">{{__('Owner')}}</span>
                                     @else
-                                        <span class="label label-primary">Member</span>
+                                        <span class="label label-primary">{{__('Member')}}</span>
                                     @endif
                                 </td>
                                 <td class="text-right">
@@ -34,7 +34,7 @@
                                         <form style="display: inline-block;" action="{{route('teams.members.uninvite', [$user])}}" method="post">
                                             {!! csrf_field() !!}
                                             <input type="hidden" name="_method" value="DELETE" />
-                                            <button class="btn btn-warning btn-sm"><i class="fa fa-trash-o"></i> Remove from team</button>
+                                            <button class="btn btn-warning btn-sm"><i class="fa fa-trash-o"></i> {{__('Remove from team')}}</button>
                                         </form>
                                     @endif
 
@@ -44,7 +44,7 @@
                                         <form style="display: inline-block;" action="{{route('teams.members.destroy', [$user])}}" method="post">
                                             {!! csrf_field() !!}
                                             <input type="hidden" name="_method" value="DELETE" />
-                                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete user</button>
+                                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> {{__('Delete user')}}</button>
                                         </form>
                                     @endif
                                 </td>
@@ -56,13 +56,13 @@
 
             @if($team->invites->count())
             <div class="panel panel-default">
-                <div class="panel-heading clearfix">Pending invitations</div>
+                <div class="panel-heading clearfix">{{__('Pending invitations')}}</div>
                 <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>E-Mail</th>
-                            <th class="text-right">Action</th>
+                            <th>{{__('E-Mail')}}</th>
+                            <th class="text-right">{{__('Action')}}</th>
                         </tr>
                         </thead>
                         @foreach($team->invites AS $invite)
@@ -70,12 +70,12 @@
                                 <td>{{$invite->email}}</td>
                                 <td class="text-right">
                                     <a href="{{route('teams.members.resend_invite', $invite)}}" class="btn btn-sm btn-default">
-                                        <i class="fa fa-envelope-o"></i> Resend invite
+                                        <i class="fa fa-envelope-o"></i> {{__('Resend invite')}}
                                     </a>
                                     <form style="display: inline-block;" action="{{route('teams.members.delete_invite', [$invite])}}" method="post">
                                         {!! csrf_field() !!}
                                         <input type="hidden" name="_method" value="DELETE" />
-                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
+                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> {{__('Delete')}}</button>
                                     </form>
                                 </td>
                             </tr>
@@ -86,12 +86,12 @@
             @endif
 
             <div class="panel panel-default">
-                <div class="panel-heading clearfix">Invite user</div>
+                <div class="panel-heading clearfix">{{__('Invite user')}}</div>
                 <div class="panel-body">
                     <form class="form-horizontal" method="post" action="{{route('teams.members.invite', $team)}}">
                         {!! csrf_field() !!}
                         <div class="form-group">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+                            <label class="col-md-4 control-label">{{__('E-Mail Address')}}</label>
 
                             <div class="col-md-6">
                                 <input type="email" class="form-control" name="email" value="{{ old('email') }}">
@@ -100,7 +100,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-envelope-o"></i> Invite to Team
+                                    <i class="fa fa-btn fa-envelope-o"></i> {{__('Invite to Team')}}
                                 </button>
                             </div>
                         </div>
@@ -109,33 +109,33 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading clearfix">Create user</div>
+                <div class="panel-heading clearfix">{{__('Create user')}}</div>
                 <div class="panel-body">
                     <form class="form-horizontal" method="post" action="{{route('teams.members.store')}}">
                         {!! csrf_field() !!}
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Name</label>
+                            <label class="col-md-4 control-label">{{__('Name')}}</label>
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+                            <label class="col-md-4 control-label">{{__('E-Mail Address')}}</label>
 
                             <div class="col-md-6">
                                 <input type="email" class="form-control" name="email" value="{{ old('email') }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Password</label>
+                            <label class="col-md-4 control-label">{{__('Password')}}</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password" placeholder="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Re-type password</label>
+                            <label class="col-md-4 control-label">{{__('Re-type password')}}</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password_confirmation" placeholder="">
@@ -144,7 +144,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-envelope-o"></i> Create user
+                                    <i class="fa fa-btn fa-envelope-o"></i> {{__('Create user')}}
                                 </button>
                             </div>
                         </div>

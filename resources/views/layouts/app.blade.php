@@ -46,7 +46,7 @@ desired effect
 
             @if(isset($errors) && count($errors))
             <div class="callout callout-danger">
-                <h4><strong>Whoops!</strong> There were some problems with your input.</h4>
+                <h4><strong>{{__('Whoops!')}}</strong> {{__('There were some problems with your input.')}}</h4>
                 <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>

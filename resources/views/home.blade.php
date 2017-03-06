@@ -12,7 +12,7 @@
 				<div class="small-box bg-aqua">
 					<div class="inner">
 						<h3>{{ $places }}</h3>
-						<p>Places</p>
+						<p>{{__('Places')}}</p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-globe"></i>
@@ -25,7 +25,7 @@
 				<div class="small-box bg-red">
 					<div class="inner">
 						<h3>{{ $floors }}</h3>
-						<p>Floors</p>
+						<p>{{__('Floors')}}</p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-clone"></i>
@@ -38,7 +38,7 @@
 				<div class="small-box bg-green">
 					<div class="inner">
 						<h3>{{ $locations }}</h3>
-						<p>Locations</p>
+						<p>{{__('Locations')}}</p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-map-marker"></i>
@@ -51,7 +51,7 @@
 				<div class="small-box bg-blue">
 					<div class="inner">
 						<h3>{{ $beacons }}</h3>
-						<p>Beacons</p>
+						<p>{{__('Beacons')}}</p>
 					</div>
 					<div class="icon">
 						<i class="fa fa-exclamation-circle"></i>

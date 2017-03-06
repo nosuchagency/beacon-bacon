@@ -4,10 +4,10 @@
 
 @section('breadcrumbs')
     <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('pois.index') }}">Point of Interests</a></li>
+        <li><a href="/"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
+        <li><a href="{{ route('pois.index') }}">{{__('Point of Interests')}}</a></li>
         <li><a href="{{ route('pois.show', $poi->name) }}">{{ $poi->name }}</a></li>
-        <li class="active">Editing</li>
+        <li class="active">{{__('Editing')}}</li>
     </ol>
 @endsection
 
@@ -16,28 +16,28 @@
         <div class="col-sm-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Details</h3>
+                    <h3 class="box-title">{{__('Details')}}</h3>
                 </div>
                 {!! Form::open(['route' => ['pois.update', $poi->id], 'method' => 'PUT', 'class' => 'form-horizontal', 'files' => true]) !!}
                 <div class="box-body">
                     <div class="form-group">
-                        {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
+                        {!! Form::label('name', __('Name'), ['class' => 'col-sm-2 control-label']) !!}
 
                         <div class="col-sm-10">
-                            {!! Form::text('name', $poi->name, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
+                            {!! Form::text('name', $poi->name, ['class' => 'form-control', 'placeholder' => __('Enter name')]) !!}
                         </div>
                     </div>
 
                     <div class="form-group">
-                        {!! Form::label('internal_name', 'Internal name', ['class' => 'col-sm-2 control-label']) !!}
+                        {!! Form::label('internal_name', __('Internal name'), ['class' => 'col-sm-2 control-label']) !!}
 
                         <div class="col-sm-10">
-                            {!! Form::text('internal_name', $poi->internal_name, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
+                            {!! Form::text('internal_name', $poi->internal_name, ['class' => 'form-control', 'placeholder' => __('Enter name')]) !!}
                         </div>
                     </div>
 
                     <div class="form-group">
-                        {!! Form::label('type', 'Type', ['class' => 'col-sm-2 control-label']) !!}
+                        {!! Form::label('type', __('Type'), ['class' => 'col-sm-2 control-label']) !!}
 
                         <div class="col-sm-10">
                             {!! Form::select('type', $types, $poi->type, ['class' => 'form-control']) !!}
@@ -45,7 +45,7 @@
                     </div>
 
                     <div id="icon_field_group" class="form-group">
-                        {!! Form::label('icon', 'Icon', ['class' => 'col-sm-2 control-label']) !!}
+                        {!! Form::label('icon', __('Icon'), ['class' => 'col-sm-2 control-label']) !!}
 
                         <div class="col-sm-10">
                             @if($poi->icon)
@@ -56,17 +56,17 @@
                     </div>
 
                     <div id="color_field_group" class="form-group">
-                        {!! Form::label('color', 'Color', ['class' => 'col-sm-2 control-label']) !!}
+                        {!! Form::label('color', __('Color'), ['class' => 'col-sm-2 control-label']) !!}
 
                         <div class="col-sm-10">
-                            {!! Form::text('color', $poi->color, ['class' => 'form-control', 'placeholder' => 'Enter area color in hex - fx. #ff0000']) !!}
+                            {!! Form::text('color', $poi->color, ['class' => 'form-control', 'placeholder' => __('Enter area color in hex - fx. #ff0000')]) !!}
                         </div>
                     </div>
 
                 </div>
                 <div class="box-footer">
-                    <a href="{{ route('pois.index') }}" class="btn btn-default">Cancel</a>
-                    <button type="submit" class="btn btn-info pull-right">Save</button>
+                    <a href="{{ route('pois.index') }}" class="btn btn-default">{{__('Cancel')}}</a>
+                    <button type="submit" class="btn btn-info pull-right">{{__('Save')}}</button>
                 </div>
                 {!! Form::close() !!}
             </div>
