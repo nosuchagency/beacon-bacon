@@ -18,7 +18,7 @@ class Place extends Model
      * @var array
      */
     protected $fillable = ['name', 'address', 'zipcode', 'city',
-        'identifier_one', 'identifier_one', 'identifier_three', 'identifier_four', 'identifier_five',
+        'identifier_one', 'identifier_two', 'identifier_three', 'identifier_four', 'identifier_five',
         'place_id', 'order', 'beacon_positioning_enabled', 'beacon_proximity_enabled', 'activated'];
 
     /**
