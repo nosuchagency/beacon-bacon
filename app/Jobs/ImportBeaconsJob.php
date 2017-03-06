@@ -15,15 +15,17 @@ class ImportBeaconsJob implements ShouldQueue
     use InteractsWithQueue, Queueable, SerializesModels;
 
     protected $service;
+    protected $teamId;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($service)
+    public function __construct($service, $teamId)
     {
         $this->service = $service;
+        $this->teamId = $teamId;
     }
 
     /**
@@ -48,14 +50,15 @@ class ImportBeaconsJob implements ShouldQueue
                         'minor' => $device->minor,
                         'major' => $device->major,
                         'created_at' => Carbon::now()->toDateTimeString(),
-                        'updated_at' => Carbon::now()->toDateTimeString()
+                        'updated_at' => Carbon::now()->toDateTimeString(),
+                        'team_id' => $this->teamId
                     ]);
+                    echo "Beacon oprettet!";
                 } catch (\Exception $e) {
                     echo $e;
                 }
 
             } else {
-                echo "tom!";
             }
         }
 
@@ -114,7 +117,7 @@ class ImportBeaconsJob implements ShouldQueue
         ]);
 
         try {
-            $response = $client->request('GET', '/device?maxResult=5');
+            $response = $client->request('GET', '/device?maxResult=2000');
             $results = json_decode($response->getBody()->getContents());
             $devices = collect();
 
