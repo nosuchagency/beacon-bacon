@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('htmlheader_title')
-    Password reset
+    {{__('Password reset')}}
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
     <body class="login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ route('home') }}"><b>Beacon</b>Bacon</a>
+            <a href="{{ route('home') }}"><b>{{__('Beacon')}}</b>{{__('Bacon')}}</a>
         </div><!-- /.login-logo -->
 
         @if (session('status'))
@@ -20,7 +20,7 @@
 
         @if (count($errors) > 0)
             <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <strong>{{__('Whoops!')}}</strong> {{__('There were some problems with your input.')}}<br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -30,7 +30,7 @@
         @endif
 
         <div class="login-box-body">
-            <p class="login-box-msg">Reset password</p>
+            <p class="login-box-msg">{{__('Reset password')}}</p>
             <form action="{{ url('/password/reset') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="token" value="{{ $token }}">
@@ -53,7 +53,7 @@
                     <div class="col-xs-2">
                     </div><!-- /.col -->
                     <div class="col-xs-8">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Reset password</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">{{__('Reset password')}}</button>
                     </div><!-- /.col -->
                     <div class="col-xs-2">
                     </div><!-- /.col -->
@@ -61,7 +61,7 @@
             </form>
 
             <a href="{{ url('/login') }}">Log in</a><br>
-            <a href="{{ url('/register') }}" class="text-center">I already have an account</a>
+            <a href="{{ url('/register') }}" class="text-center">{{__('I already have an account')}}</a>
 
         </div><!-- /.login-box-body -->
 

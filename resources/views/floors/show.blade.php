@@ -4,8 +4,8 @@
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
-  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-  <li><a href="{{ route('places.index') }}">Places</a></li>
+  <li><a href="/"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
+  <li><a href="{{ route('places.index') }}">{{__('Places')}}</a></li>
   <li><a href="{{ route('places.show', $floor->place_id) }}">{{ $floor->place->name }}</a></li>
   <li class="active">{{ $floor->name }}</li>
 </ol>
@@ -16,7 +16,7 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Details</h3>
+          <h3 class="box-title">{{__('Details')}}</h3>
         </div>
         <div class="box-body">
 
@@ -25,7 +25,7 @@
 
 	          <div class="row">
 	            <div class="col-sm-2">
-	              <strong>Place</strong>
+	              <strong>{{__('Place')}}</strong>
 	            </div>
 	            <div class="col-sm-10">
 	              {{ $floor->place->name }}
@@ -34,7 +34,7 @@
 
 	          <div class="row">
 	            <div class="col-sm-2">
-	              <strong>Name</strong>
+	              <strong>{{__('Name')}}</strong>
 	            </div>
 	            <div class="col-sm-10">
 	              {{ $floor->name }}
@@ -43,7 +43,7 @@
 
 	          <div class="row">
 	            <div class="col-sm-2">
-	              <strong>Floor no.</strong>
+	              <strong>{{__('Floor no.')}}</strong>
 	            </div>
 	            <div class="col-sm-10">
 	              {{ $floor->order }}
@@ -57,21 +57,21 @@
 					<tr style="height: 20px;">
 						<td style="width: 40px;"></td>
 						<td style="text-align: center; width: 320px;">
-							{{ $floor->map_width_in_centimeters }}cm
+							{{ $floor->map_width_in_centimeters }}{{__('cm')}}
 						</td>
 						<td style="width: 40px;"></td>
 					</tr>
 					<tr style="height: 360px;">
 						<td style="width: 40px;">
-							{{ $floor->map_height_in_centimeters }}cm
+							{{ $floor->map_height_in_centimeters }}{{__('cm')}}
 						</td>
 						<td style="width: 320px;">
 							<div style="background-image: url({{ $floor->getVirtualIconPath() }}?random={{ str_random(60) }}); background-position: center center; background-repeat: no-repeat; background-size: contain; border: 1px solid #333; height: 360px; line-height: 360px; text-align: center; width: 320px;">
-								{{ $floor->map_pixel_to_centimeter_ratio }} ratio
+								{{ $floor->map_pixel_to_centimeter_ratio }} {{__('ratio')}}
 							</div>
 						</td>
 						<td style="width: 40px;">
-			              {{ $floor->map_height_in_pixels }}px
+			              {{ $floor->map_height_in_pixels }}{{__('px')}}
 						</td>
 					</tr>
 					<tr style="height: 20px;">
@@ -79,7 +79,7 @@
 
 						</td>
 						<td style="text-align: center; width: 320px;">
-							{{ $floor->map_width_in_pixels }}px
+							{{ $floor->map_width_in_pixels }}{{__('px')}}
 						</td>
 						<td style="width: 40px;"></td>
 					</tr>
@@ -90,8 +90,8 @@
 
         </div>
         <div class="box-footer">
-          <a href="{{ route('places.show', $placeId) }}" class="btn btn-default">Back</a>
-          <a href="{{ route('floors.edit', [$placeId, $floor->id]) }}" class="btn btn-info pull-right">Edit</a>
+          <a href="{{ route('places.show', $placeId) }}" class="btn btn-default">{{__('Back')}}</a>
+          <a href="{{ route('floors.edit', [$placeId, $floor->id]) }}" class="btn btn-info pull-right">{{__('Edit')}}</a>
         </div>
       </div>
   </div>
@@ -101,29 +101,29 @@
   <div class="col-sm-12">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Locations</h3>
+        <h3 class="box-title">{{__('Locations')}}</h3>
         <div class="pull-right box-tools">
 
-          <input type="checkbox" value="Yes" id="hide_pois_checkbox" /> <span style="margin: 0 25px 0 5px">Hide POIs</span>
-          <input type="checkbox" value="Yes" id="hide_findables_checkbox" /> <span style="margin: 0 25px 0 5px">Hide Findables</span>
-          <input type="checkbox" value="Yes" id="hide_blocks_checkbox" /> <span style="margin: 0 25px 0 5px">Hide Blocks</span>
-          <input type="checkbox" value="Yes" id="hide_beacons_checkbox" /> <span style="margin: 0 25px 0 5px">Hide Beacons</span>
+          <input type="checkbox" value="Yes" id="hide_pois_checkbox" /> <span style="margin: 0 25px 0 5px">{{__('Hide POIs')}}</span>
+          <input type="checkbox" value="Yes" id="hide_findables_checkbox" /> <span style="margin: 0 25px 0 5px">{{__('Hide Findables')}}</span>
+          <input type="checkbox" value="Yes" id="hide_blocks_checkbox" /> <span style="margin: 0 25px 0 5px">{{__('Hide Blocks')}}</span>
+          <input type="checkbox" value="Yes" id="hide_beacons_checkbox" /> <span style="margin: 0 25px 0 5px">{{__('Hide Beacons')}}</span>
 
-          <a href="{{ route('locations.create', [$placeId, $floor->id, 'poi']) }}" class="btn btn-success btn-sm"><i class="fa fa-map-marker"></i> Add POI</a>
-          <a href="{{ route('locations.create', [$placeId, $floor->id, 'findable']) }}" class="btn btn-success btn-sm"><i class="fa fa-dot-circle-o"></i> Add Findable</a>
-          <a href="{{ route('locations.create', [$placeId, $floor->id, 'block']) }}" class="btn btn-success btn-sm"><i class="fa fa-square"></i> Add Block</a>
-          <a href="{{ route('locations.create', [$placeId, $floor->id, 'beacon']) }}" class="btn btn-success btn-sm"><i class="fa fa-bullseye"></i> Add Beacon</a>
+          <a href="{{ route('locations.create', [$placeId, $floor->id, 'poi']) }}" class="btn btn-success btn-sm"><i class="fa fa-map-marker"></i> {{__('Add POI')}}</a>
+          <a href="{{ route('locations.create', [$placeId, $floor->id, 'findable']) }}" class="btn btn-success btn-sm"><i class="fa fa-dot-circle-o"></i> {{__('Add Findable')}}</a>
+          <a href="{{ route('locations.create', [$placeId, $floor->id, 'block']) }}" class="btn btn-success btn-sm"><i class="fa fa-square"></i> {{__('Add Block')}}</a>
+          <a href="{{ route('locations.create', [$placeId, $floor->id, 'beacon']) }}" class="btn btn-success btn-sm"><i class="fa fa-bullseye"></i> {{__('Add Beacon')}}</a>
         </div>
       </div>
       <div class="box-body no-padding">
         <table class="table">
             <tbody>
               <tr>
-                <th>Name</th>
-                <th>POI</th>
-                <th>Beacon</th>
-                <th>Block</th>
-                <th>Findable</th>
+                <th>{{__('Name')}}</th>
+                <th>{{__('POI')}}</th>
+                <th>{{__('Beacon')}}</th>
+                <th>{{__('Block')}}</th>
+                <th>{{__('Findable')}}</th>
                 <th class="text-right"></th>
               </tr>
             @foreach($floor->locations as $index => $location)
@@ -145,19 +145,19 @@
                 @if($location->type == 'block')
                 <td>{{ $location->name or 'n/a' }}</td>
                 @else
-                <td>n/a</td>
+                <td>{{__('n/a')}}</td>
                 @endif
 
 				        @if($location->type == 'findable')
-                <td>{{ $location->name or 'n/a' }}</td>
+                <td>{{ $location->name or __('n/a') }}</td>
                 @else
-                <td>n/a</td>
+                <td>{{__('n/a')}}</td>
                 @endif
 
                 <td class="text-right">
                   {!! Form::open(['route' => ['locations.destroy', $placeId, $floor->id, $location->id], 'method' => 'DELETE']) !!}
                   {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                  <a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" class="btn btn-primary btn-sm">Edit</a>
+                  <a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
                   {!! Form::close() !!}
                 </td>
               </tr>
@@ -173,7 +173,7 @@
   <div class="col-sm-12">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Map Preview</h3>
+        <h3 class="box-title">{{__('Map Preview')}}</h3>
       </div>
       <div class="box-body">
         @if($floor->image)

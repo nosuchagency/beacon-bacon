@@ -4,12 +4,12 @@
 
 @section('breadcrumbs')
     <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('places.index') }}">Places</a></li>
+        <li><a href="/"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
+        <li><a href="{{ route('places.index') }}">{{__('Places')}}</a></li>
         <li><a href="{{ route('places.show', $placeId) }}">{{ $location->place->name }}</a></li>
         <li><a href="{{ route('floors.show', [$placeId, $floorId]) }}">{{ $location->floor->name }}</a></li>
         <li><a href="{{ route('locations.show', [$placeId, $floorId, $location->id]) }}">{{ $location->name }}</a></li>
-        <li class="active">Editing</li>
+        <li class="active">{{__('Editing')}}</li>
     </ol>
 @endsection
 
@@ -24,7 +24,7 @@
         <div class="col-sm-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Details</h3>
+                    <h3 class="box-title">{{__('Details')}}</h3>
                 </div>
                 <div class="box-body">
 
@@ -37,15 +37,15 @@
                     </div>
 
                     <div class="form-group">
-                        {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
+                        {!! Form::label('name', __('Name'), ['class' => 'col-sm-2 control-label']) !!}
 
                         <div class="col-sm-10">
-                            {!! Form::text('name', $location->name, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
+                            {!! Form::text('name', $location->name, ['class' => 'form-control', 'placeholder' => __('Enter name')]) !!}
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Parameters</h5>
+                        <h5 class="col-sm-2" style="font-size: 16px; text-align: right;">{{__('Parameters')}}</h5>
                         <div class="col-sm-10"></div>
                     </div>
 
@@ -54,7 +54,7 @@
                             {!! Form::label('parameter_one', $location->findable->parameter_one_name, ['class' => 'col-sm-2 control-label']) !!}
 
                             <div class="col-sm-10">
-                                {!! Form::text('parameter_one', $location->parameter_one, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_one_name]) !!}
+                                {!! Form::text('parameter_one', $location->parameter_one, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_one_name]) !!}
                             </div>
                         </div>
                     @endif
@@ -64,7 +64,7 @@
                             {!! Form::label('parameter_two', $location->findable->parameter_two_name, ['class' => 'col-sm-2 control-label']) !!}
 
                             <div class="col-sm-10">
-                                {!! Form::text('parameter_two', $location->parameter_two, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_two_name]) !!}
+                                {!! Form::text('parameter_two', $location->parameter_two, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_two_name]) !!}
                             </div>
                         </div>
                     @endif
@@ -74,7 +74,7 @@
                             {!! Form::label('parameter_three', $location->findable->parameter_three_name, ['class' => 'col-sm-2 control-label']) !!}
 
                             <div class="col-sm-10">
-                                {!! Form::text('parameter_three', $location->parameter_three, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_three_name]) !!}
+                                {!! Form::text('parameter_three', $location->parameter_three, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_three_name]) !!}
                             </div>
                         </div>
                     @endif
@@ -84,7 +84,7 @@
                             {!! Form::label('parameter_four', $location->findable->parameter_four_name, ['class' => 'col-sm-2 control-label']) !!}
 
                             <div class="col-sm-10">
-                                {!! Form::text('parameter_four', $location->parameter_four, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_four_name]) !!}
+                                {!! Form::text('parameter_four', $location->parameter_four, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_four_name]) !!}
                             </div>
                         </div>
                     @endif
@@ -94,18 +94,18 @@
                             {!! Form::label('parameter_five', $location->findable->parameter_five_name, ['class' => 'col-sm-2 control-label']) !!}
 
                             <div class="col-sm-10">
-                                {!! Form::text('parameter_five', $location->parameter_five, ['class' => 'form-control', 'placeholder' => 'Enter ' . $location->findable->parameter_five_name]) !!}
+                                {!! Form::text('parameter_five', $location->parameter_five, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_five_name]) !!}
                             </div>
                         </div>
                     @endif
 
                     <div class="form-group">
-                        <h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Location on Map</h5>
+                        <h5 class="col-sm-2" style="font-size: 16px; text-align: right;">{{__('Location on Map')}}</h5>
                         <div class="col-sm-10"></div>
                     </div>
 
                     <div class="form-group">
-                        {!! Form::label('area', 'Area', ['class' => 'col-sm-2 control-label']) !!}
+                        {!! Form::label('area', __('Area'), ['class' => 'col-sm-2 control-label']) !!}
 
                         <div class="col-sm-10">
                             {!! Form::text('area', $location->area, ['class' => 'form-control']) !!}
@@ -113,9 +113,9 @@
                     </div>
 
                     <div class="form-group">
-                        <h5 class="col-sm-2" style="font-size: 16px; text-align: right;">Draw Findable on Map</h5>
+                        <h5 class="col-sm-2" style="font-size: 16px; text-align: right;">{{__('Draw Findable on Map')}}</h5>
                         <div class="col-sm-10">
-                            <button type="button" class="btn btn-info pull-right" id="canvas_reset_button">Start Over
+                            <button type="button" class="btn btn-info pull-right" id="canvas_reset_button">{{__('Start Over')}}
                             </button>
                         </div>
                     </div>
@@ -136,8 +136,8 @@
 
                 </div>
                 <div class="box-footer">
-                    <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">Cancel</a>
-                    <button type="submit" class="btn btn-info pull-right">Save</button>
+                    <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">{{__('Cancel')}}</a>
+                    <button type="submit" class="btn btn-info pull-right">{{__('Save')}}</button>
                 </div>
             </div>
         </div>

@@ -4,8 +4,8 @@
 
 @section('breadcrumbs')
     <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('places.index') }}">Places</a></li>
+        <li><a href="/"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
+        <li><a href="{{ route('places.index') }}">{{__('Places')}}</a></li>
         <li class="active">{{ $place->name }}</li>
     </ol>
 @endsection
@@ -15,7 +15,7 @@
         <div class="col-sm-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Details</h3>
+                    <h3 class="box-title">{{__('Detail')}}</h3>
                 </div>
                 <div class="box-body">
 
@@ -23,7 +23,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <strong>Name</strong>
+                                    <strong>{{__('Name')}}</strong>
                                 </div>
                                 <div class="col-sm-10">
                                     {{ $place->name }}
@@ -32,7 +32,7 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <strong>Address</strong>
+                                    <strong>{{__('Address')}}</strong>
                                 </div>
                                 <div class="col-sm-10">
                                     {{ $place->address }}
@@ -41,7 +41,7 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <strong>ZIP Code</strong>
+                                    <strong>{{__('ZIP Code')}}</strong>
                                 </div>
                                 <div class="col-sm-10">
                                     {{ $place->zipcode }}
@@ -50,7 +50,7 @@
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <strong>City</strong>
+                                    <strong>{{__('City')}}</strong>
                                 </div>
                                 <div class="col-sm-10">
                                     {{ $place->city }}
@@ -63,7 +63,7 @@
 
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Identifier 1</strong>
+                                    <strong>{{__('Identifier 1')}}</strong>
                                 </div>
                                 <div class="col-sm-8">
                                     {{ $place->identifier_one }}
@@ -71,7 +71,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Identifier 2</strong>
+                                    <strong>{{__('Identifier 2')}}</strong>
                                 </div>
                                 <div class="col-sm-8">
                                     {{ $place->identifier_two }}
@@ -79,7 +79,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Identifier 3</strong>
+                                    <strong>{{__('Identifier 3')}}</strong>
                                 </div>
                                 <div class="col-sm-8">
                                     {{ $place->identifier_three }}
@@ -87,7 +87,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Identifier 4</strong>
+                                    <strong>{{__('Identifier 4')}}</strong>
                                 </div>
                                 <div class="col-sm-8">
                                     {{ $place->identifier_four }}
@@ -95,7 +95,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Identifier 5</strong>
+                                    <strong>{{__('Identifier 5')}}</strong>
                                 </div>
                                 <div class="col-sm-8">
                                     {{ $place->identifier_five }}
@@ -104,7 +104,7 @@
 
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Parent Place</strong>
+                                    <strong>{{__('Parent Place')}}</strong>
                                 </div>
                                 <div class="col-sm-8">
                                     {{ $place->parent_place }}
@@ -113,7 +113,7 @@
 
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Menu Order</strong>
+                                    <strong>{{__('Menu Order')}}</strong>
                                 </div>
                                 <div class="col-sm-8">
                                     {{ $place->order }}
@@ -122,7 +122,7 @@
 
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Enable Positioning</strong>
+                                    <strong>{{__('Enable Positioning')}}</strong>
                                 </div>
                                 <div class="col-sm-8">
                                     {{ $place->beacon_positioning_enabled }}
@@ -131,7 +131,7 @@
 
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Enable Proximity</strong>
+                                    <strong>{{__('Enable Proximity')}}</strong>
                                 </div>
                                 <div class="col-sm-8">
                                     {{ $place->beacon_proximity_enabled }}
@@ -139,7 +139,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <strong>Activated</strong>
+                                    <strong>{{__('Activated')}}</strong>
                                 </div>
                                 <div class="col-sm-8">
                                     {{ $place->activated }}
@@ -153,7 +153,7 @@
 
                 </div>
                 <div class="box-footer">
-                    <a href="{{ route('places.edit', $place->id) }}" class="btn btn-info pull-right">Edit</a>
+                    <a href="{{ route('places.edit', $place->id) }}" class="btn btn-info pull-right">{{__('Edit')}}</a>
                 </div>
             </div>
         </div>
@@ -163,10 +163,10 @@
         <div class="col-sm-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Floors</h3>
+                    <h3 class="box-title">{{__('Floors')}}</h3>
                     <div class="pull-right box-tools">
                         <a href="{{ route('floors.create', $place->id) }}" class="btn btn-success btn-sm"><i
-                                    class="fa fa-plus"></i> Add floor</a>
+                                    class="fa fa-plus"></i> {{__('Add floor')}}</a>
                     </div>
                 </div>
                 <div class="box-body no-padding">
@@ -174,9 +174,9 @@
                         <tbody>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Name</th>
-                            <th>Floor no.</th>
-                            <th>Locations</th>
+                            <th>{{__('Name')}}</th>
+                            <th>{{__('Floor no.')}}</th>
+                            <th>{{__('Locations')}}</th>
                             <th class="text-right"></th>
                         </tr>
                         @foreach($place->floors as $index => $floor)
@@ -191,7 +191,7 @@
                                     {!! Form::open(['route' => ['floors.destroy', $place->id, $floor->id], 'method' => 'DELETE']) !!}
                                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
                                     <a href="{{ route('floors.edit', [$place->id, $floor->id]) }}"
-                                       class="btn btn-info btn-sm">Edit</a>
+                                       class="btn btn-info btn-sm">{{__('Edit')}}</a>
                                     {!! Form::close() !!}
                                 </td>
                             </tr>
@@ -207,7 +207,7 @@
         <div class="col-sm-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Menu</h3>
+                    <h3 class="box-title">{{__('Menu')}}</h3>
                 </div>
                 <div class="box-body">
                     <ul id="menu-list" class="todo-list ui-sortable">
@@ -234,25 +234,25 @@
         <div class="col-sm-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Add menu item</h3>
+                    <h3 class="box-title">{{__('Add menu item')}}</h3>
                 </div>
                 {!! Form::open(['route' => ['menu.store', $place->id], 'method' => 'POST']) !!}
                 <div class="box-body">
                     <div class="form-group">
-                        {!! Form::label('type', 'Type') !!}
+                        {!! Form::label('type', __('Type')) !!}
                         {!! Form::select('type', ['poi' => 'POI', 'title' => 'Title'], null, ['class' => 'form-control', 'id' => 'menu-item-type']) !!}
                     </div>
                     <div class="form-group" id="poi-type">
-                        {!! Form::label('poi', 'POI') !!}
+                        {!! Form::label('poi', __('POI')) !!}
                         {!! Form::select('poi', $pois, '', ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group" id="title-type" style="display: none">
-                        {!! Form::label('title', 'Title') !!}
+                        {!! Form::label('title', __('Title')) !!}
                         {!! Form::text('title', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-info pull-right">Add</button>
+                    <button type="submit" class="btn btn-info pull-right">{{__('Add')}}</button>
                 </div>
                 {!! Form::close() !!}
             </div>

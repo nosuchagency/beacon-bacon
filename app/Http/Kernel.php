@@ -34,6 +34,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\ConfigLoader::class,
             \Xinax\LaravelGettext\Middleware\GettextMiddleware::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Xinax\LaravelGettext\Middleware\GettextMiddleware::class,
         ],
 
         'api' => [

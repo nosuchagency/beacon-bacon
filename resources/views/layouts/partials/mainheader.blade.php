@@ -6,21 +6,21 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>B</b>A</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Bacon</b>Admin</span>
+        <span class="logo-lg"><b>{{__('Bacon')}}</b>{{__('Admin')}}</span>
     </a>
 
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
         <!-- Sidebar toggle button-->
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">{{__('Toggle navigation')}}</span>
         </a>
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 @if (Auth::guest())
-                    <li><a href="{{ url('/register') }}">Register</a></li>
-                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/register') }}">{{__('Register')}}</a></li>
+                    <li><a href="{{ url('/login') }}">{{__('Login')}}</a></li>
                 @else
                     {{--@if(Auth::user()->teams()->count() > 1)
                     <li class="dropdown notifications-menu">
@@ -61,16 +61,16 @@
                                 <img src="{{asset('/img/avatar5.png')}}" class="img-circle" alt="User Image" />
                                 <p>
                                     {{ Auth::user()->name }}
-                                    <small>Login {{ date('j. F Y') }}</small>
+                                    <small>{{__('Login')}} {{ date('j. F Y') }}</small>
                                 </p>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ route('profile') }}" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ route('profile') }}" class="btn btn-default btn-flat">{{__('Profile')}}</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">{{__('Sign out')}}</a>
                                 </div>
                             </li>
                         </ul>

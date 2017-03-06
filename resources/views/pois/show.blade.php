@@ -4,8 +4,8 @@
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
-  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-  <li><a href="{{ route('pois.index') }}">Point of Interests</a></li>
+  <li><a href="/"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
+  <li><a href="{{ route('pois.index') }}">{{__('Point of Interests')}}</a></li>
   <li class="active">{{ $poi->name }}</li>
 </ol>
 @endsection
@@ -15,12 +15,12 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">POI details</h3>
+          <h3 class="box-title">{{__('POI details')}}</h3>
         </div>
         <div class="box-body">
           <div class="row">
             <div class="col-sm-2">
-              <strong>Name</strong>
+              <strong>{{__('Name')}}</strong>
             </div>
             <div class="col-sm-10">
               {{ $poi->name }}
@@ -28,7 +28,7 @@
           </div>
           <div class="row">
             <div class="col-sm-2">
-              <strong>Internal name</strong>
+              <strong>{{__('Internal name')}}</strong>
             </div>
             <div class="col-sm-10">
               {{ $poi->internal_name }}
@@ -36,7 +36,7 @@
           </div>
           <div class="row">
             <div class="col-sm-2">
-              <strong>Icon</strong>
+              <strong>{{__('Icon')}}</strong>
             </div>
             <div class="col-sm-10">
               @if($poi->icon)
@@ -46,8 +46,8 @@
           </div>
         </div>
         <div class="box-footer">
-          <a href="{{ route('pois.index') }}" class="btn btn-default">Back</a>
-          <a href="{{ route('pois.edit', $poi->id) }}" class="btn btn-info pull-right">Edit</a>
+          <a href="{{ route('pois.index') }}" class="btn btn-default">{{__('Back')}}</a>
+          <a href="{{ route('pois.edit', $poi->id) }}" class="btn btn-info pull-right">{{__('Edit')}}</a>
         </div>
       </div>
   </div>

@@ -4,8 +4,8 @@
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
-  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-  <li><a href="{{ route('beacons.index') }}">Beacons</a></li>
+  <li><a href="/"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
+  <li><a href="{{ route('beacons.index') }}">{{__('Beacons')}}</a></li>
   <li class="active">{{ $beacon->name }}</li>
 </ol>
 @endsection
@@ -15,12 +15,12 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Beacon details</h3>
+          <h3 class="box-title">{{__('Beacon Details')}}</h3>
         </div>
         <div class="box-body">
           <div class="row">
             <div class="col-sm-2">
-              <strong>Beacon ID</strong>
+              <strong>{{__('Beacon ID')}}</strong>
             </div>
             <div class="col-sm-10">
               {{ $beacon->beacon_uid }}
@@ -28,7 +28,7 @@
           </div>
           <div class="row">
             <div class="col-sm-2">
-              <strong>Proximity UUID</strong>
+              <strong>{{__('Proximity UUID')}}</strong>
             </div>
             <div class="col-sm-10">
               {{ $beacon->proximity_uuid }}
@@ -36,7 +36,7 @@
           </div>
           <div class="row">
             <div class="col-sm-2">
-              <strong>Major</strong>
+              <strong>{{__('Major')}}</strong>
             </div>
             <div class="col-sm-10">
               {{ $beacon->major }}
@@ -44,7 +44,7 @@
           </div>
           <div class="row">
             <div class="col-sm-2">
-              <strong>Minor</strong>
+              <strong>{{__('Minor')}}</strong>
             </div>
             <div class="col-sm-10">
               {{ $beacon->minor }}
@@ -52,10 +52,10 @@
           </div>
           <div class="row">
             <div class="col-sm-2">
-              <strong>Place</strong>
+              <strong>{{__('Place')}}</strong>
             </div>
             <div class="col-sm-10">
-              {{ $beacon->place->name or 'Not assigned' }}
+              {{ $beacon->place->name or __('Not assigned') }}
             </div>
           </div>
           <div class="row">
@@ -63,12 +63,12 @@
               <strong>Floor</strong>
             </div>
             <div class="col-sm-10">
-              {{ $beacon->floor->name or 'Not assigned' }}
+              {{ $beacon->floor->name or __('Not assigned') }}
             </div>
           </div>
           <div class="row">
             <div class="col-sm-2">
-              <strong>Name</strong>
+              <strong>{{__('Name')}}</strong>
             </div>
             <div class="col-sm-10">
               {{ $beacon->name }}
@@ -76,7 +76,7 @@
           </div>
           <div class="row">
             <div class="col-sm-2">
-              <strong>Description</strong>
+              <strong>{{__('Description')}}</strong>
             </div>
             <div class="col-sm-10">
               {{ $beacon->description }}
@@ -84,8 +84,8 @@
           </div>
         </div>
         <div class="box-footer">
-          <a href="{{ route('beacons.index') }}" class="btn btn-default">Back</a>
-          <a href="{{ route('beacons.edit', $beacon->id) }}" class="btn btn-info pull-right">Edit</a>
+          <a href="{{ route('beacons.index') }}" class="btn btn-default">{{__('Back')}}</a>
+          <a href="{{ route('beacons.edit', $beacon->id) }}" class="btn btn-info pull-right">{{__('Edit')}}</a>
         </div>
       </div>
   </div>

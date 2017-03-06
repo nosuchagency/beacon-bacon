@@ -4,9 +4,9 @@
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
-  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-  <li><a href="{{ route('blocks.index') }}">Building Blocks</a></li>
-  <li class="active">Creating</li>
+  <li><a href="/"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
+  <li><a href="{{ route('blocks.index') }}">{{__('Building Blocks')}}</a></li>
+  <li class="active">{{__('Creating')}}</li>
 </ol>
 @endsection
 
@@ -15,21 +15,21 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Details</h3>
+          <h3 class="box-title">{{__('Details')}}</h3>
         </div>
         {!! Form::open(['route' => 'blocks.store', 'method' => 'POST', 'class' => 'form-horizontal', 'files' => true]) !!}
         <div class="box-body">
 
           <div class="form-group">
-            {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('name', __('Name'), ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
+              {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => __('Enter name')]) !!}
             </div>
           </div>
 
           <div id="icon_field_group" class="form-group">
-            {!! Form::label('image', 'Image', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('image', __('Image'), ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::file('image', null, ['class' => 'form-control']) !!}
@@ -38,8 +38,8 @@
 
         </div>
         <div class="box-footer">
-          <a href="{{ route('blocks.index') }}" class="btn btn-default">Cancel</a>
-          <button type="submit" class="btn btn-info pull-right">Save</button>
+          <a href="{{ route('blocks.index') }}" class="btn btn-default">{{__('Cancel')}}</a>
+          <button type="submit" class="btn btn-info pull-right">{{__('Save')}}</button>
         </div>
         {!! Form::close() !!}
       </div>
