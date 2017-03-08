@@ -26,7 +26,7 @@ class BlockController extends Controller
      */
     public function index()
     {
-        $blocks = Block::all();
+        $blocks = Block::all()->sortBy('name', SORT_NATURAL);
         return view('blocks.index', compact('blocks'));
     }
 
