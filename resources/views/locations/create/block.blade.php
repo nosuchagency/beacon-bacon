@@ -52,7 +52,7 @@
 
         </div>
         <div class="box-footer">
-          <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">{{__('Name')}}</a>
+          <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">{{__('Cancel')}}</a>
           <button type="submit" class="btn btn-info pull-right">{{__('Save')}}</button>
         </div>
       </div>
