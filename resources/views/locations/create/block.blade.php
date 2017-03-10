@@ -4,11 +4,11 @@
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
-  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-  <li><a href="{{ route('places.index') }}">Places</a></li>
+  <li><a href="/"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
+  <li><a href="{{ route('places.index') }}">{{__('Places')}}</a></li>
   <li><a href="{{ route('places.show', $placeId) }}">{{ $place->name }}</a></li>
   <li><a href="{{ route('floors.show', [$placeId, $floorId]) }}">{{ $floor->name }}</a></li>
-  <li class="active">Creating Building Block</li>
+  <li class="active">{{__('Creating Building Block')}}</li>
 </ol>
 @endsection
 
@@ -22,12 +22,12 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Details</h3>
+          <h3 class="box-title">{{__('Details')}}</h3>
         </div>
         <div class="box-body">
 
           <div class="form-group">
-            {!! Form::label('block_id', 'Building Block', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('block_id', __('Building Block'), ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::select('block_id', $blocks, null, ['class' => 'form-control']) !!}
@@ -35,7 +35,7 @@
           </div>
 
           <div class="form-group">
-            {!! Form::label('findable_id', 'Type', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('findable_id', __('Type'), ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::select('findable_id', $findables, null, ['class' => 'form-control']) !!}
@@ -43,17 +43,17 @@
           </div>
 
           <div class="form-group">
-            {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('name', __('Name'), ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
+              {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => __('Enter name')]) !!}
             </div>
           </div>
 
         </div>
         <div class="box-footer">
-          <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">Cancel</a>
-          <button type="submit" class="btn btn-info pull-right">Save</button>
+          <a href="{{ route('floors.show', [$placeId, $floorId]) }}" class="btn btn-default">{{__('Cancel')}}</a>
+          <button type="submit" class="btn btn-info pull-right">{{__('Save')}}</button>
         </div>
       </div>
   </div>

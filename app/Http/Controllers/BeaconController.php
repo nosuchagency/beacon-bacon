@@ -10,6 +10,7 @@ use App\Setting;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 
 class BeaconController extends Controller
 {
@@ -30,7 +31,7 @@ class BeaconController extends Controller
      */
     public function index()
     {
-        $beacons = Beacon::all();
+        $beacons = Beacon::all()->sortBy('name', SORT_NATURAL);
         return view('beacons.index', compact('beacons'));
     }
 
@@ -44,8 +45,7 @@ class BeaconController extends Controller
         $services = array(
             '' => 'Select Service',
             'kontakt.io' => 'Kontakt.io',
-            'estimote' => 'estimote',
-            'test' => 'test'
+            'estimote' => 'estimote'
         );
 
         return view('beacons.import', compact('services'));
@@ -69,7 +69,11 @@ class BeaconController extends Controller
 
         $service = $filtered->get('beacon-import-service');
 
-        dispatch(new ImportBeaconsJob($service));
+        $user = Auth::user();
+
+        $teamId = $user->currentTeam->id;
+
+        dispatch(new ImportBeaconsJob($service, $teamId));
 
         return redirect()->route('beacons.import');
     }

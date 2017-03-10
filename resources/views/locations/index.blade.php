@@ -4,11 +4,11 @@
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
-  <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-  <li><a href="{{ route('places.index') }}">Places</a></li>
+  <li><a href="/"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
+  <li><a href="{{ route('places.index') }}">{{__('Places')}}</a></li>
   <li><a href="{{ route('places.show', $placeId) }}">{{ $place->name }}</a></li>
   <li><a href="{{ route('floors.show', [$placeId, $floorId]) }}">{{ $floor->name }}</a></li>
-  <li class="active">Locations</li>
+  <li class="active">{{__('Locations')}}</li>
 </ol>
 @endsection
 
@@ -17,18 +17,18 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Location list</h3>
+          <h3 class="box-title">{{__('Location list')}}</h3>
         </div>
         <div class="box-body no-padding">
           <table class="table">
               <tbody>
                 <tr>
-                  <th style="width: 10px">#</th>
-                  <th>Name</th>
-                  <th>Place</th>
-                  <th>Floor</th>
-                  <th>POI</th>
-                  <th class="text-right">Actions</th>
+                  <th style="width: 10px">{{__('#')}}</th>
+                  <th>{{__('Name')}}</th>
+                  <th>{{__('Place')}}</th>
+                  <th>{{__('Floor')}}</th>
+                  <th>{{__('POI')}}</th>
+                  <th class="text-right">{{__('Actions')}}</th>
                 </tr>
               @foreach($locations as $index => $location)
                 <tr>
@@ -40,7 +40,7 @@
                   <td class="text-right">
                     {!! Form::open(['route' => ['locations.destroy', $placeId, $floorId, $location->id], 'method' => 'DELETE']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                    <a href="{{ route('locations.edit', [$placeId, $floorId, $location->id]) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{{ route('locations.edit', [$placeId, $floorId, $location->id]) }}" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
                     {!! Form::close() !!}
                   </td>
                 </tr>

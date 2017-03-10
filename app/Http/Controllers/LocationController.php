@@ -69,8 +69,7 @@ class LocationController extends Controller
         }
 
         if ($type == 'findable') {
-
-            $findables = Findable::pluck('name', 'id');
+            $findables = Findable::all()->sortBy('name', SORT_NATURAL)->pluck('name', 'id');
             $findables->prepend('Select Findable...', 0);
             $types = array(
                 '' => 'Select type...',
@@ -82,17 +81,16 @@ class LocationController extends Controller
         }
 
         if ($type == 'block') {
-
-            $blocks = Block::pluck('name', 'id');
+            $blocks = Block::all()->sortBy('name', SORT_NATURAL)->pluck('name', 'id');
             $blocks->prepend('Select block...', 0);
 
-            $findables = Findable::pluck('name', 'id');
+            $findables = Findable::all()->sortBy('name', SORT_NATURAL)->pluck('name', 'id');
             $findables->prepend('Is this block findable?', 0);
 
             return view('locations.create.block', compact('blocks', 'findables', 'place', 'floor', 'placeId', 'floorId'));
         }
 
-        $pois = Poi::pluck('name', 'id');
+        $pois = Poi::all()->sortBy('name', SORT_NATURAL)->pluck('name', 'id');
         $pois->prepend('Select POI...', 0);
 
         return view('locations.create.poi', compact('pois', 'place', 'floor', 'placeId', 'floorId'));

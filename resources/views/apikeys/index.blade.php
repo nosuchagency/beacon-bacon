@@ -13,10 +13,10 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>User</th>
-                            <th>Token</th>
-                            <th class="text-right">Action</th>
+                            <th>{{__('Name')}}</th>
+                            <th>{{__('User')}}</th>
+                            <th>{{__('Token')}}</th>
+                            <th class="text-right">{{__('Action')}}</th>
                         </tr>
                         </thead>
                         @foreach($keys as $key)
@@ -29,7 +29,7 @@
                                         <form style="display: inline-block;" action="{{route('apikeys.destroy', [$key])}}" method="post">
                                             {!! csrf_field() !!}
                                             <input type="hidden" name="_method" value="DELETE" />
-                                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Revoke</button>
+                                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> {{__('Revoke')}}</button>
                                         </form>
                                     @endif
                                 </td>
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">User</label>
+                            <label class="col-md-4 control-label">{{__('User')}}</label>
 
                             <div class="col-md-6">
                                 {!! Form::select('user_id', $users, null, ['class' => 'form-control']) !!}
@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-envelope-o"></i> Create API key
+                                    <i class="fa fa-btn fa-envelope-o"></i>{{__('Create API key')}}
                                 </button>
                             </div>
                         </div>

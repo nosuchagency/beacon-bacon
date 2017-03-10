@@ -1,0 +1,1616 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MultilanguageLaravelApplication\n"
+"POT-Creation-Date: 2017-03-06 14:52+0100\n"
+"PO-Revision-Date: 2017-03-06 14:52+0100\n"
+"Last-Translator: James Translator <james@translations.colm>\n"
+"Language-Team: James Translator <james@translations.colm>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-KeywordsList: _;__;gettext;_n:1,2;ngettext:1,2\n"
+"X-Poedit-Basepath: ../../../../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: app/Http/Controllers\n"
+"X-Poedit-SearchPath-1: resources/views\n"
+"X-Poedit-SearchPath-2: app/Console/Commands\n"
+"X-Poedit-SearchPath-3: storage/framework/messages\n"
+"X-Poedit-SearchPath-4: app/Http/Middleware\n"
+
+#: app/Http/Middleware/AdminMenu.php:28
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: app/Http/Middleware/AdminMenu.php:30
+msgid "PLACES"
+msgstr "PLACES"
+
+#: app/Http/Middleware/AdminMenu.php:35
+msgid "All places"
+msgstr "All places"
+
+#: app/Http/Middleware/AdminMenu.php:39 app/Http/Middleware/AdminMenu.php:43
+#: app/Http/Middleware/AdminMenu.php:47 app/Http/Middleware/AdminMenu.php:51
+msgid "Add New"
+msgstr "Add New"
+
+#: app/Http/Middleware/AdminMenu.php:41
+msgid "POINT OF INTERESTS"
+msgstr "POINT OF INTERESTS"
+
+#: app/Http/Middleware/AdminMenu.php:42
+msgid "All POIs"
+msgstr "All POIs"
+
+#: app/Http/Middleware/AdminMenu.php:45
+msgid "BUILDING BLOCKS"
+msgstr "BUILDING BLOCKS"
+
+#: app/Http/Middleware/AdminMenu.php:46
+msgid "All Blocks"
+msgstr "All Blocks"
+
+#: app/Http/Middleware/AdminMenu.php:49
+msgid "BEACONS"
+msgstr "BEACONS"
+
+#: app/Http/Middleware/AdminMenu.php:50
+msgid "All Beacons"
+msgstr "All Beacons"
+
+#: app/Http/Middleware/AdminMenu.php:52
+msgid "Import Beacons"
+msgstr "Import Beacons"
+
+#: app/Http/Middleware/AdminMenu.php:54
+msgid "SETTINGS"
+msgstr "SETTINGS"
+
+#: app/Http/Middleware/AdminMenu.php:57
+#: storage/framework/messages/7ad6cece5ae834bb9d96574bb9fc851774f551af.php.php:8
+msgid "Teams"
+msgstr "Teams"
+
+#: app/Http/Middleware/AdminMenu.php:61
+msgid "Users"
+msgstr "Users"
+
+#: app/Http/Middleware/AdminMenu.php:62
+msgid "Email Settings"
+msgstr "Email Settings"
+
+#: app/Http/Middleware/AdminMenu.php:63
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:6
+#: storage/framework/messages/3c0f0476d616ce116f317927eecdfe8e1050caf4.php.php:6
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:6
+msgid "Findables"
+msgstr "Findables"
+
+#: app/Http/Middleware/AdminMenu.php:64
+msgid "Email Templates"
+msgstr "Email Templates"
+
+#: app/Http/Middleware/AdminMenu.php:65
+msgid "API Keys"
+msgstr "API Keys"
+
+#: storage/framework/messages/00699762885b92cbc377ed8006e5350836f9881d.php.php:6
+msgid "Click here to reset your password:"
+msgstr "Click here to reset your password:"
+
+#: storage/framework/messages/006b668c8bfb8c56f0975264215e5c3ccc97fcd7.php.php:2
+msgid "Service unavailable"
+msgstr "Service unavailable"
+
+#: storage/framework/messages/006b668c8bfb8c56f0975264215e5c3ccc97fcd7.php.php:7
+msgid "503 Error Page"
+msgstr "503 Error Page"
+
+#: storage/framework/messages/006b668c8bfb8c56f0975264215e5c3ccc97fcd7.php.php:17
+msgid "503"
+msgstr "503"
+
+#: storage/framework/messages/006b668c8bfb8c56f0975264215e5c3ccc97fcd7.php.php:19
+#: storage/framework/messages/9a1592e99aa5d9f3dbf048783599aef2b427ee62.php.php:19
+msgid "Oops! Something went wrong."
+msgstr "Oops! Something went wrong."
+
+#: storage/framework/messages/006b668c8bfb8c56f0975264215e5c3ccc97fcd7.php.php:21
+msgid "Meanwhile you may"
+msgstr "Meanwhile you may"
+
+#: storage/framework/messages/006b668c8bfb8c56f0975264215e5c3ccc97fcd7.php.php:21
+#: storage/framework/messages/814a1a380792e7178974dd204dd5f725c5b3306e.php.php:23
+#: storage/framework/messages/9a1592e99aa5d9f3dbf048783599aef2b427ee62.php.php:23
+msgid "return to dashboard"
+msgstr "return to dashboard"
+
+#: storage/framework/messages/006b668c8bfb8c56f0975264215e5c3ccc97fcd7.php.php:21
+#: storage/framework/messages/814a1a380792e7178974dd204dd5f725c5b3306e.php.php:23
+#: storage/framework/messages/9a1592e99aa5d9f3dbf048783599aef2b427ee62.php.php:23
+msgid "or try using the search form."
+msgstr "or try using the search form."
+
+#: storage/framework/messages/01999fe125aba5a95007b2867ba1fd5e49c04d97.php.php:2
+#: storage/framework/messages/01999fe125aba5a95007b2867ba1fd5e49c04d97.php.php:65
+#: storage/framework/messages/1b94821daff9ed4609404c0021926c29ce36afa6.php.php:22
+msgid "Register"
+msgstr "Register"
+
+#: storage/framework/messages/01999fe125aba5a95007b2867ba1fd5e49c04d97.php.php:11
+#: storage/framework/messages/1165ba725b938bcef8897bf44092b14c49199b3b.php.php:9
+#: storage/framework/messages/1fe76d047b9c888331246a95dd5e9c9b70bf1178.php.php:11
+#: storage/framework/messages/40afd431a2fad17af1fed8e810fd2198a6ed4f5f.php.php:10
+#: storage/framework/messages/44135ed576c27b2ea5b7be3f9990f613080b6b9c.php.php:11
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:34
+#: storage/framework/messages/6fcfb17a769e09bffc5e86f3098c20225dd608da.php.php:32
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:130
+msgid "Beacon"
+msgstr "Beacon"
+
+#: storage/framework/messages/01999fe125aba5a95007b2867ba1fd5e49c04d97.php.php:11
+#: storage/framework/messages/1165ba725b938bcef8897bf44092b14c49199b3b.php.php:9
+#: storage/framework/messages/1b94821daff9ed4609404c0021926c29ce36afa6.php.php:9
+#: storage/framework/messages/1fe76d047b9c888331246a95dd5e9c9b70bf1178.php.php:11
+#: storage/framework/messages/40afd431a2fad17af1fed8e810fd2198a6ed4f5f.php.php:10
+#: storage/framework/messages/44135ed576c27b2ea5b7be3f9990f613080b6b9c.php.php:11
+msgid "Bacon"
+msgstr "Bacon"
+
+#: storage/framework/messages/01999fe125aba5a95007b2867ba1fd5e49c04d97.php.php:16
+#: storage/framework/messages/1165ba725b938bcef8897bf44092b14c49199b3b.php.php:13
+#: storage/framework/messages/1fe76d047b9c888331246a95dd5e9c9b70bf1178.php.php:23
+#: storage/framework/messages/44135ed576c27b2ea5b7be3f9990f613080b6b9c.php.php:23
+#: storage/framework/messages/6d0b412db4baa3418ac88d790563ec3f58d1fade.php.php:49
+msgid "Whoops!"
+msgstr "Whoops!"
+
+#: storage/framework/messages/01999fe125aba5a95007b2867ba1fd5e49c04d97.php.php:16
+#: storage/framework/messages/1165ba725b938bcef8897bf44092b14c49199b3b.php.php:13
+#: storage/framework/messages/1fe76d047b9c888331246a95dd5e9c9b70bf1178.php.php:23
+#: storage/framework/messages/44135ed576c27b2ea5b7be3f9990f613080b6b9c.php.php:23
+#: storage/framework/messages/6d0b412db4baa3418ac88d790563ec3f58d1fade.php.php:49
+msgid "There were some problems with your input."
+msgstr "There were some problems with your input."
+
+#: storage/framework/messages/01999fe125aba5a95007b2867ba1fd5e49c04d97.php.php:27
+msgid "Register to accept the invitation"
+msgstr "Register to accept the invitation"
+
+#: storage/framework/messages/01999fe125aba5a95007b2867ba1fd5e49c04d97.php.php:29
+#: storage/framework/messages/1165ba725b938bcef8897bf44092b14c49199b3b.php.php:56
+#: storage/framework/messages/1fe76d047b9c888331246a95dd5e9c9b70bf1178.php.php:53
+msgid "Register a new account"
+msgstr "Register a new account"
+
+#: storage/framework/messages/01999fe125aba5a95007b2867ba1fd5e49c04d97.php.php:61
+msgid "I agree to the terms"
+msgstr "I agree to the terms"
+
+#: storage/framework/messages/01999fe125aba5a95007b2867ba1fd5e49c04d97.php.php:72
+#: storage/framework/messages/44135ed576c27b2ea5b7be3f9990f613080b6b9c.php.php:64
+msgid "I already have an account"
+msgstr "I already have an account"
+
+#: storage/framework/messages/01ad37c3ea4d2059bf9245dbc02673185271c455.php.php:5
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:5
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:5
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:5
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:5
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:5
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:5
+#: storage/framework/messages/1cb87d7cf252a269a029086f0b3f1d1ae986ea03.php.php:5
+#: storage/framework/messages/2710958fa013f8befd6dea5589e5f1a794bef456.php.php:5
+#: storage/framework/messages/3c0f0476d616ce116f317927eecdfe8e1050caf4.php.php:5
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:5
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:5
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:5
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:5
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:5
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:5
+#: storage/framework/messages/66009d87545c99c9887c796ca0aa3726df655104.php.php:5
+#: storage/framework/messages/67722b928c016391609c12895c1ec8b4c727521d.php.php:5
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:5
+#: storage/framework/messages/6fcfb17a769e09bffc5e86f3098c20225dd608da.php.php:5
+#: storage/framework/messages/7c2632e36dafe223bd4531608d9004062bb56b09.php.php:5
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:5
+#: storage/framework/messages/8434b2c7de4eeaf5e5f7aa75b977828e70e71601.php.php:5
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:5
+#: storage/framework/messages/89217bf78fc727395fa17eb866887ad80790226f.php.php:5
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:5
+#: storage/framework/messages/94877ab1e0e92db09c5a82ffeb7d377185bada46.php.php:5
+#: storage/framework/messages/968bad29906a50e776c0da5c64b3083df99640c4.php.php:5
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:5
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:5
+#: storage/framework/messages/c1db694dd83eadde3603bbb4d277e45ce4ecbbff.php.php:5
+#: storage/framework/messages/cdfd2d83659a6965eff3d2090ad002412b7b16fd.php.php:5
+#: storage/framework/messages/df68f0126a8abf9b5ff7fd3149d4a10ce0110d9f.php.php:5
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:5
+#: storage/framework/messages/e8699c9e402c12bb1858c129b1c53c39b38e3a4a.php.php:5
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:5
+#: storage/framework/messages/f1bca04968b4e7b5d8d0e0dcf5ae6ca7927ab5e8.php.php:5
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:5
+msgid "Home"
+msgstr "Home"
+
+#: storage/framework/messages/01ad37c3ea4d2059bf9245dbc02673185271c455.php.php:6
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:6
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:6
+#: storage/framework/messages/74251ed01e2bd6ae932c70fdb61107e65d161a79.php.php:52
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:6
+#: storage/framework/messages/df68f0126a8abf9b5ff7fd3149d4a10ce0110d9f.php.php:6
+msgid "Beacons"
+msgstr "Beacons"
+
+#: storage/framework/messages/01ad37c3ea4d2059bf9245dbc02673185271c455.php.php:7
+#: storage/framework/messages/01ad37c3ea4d2059bf9245dbc02673185271c455.php.php:16
+msgid "Import Settings"
+msgstr "Import Settings"
+
+#: storage/framework/messages/01ad37c3ea4d2059bf9245dbc02673185271c455.php.php:23
+msgid "Service"
+msgstr "Service"
+
+#: storage/framework/messages/01ad37c3ea4d2059bf9245dbc02673185271c455.php.php:33
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:97
+msgid "Username"
+msgstr "Username"
+
+#: storage/framework/messages/01ad37c3ea4d2059bf9245dbc02673185271c455.php.php:43
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:106
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:137
+msgid "Password"
+msgstr "Password"
+
+#: storage/framework/messages/01ad37c3ea4d2059bf9245dbc02673185271c455.php.php:53
+msgid "API Key"
+msgstr "API Key"
+
+#: storage/framework/messages/01ad37c3ea4d2059bf9245dbc02673185271c455.php.php:63
+msgid "API Secret"
+msgstr "API Secret"
+
+#: storage/framework/messages/01ad37c3ea4d2059bf9245dbc02673185271c455.php.php:74
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:158
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:181
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:81
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:103
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:102
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:103
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:106
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:77
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:168
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:106
+#: storage/framework/messages/6fcfb17a769e09bffc5e86f3098c20225dd608da.php.php:53
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:82
+#: storage/framework/messages/8434b2c7de4eeaf5e5f7aa75b977828e70e71601.php.php:53
+#: storage/framework/messages/89217bf78fc727395fa17eb866887ad80790226f.php.php:44
+#: storage/framework/messages/968bad29906a50e776c0da5c64b3083df99640c4.php.php:48
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:74
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:191
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:89
+#: storage/framework/messages/e8699c9e402c12bb1858c129b1c53c39b38e3a4a.php.php:63
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:107
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:159
+msgid "Cancel"
+msgstr "Cancel"
+
+#: storage/framework/messages/01ad37c3ea4d2059bf9245dbc02673185271c455.php.php:75
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:159
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:182
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:82
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:40
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:104
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:103
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:104
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:107
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:78
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:169
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:107
+#: storage/framework/messages/6fcfb17a769e09bffc5e86f3098c20225dd608da.php.php:54
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:83
+#: storage/framework/messages/8434b2c7de4eeaf5e5f7aa75b977828e70e71601.php.php:54
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:50
+#: storage/framework/messages/86414a0dcd02ffa57517d9eb1c55d6a3ab8cb174.php.php:29
+#: storage/framework/messages/89217bf78fc727395fa17eb866887ad80790226f.php.php:45
+#: storage/framework/messages/94877ab1e0e92db09c5a82ffeb7d377185bada46.php.php:64
+#: storage/framework/messages/968bad29906a50e776c0da5c64b3083df99640c4.php.php:49
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:75
+#: storage/framework/messages/ad08bc7f87fef03c84fb7de210ad52d374d6d94a.php.php:30
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:192
+#: storage/framework/messages/c1db694dd83eadde3603bbb4d277e45ce4ecbbff.php.php:39
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:90
+#: storage/framework/messages/e8699c9e402c12bb1858c129b1c53c39b38e3a4a.php.php:64
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:108
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:160
+msgid "Save"
+msgstr "Save"
+
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:6
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:6
+#: storage/framework/messages/2710958fa013f8befd6dea5589e5f1a794bef456.php.php:6
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:6
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:6
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:6
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:6
+#: storage/framework/messages/67722b928c016391609c12895c1ec8b4c727521d.php.php:6
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:6
+#: storage/framework/messages/6fcfb17a769e09bffc5e86f3098c20225dd608da.php.php:6
+#: storage/framework/messages/74251ed01e2bd6ae932c70fdb61107e65d161a79.php.php:13
+#: storage/framework/messages/8434b2c7de4eeaf5e5f7aa75b977828e70e71601.php.php:6
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:6
+#: storage/framework/messages/94877ab1e0e92db09c5a82ffeb7d377185bada46.php.php:6
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:6
+#: storage/framework/messages/cdfd2d83659a6965eff3d2090ad002412b7b16fd.php.php:6
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:6
+#: storage/framework/messages/e8699c9e402c12bb1858c129b1c53c39b38e3a4a.php.php:6
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:6
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:6
+msgid "Places"
+msgstr "Places"
+
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:10
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:7
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:8
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:10
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:10
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:8
+#: storage/framework/messages/968bad29906a50e776c0da5c64b3083df99640c4.php.php:8
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:10
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:10
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:10
+msgid "Editing"
+msgstr "Editing"
+
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:29
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:16
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:16
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:17
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:16
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:17
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:29
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:29
+#: storage/framework/messages/6fcfb17a769e09bffc5e86f3098c20225dd608da.php.php:27
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:17
+#: storage/framework/messages/8434b2c7de4eeaf5e5f7aa75b977828e70e71601.php.php:27
+#: storage/framework/messages/89217bf78fc727395fa17eb866887ad80790226f.php.php:16
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:17
+#: storage/framework/messages/94877ab1e0e92db09c5a82ffeb7d377185bada46.php.php:27
+#: storage/framework/messages/968bad29906a50e776c0da5c64b3083df99640c4.php.php:17
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:16
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:29
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:29
+#: storage/framework/messages/e8699c9e402c12bb1858c129b1c53c39b38e3a4a.php.php:27
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:29
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:16
+msgid "Details"
+msgstr "Details"
+
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:44
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:75
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:24
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:60
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:21
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:23
+#: storage/framework/messages/1cb87d7cf252a269a029086f0b3f1d1ae986ea03.php.php:21
+#: storage/framework/messages/2710958fa013f8befd6dea5589e5f1a794bef456.php.php:24
+#: storage/framework/messages/3c0f0476d616ce116f317927eecdfe8e1050caf4.php.php:25
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:26
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:23
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:26
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:23
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:44
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:24
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:189
+#: storage/framework/messages/66009d87545c99c9887c796ca0aa3726df655104.php.php:21
+#: storage/framework/messages/67722b928c016391609c12895c1ec8b4c727521d.php.php:22
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:44
+#: storage/framework/messages/6fcfb17a769e09bffc5e86f3098c20225dd608da.php.php:42
+#: storage/framework/messages/7ad6cece5ae834bb9d96574bb9fc851774f551af.php.php:15
+#: storage/framework/messages/7c2632e36dafe223bd4531608d9004062bb56b09.php.php:22
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:61
+#: storage/framework/messages/8434b2c7de4eeaf5e5f7aa75b977828e70e71601.php.php:42
+#: storage/framework/messages/86414a0dcd02ffa57517d9eb1c55d6a3ab8cb174.php.php:12
+#: storage/framework/messages/89217bf78fc727395fa17eb866887ad80790226f.php.php:23
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:36
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:128
+#: storage/framework/messages/94877ab1e0e92db09c5a82ffeb7d377185bada46.php.php:52
+#: storage/framework/messages/94877ab1e0e92db09c5a82ffeb7d377185bada46.php.php:63
+#: storage/framework/messages/968bad29906a50e776c0da5c64b3083df99640c4.php.php:23
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:23
+#: storage/framework/messages/ad08bc7f87fef03c84fb7de210ad52d374d6d94a.php.php:13
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:44
+#: storage/framework/messages/bc89b151d06a71fea94aeff2986eb25068b2a894.php.php:14
+#: storage/framework/messages/cdfd2d83659a6965eff3d2090ad002412b7b16fd.php.php:25
+#: storage/framework/messages/df68f0126a8abf9b5ff7fd3149d4a10ce0110d9f.php.php:22
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:44
+#: storage/framework/messages/e8699c9e402c12bb1858c129b1c53c39b38e3a4a.php.php:42
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:15
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:123
+#: storage/framework/messages/f1bca04968b4e7b5d8d0e0dcf5ae6ca7927ab5e8.php.php:22
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:23
+msgid "Name"
+msgstr "Name"
+
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:48
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:28
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:64
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:27
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:30
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:27
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:30
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:27
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:37
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:48
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:48
+#: storage/framework/messages/6fcfb17a769e09bffc5e86f3098c20225dd608da.php.php:46
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:65
+#: storage/framework/messages/8434b2c7de4eeaf5e5f7aa75b977828e70e71601.php.php:46
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:35
+#: storage/framework/messages/89217bf78fc727395fa17eb866887ad80790226f.php.php:27
+#: storage/framework/messages/94877ab1e0e92db09c5a82ffeb7d377185bada46.php.php:56
+#: storage/framework/messages/968bad29906a50e776c0da5c64b3083df99640c4.php.php:27
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:27
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:48
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:48
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:48
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:27
+msgid "Enter name"
+msgstr "Enter name"
+
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:54
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:54
+msgid "Parameters"
+msgstr "Parameters"
+
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:64
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:76
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:88
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:100
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:112
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:64
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:76
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:88
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:100
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:112
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:66
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:78
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:90
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:102
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:114
+msgid "Enter "
+msgstr "Enter "
+
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:119
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:119
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:54
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:123
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:54
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:54
+msgid "Location on Map"
+msgstr "Location on Map"
+
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:124
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:59
+msgid "Area"
+msgstr "Area"
+
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:134
+msgid "Draw Findable on Map"
+msgstr "Draw Findable on Map"
+
+#: storage/framework/messages/07a8c1f6ce4274524c6ce33d92b47f49fd8b8953.php.php:136
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:71
+msgid "Start Over"
+msgstr "Start Over"
+
+#: storage/framework/messages/0a8af19fb6b6b909fa66b8a45a65768d9897d660.php.php:12
+msgid "Recent Activity"
+msgstr "Recent Activity"
+
+#: storage/framework/messages/0a8af19fb6b6b909fa66b8a45a65768d9897d660.php.php:18
+msgid "Your birthday"
+msgstr "Your birthday"
+
+#: storage/framework/messages/0a8af19fb6b6b909fa66b8a45a65768d9897d660.php.php:19
+msgid "Will be 23 on April 24th"
+msgstr "Will be 23 on April 24th"
+
+#: storage/framework/messages/0a8af19fb6b6b909fa66b8a45a65768d9897d660.php.php:25
+msgid "Tasks Progress"
+msgstr "Tasks Progress"
+
+#: storage/framework/messages/0a8af19fb6b6b909fa66b8a45a65768d9897d660.php.php:30
+msgid "Custom Template Design"
+msgstr "Custom Template Design"
+
+#: storage/framework/messages/0a8af19fb6b6b909fa66b8a45a65768d9897d660.php.php:43
+msgid "Stats Tab Content"
+msgstr "Stats Tab Content"
+
+#: storage/framework/messages/0a8af19fb6b6b909fa66b8a45a65768d9897d660.php.php:47
+msgid "General Settings"
+msgstr "General Settings"
+
+#: storage/framework/messages/0a8af19fb6b6b909fa66b8a45a65768d9897d660.php.php:50
+msgid "Report panel usage"
+msgstr "Report panel usage"
+
+#: storage/framework/messages/0a8af19fb6b6b909fa66b8a45a65768d9897d660.php.php:55
+msgid "Some information about this general settings option"
+msgstr "Some information about this general settings option"
+
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:16
+msgid "Beacon Details"
+msgstr "Beacon Details"
+
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:21
+msgid "Beacon ID"
+msgstr "Beacon ID"
+
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:30
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:32
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:33
+msgid "Proximity UUID"
+msgstr "Proximity UUID"
+
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:39
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:41
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:42
+#: storage/framework/messages/df68f0126a8abf9b5ff7fd3149d4a10ce0110d9f.php.php:23
+msgid "Major"
+msgstr "Major"
+
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:48
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:50
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:51
+#: storage/framework/messages/df68f0126a8abf9b5ff7fd3149d4a10ce0110d9f.php.php:24
+msgid "Minor"
+msgstr "Minor"
+
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:57
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:26
+#: storage/framework/messages/cdfd2d83659a6965eff3d2090ad002412b7b16fd.php.php:26
+#: storage/framework/messages/df68f0126a8abf9b5ff7fd3149d4a10ce0110d9f.php.php:25
+msgid "Place"
+msgstr "Place"
+
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:60
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:69
+msgid "Not assigned"
+msgstr "Not assigned"
+
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:84
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:70
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:71
+msgid "Description"
+msgstr "Description"
+
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:93
+#: storage/framework/messages/1cb87d7cf252a269a029086f0b3f1d1ae986ea03.php.php:49
+#: storage/framework/messages/66009d87545c99c9887c796ca0aa3726df655104.php.php:49
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:99
+msgid "Back"
+msgstr "Back"
+
+#: storage/framework/messages/0d8b224a1630705eb7e1d10a567e35ceec9a9ff3.php.php:94
+#: storage/framework/messages/1cb87d7cf252a269a029086f0b3f1d1ae986ea03.php.php:50
+#: storage/framework/messages/2710958fa013f8befd6dea5589e5f1a794bef456.php.php:38
+#: storage/framework/messages/3c0f0476d616ce116f317927eecdfe8e1050caf4.php.php:39
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:168
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:208
+#: storage/framework/messages/66009d87545c99c9887c796ca0aa3726df655104.php.php:50
+#: storage/framework/messages/67722b928c016391609c12895c1ec8b4c727521d.php.php:34
+#: storage/framework/messages/7c2632e36dafe223bd4531608d9004062bb56b09.php.php:40
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:100
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:168
+#: storage/framework/messages/cdfd2d83659a6965eff3d2090ad002412b7b16fd.php.php:43
+#: storage/framework/messages/df68f0126a8abf9b5ff7fd3149d4a10ce0110d9f.php.php:42
+#: storage/framework/messages/f1bca04968b4e7b5d8d0e0dcf5ae6ca7927ab5e8.php.php:34
+msgid "Edit"
+msgstr "Edit"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:8
+msgid "Edit place"
+msgstr "Edit place"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:17
+msgid "Place details"
+msgstr "Place details"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:34
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:34
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:33
+msgid "Address"
+msgstr "Address"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:38
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:37
+msgid "Enter address"
+msgstr "Enter address"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:44
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:44
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:43
+msgid "ZIP Code"
+msgstr "ZIP Code"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:48
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:47
+msgid "Enter ZIP Code"
+msgstr "Enter ZIP Code"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:54
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:54
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:53
+msgid "City"
+msgstr "City"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:58
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:57
+msgid "Enter city"
+msgstr "Enter city"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:67
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:63
+msgid "System"
+msgstr "System"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:72
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:68
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:68
+msgid "Identifier 1"
+msgstr "Identifier 1"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:76
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:86
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:96
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:106
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:116
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:72
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:82
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:92
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:102
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:112
+msgid "Enter an identifier if one such is needed"
+msgstr "Enter an identifier if one such is needed"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:82
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:77
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:78
+msgid "Identifier 2"
+msgstr "Identifier 2"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:92
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:86
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:88
+msgid "Identifier 3"
+msgstr "Identifier 3"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:102
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:95
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:98
+msgid "Identifier 4"
+msgstr "Identifier 4"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:112
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:104
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:108
+msgid "Identifier 5"
+msgstr "Identifier 5"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:122
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:114
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:118
+msgid "Parent Place"
+msgstr "Parent Place"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:132
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:124
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:128
+msgid "Menu Order"
+msgstr "Menu Order"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:136
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:132
+msgid "Enter the menu order of this place"
+msgstr "Enter the menu order of this place"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:142
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:134
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:138
+msgid "Enable Positioning"
+msgstr "Enable Positioning"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:154
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:144
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:148
+msgid "Enable Proximity"
+msgstr "Enable Proximity"
+
+#: storage/framework/messages/0f549d98db94acac791125c67df1776dee38dfa4.php.php:165
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:153
+msgid "Activated"
+msgstr "Activated"
+
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:7
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:7
+#: storage/framework/messages/89217bf78fc727395fa17eb866887ad80790226f.php.php:7
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:7
+#: storage/framework/messages/f4e71fa035e34f3b5499d7acb1a767e546f8bd87.php.php:7
+msgid "Creating"
+msgstr "Creating"
+
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:23
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:24
+msgid "Beacon UID"
+msgstr "Beacon UID"
+
+#: storage/framework/messages/10cb16ca89dc98067857df37c2107f0a404a0a9c.php.php:74
+#: storage/framework/messages/81e2c394e5ec50719e021827f948f8ce2d9a8d92.php.php:75
+msgid "Enter description"
+msgstr "Enter description"
+
+#: storage/framework/messages/1165ba725b938bcef8897bf44092b14c49199b3b.php.php:2
+#: storage/framework/messages/1b94821daff9ed4609404c0021926c29ce36afa6.php.php:23
+#: storage/framework/messages/1b94821daff9ed4609404c0021926c29ce36afa6.php.php:42
+#: storage/framework/messages/40afd431a2fad17af1fed8e810fd2198a6ed4f5f.php.php:18
+msgid "Login"
+msgstr "Login"
+
+#: storage/framework/messages/1165ba725b938bcef8897bf44092b14c49199b3b.php.php:24
+msgid "Sign in to accept the invitation"
+msgstr "Sign in to accept the invitation"
+
+#: storage/framework/messages/1165ba725b938bcef8897bf44092b14c49199b3b.php.php:26
+msgid "Sign in to start your session"
+msgstr "Sign in to start your session"
+
+#: storage/framework/messages/1165ba725b938bcef8897bf44092b14c49199b3b.php.php:42
+msgid "Remember me"
+msgstr "Remember me"
+
+#: storage/framework/messages/1165ba725b938bcef8897bf44092b14c49199b3b.php.php:48
+msgid "Sign in"
+msgstr "Sign in"
+
+#: storage/framework/messages/1165ba725b938bcef8897bf44092b14c49199b3b.php.php:54
+msgid "I forgot my password"
+msgstr "I forgot my password"
+
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:6
+#: storage/framework/messages/1b94821daff9ed4609404c0021926c29ce36afa6.php.php:48
+msgid "Profile"
+msgstr "Profile"
+
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:15
+msgid "Profile details"
+msgstr "Profile details"
+
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:25
+msgid "Enter your name"
+msgstr "Enter your name"
+
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:30
+msgid "E-mail"
+msgstr "E-mail"
+
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:34
+msgid "Enter your email"
+msgstr "Enter your email"
+
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:52
+msgid "Change password"
+msgstr "Change password"
+
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:58
+msgid "Old password"
+msgstr "Old password"
+
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:67
+msgid "New password"
+msgstr "New password"
+
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:76
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:144
+msgid "Re-type password"
+msgstr "Re-type password"
+
+#: storage/framework/messages/14c2878fb6dab9a5865eef0d0ec66dd98f88f4bf.php.php:86
+msgid "Update password"
+msgstr "Update password"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:33
+#: storage/framework/messages/3c0f0476d616ce116f317927eecdfe8e1050caf4.php.php:26
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:33
+msgid "Identifier"
+msgstr "Identifier"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:37
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:37
+msgid "Enter identifier"
+msgstr "Enter identifier"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:43
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:43
+msgid "Parameter One Name"
+msgstr "Parameter One Name"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:47
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:47
+msgid "Enter parameter one name"
+msgstr "Enter parameter one name"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:53
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:53
+msgid "Parameter Two Name"
+msgstr "Parameter Two Name"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:57
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:57
+msgid "Enter parameter two name"
+msgstr "Enter parameter two name"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:63
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:63
+msgid "Parameter Three Name"
+msgstr "Parameter Three Name"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:67
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:67
+msgid "Enter parameter three name"
+msgstr "Enter parameter three name"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:73
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:73
+msgid "Parameter Four Name"
+msgstr "Parameter Four Name"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:77
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:77
+msgid "Enter parameter four name"
+msgstr "Enter parameter four name"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:83
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:83
+msgid "Parameter Five Name"
+msgstr "Parameter Five Name"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:87
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:87
+msgid "Enter parameter five name"
+msgstr "Enter parameter five name"
+
+#: storage/framework/messages/161eb7cf82d0c6fe2961932555c543064546b8db.php.php:92
+#: storage/framework/messages/4c26931c88c350b4d47a84e59ab7b5bfc6b8bff2.php.php:92
+msgid "Custom Findable File"
+msgstr "Custom Findable File"
+
+#: storage/framework/messages/16a9703a14e91892eb63ca11bf766031fe9b6d79.php.php:1
+msgid "You have been invited to join team"
+msgstr "You have been invited to join team"
+
+#: storage/framework/messages/16a9703a14e91892eb63ca11bf766031fe9b6d79.php.php:2
+msgid "Click here to join:"
+msgstr "Click here to join:"
+
+#: storage/framework/messages/1b94821daff9ed4609404c0021926c29ce36afa6.php.php:9
+msgid "Admin"
+msgstr "Admin"
+
+#: storage/framework/messages/1b94821daff9ed4609404c0021926c29ce36afa6.php.php:16
+msgid "Toggle navigation"
+msgstr "Toggle navigation"
+
+#: storage/framework/messages/1b94821daff9ed4609404c0021926c29ce36afa6.php.php:51
+msgid "Sign out"
+msgstr "Sign out"
+
+#: storage/framework/messages/1cb87d7cf252a269a029086f0b3f1d1ae986ea03.php.php:6
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:6
+#: storage/framework/messages/66009d87545c99c9887c796ca0aa3726df655104.php.php:6
+#: storage/framework/messages/7c2632e36dafe223bd4531608d9004062bb56b09.php.php:6
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:6
+msgid "Point of Interests"
+msgstr "Point of Interests"
+
+#: storage/framework/messages/1cb87d7cf252a269a029086f0b3f1d1ae986ea03.php.php:16
+#: storage/framework/messages/66009d87545c99c9887c796ca0aa3726df655104.php.php:16
+msgid "POI details"
+msgstr "POI details"
+
+#: storage/framework/messages/1cb87d7cf252a269a029086f0b3f1d1ae986ea03.php.php:30
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:33
+#: storage/framework/messages/66009d87545c99c9887c796ca0aa3726df655104.php.php:30
+#: storage/framework/messages/7c2632e36dafe223bd4531608d9004062bb56b09.php.php:23
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:33
+msgid "Internal name"
+msgstr "Internal name"
+
+#: storage/framework/messages/1cb87d7cf252a269a029086f0b3f1d1ae986ea03.php.php:39
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:53
+#: storage/framework/messages/66009d87545c99c9887c796ca0aa3726df655104.php.php:39
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:53
+msgid "Icon"
+msgstr "Icon"
+
+#: storage/framework/messages/1fe76d047b9c888331246a95dd5e9c9b70bf1178.php.php:2
+msgid "Password recovery"
+msgstr "Password recovery"
+
+#: storage/framework/messages/1fe76d047b9c888331246a95dd5e9c9b70bf1178.php.php:33
+msgid "Reset Password"
+msgstr "Reset Password"
+
+#: storage/framework/messages/1fe76d047b9c888331246a95dd5e9c9b70bf1178.php.php:45
+msgid "Send Password Reset Link"
+msgstr "Send Password Reset Link"
+
+#: storage/framework/messages/2710958fa013f8befd6dea5589e5f1a794bef456.php.php:8
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:178
+#: storage/framework/messages/74251ed01e2bd6ae932c70fdb61107e65d161a79.php.php:26
+msgid "Floors"
+msgstr "Floors"
+
+#: storage/framework/messages/2710958fa013f8befd6dea5589e5f1a794bef456.php.php:17
+msgid "Floor list"
+msgstr "Floor list"
+
+#: storage/framework/messages/2710958fa013f8befd6dea5589e5f1a794bef456.php.php:25
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:36
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:36
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:190
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:46
+msgid "Floor no."
+msgstr "Floor no."
+
+#: storage/framework/messages/2710958fa013f8befd6dea5589e5f1a794bef456.php.php:26
+#: storage/framework/messages/67722b928c016391609c12895c1ec8b4c727521d.php.php:23
+#: storage/framework/messages/cdfd2d83659a6965eff3d2090ad002412b7b16fd.php.php:29
+msgid "Actions"
+msgstr "Actions"
+
+#: storage/framework/messages/3c0f0476d616ce116f317927eecdfe8e1050caf4.php.php:15
+#: storage/framework/messages/7c2632e36dafe223bd4531608d9004062bb56b09.php.php:15
+#: storage/framework/messages/df68f0126a8abf9b5ff7fd3149d4a10ce0110d9f.php.php:15
+#: storage/framework/messages/f1bca04968b4e7b5d8d0e0dcf5ae6ca7927ab5e8.php.php:15
+msgid "List"
+msgstr "List"
+
+#: storage/framework/messages/3c0f0476d616ce116f317927eecdfe8e1050caf4.php.php:17
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:119
+msgid "Add Findable"
+msgstr "Add Findable"
+
+#: storage/framework/messages/40afd431a2fad17af1fed8e810fd2198a6ed4f5f.php.php:2
+msgid "Team Capacity Reached"
+msgstr "Team Capacity Reached"
+
+#: storage/framework/messages/40afd431a2fad17af1fed8e810fd2198a6ed4f5f.php.php:14
+msgid "Team capacity reached"
+msgstr "Team capacity reached"
+
+#: storage/framework/messages/40afd431a2fad17af1fed8e810fd2198a6ed4f5f.php.php:15
+msgid "You will need an invitation in order to register"
+msgstr "You will need an invitation in order to register"
+
+#: storage/framework/messages/40afd431a2fad17af1fed8e810fd2198a6ed4f5f.php.php:16
+msgid "If you are the system administrator, you can also raise the team limit"
+msgstr "If you are the system administrator, you can also raise the team limit"
+
+#: storage/framework/messages/40afd431a2fad17af1fed8e810fd2198a6ed4f5f.php.php:17
+msgid "If you already have a profile, click the link below"
+msgstr "If you already have a profile, click the link below"
+
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:8
+msgid "Creating new floor"
+msgstr "Creating new floor"
+
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:46
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:46
+msgid "Floor Map"
+msgstr "Floor Map"
+
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:51
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:51
+#: storage/framework/messages/89217bf78fc727395fa17eb866887ad80790226f.php.php:33
+#: storage/framework/messages/968bad29906a50e776c0da5c64b3083df99640c4.php.php:34
+msgid "Image"
+msgstr "Image"
+
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:61
+msgid "Width in Centimeters"
+msgstr "Width in Centimeters"
+
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:65
+msgid "Enter width in centimeters"
+msgstr "Enter width in centimeters"
+
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:71
+msgid "Height in Centimeters"
+msgstr "Height in Centimeters"
+
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:75
+msgid "Enter height in centimeters"
+msgstr "Enter height in centimeters"
+
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:81
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:85
+msgid "Background Color (HEX)"
+msgstr "Background Color (HEX)"
+
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:85
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:89
+msgid "Enter background color in HEX"
+msgstr "Enter background color in HEX"
+
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:91
+msgid "Walkable Color (HEX)"
+msgstr "Walkable Color (HEX)"
+
+#: storage/framework/messages/43508483eb06a451a2ce18b1fc0879a218a77be2.php.php:95
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:99
+msgid "Enter walkable color in HEX"
+msgstr "Enter walkable color in HEX"
+
+#: storage/framework/messages/44135ed576c27b2ea5b7be3f9990f613080b6b9c.php.php:2
+msgid "Password reset"
+msgstr "Password reset"
+
+#: storage/framework/messages/44135ed576c27b2ea5b7be3f9990f613080b6b9c.php.php:33
+#: storage/framework/messages/44135ed576c27b2ea5b7be3f9990f613080b6b9c.php.php:56
+#: storage/framework/messages/c1db694dd83eadde3603bbb4d277e45ce4ecbbff.php.php:18
+msgid "Reset password"
+msgstr "Reset password"
+
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:8
+msgid "Edit floor"
+msgstr "Edit floor"
+
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:17
+msgid "Floor details"
+msgstr "Floor details"
+
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:64
+msgid "Map - Width in Centimeters"
+msgstr "Map - Width in Centimeters"
+
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:68
+msgid "Enter map width in centimeters"
+msgstr "Enter map width in centimeters"
+
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:74
+msgid "Map - Height in Centimeters"
+msgstr "Map - Height in Centimeters"
+
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:78
+msgid "Enter map height in centimeters"
+msgstr "Enter map height in centimeters"
+
+#: storage/framework/messages/4c6360150e45c268465882bf4c272471b7c0aad9.php.php:95
+msgid "Map - Walkable Color in HEX"
+msgstr "Map - Walkable Color in HEX"
+
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:43
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:34
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:258
+#: storage/framework/messages/7c2632e36dafe223bd4531608d9004062bb56b09.php.php:24
+#: storage/framework/messages/94877ab1e0e92db09c5a82ffeb7d377185bada46.php.php:42
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:43
+#: storage/framework/messages/e8699c9e402c12bb1858c129b1c53c39b38e3a4a.php.php:52
+msgid "Type"
+msgstr "Type"
+
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:66
+#: storage/framework/messages/7c2632e36dafe223bd4531608d9004062bb56b09.php.php:25
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:63
+msgid "Color"
+msgstr "Color"
+
+#: storage/framework/messages/512c588535ddb3c67ab040789c4ea372b387aadd.php.php:70
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:67
+msgid "Enter area color in hex - fx. #ff0000"
+msgstr "Enter area color in hex - fx. #ff0000"
+
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:124
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:59
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:128
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:59
+msgid "Position X"
+msgstr "Position X"
+
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:134
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:69
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:138
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:69
+msgid "Position Y"
+msgstr "Position Y"
+
+#: storage/framework/messages/5a1f3eee4364db6c9b1ea1a53ff33d470d452032.php.php:144
+msgid "Place Findable on Map"
+msgstr "Place Findable on Map"
+
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:16
+msgid "Detail"
+msgstr "Detail"
+
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:181
+msgid "Add floor"
+msgstr "Add floor"
+
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:191
+#: storage/framework/messages/74251ed01e2bd6ae932c70fdb61107e65d161a79.php.php:39
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:110
+#: storage/framework/messages/cdfd2d83659a6965eff3d2090ad002412b7b16fd.php.php:9
+msgid "Locations"
+msgstr "Locations"
+
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:225
+msgid "Menu"
+msgstr "Menu"
+
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:252
+msgid "Add menu item"
+msgstr "Add menu item"
+
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:264
+#: storage/framework/messages/8434b2c7de4eeaf5e5f7aa75b977828e70e71601.php.php:32
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:129
+#: storage/framework/messages/cdfd2d83659a6965eff3d2090ad002412b7b16fd.php.php:28
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:34
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:34
+msgid "POI"
+msgstr "POI"
+
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:270
+msgid "Title"
+msgstr "Title"
+
+#: storage/framework/messages/6479a43a15ec4f65148adc321d358d7210b28b50.php.php:277
+msgid "Add"
+msgstr "Add"
+
+#: storage/framework/messages/67722b928c016391609c12895c1ec8b4c727521d.php.php:15
+msgid "Place list"
+msgstr "Place list"
+
+#: storage/framework/messages/67722b928c016391609c12895c1ec8b4c727521d.php.php:21
+#: storage/framework/messages/cdfd2d83659a6965eff3d2090ad002412b7b16fd.php.php:24
+msgid "#"
+msgstr "#"
+
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:79
+msgid "Place Beacon on Map"
+msgstr "Place Beacon on Map"
+
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:81
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:160
+msgid "Show Grid"
+msgstr "Show Grid"
+
+#: storage/framework/messages/69e5d9ea50db16267ef2fd567ae19b31ae5a9f78.php.php:81
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:81
+msgid "Show 100%"
+msgstr "Show 100%"
+
+#: storage/framework/messages/6fcfb17a769e09bffc5e86f3098c20225dd608da.php.php:9
+msgid "Creating Beacon Location"
+msgstr "Creating Beacon Location"
+
+#: storage/framework/messages/7070fc5a736b10a67bc91612064d0d372a40eec6.php.php:5
+msgid "Mmmm.... Bacon!"
+msgstr "Mmmm.... Bacon!"
+
+#: storage/framework/messages/7070fc5a736b10a67bc91612064d0d372a40eec6.php.php:9
+msgid "Created by"
+msgstr "Created by"
+
+#: storage/framework/messages/7070fc5a736b10a67bc91612064d0d372a40eec6.php.php:9
+msgid "no such agency"
+msgstr "no such agency"
+
+#: storage/framework/messages/7070fc5a736b10a67bc91612064d0d372a40eec6.php.php:9
+msgid "- fork code at"
+msgstr "- fork code at"
+
+#: storage/framework/messages/7070fc5a736b10a67bc91612064d0d372a40eec6.php.php:9
+msgid "Github"
+msgstr "Github"
+
+#: storage/framework/messages/70d1d9e686ac92ab69726f812d30a2faef86fec8.php.php:6
+msgid "Terms and conditions"
+msgstr "Terms and conditions"
+
+#: storage/framework/messages/70d1d9e686ac92ab69726f812d30a2faef86fec8.php.php:10
+msgid ""
+"Lorem ipsum dolor sit amet, veniam numquam has te. No suas nonumes recusabo "
+"mea, est ut graeci definitiones. His ne melius vituperata scriptorem, cum "
+"paulo copiosae conclusionemque at. Facer inermis ius in, ad brute nominati "
+"referrentur vis. Dicat erant sit ex. Phaedrum imperdiet scribentur vix no, "
+"ad latine similique forensibus vel."
+msgstr ""
+"Lorem ipsum dolor sit amet, veniam numquam has te. No suas nonumes recusabo "
+"mea, est ut graeci definitiones. His ne melius vituperata scriptorem, cum "
+"paulo copiosae conclusionemque at. Facer inermis ius in, ad brute nominati "
+"referrentur vis. Dicat erant sit ex. Phaedrum imperdiet scribentur vix no, "
+"ad latine similique forensibus vel."
+
+#: storage/framework/messages/70d1d9e686ac92ab69726f812d30a2faef86fec8.php.php:11
+msgid ""
+"Dolore populo vivendum vis eu, mei quaestio liberavisse ex. Electram "
+"necessitatibus ut vel, quo at probatus oportere, molestie conclusionemque "
+"pri cu. Brute augue tincidunt vim id, ne munere fierent rationibus mei. Ut "
+"pro volutpat praesent qualisque, an iisque scripta intellegebat eam."
+msgstr ""
+"Dolore populo vivendum vis eu, mei quaestio liberavisse ex. Electram "
+"necessitatibus ut vel, quo at probatus oportere, molestie conclusionemque "
+"pri cu. Brute augue tincidunt vim id, ne munere fierent rationibus mei. Ut "
+"pro volutpat praesent qualisque, an iisque scripta intellegebat eam."
+
+#: storage/framework/messages/70d1d9e686ac92ab69726f812d30a2faef86fec8.php.php:15
+msgid "OK"
+msgstr "OK"
+
+#: storage/framework/messages/751ae267572b6ebb0c1a4ceae707d067a4661dae.php.php:15
+msgid "online"
+msgstr "online"
+
+#: storage/framework/messages/7ad6cece5ae834bb9d96574bb9fc851774f551af.php.php:16
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:16
+msgid "Status"
+msgstr "Status"
+
+#: storage/framework/messages/7ad6cece5ae834bb9d96574bb9fc851774f551af.php.php:26
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:25
+msgid "Owner"
+msgstr "Owner"
+
+#: storage/framework/messages/7ad6cece5ae834bb9d96574bb9fc851774f551af.php.php:28
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:27
+msgid "Member"
+msgstr "Member"
+
+#: storage/framework/messages/7ad6cece5ae834bb9d96574bb9fc851774f551af.php.php:34
+msgid "Switch"
+msgstr "Switch"
+
+#: storage/framework/messages/7ad6cece5ae834bb9d96574bb9fc851774f551af.php.php:38
+msgid "Current team"
+msgstr "Current team"
+
+#: storage/framework/messages/814a1a380792e7178974dd204dd5f725c5b3306e.php.php:2
+msgid "Page not found"
+msgstr "Page not found"
+
+#: storage/framework/messages/814a1a380792e7178974dd204dd5f725c5b3306e.php.php:7
+msgid "404 Error Page"
+msgstr "404 Error Page"
+
+#: storage/framework/messages/814a1a380792e7178974dd204dd5f725c5b3306e.php.php:17
+msgid "404"
+msgstr "404"
+
+#: storage/framework/messages/814a1a380792e7178974dd204dd5f725c5b3306e.php.php:19
+msgid "Oops! Page not found."
+msgstr "Oops! Page not found."
+
+#: storage/framework/messages/814a1a380792e7178974dd204dd5f725c5b3306e.php.php:21
+msgid "We could not find the page you were looking for."
+msgstr "We could not find the page you were looking for."
+
+#: storage/framework/messages/814a1a380792e7178974dd204dd5f725c5b3306e.php.php:23
+#: storage/framework/messages/9a1592e99aa5d9f3dbf048783599aef2b427ee62.php.php:23
+msgid "Meanwhile, you may"
+msgstr "Meanwhile, you may"
+
+#: storage/framework/messages/8434b2c7de4eeaf5e5f7aa75b977828e70e71601.php.php:9
+msgid "Creating POI Location"
+msgstr "Creating POI Location"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:6
+#: storage/framework/messages/c1db694dd83eadde3603bbb4d277e45ce4ecbbff.php.php:6
+msgid "Settings"
+msgstr "Settings"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:7
+msgid "Email"
+msgstr "Email"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:18
+msgid "E-mail provider"
+msgstr "E-mail provider"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:22
+msgid "Provider"
+msgstr "Provider"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:31
+msgid "Sender name"
+msgstr "Sender name"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:40
+msgid "Sender email"
+msgstr "Sender email"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:44
+msgid "Enter email"
+msgstr "Enter email"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:70
+msgid "Host"
+msgstr "Host"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:79
+msgid "Port"
+msgstr "Port"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:88
+msgid "Encryption"
+msgstr "Encryption"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:118
+msgid "Domain"
+msgstr "Domain"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:127
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:139
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:160
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:172
+msgid "Secret"
+msgstr "Secret"
+
+#: storage/framework/messages/84cde4571cd683b6addb8fbd7348ab6183776bfe.php.php:151
+msgid "Key"
+msgstr "Key"
+
+#: storage/framework/messages/86414a0dcd02ffa57517d9eb1c55d6a3ab8cb174.php.php:5
+msgid "Create a new team"
+msgstr "Create a new team"
+
+#: storage/framework/messages/89217bf78fc727395fa17eb866887ad80790226f.php.php:6
+#: storage/framework/messages/968bad29906a50e776c0da5c64b3083df99640c4.php.php:6
+#: storage/framework/messages/f1bca04968b4e7b5d8d0e0dcf5ae6ca7927ab5e8.php.php:6
+msgid "Building Blocks"
+msgstr "Building Blocks"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:61
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:68
+msgid "cm"
+msgstr "cm"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:73
+msgid "ratio"
+msgstr "ratio"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:78
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:87
+msgid "px"
+msgstr "px"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:113
+msgid "Hide POIs"
+msgstr "Hide POIs"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:114
+msgid "Hide Findables"
+msgstr "Hide Findables"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:115
+msgid "Hide Blocks"
+msgstr "Hide Blocks"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:116
+msgid "Hide Beacons"
+msgstr "Hide Beacons"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:118
+msgid "Add POI"
+msgstr "Add POI"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:120
+msgid "Add Block"
+msgstr "Add Block"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:121
+msgid "Add Beacon"
+msgstr "Add Beacon"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:131
+msgid "Block"
+msgstr "Block"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:132
+#: storage/framework/messages/e8699c9e402c12bb1858c129b1c53c39b38e3a4a.php.php:32
+msgid "Findable"
+msgstr "Findable"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:154
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:158
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:160
+msgid "n/a"
+msgstr "n/a"
+
+#: storage/framework/messages/8f0276210bbc6499d5245e3578660684d27201e6.php.php:185
+msgid "Map Preview"
+msgstr "Map Preview"
+
+#: storage/framework/messages/9018bb7495ecd313b2e418cceade148153631c8c.php.php:3
+msgid "Sign in using Github"
+msgstr "Sign in using Github"
+
+#: storage/framework/messages/9018bb7495ecd313b2e418cceade148153631c8c.php.php:4
+msgid "Sign in using Facebook"
+msgstr "Sign in using Facebook"
+
+#: storage/framework/messages/9018bb7495ecd313b2e418cceade148153631c8c.php.php:5
+msgid "Sign in using Twitter"
+msgstr "Sign in using Twitter"
+
+#: storage/framework/messages/9018bb7495ecd313b2e418cceade148153631c8c.php.php:6
+msgid "Sign in using Google+"
+msgstr "Sign in using Google+"
+
+#: storage/framework/messages/94877ab1e0e92db09c5a82ffeb7d377185bada46.php.php:9
+msgid "Creating Building Block"
+msgstr "Creating Building Block"
+
+#: storage/framework/messages/94877ab1e0e92db09c5a82ffeb7d377185bada46.php.php:32
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:34
+msgid "Building Block"
+msgstr "Building Block"
+
+#: storage/framework/messages/96bec05d55d77bf330b3e154005c84296d19c3a9.php.php:37
+msgid "Enter internal name"
+msgstr "Enter internal name"
+
+#: storage/framework/messages/9a1592e99aa5d9f3dbf048783599aef2b427ee62.php.php:2
+msgid "Server Error"
+msgstr "Server Error"
+
+#: storage/framework/messages/9a1592e99aa5d9f3dbf048783599aef2b427ee62.php.php:7
+msgid "500 Error page"
+msgstr "500 Error page"
+
+#: storage/framework/messages/9a1592e99aa5d9f3dbf048783599aef2b427ee62.php.php:17
+msgid "500"
+msgstr "500"
+
+#: storage/framework/messages/9a1592e99aa5d9f3dbf048783599aef2b427ee62.php.php:21
+msgid "We will work on fixing that right away."
+msgstr "We will work on fixing that right away."
+
+#: storage/framework/messages/ad08bc7f87fef03c84fb7de210ad52d374d6d94a.php.php:5
+msgid "Edit team"
+msgstr "Edit team"
+
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:54
+msgid "Findable Parameters"
+msgstr "Findable Parameters"
+
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:148
+msgid "Rotation"
+msgstr "Rotation"
+
+#: storage/framework/messages/aed2a572a9125783b94f781e0dc48a29b253ef0f.php.php:158
+msgid "Place Block on Map"
+msgstr "Place Block on Map"
+
+#: storage/framework/messages/bc89b151d06a71fea94aeff2986eb25068b2a894.php.php:15
+#: storage/framework/messages/bc89b151d06a71fea94aeff2986eb25068b2a894.php.php:55
+msgid "User"
+msgstr "User"
+
+#: storage/framework/messages/bc89b151d06a71fea94aeff2986eb25068b2a894.php.php:16
+msgid "Token"
+msgstr "Token"
+
+#: storage/framework/messages/bc89b151d06a71fea94aeff2986eb25068b2a894.php.php:17
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:17
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:66
+msgid "Action"
+msgstr "Action"
+
+#: storage/framework/messages/bc89b151d06a71fea94aeff2986eb25068b2a894.php.php:31
+msgid "Revoke"
+msgstr "Revoke"
+
+#: storage/framework/messages/bc89b151d06a71fea94aeff2986eb25068b2a894.php.php:65
+msgid "Create API key"
+msgstr "Create API key"
+
+#: storage/framework/messages/c1db694dd83eadde3603bbb4d277e45ce4ecbbff.php.php:7
+msgid "Templates"
+msgstr "Templates"
+
+#: storage/framework/messages/c1db694dd83eadde3603bbb4d277e45ce4ecbbff.php.php:22
+msgid "Subject"
+msgstr "Subject"
+
+#: storage/framework/messages/c1db694dd83eadde3603bbb4d277e45ce4ecbbff.php.php:24
+msgid "Your Password Reset Link"
+msgstr "Your Password Reset Link"
+
+#: storage/framework/messages/c1db694dd83eadde3603bbb4d277e45ce4ecbbff.php.php:33
+msgid "Use the placeholder"
+msgstr "Use the placeholder"
+
+#: storage/framework/messages/c1db694dd83eadde3603bbb4d277e45ce4ecbbff.php.php:33
+msgid "to insert the reset link."
+msgstr "to insert the reset link."
+
+#: storage/framework/messages/cdfd2d83659a6965eff3d2090ad002412b7b16fd.php.php:18
+msgid "Location list"
+msgstr "Location list"
+
+#: storage/framework/messages/cdfd2d83659a6965eff3d2090ad002412b7b16fd.php.php:27
+#: storage/framework/messages/df68f0126a8abf9b5ff7fd3149d4a10ce0110d9f.php.php:26
+msgid "Floor"
+msgstr "Floor"
+
+#: storage/framework/messages/d91ee1b9c36e3741852cb18a836829fa4ba888a5.php.php:1
+msgid "Mail title"
+msgstr "Mail title"
+
+#: storage/framework/messages/e48b8a3e707a7cff3cf9c0ef2cad3286f3de14b0.php.php:69
+msgid "Draw POI on Map"
+msgstr "Draw POI on Map"
+
+#: storage/framework/messages/e8699c9e402c12bb1858c129b1c53c39b38e3a4a.php.php:9
+msgid "Creating Findable Location"
+msgstr "Creating Findable Location"
+
+#: storage/framework/messages/e8699c9e402c12bb1858c129b1c53c39b38e3a4a.php.php:46
+msgid "Enter location name"
+msgstr "Enter location name"
+
+#: storage/framework/messages/eb93370d08fdca8549665dc7b4ed25469ccfbdc0.php.php:79
+msgid "Place POI on Map"
+msgstr "Place POI on Map"
+
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:8
+msgid "Account users"
+msgstr "Account users"
+
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:37
+msgid "Remove from team"
+msgstr "Remove from team"
+
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:48
+msgid "Delete user"
+msgstr "Delete user"
+
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:60
+msgid "Pending invitations"
+msgstr "Pending invitations"
+
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:65
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:74
+msgid "Resend invite"
+msgstr "Resend invite"
+
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:81
+msgid "Delete"
+msgstr "Delete"
+
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:92
+msgid "Invite user"
+msgstr "Invite user"
+
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:98
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:130
+msgid "E-Mail Address"
+msgstr "E-Mail Address"
+
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:107
+msgid "Invite to Team"
+msgstr "Invite to Team"
+
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:117
+#: storage/framework/messages/ecedc5cbd135ab96cc71a3e35dc09b3aac4b8f27.php.php:153
+msgid "Create user"
+msgstr "Create user"

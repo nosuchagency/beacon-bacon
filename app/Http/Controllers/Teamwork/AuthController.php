@@ -28,7 +28,7 @@ class AuthController extends Controller
             return redirect()->route('teams.index');
         } else {
             session(['invite_token' => $token]);
-            return redirect()->to('login');
+            return redirect()->to('register');
         }
     }
 

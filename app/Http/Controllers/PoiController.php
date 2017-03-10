@@ -26,7 +26,7 @@ class PoiController extends Controller
      */
     public function index()
     {
-        $pois = Poi::all();
+        $pois = Poi::all()->sortBy('name', SORT_NATURAL);
         return view('pois.index', compact('pois'));
     }
 
