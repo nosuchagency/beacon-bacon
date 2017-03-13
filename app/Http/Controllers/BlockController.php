@@ -147,7 +147,7 @@ class BlockController extends Controller
             return;
         }
 
-        $request->file('image')->store('blocks/' . $block->id);
+        $request->file('image')->store('images/blocks/' . $block->id);
         $fileName = $request->image->hashName();
         $destinationPath = storage_path() . '/app/images/blocks/' . $block->id;
 
