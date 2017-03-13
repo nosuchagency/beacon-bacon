@@ -4,12 +4,12 @@
 
 @section('breadcrumbs')
 <ol class="breadcrumb">
-  <li><a href="/"><i class="fa fa-dashboard"></i> {{__('Home')}}</a></li>
-  <li><a href="{{ route('places.index') }}">{{__('Places')}}</a></li>
+  <li><a href="/"><i class="fa fa-dashboard"></i> {{'Home'}}</a></li>
+  <li><a href="{{ route('places.index') }}">{{'Places'}}</a></li>
   <li><a href="{{ route('places.show', $placeId) }}">{{ $location->place->name }}</a></li>
   <li><a href="{{ route('floors.show', [$placeId, $floorId]) }}">{{ $location->floor->name }}</a></li>
   <li><a href="{{ route('locations.show', [$placeId, $floorId, $location->id]) }}">{{ $location->name }}</a></li>
-  <li class="active">{{__('Editing')}}</li>
+  <li class="active">{{'Editing'}}</li>
 </ol>
 @endsection
 
@@ -24,12 +24,12 @@
   <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">{{__('Details')}}</h3>
+          <h3 class="box-title">{{'Details'}}</h3>
         </div>
         <div class="box-body">
 
           <div class="form-group">
-            {!! Form::label('poi_id', __('POI'), ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('poi_id', 'POI', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::select('poi_id', $pois, $location->poi_id, ['class' => 'form-control']) !!}
@@ -40,17 +40,17 @@
             {!! Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::text('name', $location->name, ['class' => 'form-control', 'placeholder' => __('Enter name')]) !!}
+              {!! Form::text('name', $location->name, ['class' => 'form-control', 'placeholder' => 'Enter name']) !!}
             </div>
           </div>
 
           <div class="form-group">
-			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">{{__('Location on Map')}}</h5>
+			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">{{'Location on Map'}}</h5>
             <div class="col-sm-10"></div>
           </div>
 
           <div class="form-group">
-            {!! Form::label('posX', __('Position X'), ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('posX', 'Position X', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::text('posX', $location->posX, ['class' => 'form-control']) !!}
@@ -58,7 +58,7 @@
           </div>
 
           <div class="form-group">
-            {!! Form::label('posY', __('Position Y'), ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('posY', 'Position Y', ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::text('posY', $location->posY, ['class' => 'form-control']) !!}
@@ -66,9 +66,9 @@
           </div>
 
           <div class="form-group">
-			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">{{__('Place POI on Map')}}</h5>
+			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">{{'Place POI on Map'}}</h5>
             <div class="col-sm-10" style="text-align: right;">
-				<input type="checkbox" id="show-100" /> {{__('Show 100%')}}
+				<input type="checkbox" id="show-100" /> Show 100%
             </div>
           </div>
 
