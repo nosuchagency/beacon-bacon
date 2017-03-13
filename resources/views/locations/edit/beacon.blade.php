@@ -68,7 +68,7 @@
           <div class="form-group">
 			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">{{__('Place Beacon on Map')}}</h5>
             <div class="col-sm-10" style="text-align: right;">
-				<input type="checkbox" id="show-grid" /> {{__('Show Grid')}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="show-100" /> {{__('Show 100%')}}
+				<input type="checkbox" id="show-grid" /> {{__('Show Grid')}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="show-100" /> Show 100%'
             </div>
           </div>
 
