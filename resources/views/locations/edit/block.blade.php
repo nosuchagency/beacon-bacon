@@ -35,7 +35,6 @@
               {!! Form::select('block_id', $blocks, $location->block_id, ['class' => 'form-control']) !!}
             </div>
           </div>
-
           <div class="form-group">
             {!! Form::label('name', __('Name'), ['class' => 'col-sm-2 control-label']) !!}
 
