@@ -106,6 +106,10 @@ class LocationController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
+            'block_id' => 'required_without_all:poi_id,beacon_id,findable_id',
+            'poi_id' => 'required_without_all:block_id,findable_id,beacon_id',
+            'findable_id' => 'required_without_all:block_id,poi_id,beacon_id',
+            'beacon_id' => 'required_without_all:block_id,poi_id,findable_id'
         ]);
 
         $location = Location::create($request->all());
@@ -141,7 +145,7 @@ class LocationController extends Controller
      */
     public function edit($placeId, $floorId, $id)
     {
-        $place = Place::findOrFail($placeId);
+        //$place = Place::findOrFail($placeId);
         $floor = Floor::findOrFail($floorId);
         $location = Location::findOrFail($id);
 
@@ -169,7 +173,6 @@ class LocationController extends Controller
         if ($location->type == 'findable') {
 
             $findables = Findable::pluck('name', 'id');
-            $findables->prepend('Select Findable...', 0);
 
             if ($location->draw_type === "area") {
                 return view('locations.edit.findable.area', compact('findables', 'location', 'placeId', 'floorId'));
@@ -183,10 +186,7 @@ class LocationController extends Controller
             $blocks = Block::pluck('name', 'id');
             $blocks->prepend('Select Block...', 0);
 
-            $findables = Findable::pluck('name', 'id');
-            $findables->prepend('Is findable?', 0);
-
-            if ($location->block->image) {
+            if ($location->block && $location->block->image) {
                 $path = $location->block->getPhysicalIconPath();
                 $image = Image::make($path);
                 $location->imageWidth = $image->width();
@@ -195,19 +195,19 @@ class LocationController extends Controller
 
             $location->imageRotation = deg2rad($location->rotation);
 
-            return view('locations.edit.block', compact('blocks', 'findables', 'location', 'placeId', 'floor', 'floorId'));
+            return view('locations.edit.block', compact('blocks', 'location', 'placeId', 'floor', 'floorId'));
         }
 
         $pois = Poi::pluck('name', 'id');
 
-        if ($location->poi->icon) {
+        if ($location->poi && $location->poi->icon) {
             $icon = Image::make($location->poi->getPhysicalIconPath());
 
             $location->iconWidth = 32;
             $location->iconHeight = round(32 / $icon->width() * $icon->height());
         }
 
-        if ($location->poi->type == 'area') {
+        if ($location->poi && $location->poi->type == 'area') {
             return view('locations.edit.poi.area', compact('pois', 'location', 'placeId', 'floorId'));
         }
 
@@ -246,7 +246,7 @@ class LocationController extends Controller
             $beacon->save();
         }
 
-        $location->update($request->all());
+        $location->update($request->except('findable_id'));
 
         if ($location->type == 'block') {
             $locations = Location::with('block')->get()->where('floor_id', $floorId);
