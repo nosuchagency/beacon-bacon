@@ -22,7 +22,6 @@
 
           <div class="row">
             <div class="col-sm-6">
-
 	          <div class="row">
 	            <div class="col-sm-2">
 	              <strong>{{__('Place')}}</strong>
@@ -115,59 +114,176 @@
           <a href="{{ route('locations.create', [$placeId, $floor->id, 'beacon']) }}" class="btn btn-success btn-sm"><i class="fa fa-bullseye"></i> {{__('Add Beacon')}}</a>
         </div>
       </div>
-      <div class="box-body no-padding">
-        <table class="table">
-            <tbody>
-              <tr>
-                <th>{{__('Name')}}</th>
-                <th>{{__('POI')}}</th>
-                <th>{{__('Beacon')}}</th>
-                <th>{{__('Block')}}</th>
-                <th>{{__('Findable')}}</th>
-                <th class="text-right"></th>
-              </tr>
-            @foreach($floor->locations as $index => $location)
-              <tr class="
-              @if($location->type == 'block')
-              block-in-list
-              @elseif($location->type == 'findable')
-              findable-in-list
-              @elseif($location->type == 'beacon')
-              beacon-in-list
-              @else
-              poi-in-list
-              @endif
-              ">
-                <td><a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a></td>
-                <td>{{ $location->poi->name or 'n/a' }}</td>
-                <td>{{ $location->beacon->name or 'n/a' }}</td>
-
-                @if($location->type == 'block')
-                <td>{{ $location->name or 'n/a' }}</td>
-                @else
-                <td>{{__('n/a')}}</td>
-                @endif
-
-				        @if($location->type == 'findable')
-                <td>{{ $location->name or __('n/a') }}</td>
-                @else
-                <td>{{__('n/a')}}</td>
-                @endif
-
-                <td class="text-right">
-                  {!! Form::open(['route' => ['locations.destroy', $placeId, $floor->id, $location->id], 'method' => 'DELETE']) !!}
-                  {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                  <a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
-                  {!! Form::close() !!}
-                </td>
-              </tr>
-            @endforeach
-            </tbody>
-          </table>
-      </div>
     </div>
   </div>
 </div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div id="poi-list" class="box box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">{{__('POI')}}</h3>
+				<div class="pull-right box-tools">
+					<a href="{{ route('locations.create', [$placeId, $floor->id, 'poi']) }}" class="btn btn-success btn-sm"><i class="fa fa-map-marker"></i> {{__('Add POI')}}</a>
+				</div>
+			</div>
+			<div class="box-body no-padding">
+				<table class="table list-table">
+					<tbody>
+					<tr>
+						<th>{{__('Name')}}</th>
+						<th>{{__('POI')}}</th>
+						<th>{{__('Area')}}</th>
+						<th class="text-right"></th>
+					</tr>
+					@foreach($floor->locations as $index => $location)
+					  @if($location->type == 'poi')
+						  <tr class="poi-in-list">
+									<td><a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a></td>
+									<td>{{ !empty($location->poi) ? $location->poi->name : 'n/a' }}</td>
+							        <td>{{ !empty($location->area) ? $location->area : 'n/a' }}</td>
+									<td class="text-right">
+										{!! Form::open(['route' => ['locations.destroy', $placeId, $floor->id, $location->id], 'method' => 'DELETE']) !!}
+										{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+										<a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
+										{!! Form::close() !!}
+									</td>
+								</tr>
+					  @endif
+					@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div id="beacon-list" class="box box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">{{__('Beacons')}}</h3>
+				<div class="pull-right box-tools">
+					<a href="{{ route('locations.create', [$placeId, $floor->id, 'beacon']) }}" class="btn btn-success btn-sm"><i class="fa fa-bullseye"></i> {{__('Add Beacon')}}</a>
+				</div>
+			</div>
+			<div class="box-body no-padding">
+				<table class="table list-table">
+					<tbody>
+					<tr>
+						<th>{{__('Name')}}</th>
+						<th>{{__('Beacon')}}</th>
+						<th>{{__('Major')}}</th>
+						<th>{{__('Minor')}}</th>
+						<th class="text-right"></th>
+					</tr>
+					@foreach($floor->locations as $index => $location)
+						  @if($location->type == 'beacon')
+							  <tr class="beacon-in-list">
+										<td><a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a></td>
+										<td>{{ !empty($location->beacon) ? $location->beacon->name : 'n/a' }}</td>
+								  		<td>{{ !empty($location->beacon) ? $location->beacon->major : 'n/a' }}</td>
+								  		<td>{{ !empty($location->beacon) ? $location->beacon->minor : 'n/a' }}</td>
+										<td class="text-right">
+											{!! Form::open(['route' => ['locations.destroy', $placeId, $floor->id, $location->id], 'method' => 'DELETE']) !!}
+											{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+											<a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
+											{!! Form::close() !!}
+										</td>
+									</tr>
+						  @endif
+					@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div id="block-list" class="box box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">{{__('Blocks')}}</h3>
+				<div class="pull-right box-tools">
+					<a href="{{ route('locations.create', [$placeId, $floor->id, 'block']) }}" class="btn btn-success btn-sm"><i class="fa fa-square"></i> {{__('Add Block')}}</a>
+				</div>
+			</div>
+			<div class="box-body no-padding">
+				<table class="table list-table">
+					<tbody>
+					<tr>
+						<th>{{__('Name')}}</th>
+						<th>{{__('Block')}}</th>
+						<th>{{__('Findable')}}</th>
+						<th>{{__('identifier')}}</th>
+						<th class="text-right"></th>
+					</tr>
+					@foreach($floor->locations as $index => $location)
+						@if($location->type == 'block')
+									<tr class="block-in-list">
+							<td><a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a></td>
+										<td>{{ !empty($location->block) ? $location->block->name : 'n/a' }}</td>
+										<td>{{ !empty($location->findable) ? $location->findable->name : 'n/a' }}</td>
+										<td>{{ !empty($location->parameter_one) ? $location->parameter_one : 'n/a' }}</td>
+							<td class="text-right">
+								{!! Form::open(['route' => ['locations.destroy', $placeId, $floor->id, $location->id], 'method' => 'DELETE']) !!}
+								{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+								<a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
+								{!! Form::close() !!}
+							</td>
+						</tr>
+						@endif
+					@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div id="findable-list" class="box box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">{{__('Findables')}}</h3>
+				<div class="pull-right box-tools">
+					<a href="{{ route('locations.create', [$placeId, $floor->id, 'findable']) }}" class="btn btn-success btn-sm"><i class="fa fa-dot-circle-o"></i> {{__('Add Findable')}}</a>
+				</div>
+			</div>
+			<div class="box-body no-padding">
+				<table class="table list-table">
+					<tbody>
+					<tr>
+						<th>{{__('Name')}}</th>
+						<th>{{__('Findable')}}</th>
+						<th>{{__('Identifier')}}</th>
+						<th>{{__('Area')}}</th>
+						<th class="text-right"></th>
+					</tr>
+					@foreach($floor->locations as $index => $location)
+						@if($location->type == 'findable')
+									<tr class="findable-in-list">
+							<td><a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a></td>
+								<td>{{ !empty($location->findable) ? $location->findable->name : 'n/a' }}</td>
+										<td>{{ !empty($location->parameter_one) ? $location->parameter_one : 'n/a' }}</td>
+										<td>{{ !empty($location->area) ? $location->area : 'n/a' }}</td>
+							<td class="text-right">
+								{!! Form::open(['route' => ['locations.destroy', $placeId, $floor->id, $location->id], 'method' => 'DELETE']) !!}
+								{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+								<a href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
+								{!! Form::close() !!}
+							</td>
+						</tr>
+						@endif
+					@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <div class="row">
   <div class="col-sm-12">
@@ -186,9 +302,9 @@
               <img src="{{ $location->poi->getVirtualIconPath() }}" style="height: 32px; width: auto;" />
             </a>
 	          @elseif($location->poi && $location->poi->type == 'area' )
-			  	<span class="floor-map-preview-location titletip" data-hex="{{ $location->poi->color }}" data-position-area="{{ $location->area }}"></span>
+			  	<span class="floor-map-preview-location titletip" data-hex="{{ !empty($location->poi) ? $location->poi->color : '' }}" data-position-area="{{ $location->area }}"></span>
 			  @elseif($location->type == 'beacon')
-			  	<a class="beacon-on-map-preview floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="background-image: url({{URL::asset('/img/font-awesome-bullseye.png')}}); display: block; height: 32px; position: absolute; width: 32px;" title="Beacon: {{ $location->beacon->name }}"></a>
+			  	<a class="beacon-on-map-preview floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="background-image: url({{URL::asset('/img/font-awesome-bullseye.png')}}); display: block; height: 32px; position: absolute; width: 32px;" title="Beacon: {{ !empty($location->beacon) ? $location->beacon->name : '' }}"></a>
 			  @elseif($location->type == 'findable' && ($location->draw_type == 'point' || empty($location->draw_type)))
 			  	<a class="findable-on-map-preview floor-map-preview-location titletip" data-height="32" data-width="32" data-position-x="{{ $location->posX }}" data-position-y="{{ $location->posY }}" href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}" style="background-image: url({{URL::asset('/img/font-awesome-dot-circle-o.png')}}); display: block; height: 32px; position: absolute; width: 32px;" title="Findable: {{ $location->name }}"></a>
                 @elseif($location->type == 'findable' && $location->draw_type == 'area' )
