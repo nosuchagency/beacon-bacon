@@ -23,7 +23,8 @@
 	<!-- jQuery Rotatable -->
     <link href="{{ asset('/css/jquery.ui.rotatable.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <!-- Bootstrap editable -->
+    <link href="{{ asset('/css/bootstrap-editable.css') }}" rel="stylesheet" type="text/css" />
 
     @yield('header')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
