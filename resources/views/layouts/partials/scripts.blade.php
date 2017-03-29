@@ -30,4 +30,6 @@
 <!-- Beacon Bacon -->
 <script src="{{ asset('/js/beacon-bacon.js') }}" type="text/javascript"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
 @yield('footer')
