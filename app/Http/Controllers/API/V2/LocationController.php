@@ -61,8 +61,8 @@ class LocationController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'max:255:required_without:value',
-            'value' => 'max:255:required_without:name'
+            'name' => 'max:255|required_without:value',
+            'value' => 'max:255|required_without:name'
         ]);
 
         if(!empty($request->value)) {
