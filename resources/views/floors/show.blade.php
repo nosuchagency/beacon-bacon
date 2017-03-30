@@ -349,6 +349,7 @@
                                     <a class="poi-on-map-preview floor-map-preview-location poi titletip"
                                        data-height="-1" data-width="-1" data-position-x="{{ $location->posX }}"
                                        data-position-y="{{ $location->posY }}"
+                                       data-location-id="{{$location->id}}"
                                        src="{{ $location->poi->getVirtualIconPath() }}"
                                        href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}"
                                        style="position: absolute;" title="POI: {{ $location->name }}">
@@ -365,14 +366,16 @@
                                        data-position-y="{{ $location->posY }}"
                                        href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}"
                                        style="background-image: url({{URL::asset('/img/font-awesome-bullseye.png')}}); display: block; height: 32px; position: absolute; width: 32px;"
-                                       title="Beacon: {{ !empty($location->beacon) ? $location->beacon->name : '' }}"></a>
+                                       title="Beacon: {{ !empty($location->beacon) ? $location->beacon->name : '' }}">
+                                        data-location-id="{{$location->id}}"</a>
                                 @elseif($location->type == 'findable' && ($location->draw_type == 'point' || empty($location->draw_type)))
                                     <a class="findable-on-map-preview floor-map-preview-location titletip"
                                        data-height="32" data-width="32" data-position-x="{{ $location->posX }}"
                                        data-position-y="{{ $location->posY }}"
                                        href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}"
                                        style="background-image: url({{URL::asset('/img/font-awesome-dot-circle-o.png')}}); display: block; height: 32px; position: absolute; width: 32px;"
-                                       title="Findable: {{ $location->name }}"></a>
+                                       title="Findable: {{ $location->name }}"
+                                       data-location-id="{{$location->id}}"></a>
                                 @elseif($location->type == 'findable' && $location->draw_type == 'area' )
                                     <span class="floor-map-preview-location titletip" data-hex="#c1f188"
                                           data-position-area="{{ $location->area }}"></span>
@@ -496,12 +499,34 @@
                     return params;
                 },
                 validate: function (value) {
-                    if ($.trim(value) == '') {
+                    if (!value.trim()) {
                         return 'The name is required';
                     }
+                },
+                success: function(response, newValue) {
+                    $('a[data-location-id="' + response.id + '"]').attr('title', regenerateTooltip(response))
+                        .tooltip('fixTitle')
                 }
             });
         });
+
+        function regenerateTooltip(location) {
+            var tooltip = "";
+            switch(location.type) {
+                case 'poi':
+                    tooltip = 'POI: ' + location.name;
+                    break;
+                case 'beacon':
+                    tooltip = 'Beacon: ' + location.name;
+                    break;
+                case 'findable':
+                    tooltip = 'Findable: ' + location.name;
+                    break;
+                default :
+                    tooltip = 'n/a';
+            }
+            return tooltip;
+        }
 
         $('.pencil-edit').click(function (e) {
             e.stopPropagation();
