@@ -103,7 +103,6 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">{{__('Locations')}}</h3>
                     <div class="pull-right box-tools">
-
                         <input type="checkbox" value="Yes" id="hide_pois_checkbox"/> <span
                                 style="margin: 0 25px 0 5px">{{__('Hide POIs')}}</span>
                         <input type="checkbox" value="Yes" id="hide_findables_checkbox"/> <span
@@ -112,7 +111,6 @@
                                 style="margin: 0 25px 0 5px">{{__('Hide Blocks')}}</span>
                         <input type="checkbox" value="Yes" id="hide_beacons_checkbox"/> <span
                                 style="margin: 0 25px 0 5px">{{__('Hide Beacons')}}</span>
-
                         <a href="{{ route('locations.create', [$placeId, $floor->id, 'poi']) }}"
                            class="btn btn-success btn-sm"><i class="fa fa-map-marker"></i> {{__('Add POI')}}</a>
                         <a href="{{ route('locations.create', [$placeId, $floor->id, 'findable']) }}"
@@ -150,7 +148,9 @@
                             @if($location->type == 'poi')
                                 <tr class="poi-in-list">
                                     <td>
-                                        <a class="modal-{{$location->id}} name-edit" data-type="text" data-pk="{{$location->id}}" data-url="{{URL::to('/')}}/ajax/location/{{$location->id}}?XDEBUG_SESSION_START=PHPSTORM"
+                                        <a class="modal-{{$location->id}} name-edit" data-type="text"
+                                           data-pk="{{$location->id}}"
+                                           data-url="{{URL::to('/')}}/ajax/location/{{$location->id}}"
                                            data-title="Enter new name"
                                            href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a>
                                         <a style="padding-left: 5px;" data-id="{{$location->id}}" class="pencil-edit"
@@ -199,7 +199,9 @@
                             @if($location->type == 'beacon')
                                 <tr class="beacon-in-list">
                                     <td>
-                                        <a class="modal-{{$location->id}} name-edit" data-type="text" data-pk="{{$location->id}}" data-url="{{URL::to('/')}}/ajax/location/{{$location->id}}?XDEBUG_SESSION_START=PHPSTORM"
+                                        <a class="modal-{{$location->id}} name-edit" data-type="text"
+                                           data-pk="{{$location->id}}"
+                                           data-url="{{URL::to('/')}}/ajax/location/{{$location->id}}"
                                            data-title="Enter new name"
                                            href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a>
                                         <a style="padding-left: 5px" data-id="{{$location->id}}" class="pencil-edit"
@@ -249,7 +251,9 @@
                             @if($location->type == 'block')
                                 <tr class="block-in-list">
                                     <td>
-                                        <a class="modal-{{$location->id}} name-edit" data-type="text" data-pk="{{$location->id}}" data-url="{{URL::to('/')}}/ajax/location/{{$location->id}}?XDEBUG_SESSION_START=PHPSTORM"
+                                        <a class="modal-{{$location->id}} name-edit" data-type="text"
+                                           data-pk="{{$location->id}}"
+                                           data-url="{{URL::to('/')}}/ajax/location/{{$location->id}}"
                                            data-title="Enter new name"
                                            href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a>
                                         <a style="padding-left: 5px" data-id="{{$location->id}}" class="pencil-edit"
@@ -299,7 +303,9 @@
                             @if($location->type == 'findable')
                                 <tr class="findable-in-list">
                                     <td>
-                                        <a class="modal-{{$location->id}} name-edit" data-type="text" data-pk="{{$location->id}}" data-url="{{URL::to('/')}}/ajax/location/{{$location->id}}?XDEBUG_SESSION_START=PHPSTORM"
+                                        <a class="modal-{{$location->id}} name-edit" data-type="text"
+                                           data-pk="{{$location->id}}"
+                                           data-url="{{URL::to('/')}}/ajax/location/{{$location->id}}"
                                            data-title="Enter new name"
                                            href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}">{{ $location->name or 'Unnamed' }}</a>
                                         <a style="padding-left: 5px" data-id="{{$location->id}}" class="pencil-edit"
@@ -489,8 +495,8 @@
                     params._method = 'PUT';
                     return params;
                 },
-                validate: function(value) {
-                    if($.trim(value) == '') {
+                validate: function (value) {
+                    if ($.trim(value) == '') {
                         return 'The name is required';
                     }
                 }
