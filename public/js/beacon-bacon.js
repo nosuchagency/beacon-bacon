@@ -16,7 +16,7 @@ jQuery( 'document' ).ready( function ( ) {
   } );
 
   jQuery( '#hide_pois_checkbox' ).click( function ( event ) {
-    $( '.poi-in-list').toggle( ! this.checked );
+    $( '#poi-list').toggle( ! this.checked );
     $( '.poi-on-map-preview').toggle( ! this.checked );
 
     jQuery.cookie( 'hide-pois', this.checked );
@@ -25,13 +25,13 @@ jQuery( 'document' ).ready( function ( ) {
   if ( jQuery.cookie( 'hide-pois' ) == 'true' ) {
     jQuery( '#hide_pois_checkbox' ).prop( 'checked', true );
 
-    $( '.poi-in-list' ).toggle( false );
+    $( '#poi-list' ).toggle( false );
     $( '.poi-on-map-preview' ).toggle( false );
   }
   
 
   jQuery( '#hide_beacons_checkbox' ).click( function ( event ) {
-    $( '.beacon-in-list').toggle( ! this.checked );
+    $( '#beacon-list').toggle( ! this.checked );
     $( '.beacon-on-map-preview').toggle( ! this.checked );
 
     jQuery.cookie( 'hide-beacons', this.checked );
@@ -40,13 +40,13 @@ jQuery( 'document' ).ready( function ( ) {
   if ( jQuery.cookie( 'hide-beacons' ) == 'true' ) {
     jQuery( '#hide_beacons_checkbox' ).prop( 'checked', true );
 
-    $( '.beacon-in-list' ).toggle( false );
+    $( '#beacon-list' ).toggle( false );
     $( '.beacon-on-map-preview' ).toggle( false );
   }
 
 
   jQuery( '#hide_blocks_checkbox' ).click( function ( event ) {
-    $( '.block-in-list' ).toggle( ! this.checked );
+    $( '#block-list' ).toggle( ! this.checked );
 
     jQuery.cookie( 'hide-blocks', this.checked );
   } );
@@ -54,12 +54,12 @@ jQuery( 'document' ).ready( function ( ) {
   if ( jQuery.cookie( 'hide-blocks' ) == 'true' ) {
     jQuery( '#hide_blocks_checkbox' ).prop( 'checked', true );
 
-    $( '.block-in-list' ).toggle( false );
+    $( '#block-list' ).toggle( false );
   }
 
 
   jQuery( '#hide_findables_checkbox' ).click( function ( event ) {
-    $( '.findable-in-list' ).toggle( ! this.checked );
+    $( '#findable-list' ).toggle( ! this.checked );
     $( '.findable-on-map-preview' ).toggle( ! this.checked );
 
     jQuery.cookie( 'hide-findables', this.checked );
@@ -68,7 +68,7 @@ jQuery( 'document' ).ready( function ( ) {
   if ( jQuery.cookie( 'hide-findables' ) == 'true' ) {
     jQuery( '#hide_findables_checkbox' ).prop( 'checked', true );
 
-    $( '.findable-in-list' ).toggle( false );
+    $( '#findable-list' ).toggle( false );
     $( '.findable-on-map-preview' ).toggle( false );
   }
 

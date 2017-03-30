@@ -15,12 +15,16 @@
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
+
     <link href="{{ asset('/css/skins/skin-blue.css') }}" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
     <link href="{{ asset('/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
     
 	<!-- jQuery Rotatable -->
     <link href="{{ asset('/css/jquery.ui.rotatable.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap editable -->
+    <link href="{{ asset('/css/bootstrap-editable.css') }}" rel="stylesheet" type="text/css" />
 
     @yield('header')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

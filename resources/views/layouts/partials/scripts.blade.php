@@ -30,4 +30,6 @@
 <!-- Beacon Bacon -->
 <script src="{{ asset('/js/beacon-bacon.js') }}" type="text/javascript"></script>
 
+<script src="{{ asset('/js/bootstrap-editable.min.js') }}"></script>
+
 @yield('footer')

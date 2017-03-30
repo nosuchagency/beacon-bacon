@@ -18,6 +18,13 @@ body {
 .layout-boxed body {
   height: 100%;
 }
+.list-table {
+  table-layout: fixed;
+}
+
+table.list-table td{
+  word-wrap : break-word;
+}
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -4923,3 +4930,8 @@ table.text-center th {
     white-space: normal !important;
   }
 }
+
+.pencil-edit {
+  color: #367fa9;
+}
+
