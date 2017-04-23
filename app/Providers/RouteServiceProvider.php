@@ -93,5 +93,13 @@ class RouteServiceProvider extends ServiceProvider
         ], function ($router) {
             require base_path('routes/api2.php');
         });
+
+        Route::group([
+            'middleware' => 'web',
+            'namespace' => $this->namespace .'\API\V2',
+            'prefix' => 'ajax',
+        ], function ($router) {
+            require base_path('routes/api2.php');
+        });
     }
 }
