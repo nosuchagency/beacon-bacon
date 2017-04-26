@@ -350,7 +350,7 @@
                                        data-height="-1" data-width="-1" data-position-x="{{ $location->posX }}"
                                        data-position-y="{{ $location->posY }}"
                                        data-location-id="{{$location->id}}"
-                                       src="{{ $location->poi->getVirtualIconPath() }}"
+
                                        href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}"
                                        style="position: absolute;" title="POI: {{ $location->name }}">
                                         <img src="{{ $location->poi->getVirtualIconPath() }}"
@@ -365,10 +365,19 @@
                                        data-height="32" data-width="32" data-position-x="{{ $location->posX }}"
                                        data-position-y="{{ $location->posY }}"
                                        href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}"
-                                       style="background-image: url({{URL::asset('/img/font-awesome-bullseye.png')}}); display: block; height: 32px; position: absolute; width: 32px;"
+                                       style="background-image: url({{URL::asset('/img/font-awesome-bullseye.png')}}); display: block; height: 32px; position: absolute; width: 32px; z-index: 2;"
                                        data-location-id="{{$location->id}}"
                                        title="Beacon: {{ !empty($location->beacon) ? $location->beacon->name : '' }}">
                                         </a>
+                                @elseif($location->type == 'block')
+                                    <a class="block-on-map-preview floor-map-preview-location titletip"
+                                       data-height="{{ $location->block->height }}" data-width="{{ $location->block->width }}" data-position-x="{{ $location->posX }}"
+                                       data-position-y="{{ $location->posY }}"
+                                       href="{{ route('locations.edit', [$placeId, $floor->id, $location->id]) }}"
+                                       style="display: block; height: 0px; position: absolute; transform: rotate({{ $location->rotation }}deg);  width: 0px;"
+                                       data-location-id="{{$location->id}}"
+                                       title="Block: {{ $location->name }}">
+                                    </a>
                                 @elseif($location->type == 'findable' && ($location->draw_type == 'point' || empty($location->draw_type)))
                                     <a class="findable-on-map-preview floor-map-preview-location titletip"
                                        data-height="32" data-width="32" data-position-x="{{ $location->posX }}"
@@ -474,6 +483,16 @@
                 if (iconWidth == -1 || iconHeight == -1) {
                     iconWidth = $(location).first().width();
                     iconHeight = $(location).first().height();
+                }
+
+                if ( $(location).hasClass( 'block-on-map-preview' ) ) {
+                    iconWidth = Math.round( iconWidth * ratio );
+                    iconHeight = Math.round( iconHeight * ratio );
+
+                    $( location ).css( {
+                        height : iconHeight,
+                        width : iconWidth
+                    } );
                 }
 
                 $(location).css({
