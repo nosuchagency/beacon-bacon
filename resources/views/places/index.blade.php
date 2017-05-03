@@ -31,7 +31,7 @@
                   <td class="text-right">
                     {!! Form::open(['route' => ['places.destroy', $place->id], 'method' => 'DELETE']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                    <a href="#" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
+                    <a href="{{ route('places.edit', [$place->id]) }}" class="btn btn-primary btn-sm">{{__('Edit')}}</a>
                     {!! Form::close() !!}
                   </td>
                 </tr>
