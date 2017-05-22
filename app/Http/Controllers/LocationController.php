@@ -145,7 +145,6 @@ class LocationController extends Controller
      */
     public function edit($placeId, $floorId, $id)
     {
-        //$place = Place::findOrFail($placeId);
         $floor = Floor::findOrFail($floorId);
         $location = Location::findOrFail($id);
 

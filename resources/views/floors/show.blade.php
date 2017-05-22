@@ -369,7 +369,7 @@
                                        data-location-id="{{$location->id}}"
                                        title="Beacon: {{ !empty($location->beacon) ? $location->beacon->name : '' }}">
                                         </a>
-                                @elseif($location->type == 'block')
+                                @elseif($location->type == 'block' && $location->block)
                                     <a class="block-on-map-preview floor-map-preview-location titletip"
                                        data-height="{{ $location->block->height }}" data-width="{{ $location->block->width }}" data-position-x="{{ $location->posX }}"
                                        data-position-y="{{ $location->posY }}"
