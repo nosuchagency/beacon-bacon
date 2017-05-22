@@ -12,8 +12,7 @@ use App\Beacon;
 use App\Block;
 use App\Findable;
 use App\Location;
-use App\Setting;
-use App\Http\Requests;
+use App\Http\Requests\StoreLocationRequest;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -102,16 +101,8 @@ class LocationController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $placeId, $floorId)
+    public function store(StoreLocationRequest $request, $placeId, $floorId)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-            'block_id' => 'required_without_all:poi_id,beacon_id,findable_id',
-            'poi_id' => 'required_without_all:block_id,findable_id,beacon_id',
-            'findable_id' => 'required_without_all:block_id,poi_id,beacon_id',
-            'beacon_id' => 'required_without_all:block_id,poi_id,findable_id'
-        ]);
-
         $location = Location::create($request->all());
 
         $beacon_id = $request->input('beacon_id');
