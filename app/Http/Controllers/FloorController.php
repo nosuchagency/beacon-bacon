@@ -46,17 +46,17 @@ class FloorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $placeId)
     {
         $this->validate($request, [
-           'name' => 'required|max:255',
-           'order' => 'required|numeric',
-           'map_height_in_centimeters' => 'required|numeric',
-           'map_width_in_centimeters' => 'required|numeric',           
-           'image' => 'required|image',
+            'name' => 'required|max:255',
+            'order' => 'required|numeric',
+            'map_height_in_centimeters' => 'required|numeric',
+            'map_width_in_centimeters' => 'required|numeric',
+            'image' => 'required|image',
         ]);
 
         $floor = Floor::create($request->except('image'));
@@ -69,7 +69,7 @@ class FloorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($placeId, $id)
@@ -89,7 +89,7 @@ class FloorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($placeId, $id)
@@ -102,18 +102,18 @@ class FloorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $placeId, $id)
     {
         $this->validate($request, [
-           'name' => 'required|max:255',
-           'order' => 'required|numeric',
-           'map_height_in_centimeters' => 'required|numeric',
-           'map_width_in_centimeters' => 'required|numeric',
-           'image' => 'image',
+            'name' => 'required|max:255',
+            'order' => 'required|numeric',
+            'map_height_in_centimeters' => 'required|numeric',
+            'map_width_in_centimeters' => 'required|numeric',
+            'image' => 'image',
         ]);
 
         $floor = Floor::findOrFail($id);
@@ -140,7 +140,7 @@ class FloorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($placeId, $id)
@@ -155,31 +155,33 @@ class FloorController extends Controller
     /**
      * Upload image
      * @param  Floor $floor
-     * @param  Request  $request
+     * @param  Request $request
      * @return void
      */
     protected function uploadFloor(Floor $floor, Request $request)
     {
+        $destinationPath = storage_path() . '/app/images/floors/' . $floor->id;
+
         if (!$request->hasFile('image')) {
+
+            if ($floor->image && file_exists($destinationPath . '/' . $floor->image)) {
+                $image = Image::make($destinationPath . '/' . $floor->image);
+                $map_pixel_to_centimeter_ratio = round($image->width() / $floor->map_width_in_centimeters, 2);
+                $floor->update(['map_pixel_to_centimeter_ratio' => $map_pixel_to_centimeter_ratio]);
+            }
+
             return;
         }
 
         $request->file('image')->store('images/floors/' . $floor->id);
         $fileName = $request->image->hashName();
-        $destinationPath = storage_path() . '/app/images/floors/' . $floor->id;
 
-        /*$destinationPath = public_path('uploads/floors/' . $floor->id);
-        $fileName = $request->file('image')->getClientOriginalName();*/
+        $this->removeFloorImage($floor, $destinationPath . '/' . $floor->image, $fileName);
+        $this->removeFloorImage($floor, $destinationPath . '/original-' . $floor->image, $fileName);
 
-        if ($floor->image && is_file($destinationPath . '/' . $floor->image) && $fileName != $floor->image) {
-            unlink($destinationPath . '/' . $floor->image);
-        }
-
-        //$request->file('image')->move($destinationPath, $fileName);
-        
         $image = Image::make($destinationPath . '/' . $fileName);
-        $image->save( $destinationPath . '/original-' . $fileName );
-        $map_pixel_to_centimeter_ratio = round( $image->width() / $floor->map_width_in_centimeters, 2 );
+        $image->save($destinationPath . '/original-' . $fileName);
+        $map_pixel_to_centimeter_ratio = round($image->width() / $floor->map_width_in_centimeters, 2);
 
         $floor->update([
             'image' => $fileName,
@@ -187,5 +189,12 @@ class FloorController extends Controller
             'map_width_in_pixels' => $image->width(),
             'map_pixel_to_centimeter_ratio' => $map_pixel_to_centimeter_ratio
         ]);
+    }
+
+    protected function removeFloorImage($floor, $filePath, $fileName)
+    {
+        if ($floor->image && file_exists($filePath) && $fileName != $floor->image) {
+            unlink($filePath);
+        }
     }
 }
