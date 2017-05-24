@@ -171,7 +171,7 @@ class FloorController extends Controller
         /*$destinationPath = public_path('uploads/floors/' . $floor->id);
         $fileName = $request->file('image')->getClientOriginalName();*/
 
-        if ($floor->image && is_file($destinationPath . '/' . $floor->image)) {
+        if ($floor->image && is_file($destinationPath . '/' . $floor->image) && $fileName != $floor->image) {
             unlink($destinationPath . '/' . $floor->image);
         }
 
