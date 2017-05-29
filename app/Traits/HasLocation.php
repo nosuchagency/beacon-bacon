@@ -23,6 +23,10 @@ trait HasLocation
 
     protected static function traitGuard()
     {
+        if (auth()->guard('api')->check()) {
+            return;
+        }
+
         if (auth()->guest()) {
             throw new \Exception('Permission denied');
         }
