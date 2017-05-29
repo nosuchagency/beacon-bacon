@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\HasLocation;
 use App\Traits\UsedByTeams;
 use App\Traits\HasCreatedBy;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Beacon extends Model
 {
-    use SoftDeletes, UsedByTeams, HasCreatedBy, LogsActivity;
+    use SoftDeletes, UsedByTeams, HasCreatedBy, LogsActivity, HasLocation;
 
     /**
      * The attributes that are mass assignable.
