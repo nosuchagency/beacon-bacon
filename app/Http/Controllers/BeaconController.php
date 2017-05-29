@@ -167,7 +167,9 @@ class BeaconController extends Controller
     public function destroy($id)
     {
         $beacon = Beacon::findOrFail($id);
+
         $beacon->delete();
+
         return redirect()->route('beacons.index');
     }
 }

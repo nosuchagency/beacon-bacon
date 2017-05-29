@@ -259,14 +259,6 @@ class LocationController extends Controller
     {
         $location = Location::findOrFail($id);
 
-        if ($location->type == 'beacon') {
-            $beacon = Beacon::where('location_id', '=', $location->id)->first();
-            $beacon->place_id = 0;
-            $beacon->floor_id = 0;
-            $beacon->location_id = 0;
-            $beacon->save();
-        }
-
         $location->delete();
 
         if ($location->type == 'block') {
