@@ -32,7 +32,7 @@
             {!! Form::label('findable_id', __('Type'), ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
-              {!! Form::select('findable_id', $findables, $location->findable->id, ['class' => 'form-control', 'readonly' => 'readonly']) !!}
+              {!! Form::select('findable_id', $findables, $location->findable ? $location->findable : null, ['class' => 'form-control', 'readonly' => 'readonly']) !!}
             </div>
           </div>
 
@@ -44,60 +44,61 @@
             </div>
           </div>
 
-          <div class="form-group">
-			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">{{__('Parameters')}}</h5>
-            <div class="col-sm-10"></div>
-          </div>
+			@if($location->findable)
+				<div class="form-group">
+					<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">{{__('Parameters')}}</h5>
+					<div class="col-sm-10"></div>
+				</div>
+				@if($location->findable->parameter_one_name)
+					<div class="form-group">
+						{!! Form::label('parameter_one', $location->findable->parameter_one_name, ['class' => 'col-sm-2 control-label']) !!}
 
-          @if($location->findable->parameter_one_name)
-	          <div class="form-group">
-	            {!! Form::label('parameter_one', $location->findable->parameter_one_name, ['class' => 'col-sm-2 control-label']) !!}
+						<div class="col-sm-10">
+							{!! Form::text('parameter_one', $location->parameter_one, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_one_name]) !!}
+						</div>
+					</div>
+				@endif
 
-	            <div class="col-sm-10">
-	              {!! Form::text('parameter_one', $location->parameter_one, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_one_name]) !!}
-	            </div>
-	          </div>
-		  @endif
+				@if($location->findable->parameter_two_name)
+					<div class="form-group">
+						{!! Form::label('parameter_two', $location->findable->parameter_two_name, ['class' => 'col-sm-2 control-label']) !!}
 
-          @if($location->findable->parameter_two_name)
-	          <div class="form-group">
-	            {!! Form::label('parameter_two', $location->findable->parameter_two_name, ['class' => 'col-sm-2 control-label']) !!}
+						<div class="col-sm-10">
+							{!! Form::text('parameter_two', $location->parameter_two, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_two_name]) !!}
+						</div>
+					</div>
+				@endif
 
-	            <div class="col-sm-10">
-	              {!! Form::text('parameter_two', $location->parameter_two, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_two_name]) !!}
-	            </div>
-	          </div>
-		  @endif
+				@if($location->findable->parameter_three_name)
+					<div class="form-group">
+						{!! Form::label('parameter_three', $location->findable->parameter_three_name, ['class' => 'col-sm-2 control-label']) !!}
 
-          @if($location->findable->parameter_three_name)
-	          <div class="form-group">
-	            {!! Form::label('parameter_three', $location->findable->parameter_three_name, ['class' => 'col-sm-2 control-label']) !!}
+						<div class="col-sm-10">
+							{!! Form::text('parameter_three', $location->parameter_three, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_three_name]) !!}
+						</div>
+					</div>
+				@endif
 
-	            <div class="col-sm-10">
-	              {!! Form::text('parameter_three', $location->parameter_three, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_three_name]) !!}
-	            </div>
-	          </div>
-		  @endif
+				@if($location->findable->parameter_four_name)
+					<div class="form-group">
+						{!! Form::label('parameter_four', $location->findable->parameter_four_name, ['class' => 'col-sm-2 control-label']) !!}
 
-          @if($location->findable->parameter_four_name)
-	          <div class="form-group">
-	            {!! Form::label('parameter_four', $location->findable->parameter_four_name, ['class' => 'col-sm-2 control-label']) !!}
+						<div class="col-sm-10">
+							{!! Form::text('parameter_four', $location->parameter_four, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_four_name]) !!}
+						</div>
+					</div>
+				@endif
 
-	            <div class="col-sm-10">
-	              {!! Form::text('parameter_four', $location->parameter_four, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_four_name]) !!}
-	            </div>
-	          </div>
-		  @endif
+				@if($location->findable->parameter_five_name)
+					<div class="form-group">
+						{!! Form::label('parameter_five', $location->findable->parameter_five_name, ['class' => 'col-sm-2 control-label']) !!}
 
-          @if($location->findable->parameter_five_name)
-	          <div class="form-group">
-	            {!! Form::label('parameter_five', $location->findable->parameter_five_name, ['class' => 'col-sm-2 control-label']) !!}
-
-	            <div class="col-sm-10">
-	              {!! Form::text('parameter_five', $location->parameter_five, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_five_name]) !!}
-	            </div>
-	          </div>
-		  @endif
+						<div class="col-sm-10">
+							{!! Form::text('parameter_five', $location->parameter_five, ['class' => 'form-control', 'placeholder' => __('Enter ') . $location->findable->parameter_five_name]) !!}
+						</div>
+					</div>
+				@endif
+			@endif
 
           <div class="form-group">
 			<h5 class="col-sm-2" style="font-size: 16px; text-align: right;">{{__('Location on Map')}}</h5>
