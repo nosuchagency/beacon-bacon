@@ -28,18 +28,21 @@ class StoreLocationRequest extends FormRequest
         $rules['name'] = 'required|max:255';
         $rules['type'] = 'required|max:255';
 
-        if($type == 'block') {
-            $rules['block_id'] = 'required|integer|min:1';
+        if($type == 'findable')  {
+            $rules['findable_id'] = 'required|integer|exists:findables,id';
+        }
 
-            $rules['findable_id'] = 'integer';
+        if($type == 'block') {
+            $rules['block_id'] = 'required|integer|exists:blocks,id';
+            $rules['findable_id'] = 'integer|exists:findables,id';
         }
 
         if($type == 'beacon') {
-            $rules['beacon_id'] = 'required|integer|min:1';
+            $rules['beacon_id'] = 'required|integer|exists:beacons,id';
         }
 
         if($type == 'poi') {
-            $rules['poi_id'] = 'required|integer|min:1';
+            $rules['poi_id'] = 'required|integer|exists:pois,id';
         }
 
         return $rules;
