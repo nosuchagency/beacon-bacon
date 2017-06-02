@@ -155,7 +155,9 @@ class LocationController extends Controller
                 $beacons_select[$beacon->id] = $beacon->name . ' (' . $beacon->major . ' : ' . $beacon->minor . ')';
             }
 
-            $beacons_select[$location->beacon->id] = $location->beacon->name . ' (' . $location->beacon->major . ' : ' . $location->beacon->minor . ')';
+            if(!empty($location->beacon)) {
+                $beacons_select[$location->beacon->id] = $location->beacon->name . ' (' . $location->beacon->major . ' : ' . $location->beacon->minor . ')';
+            }
 
             return view('locations.edit.beacon', compact('beacons_select', 'location', 'placeId', 'floorId'));
         }
