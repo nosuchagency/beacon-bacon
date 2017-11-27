@@ -4,12 +4,6 @@ namespace App\Http\Controllers\API\V2;
 
 use App\Floor;
 use App\Poi;
-use Image;
-use File;
-use Artisaninweb\SoapWrapper\Facades\SoapWrapper;
-use App\Place;
-use App\Findable;
-use App\Location;
 
 class MediaController extends Controller
 {
@@ -25,7 +19,7 @@ class MediaController extends Controller
 
         $path = storage_path() . '/app/images/pois/' . $poi->id . '/' . $poi->icon;
 
-        if (!File::exists($path)) {
+        if (!file_exists($path)) {
             return response(['message' => 'Resource not found',], 404);
         }
 
@@ -44,7 +38,7 @@ class MediaController extends Controller
 
         $path = storage_path() . '/app/images/floors/' . $floor->id . '/' . $floor->image;
 
-        if (!File::exists($path)) {
+        if (!file_exists($path)) {
             return response(['message' => 'Resource not found',], 404);
         }
 
