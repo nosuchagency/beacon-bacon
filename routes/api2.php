@@ -61,5 +61,6 @@ Route::delete('beacons/{id}', ['uses' => 'BeaconController@destroy']);
 
 // Media
 Route::get('floors/{id}/image', ['uses' => 'MediaController@image']);
-Route::post('floors/{id}/image', ['uses' => 'MediaController@updated']);
+Route::post('floors/{id}/image', ['uses' => 'MediaController@imageUpdated']);
 Route::get('pois/{id}/icon', ['uses' => 'MediaController@icon']);
+Route::post('pois/{id}/image', ['uses' => 'MediaController@iconUpdated']);

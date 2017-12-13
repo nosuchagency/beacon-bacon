@@ -54,7 +54,36 @@ class MediaController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function updated(Request $request, $id)
+    public function iconUpdated(Request $request, $id)
+    {
+        $this->validate($request, [
+            'date' => 'nullable|date',
+        ]);
+
+        $date = $request->get('date');
+
+        if (empty($date)) {
+            $hasBeenUpdated = true;
+        } else {
+            $poi = Poi::findOrFail($id);
+
+            $inputDate = Carbon::parse($date);
+            $imageDate = Carbon::parse($poi->updated_at);
+
+            $hasBeenUpdated = $imageDate->greaterThan($inputDate);
+        }
+
+        return response()->json(['update' => $hasBeenUpdated], 200);
+    }
+
+    /**
+     * Get the specified image resource from storage.
+     *
+     * @param   $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function imageUpdated(Request $request, $id)
     {
         $this->validate($request, [
             'date' => 'nullable|date',
