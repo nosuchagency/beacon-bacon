@@ -44,7 +44,7 @@
             </div>
           </div>
           <div class="form-group">
-            {!! Form::label('minor', __('Minor', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('minor', __('Minor'), ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::text('minor', $beacon->minor, ['class' => 'form-control']) !!}
@@ -52,7 +52,7 @@
           </div>
 
           <div class="form-group">
-            {!! Form::label('name', __('Name', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('name', __('Name'), ['class' => 'col-sm-2 control-label']) !!}
 
             <div class="col-sm-10">
               {!! Form::text('name', $beacon->name, ['class' => 'form-control', 'placeholder' => __('Enter name')]) !!}
