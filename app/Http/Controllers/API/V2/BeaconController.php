@@ -29,7 +29,7 @@ class BeaconController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-           'name' => 'required|max:255',
+            'name' => 'required|max:255',
         ]);
 
         return response(Beacon::create($request->all()), 201);
@@ -39,7 +39,7 @@ class BeaconController extends Controller
      * Return a single item.
      *
      * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return json
      */
@@ -54,14 +54,14 @@ class BeaconController extends Controller
      * Update a single item.
      *
      * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return json
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-           'name' => 'required|max:255',
+            'name' => 'required|max:255',
         ]);
 
         $beacon = Beacon::findOrFail($id);

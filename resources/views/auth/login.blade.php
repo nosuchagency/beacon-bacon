@@ -7,7 +7,7 @@
     <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ route('home') }}"><b>{{__('Beacon')}}</b>{{__('Bacon')}}</a>
+            <a href="{{ route('home') }}"><b>{{__('Wayfinder')}}</b>{{__('Admin')}}</a>
         </div><!-- /.login-logo -->
         @if (count($errors) > 0)
             <div class="alert alert-danger">
