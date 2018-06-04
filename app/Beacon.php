@@ -43,7 +43,7 @@ class Beacon extends Model
      * @var array
      */
     protected static $logAttributes = ['name', 'description', 'posX', 'posY', 'beacon_uid', 'proximity_uuid', 'major', 'minor'];
-q
+
     /**
      * Get the place
      * @return Illuminate\Database\Query\Builder
