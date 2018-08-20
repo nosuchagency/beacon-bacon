@@ -17,33 +17,52 @@ class Floor extends Model
      *
      * @var array
      */
-    protected $fillable = ['place_id', 'name', 'order', 'image', 'map_width_in_centimeters', 'map_height_in_centimeters', 'map_width_in_pixels', 'map_height_in_pixels', 'map_pixel_to_centimeter_ratio', 'map_walkable_color', 'map_background_color'];
+    protected $fillable = [
+        'place_id',
+        'name',
+        'order',
+        'image',
+        'map_width_in_centimeters',
+        'map_height_in_centimeters',
+        'map_width_in_pixels',
+        'map_height_in_pixels',
+        'map_pixel_to_centimeter_ratio',
+        'map_walkable_color',
+        'map_background_color'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * The attributes that should be visible in arrays.
      *
      * @var array
      */
-    protected $hidden = ['deleted_at'];
+    protected $hidden = [
+        'deleted_at'
+    ];
 
     /**
      * Set which attributes to log.
      *
      * @var array
      */
-    protected static $logAttributes = ['name', 'order', 'image'];
+    protected static $logAttributes = [
+        'name',
+        'order',
+        'image'
+    ];
 
     /**
      * Get the place.
      *
-     * @return Illuminate\Database\Query\Builder
      */
     public function place()
     {
@@ -53,7 +72,6 @@ class Floor extends Model
     /**
      * Get locations on this floor.
      *
-     * @return Illuminate\Database\Query\Builder
      */
     public function locations()
     {
@@ -62,9 +80,7 @@ class Floor extends Model
 
     /**
      * Return full path to image.
-     *
-     * @param string $value
-     *
+     **
      * @return string
      */
     public function getPublicImage()

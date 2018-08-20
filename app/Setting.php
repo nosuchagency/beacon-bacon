@@ -15,7 +15,10 @@ class Setting extends Model
      *
      * @var array
      */
-    protected $fillable = ['key', 'value'];
+    protected $fillable = [
+        'key',
+        'value'
+    ];
 
     /**
      * Disable timestamps.
@@ -29,5 +32,8 @@ class Setting extends Model
      *
      * @var array
      */
-    protected static $logAttributes = ['key', 'value'];
+    protected static $logAttributes = [
+        'key',
+        'value'
+    ];
 }

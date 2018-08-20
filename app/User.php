@@ -17,7 +17,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
     ];
 
     /**
@@ -26,7 +28,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'api_team_id', 'current_team_id'
+        'password',
+        'remember_token',
+        'api_team_id',
+        'current_team_id'
     ];
 
     /**
@@ -34,7 +39,10 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected static $logAttributes = ['name', 'email'];
+    protected static $logAttributes = [
+        'name',
+        'email'
+    ];
 
     /**
      * Shortcut to get if the user is the owner of the current team

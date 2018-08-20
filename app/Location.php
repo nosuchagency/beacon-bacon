@@ -18,32 +18,59 @@ class Location extends Model
      *
      * @var array
      */
-    protected $fillable = ['place_id', 'floor_id', 'poi_id', 'block_id', 'findable_id', 'type', 'name', 'posX', 'posY', 'area', 'rotation', 'parameter_one', 'parameter_two', 'parameter_three', 'parameter_four', 'parameter_five', 'draw_type'];
+    protected $fillable = [
+        'place_id',
+        'floor_id',
+        'poi_id',
+        'block_id',
+        'findable_id',
+        'type',
+        'name',
+        'posX',
+        'posY',
+        'area',
+        'rotation',
+        'parameter_one',
+        'parameter_two',
+        'parameter_three',
+        'parameter_four',
+        'parameter_five',
+        'draw_type'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * The attributes that should be visible in arrays.
      *
      * @var array
      */
-    protected $hidden = ['deleted_at'];
+    protected $hidden = [
+        'deleted_at'
+    ];
 
     /**
      * Set which attributes to log.
      *
      * @var array
      */
-    protected static $logAttributes = ['poi_id', 'type', 'name', 'posX', 'posY'];
+    protected static $logAttributes = [
+        'poi_id',
+        'type',
+        'name',
+        'posX',
+        'posY'
+    ];
 
     /**
      * Get the place
-     * @return Illuminate\Database\Query\Builder
      */
     public function place()
     {
@@ -52,7 +79,6 @@ class Location extends Model
 
     /**
      * Get the floor
-     * @return Illuminate\Database\Query\Builder
      */
     public function floor()
     {
@@ -61,7 +87,6 @@ class Location extends Model
 
     /**
      * Get the poi
-     * @return Illuminate\Database\Query\Builder
      */
     public function poi()
     {
@@ -70,7 +95,6 @@ class Location extends Model
 
     /**
      * Get the findable
-     * @return Illuminate\Database\Query\Builder
      */
     public function findable()
     {
@@ -79,7 +103,6 @@ class Location extends Model
 
     /**
      * Get the block
-     * @return Illuminate\Database\Query\Builder
      */
     public function block()
     {
@@ -88,7 +111,6 @@ class Location extends Model
     
     /**
      * Get the beacon
-     * @return Illuminate\Database\Query\Builder
      */
     public function beacon()
     {

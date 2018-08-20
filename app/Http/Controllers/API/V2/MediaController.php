@@ -3,22 +3,20 @@
 namespace App\Http\Controllers\API\V2;
 
 use App\Floor;
+use App\Http\Requests\DateRequest;
 use App\Poi;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class MediaController extends Controller
 {
     /**
      * Get the specified image resource from storage.
      *
-     * @param  int $id
+     * @param  Poi $poi
      * @return \Illuminate\Http\Response
      */
-    public function icon($id)
+    public function icon(Poi $poi)
     {
-        $poi = Poi::findOrFail($id);
-
         $path = storage_path() . '/app/images/pois/' . $poi->id . '/' . $poi->icon;
 
         if (!file_exists($path)) {
@@ -31,13 +29,11 @@ class MediaController extends Controller
     /**
      * Get the specified image resource from storage.
      *
-     * @param  int $id
+     * @param  Floor $floor
      * @return \Illuminate\Http\Response
      */
-    public function image($id)
+    public function image(Floor $floor)
     {
-        $floor = Floor::findOrFail($id);
-
         $path = storage_path() . '/app/images/floors/' . $floor->id . '/' . $floor->image;
 
         if (!file_exists($path)) {
@@ -51,26 +47,18 @@ class MediaController extends Controller
      * Get the specified image resource from storage.
      *
      * @param   $request
-     * @param  int $id
+     * @param  Poi $poi
      * @return \Illuminate\Http\Response
      */
-    public function iconUpdated(Request $request, $id)
+    public function iconUpdated(DateRequest $request, Poi $poi)
     {
-        $this->validate($request, [
-            'date' => 'nullable|date',
-        ]);
-
-        $date = $request->get('date');
-
-        if (empty($date)) {
-            $hasBeenUpdated = true;
-        } else {
-            $poi = Poi::findOrFail($id);
-
-            $inputDate = Carbon::parse($date);
+        if ($request->has('date')) {
+            $inputDate = Carbon::parse($request->input('date'));
             $imageDate = Carbon::parse($poi->updated_at);
 
             $hasBeenUpdated = $imageDate->greaterThan($inputDate);
+        } else {
+            $hasBeenUpdated = true;
         }
 
         return response()->json(['update' => $hasBeenUpdated], 200);
@@ -80,26 +68,18 @@ class MediaController extends Controller
      * Get the specified image resource from storage.
      *
      * @param   $request
-     * @param  int $id
+     * @param  Floor $floor
      * @return \Illuminate\Http\Response
      */
-    public function imageUpdated(Request $request, $id)
+    public function imageUpdated(DateRequest $request, Floor $floor)
     {
-        $this->validate($request, [
-            'date' => 'nullable|date',
-        ]);
-
-        $date = $request->get('date');
-
-        if (empty($date)) {
-            $hasBeenUpdated = true;
-        } else {
-            $floor = Floor::findOrFail($id);
-
-            $inputDate = Carbon::parse($date);
+        if ($request->has('date')) {
+            $inputDate = Carbon::parse($request->input('date'));
             $imageDate = Carbon::parse($floor->updated_at);
 
             $hasBeenUpdated = $imageDate->greaterThan($inputDate);
+        } else {
+            $hasBeenUpdated = true;
         }
 
         return response()->json(['update' => $hasBeenUpdated], 200);

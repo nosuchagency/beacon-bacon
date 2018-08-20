@@ -15,14 +15,23 @@ class Menu extends Model
      *
      * @var array
      */
-    protected $fillable = ['place_id', 'poi_id', 'title', 'order'];
+    protected $fillable = [
+        'place_id',
+        'poi_id',
+        'title',
+        'order'
+    ];
 
     /**
      * The attributes that should be visible in arrays.
      *
      * @var array
      */
-    protected $hidden = ['team_id', 'place_id', 'poi_id'];
+    protected $hidden = [
+        'team_id',
+        'place_id',
+        'poi_id'
+    ];
 
     /**
      * Disable timestamps.
@@ -36,12 +45,15 @@ class Menu extends Model
      *
      * @var array
      */
-    protected static $logAttributes = ['poi_id', 'title', 'order'];
+    protected static $logAttributes = [
+        'poi_id',
+        'title',
+        'order'
+    ];
 
     /**
      * Get the place.
      *
-     * @return Illuminate\Database\Query\Builder
      */
     public function place()
     {
@@ -51,7 +63,6 @@ class Menu extends Model
     /**
      * Get the poi.
      *
-     * @return Illuminate\Database\Query\Builder
      */
     public function poi()
     {

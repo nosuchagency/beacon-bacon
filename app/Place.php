@@ -17,34 +17,52 @@ class Place extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'address', 'zipcode', 'city',
-        'identifier_one', 'identifier_two', 'identifier_three', 'identifier_four', 'identifier_five',
-        'place_id', 'order', 'beacon_positioning_enabled', 'beacon_proximity_enabled', 'activated'];
+    protected $fillable = [
+        'name',
+        'address',
+        'zipcode',
+        'city',
+        'identifier_one',
+        'identifier_two',
+        'identifier_three',
+        'identifier_four',
+        'identifier_five',
+        'place_id',
+        'order',
+        'beacon_positioning_enabled',
+        'beacon_proximity_enabled',
+        'activated'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * The attributes that should be visible in arrays.
      *
      * @var array
      */
-    protected $hidden = ['deleted_at'];
+    protected $hidden = [
+        'deleted_at'
+    ];
 
     /**
      * Set which attributes to log.
      *
      * @var array
      */
-    protected static $logAttributes = ['name'];
+    protected static $logAttributes = [
+        'name'
+    ];
 
     /**
      * Get floors belonging to this place
-     * @return Illuminate\Database\Query\Builder
      */
     public function floors()
     {
@@ -53,7 +71,6 @@ class Place extends Model
 
     /**
      * Get places belonging to this place
-     * @return Illuminate\Database\Query\Builder
      */
     public function places()
     {

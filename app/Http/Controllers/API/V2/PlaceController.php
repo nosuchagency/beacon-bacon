@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers\API\V2;
 
+use App\Http\Requests\FindMaterialRequest;
+use App\Http\Requests\PlaceRequest;
 use App\Menu;
 use App\Place;
 use App\Poi;
-use App\Location;
 use App\Findable;
-use File;
-use Image;
 use Illuminate\Http\Request;
-use Artisaninweb\SoapWrapper\Facades\SoapWrapper;
-use Cache;
-use Carbon\Carbon;
 
 class PlaceController extends Controller
 {
@@ -25,53 +21,45 @@ class PlaceController extends Controller
      */
     public function index(Request $request)
     {
-        $request->request->add(array('activated' => 1));
+        $request->request->add(['activated' => 1]);
         return $this->filteredAndOrdered($request, new Place())->paginate($this->pageSize);
     }
 
     /**
      * Save a new item.
      *
-     * @param Request $request
+     * @param PlaceRequest $request
      *
      * @return json
      */
-    public function store(Request $request)
+    public function store(PlaceRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
-
         return response(Place::create($request->all()), 201);
     }
 
     /**
      * Return a findable Location
      *
-     * @param Request $request
-     * @param int $id
+     * @param FindMaterialRequest $request
+     * @param Place $place
      *
      * @return json
      */
-    public function find(Request $request, $id)
+    public function find(FindMaterialRequest $request, Place $place)
     {
-        $identifier = $request->find_identifier;
-        if (empty($identifier)) {
-            return response(['message' => 'missing parameter', 'parameter' => 'identifier'], 400);
-        }
+        $identifier = $request->input('find_identifier');
+
         $findable = Findable::where('identifier', $identifier)->first();
-        if (empty($findable)) {
-            return response(['message' => 'resource not found', 'resource' => 'findable'], 404);
-        }
 
-        $place = Place::findOrFail($id);
+        $class = 'BB\\' . $identifier . 'Plugin\\' . $identifier . 'Plugin';
 
-        $class = "BB\\" . $identifier . "Plugin\\" . $identifier . "Plugin";
         if (!class_exists($class)) {
             return response(['message' => 'resource not found', 'resource' => 'class'], 404);
         }
+
         $plugin = new $class;
-        if (!method_exists($plugin, 'findable' . $identifier)) {
+
+        if (!is_callable([$plugin, 'findable' . $identifier])) {
             return response(['message' => 'resource not found', 'resource' => 'method'], 404);
         }
 
@@ -82,15 +70,14 @@ class PlaceController extends Controller
      * Return a single item.
      *
      * @param Request $request
-     * @param int $id
+     * @param Place $place
      *
      * @return json
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, Place $place)
     {
-        $place = Place::findOrFail($id);
-
         $place = $this->attachResources($request, $place);
+
         foreach ($place->floors as $floor) {
 
             $floor->image = url('api/v2/floors/' . $floor->id . '/image');
@@ -118,19 +105,13 @@ class PlaceController extends Controller
     /**
      * Update a single item.
      *
-     * @param Request $request
-     * @param int $id
+     * @param PlaceRequest $request
+     * @param Place $place
      *
      * @return json
      */
-    public function update(Request $request, $id)
+    public function update(PlaceRequest $request, Place $place)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
-
-        $place = Place::findOrFail($id);
-
         $place->update($request->all());
 
         return $place;
@@ -139,13 +120,13 @@ class PlaceController extends Controller
     /**
      * Delete a single item.
      *
-     * @param int $id
+     * @param Place $place
      *
      * @return empty
      */
-    public function destroy($id)
+    public function destroy(Place $place)
     {
-        $place = Place::findOrFail($id)->delete();
+        $place->delete();
 
         return response('', 204);
     }
@@ -171,8 +152,8 @@ class PlaceController extends Controller
     {
         $menus = Menu::where('place_id', $id)->orderBy('order')->with('poi')->get();
 
-        foreach($menus as $menu ) {
-            if(!empty($menu->poi) && !empty($menu->poi->icon)) {
+        foreach ($menus as $menu) {
+            if (!empty($menu->poi) && !empty($menu->poi->icon)) {
                 $menu->poi->icon = url('api/v2/pois/' . $menu->poi->id . '/icon');
             }
         }

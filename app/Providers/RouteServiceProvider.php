@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Findable;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -24,8 +25,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
     }
 
@@ -69,8 +68,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApi1Routes()
     {
         Route::group([
-            'middleware' => 'auth:api',
-            'namespace' => $this->namespace .'\API\V1',
+            'middleware' => 'api',
+            'namespace' => $this->namespace . '\API\V1',
             'prefix' => 'api/v1',
         ], function ($router) {
             require base_path('routes/api1.php');
@@ -87,8 +86,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApi2Routes()
     {
         Route::group([
-            'middleware' => 'auth:api',
-            'namespace' => $this->namespace .'\API\V2',
+            'middleware' => 'api',
+            'namespace' => $this->namespace . '\API\V2',
             'prefix' => 'api/v2',
         ], function ($router) {
             require base_path('routes/api2.php');
@@ -96,7 +95,7 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::group([
             'middleware' => 'web',
-            'namespace' => $this->namespace .'\API\V2',
+            'namespace' => $this->namespace . '\API\V2',
             'prefix' => 'ajax',
         ], function ($router) {
             require base_path('routes/api2.php');

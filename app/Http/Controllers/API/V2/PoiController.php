@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V2;
 
+use App\Http\Requests\PoiRequest;
 use File;
 use Image;
 use App\Poi;
@@ -35,18 +36,12 @@ class PoiController extends Controller
     /**
      * Save a new item.
      *
-     * @param Request $request
+     * @param PoiRequest $request
      *
      * @return json
      */
-    public function store(Request $request)
+    public function store(PoiRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-            'internal_name' => 'required|max:255',
-            'icon' => 'required|imageable',
-        ]);
-
         $poi = Poi::create($request->except('icon'));
 
         $this->uploadIcon($poi, $request);
@@ -60,14 +55,12 @@ class PoiController extends Controller
      * Return a single item.
      *
      * @param Request $request
-     * @param int $id
+     * @param Poi $poi
      *
      * @return json
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, Poi $poi)
     {
-        $poi = Poi::findOrFail($id);
-
         $poi->icon = url('api/v2/pois/' . $poi->id . '/icon');
 
         return $this->attachResources($request, $poi);
@@ -76,21 +69,13 @@ class PoiController extends Controller
     /**
      * Update a single item.
      *
-     * @param Request $request
-     * @param int $id
+     * @param PoiRequest $request
+     * @param Poi $poi
      *
      * @return json
      */
-    public function update(Request $request, $id)
+    public function update(PoiRequest $request, Poi $poi)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-            'internal_name' => 'required|max:255',
-            'icon' => 'required|imageable',
-        ]);
-
-        $poi = Poi::findOrFail($id);
-
         $poi->update($request->except('icon'));
 
         $this->uploadIcon($poi, $request);
@@ -103,13 +88,13 @@ class PoiController extends Controller
     /**
      * Delete a single item.
      *
-     * @param int $id
+     * @param Poi $poi
      *
      * @return empty
      */
-    public function destroy($id)
+    public function destroy(Poi $poi)
     {
-        $poi = Poi::findOrFail($id)->delete();
+        $poi->delete();
 
         return response('', 204);
     }

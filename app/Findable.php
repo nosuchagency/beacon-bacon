@@ -17,32 +17,48 @@ class Findable extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'identifier', 'parameter_one_name', 'parameter_two_name', 'parameter_three_name', 'parameter_four_name', 'parameter_five_name', 'custom_file', 'type'];
+    protected $fillable = [
+        'name',
+        'identifier',
+        'parameter_one_name',
+        'parameter_two_name',
+        'parameter_three_name',
+        'parameter_four_name',
+        'parameter_five_name',
+        'custom_file',
+        'type'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * The attributes that should be visible in arrays.
      *
      * @var array
      */
-    protected $hidden = ['deleted_at'];
+    protected $hidden = [
+        'deleted_at'
+    ];
 
     /**
      * Set which attributes to log.
      *
      * @var array
      */
-    protected static $logAttributes = ['name', 'identifier'];
+    protected static $logAttributes = [
+        'name',
+        'identifier'
+    ];
 
     /**
      * Get locations belonging to this findable
-     * @return Illuminate\Database\Query\Builder
      */
     public function locations()
     {

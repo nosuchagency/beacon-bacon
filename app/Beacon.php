@@ -19,8 +19,17 @@ class Beacon extends Model
      * @var array
      */
     protected $fillable = [
-        'place_id', 'floor_id', 'location_id', 'name', 'description', 'posX', 'posY',
-        'beacon_uid', 'proximity_uuid', 'major', 'minor'
+        'place_id',
+        'floor_id',
+        'location_id',
+        'name',
+        'description',
+        'posX',
+        'posY',
+        'beacon_uid',
+        'proximity_uuid',
+        'major',
+        'minor'
     ];
 
     /**
@@ -42,11 +51,19 @@ class Beacon extends Model
      *
      * @var array
      */
-    protected static $logAttributes = ['name', 'description', 'posX', 'posY', 'beacon_uid', 'proximity_uuid', 'major', 'minor'];
+    protected static $logAttributes = [
+        'name',
+        'description',
+        'posX',
+        'posY',
+        'beacon_uid',
+        'proximity_uuid',
+        'major',
+        'minor'
+    ];
 
     /**
      * Get the place
-     * @return Illuminate\Database\Query\Builder
      */
     public function place()
     {
@@ -55,7 +72,6 @@ class Beacon extends Model
 
     /**
      * Get the floor
-     * @return Illuminate\Database\Query\Builder
      */
     public function floor()
     {
@@ -64,7 +80,6 @@ class Beacon extends Model
 
     /**
      * Get the location
-     * @return Illuminate\Database\Query\Builder
      */
     public function location()
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V2;
 
 use App\Beacon;
+use App\Http\Requests\BeaconRequest;
 use Illuminate\Http\Request;
 
 class BeaconController extends Controller
@@ -26,12 +27,8 @@ class BeaconController extends Controller
      *
      * @return json
      */
-    public function store(Request $request)
+    public function store(BeaconRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
-
         return response(Beacon::create($request->all()), 201);
     }
 
@@ -39,33 +36,25 @@ class BeaconController extends Controller
      * Return a single item.
      *
      * @param Request $request
-     * @param int $id
+     * @param Beacon $beacon
      *
      * @return json
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, Beacon $beacon)
     {
-        $beacon = Beacon::findOrFail($id);
-
         return $this->attachResources($request, $beacon);
     }
 
     /**
      * Update a single item.
      *
-     * @param Request $request
-     * @param int $id
+     * @param BeaconRequest $request
+     * @param Beacon $beacon
      *
      * @return json
      */
-    public function update(Request $request, $id)
+    public function update(BeaconRequest $request, Beacon $beacon)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
-
-        $beacon = Beacon::findOrFail($id);
-
         $beacon->update($request->all());
 
         return $beacon;
@@ -74,13 +63,13 @@ class BeaconController extends Controller
     /**
      * Delete a single item.
      *
-     * @param int $id
+     * @param Beacon $beacon
      *
      * @return empty
      */
-    public function destroy($id)
+    public function destroy(Beacon $beacon)
     {
-        $beacon = Beacon::findOrFail($id)->delete();
+        $beacon->delete();
 
         return response('', 204);
     }

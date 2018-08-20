@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V2;
 
+use App\Http\Requests\FloorRequest;
 use File;
 use Image;
 use App\Floor;
@@ -18,7 +19,6 @@ class FloorController extends Controller
      */
     public function index(Request $request)
     {
-
         $floors = $this->filteredAndOrdered($request, new Floor())->paginate($this->pageSize);
 
         foreach ($floors->items() as $floor) {
@@ -35,19 +35,12 @@ class FloorController extends Controller
     /**
      * Save a new item.
      *
-     * @param Request $request
+     * @param FloorRequest $request
      *
      * @return json
      */
-    public function store(Request $request)
+    public function store(FloorRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-            'map_height_in_centimeters' => 'required|numeric',
-            'map_width_in_centimeters' => 'required|numeric',
-            'image' => 'required|imageable',
-        ]);
-
         $floor = Floor::create($request->except('image'));
 
         $this->uploadFloor($floor, $request);
@@ -59,14 +52,12 @@ class FloorController extends Controller
      * Return a single item.
      *
      * @param Request $request
-     * @param int $id
+     * @param Floor $floor
      *
      * @return json
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, Floor $floor)
     {
-        $floor = Floor::findOrFail($id);
-
         $floor->image = url('api/v2/floors/' . $floor->id . '/image');
 
         return $this->attachResources($request, $floor);
@@ -75,22 +66,13 @@ class FloorController extends Controller
     /**
      * Update a single item.
      *
-     * @param Request $request
-     * @param int $id
+     * @param FloorRequest $request
+     * @param Floor $floor
      *
      * @return json
      */
-    public function update(Request $request, $id)
+    public function update(FloorRequest $request, Floor $floor)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-            'map_height_in_centimeters' => 'required|numeric',
-            'map_width_in_centimeters' => 'required|numeric',
-            'image' => 'required|imageable',
-        ]);
-
-        $floor = Floor::findOrFail($id);
-
         $floor->update($request->except('image'));
 
         $this->uploadFloor($floor, $request);
@@ -101,13 +83,13 @@ class FloorController extends Controller
     /**
      * Delete a single item.
      *
-     * @param int $id
+     * @param Floor $floor
      *
      * @return empty
      */
-    public function destroy($id)
+    public function destroy(Floor $floor)
     {
-        $floor = Floor::findOrFail($id)->delete();
+        $floor->delete();
 
         return response('', 204);
     }
@@ -126,7 +108,7 @@ class FloorController extends Controller
     {
         $destinationPath = storage_path() . '/app/images/floors/' . $floor->id;
 
-        if(!File::exists($destinationPath)) {
+        if (!File::exists($destinationPath)) {
             File::makeDirectory($destinationPath);
         }
 

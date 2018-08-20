@@ -17,33 +17,53 @@ class Poi extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'type', 'color', 'internal_name', 'icon'];
+    protected $fillable = [
+        'name',
+        'type',
+        'color',
+        'internal_name',
+        'icon'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * The attributes that should be visible in arrays.
      *
      * @var array
      */
-    protected $hidden = ['deleted_at'];
+    protected $hidden = [
+        'deleted_at'
+    ];
 
     /**
      * Set which attributes to log.
      *
      * @var array
      */
-    protected static $logAttributes = ['name', 'internal_name', 'icon'];
+    protected static $logAttributes = [
+        'name',
+        'internal_name',
+        'icon'
+    ];
+
+    /**
+     * Get locations belonging to this poi
+     */
+    public function locations()
+    {
+        return $this->hasMany('App\Location');
+    }
 
     /**
      * Return full path to image.
-     *
-     * @param string $value
      *
      * @return string
      */
@@ -70,15 +90,6 @@ class Poi extends Model
     public function getPhysicalIconPath()
     {
         return !$this->icon ? '' :  storage_path() . '/app/images/pois/' . $this->id . '/' . $this->icon;
-    }
-
-    /**
-     * Get locations belonging to this poi
-     * @return Illuminate\Database\Query\Builder
-     */
-    public function locations()
-    {
-        return $this->hasMany('App\Location');
     }
 
     /**

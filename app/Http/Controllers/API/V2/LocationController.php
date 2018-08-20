@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V2;
 
+use App\Http\Requests\LocationRequest;
 use App\Location;
 use Illuminate\Http\Request;
 
@@ -22,16 +23,12 @@ class LocationController extends Controller
     /**
      * Save a new item.
      *
-     * @param Request $request
+     * @param LocationRequest $request
      *
      * @return json
      */
-    public function store(Request $request)
+    public function store(LocationRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
-
         return response(Location::create($request->all()), 201);
     }
 
@@ -39,37 +36,28 @@ class LocationController extends Controller
      * Return a single item.
      *
      * @param Request $request
-     * @param int     $id
+     * @param Location $location
      *
      * @return json
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, Location $location)
     {
-        $location = Location::findOrFail($id);
-
         return $this->attachResources($request, $location);
     }
 
     /**
      * Update a single item.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param LocationRequest $request
+     * @param Location $location
      *
      * @return json
      */
-    public function update(Request $request, $id)
+    public function update(LocationRequest $request, Location $location)
     {
-        $this->validate($request, [
-            'name' => 'max:255|required_without:value',
-            'value' => 'max:255|required_without:name'
-        ]);
-
-        if(!empty($request->value)) {
+        if (!empty($request->value)) {
             $request->request->add(['name' => $request->value]);
         }
-
-        $location = Location::findOrFail($id);
 
         $location->update($request->all());
 
@@ -79,13 +67,13 @@ class LocationController extends Controller
     /**
      * Delete a single item.
      *
-     * @param int $id
+     * @param Location $location
      *
      * @return empty
      */
-    public function destroy($id)
+    public function destroy(Location $location)
     {
-        $location = Location::findOrFail($id)->delete();
+        $location->delete();
 
         return response('', 204);
     }
